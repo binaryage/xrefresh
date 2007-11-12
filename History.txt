@@ -1,0 +1,6 @@
+History of XRefresh
+===================
+
+  Version 1.0                      2007-11-12
+  -------------------------------------------
+    * initial public release

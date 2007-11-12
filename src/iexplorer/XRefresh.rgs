@@ -1,0 +1,72 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'XRefresh'
+		'XRefreshAddon.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}
+HKLM {
+  NoRemove SOFTWARE {
+    NoRemove Microsoft {   
+      NoRemove Windows {
+        NoRemove CurrentVersion {
+          NoRemove Explorer {
+            NoRemove 'Browser Helper Objects' {
+              ForceRemove '{8774C0B1-6697-43B8-8D0E-6179F48838B0}' = s 'XRefresh BHO' {
+                val 'NoExplorer' = d '1'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+HKLM {
+  NoRemove SOFTWARE {
+    NoRemove Microsoft {   
+      NoRemove 'Internet Explorer' {
+        NoRemove Toolbar {
+  		  ForceRemove val '{551012C5-352D-48D9-9E29-E90F293D19F0}' = s 'XRefresh Toolbar'
+		}
+      }
+    }
+  }
+}
+HKLM {
+  NoRemove SOFTWARE {
+    NoRemove Microsoft {   
+      NoRemove 'Internet Explorer' {
+        NoRemove 'Explorer Bars' {
+          ForceRemove '{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}' = s 'XRefresh Panel' {
+            val 'BarSize' = b '4100000000000000'
+          }
+		}
+      }
+    }
+  }
+}
+HKLM {
+  NoRemove SOFTWARE {
+    NoRemove Microsoft {   
+      NoRemove 'Internet Explorer' {
+        NoRemove 'Extensions' {
+  		  ForceRemove '{8774C0B1-6697-43B8-8D0E-6179F48838B0}' = s 'XRefresh' {
+  			val 'BandCLSID' = s '{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}'
+  			val 'ButtonText' = s 'XRefresh'
+  			val 'CLSID' = s '{E0DD6CAB-2D10-11D2-8F1A-0000F87ABD16}'
+  			val 'Default Visible' = s 'Yes'
+  			val 'HotIcon' = s 'C:\Program Files\XRefresh\IEAddon\XRefreshAddon.dll,214'
+  			val 'Icon' = s 'C:\Program Files\XRefresh\IEAddon\XRefreshAddon.dll,214'
+  			val 'MenuStatusBar' = s 'XRefresh Panel'
+  			val 'MenuText' = s 'XRefresh'
+  		  }
+		}
+      }
+    }
+  }
+}

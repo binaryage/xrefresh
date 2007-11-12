@@ -1,0 +1,4 @@
+You are free to distribute the viewer (GPL) and to incorporate 
+the library (LGPL) in your product (commercial or not).
+The only thing you can't do is to sell the viewer 
+(or a modified version) and the API as a tracing solution.

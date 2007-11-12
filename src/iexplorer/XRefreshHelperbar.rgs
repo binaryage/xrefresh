@@ -1,0 +1,33 @@
+HKCR
+{
+	XRefresh.XRefreshHelperbar.1 = s 'XRefresh Helperbar'
+	{
+		CLSID = s '{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}'
+	}
+	XRefresh.XRefreshHelperbar = s 'XRefresh Helperbar'
+	{
+		CLSID = s '{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}'
+		CurVer = s 'XRefresh.XRefreshHelperbar.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {0A839FF4-F7CA-41E0-8EA1-F5E2913139D0} = s 'XRefresh Helperbar'
+		{
+			ProgID = s 'XRefresh.XRefreshHelperbar.1'
+			VersionIndependentProgID = s 'XRefresh.XRefreshHelperbar'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{753A4046-6863-42AC-9C85-24468A489720}'
+			'Implemented Categories' 
+			{
+				{00021494-0000-0000-C000-000000000046}
+			}
+			val MenuText = s 'XRefresh Helperbar'
+			val HelpText = s 'Opens XRefresh Helperbar'
+		}
+	}
+}
