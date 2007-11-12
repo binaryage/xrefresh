@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Model" targetNamespace="http://xrefresh.com/model.xsd" xmlns:mstns="http://xrefresh.com/model.xsd" xmlns="http://xrefresh.com/model.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="ExcludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Model" msdata:IsDataSet="true" msdata:Locale="" msprop:Generator_UserDSName="Model" msprop:Generator_DataSetName="Model">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Folders" msdata:Locale="" msprop:Generator_UserTableName="Folders" msprop:Generator_RowDeletedName="FoldersRowDeleted" msprop:Generator_RowChangedName="FoldersRowChanged" msprop:Generator_RowClassName="FoldersRow" msprop:Generator_RowChangingName="FoldersRowChanging" msprop:Generator_RowEvArgName="FoldersRowChangeEvent" msprop:Generator_RowEvHandlerName="FoldersRowChangeEventHandler" msprop:Generator_TableClassName="FoldersDataTable" msprop:Generator_TableVarName="tableFolders" msprop:Generator_RowDeletingName="FoldersRowDeleting" msprop:Generator_TablePropName="Folders">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" type="xs:string" />
+              <xs:element name="Path" msprop:Generator_UserColumnName="Path" msprop:Generator_ColumnVarNameInTable="columnPath" msprop:Generator_ColumnPropNameInRow="Path" msprop:Generator_ColumnPropNameInTable="PathColumn" type="xs:string" />
+              <xs:element name="Enabled" msprop:Generator_UserColumnName="Enabled" msprop:Generator_ColumnVarNameInTable="columnEnabled" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" type="xs:boolean" default="true" />
+              <xs:element name="Type" msprop:Generator_UserColumnName="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" type="xs:string" />
+              <xs:element name="IncludeFilters" msprop:Generator_UserTableName="IncludeFilters" msprop:Generator_RowDeletedName="IncludeFiltersRowDeleted" msprop:Generator_RowChangedName="IncludeFiltersRowChanged" msprop:Generator_RowClassName="IncludeFiltersRow" msprop:Generator_RowChangingName="IncludeFiltersRowChanging" msprop:Generator_RowEvArgName="IncludeFiltersRowChangeEvent" msprop:Generator_RowEvHandlerName="IncludeFiltersRowChangeEventHandler" msprop:Generator_TableClassName="IncludeFiltersDataTable" msprop:Generator_TableVarName="tableIncludeFilters" msprop:Generator_RowDeletingName="IncludeFiltersRowDeleting" msprop:Generator_TablePropName="IncludeFilters" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Mask" msprop:Generator_UserColumnName="Mask" msprop:Generator_ColumnPropNameInRow="Mask" msprop:Generator_ColumnVarNameInTable="columnMask" msprop:Generator_ColumnPropNameInTable="MaskColumn" type="xs:string" />
+                    <xs:element name="Info" msprop:Generator_UserColumnName="Info" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Info" msprop:Generator_ColumnPropNameInTable="InfoColumn" msprop:Generator_ColumnVarNameInTable="columnInfo" type="xs:string" minOccurs="0" />
+                    <xs:element name="Folder" msprop:Generator_UserColumnName="Folder" msprop:Generator_ColumnPropNameInRow="Folder" msprop:Generator_ColumnVarNameInTable="columnFolder" msprop:Generator_ColumnPropNameInTable="FolderColumn" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ExcludeFilters" msprop:Generator_UserTableName="ExcludeFilters" msprop:Generator_RowDeletedName="ExcludeFiltersRowDeleted" msprop:Generator_RowChangedName="ExcludeFiltersRowChanged" msprop:Generator_RowClassName="ExcludeFiltersRow" msprop:Generator_RowChangingName="ExcludeFiltersRowChanging" msprop:Generator_RowEvArgName="ExcludeFiltersRowChangeEvent" msprop:Generator_RowEvHandlerName="ExcludeFiltersRowChangeEventHandler" msprop:Generator_TableClassName="ExcludeFiltersDataTable" msprop:Generator_TableVarName="tableExcludeFilters" msprop:Generator_RowDeletingName="ExcludeFiltersRowDeleting" msprop:Generator_TablePropName="ExcludeFilters" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Mask" msprop:Generator_UserColumnName="Mask" msprop:Generator_ColumnVarNameInTable="columnMask" msprop:Generator_ColumnPropNameInRow="Mask" msprop:Generator_ColumnPropNameInTable="MaskColumn" type="xs:string" />
+                    <xs:element name="Info" msprop:Generator_UserColumnName="Info" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnInfo" msprop:Generator_ColumnPropNameInTable="InfoColumn" msprop:Generator_ColumnPropNameInRow="Info" type="xs:string" minOccurs="0" />
+                    <xs:element name="Folder" msprop:Generator_UserColumnName="Folder" msprop:Generator_ColumnPropNameInRow="Folder" msprop:Generator_ColumnVarNameInTable="columnFolder" msprop:Generator_ColumnPropNameInTable="FolderColumn" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Settings" msprop:Generator_UserTableName="Settings" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_TablePropName="Settings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RunOnWindowsStartup" msprop:Generator_UserColumnName="RunOnWindowsStartup" msprop:Generator_ColumnVarNameInTable="columnRunOnWindowsStartup" msprop:Generator_ColumnPropNameInRow="RunOnWindowsStartup" msprop:Generator_ColumnPropNameInTable="RunOnWindowsStartupColumn" type="xs:boolean" default="false" />
+              <xs:element name="ShowGlobalIncludes" msprop:Generator_UserColumnName="ShowGlobalIncludes" msprop:Generator_ColumnVarNameInTable="columnShowGlobalIncludes" msprop:Generator_ColumnPropNameInRow="ShowGlobalIncludes" msprop:Generator_ColumnPropNameInTable="ShowGlobalIncludesColumn" type="xs:boolean" default="false" />
+              <xs:element name="ShowGlobalExcludes" msprop:Generator_UserColumnName="ShowGlobalExcludes" msprop:Generator_ColumnVarNameInTable="columnShowGlobalExcludes" msprop:Generator_ColumnPropNameInRow="ShowGlobalExcludes" msprop:Generator_ColumnPropNameInTable="ShowGlobalExcludesColumn" type="xs:boolean" default="false" />
+              <xs:element name="PlaySoundOnRefresh" msprop:Generator_UserColumnName="PlaySoundOnRefresh" msprop:Generator_ColumnPropNameInRow="PlaySoundOnRefresh" msprop:Generator_ColumnVarNameInTable="columnPlaySoundOnRefresh" msprop:Generator_ColumnPropNameInTable="PlaySoundOnRefreshColumn" type="xs:boolean" default="false" />
+              <xs:element name="SoundFile" msprop:Generator_UserColumnName="SoundFile" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnSoundFile" msprop:Generator_ColumnPropNameInTable="SoundFileColumn" msprop:Generator_ColumnPropNameInRow="SoundFile" type="xs:string" default="drum.wav" />
+              <xs:element name="FlashIconOnRefresh" msprop:Generator_UserColumnName="FlashIconOnRefresh" msprop:Generator_ColumnPropNameInRow="FlashIconOnRefresh" msprop:Generator_ColumnVarNameInTable="columnFlashIconOnRefresh" msprop:Generator_ColumnPropNameInTable="FlashIconOnRefreshColumn" type="xs:boolean" default="true" />
+              <xs:element name="Port" msprop:Generator_UserColumnName="Port" msprop:Generator_ColumnVarNameInTable="columnPort" msprop:Generator_ColumnPropNameInRow="Port" msprop:Generator_ColumnPropNameInTable="PortColumn" type="xs:int" default="41258" />
+              <xs:element name="LocalhostOnly" msprop:Generator_UserColumnName="LocalhostOnly" msprop:Generator_ColumnVarNameInTable="columnLocalhostOnly" msprop:Generator_ColumnPropNameInRow="LocalhostOnly" msprop:Generator_ColumnPropNameInTable="LocalhostOnlyColumn" type="xs:boolean" default="true" />
+              <xs:element name="SlaveHost" msprop:Generator_UserColumnName="SlaveHost" msprop:Generator_ColumnVarNameInTable="columnSlaveHost" msprop:Generator_ColumnPropNameInRow="SlaveHost" msprop:Generator_ColumnPropNameInTable="SlaveHostColumn" type="xs:string" default="localhost" />
+              <xs:element name="PortRange" msprop:Generator_UserColumnName="PortRange" msprop:Generator_ColumnVarNameInTable="columnPortRange" msprop:Generator_ColumnPropNameInRow="PortRange" msprop:Generator_ColumnPropNameInTable="PortRangeColumn" type="xs:int" default="4" />
+              <xs:element name="WaitingTimeout" msprop:Generator_UserColumnName="WaitingTimeout" msprop:Generator_ColumnVarNameInTable="columnWaitingTimeout" msprop:Generator_ColumnPropNameInRow="WaitingTimeout" msprop:Generator_ColumnPropNameInTable="WaitingTimeoutColumn" type="xs:int" default="300" />
+              <xs:element name="CheckForUpdates" msprop:Generator_UserColumnName="CheckForUpdates" msprop:Generator_ColumnPropNameInRow="CheckForUpdates" msprop:Generator_ColumnVarNameInTable="columnCheckForUpdates" msprop:Generator_ColumnPropNameInTable="CheckForUpdatesColumn" type="xs:boolean" default="true" />
+              <xs:element name="SendUsage" msprop:Generator_UserColumnName="SendUsage" msprop:Generator_ColumnPropNameInRow="SendUsage" msprop:Generator_ColumnVarNameInTable="columnSendUsage" msprop:Generator_ColumnPropNameInTable="SendUsageColumn" type="xs:boolean" default="true" />
+              <xs:element name="EnableLogging" msprop:Generator_UserColumnName="EnableLogging" msprop:Generator_ColumnVarNameInTable="columnEnableLogging" msprop:Generator_ColumnPropNameInRow="EnableLogging" msprop:Generator_ColumnPropNameInTable="EnableLoggingColumn" type="xs:boolean" default="false" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GlobalIncludeFilters" msprop:Generator_UserTableName="GlobalIncludeFilters" msprop:Generator_RowDeletedName="GlobalIncludeFiltersRowDeleted" msprop:Generator_RowChangedName="GlobalIncludeFiltersRowChanged" msprop:Generator_RowClassName="GlobalIncludeFiltersRow" msprop:Generator_RowChangingName="GlobalIncludeFiltersRowChanging" msprop:Generator_RowEvArgName="GlobalIncludeFiltersRowChangeEvent" msprop:Generator_RowEvHandlerName="GlobalIncludeFiltersRowChangeEventHandler" msprop:Generator_TableClassName="GlobalIncludeFiltersDataTable" msprop:Generator_TableVarName="tableGlobalIncludeFilters" msprop:Generator_RowDeletingName="GlobalIncludeFiltersRowDeleting" msprop:Generator_TablePropName="GlobalIncludeFilters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Mask" msprop:Generator_UserColumnName="Mask" msprop:Generator_ColumnPropNameInRow="Mask" msprop:Generator_ColumnVarNameInTable="columnMask" msprop:Generator_ColumnPropNameInTable="MaskColumn" type="xs:string" />
+              <xs:element name="Info" msprop:Generator_UserColumnName="Info" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnInfo" msprop:Generator_ColumnPropNameInTable="InfoColumn" msprop:Generator_ColumnPropNameInRow="Info" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GlobalExcludeFilters" msprop:Generator_UserTableName="GlobalExcludeFilters" msprop:Generator_RowDeletedName="GlobalExcludeFiltersRowDeleted" msprop:Generator_RowChangedName="GlobalExcludeFiltersRowChanged" msprop:Generator_RowClassName="GlobalExcludeFiltersRow" msprop:Generator_RowChangingName="GlobalExcludeFiltersRowChanging" msprop:Generator_RowEvArgName="GlobalExcludeFiltersRowChangeEvent" msprop:Generator_RowEvHandlerName="GlobalExcludeFiltersRowChangeEventHandler" msprop:Generator_TableClassName="GlobalExcludeFiltersDataTable" msprop:Generator_TableVarName="tableGlobalExcludeFilters" msprop:Generator_RowDeletingName="GlobalExcludeFiltersRowDeleting" msprop:Generator_TablePropName="GlobalExcludeFilters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Mask" msprop:Generator_UserColumnName="Mask" msprop:Generator_ColumnPropNameInRow="Mask" msprop:Generator_ColumnVarNameInTable="columnMask" msprop:Generator_ColumnPropNameInTable="MaskColumn" type="xs:string" />
+              <xs:element name="Info" msprop:Generator_UserColumnName="Info" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnInfo" msprop:Generator_ColumnPropNameInTable="InfoColumn" msprop:Generator_ColumnPropNameInRow="Info" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:Folders" />
+      <xs:field xpath="mstns:Name" />
+    </xs:unique>
+    <xs:keyref name="FK_Folders_ExcludeFilters" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="FK_Folders_ExcludeFilters" msprop:rel_Generator_RelationVarName="relationFK_Folders_ExcludeFilters" msprop:rel_Generator_UserChildTable="ExcludeFilters" msprop:rel_Generator_UserParentTable="Folders" msprop:rel_Generator_ParentPropName="FoldersRow" msprop:rel_Generator_ChildPropName="GetExcludeFiltersRows">
+      <xs:selector xpath=".//mstns:ExcludeFilters" />
+      <xs:field xpath="mstns:Folder" />
+    </xs:keyref>
+    <xs:keyref name="FK_Folders_IncludeFilters" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="FK_Folders_IncludeFilters" msprop:rel_Generator_RelationVarName="relationFK_Folders_IncludeFilters" msprop:rel_Generator_UserChildTable="IncludeFilters" msprop:rel_Generator_UserParentTable="Folders" msprop:rel_Generator_ParentPropName="FoldersRow" msprop:rel_Generator_ChildPropName="GetIncludeFiltersRows">
+      <xs:selector xpath=".//mstns:IncludeFilters" />
+      <xs:field xpath="mstns:Folder" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

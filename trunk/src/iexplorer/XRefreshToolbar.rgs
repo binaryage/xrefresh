@@ -1,0 +1,27 @@
+HKCR
+{
+	XRefresh.XRefreshToolbar.1 = s 'XRefresh Toolbar'
+	{
+		CLSID = s '{551012C5-352D-48D9-9E29-E90F293D19F0}'
+	}
+	XRefresh.XRefreshToolbar = s 'XRefresh Toolbar'
+	{
+		CLSID = s '{551012C5-352D-48D9-9E29-E90F293D19F0}'
+		CurVer = s 'XRefresh.XRefreshToolbar.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {551012C5-352D-48D9-9E29-E90F293D19F0} = s 'XRefresh Toolbar'
+		{
+			ProgID = s 'XRefresh.XRefreshToolbar.1'
+			VersionIndependentProgID = s 'XRefresh.XRefreshToolbar'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{753A4046-6863-42AC-9C85-24468A489720}'
+		}
+	}
+}

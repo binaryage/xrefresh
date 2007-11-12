@@ -1,0 +1,600 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.20706</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25C4E083-5741-477B-A153-D0C24F80C245}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XRefresh</RootNamespace>
+    <AssemblyName>XRefresh</AssemblyName>
+    <ApplicationIcon>Icons\XRefresh.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedSettings.Designer.cs">
+      <DependentUpon>AdvancedSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FilterTester.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FilterTester.Designer.cs">
+      <DependentUpon>FilterTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="FirefoxDialog\EtchedLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FirefoxDialog\FirefoxDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FirefoxDialog\FirefoxDialog.Designer.cs">
+      <DependentUpon>FirefoxDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FirefoxDialog\PageProp.cs" />
+    <Compile Include="FirefoxDialog\PropertyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlexControl\CedeFocusEventArgs.cs" />
+    <Compile Include="FlexControl\DecimalValue.cs" />
+    <Compile Include="FlexControl\FieldChangedEventArgs.cs" />
+    <Compile Include="FlexControl\FieldControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlexControl\FieldFocusEventArgs.cs" />
+    <Compile Include="FlexControl\FieldValidatedEventArgs.cs" />
+    <Compile Include="FlexControl\FlexFieldControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlexControl\FlexFieldControl.Designer.cs">
+      <DependentUpon>FlexFieldControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlexControl\FlexFieldControlDesigner.cs" />
+    <Compile Include="FlexControl\HexadecimalValue.cs" />
+    <Compile Include="FlexControl\IValueFormatter.cs" />
+    <Compile Include="FlexControl\NativeMethods.cs" />
+    <Compile Include="FlexControl\SeparatorControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FlexControl\SeparatorMouseEventArgs.cs" />
+    <Compile Include="JSON\Converters\AspNetAjaxDateTimeConverter.cs" />
+    <Compile Include="JSON\Converters\HtmlColorConverter.cs" />
+    <Compile Include="JSON\Converters\XmlNodeConverter.cs" />
+    <Compile Include="JSON\Identifier.cs" />
+    <Compile Include="JSON\JavaScriptArray.cs" />
+    <Compile Include="JSON\JavaScriptConstructor.cs" />
+    <Compile Include="JSON\JavaScriptConvert.cs" />
+    <Compile Include="JSON\JavaScriptObject.cs" />
+    <Compile Include="JSON\JavaScriptParameters.cs" />
+    <Compile Include="JSON\JavaScriptUtils.cs" />
+    <Compile Include="JSON\JsonConverter.cs" />
+    <Compile Include="JSON\JsonConverterCollection.cs" />
+    <Compile Include="JSON\JsonIgnoreAttribute.cs" />
+    <Compile Include="JSON\JsonReader.cs" />
+    <Compile Include="JSON\JsonReaderException.cs" />
+    <Compile Include="JSON\JsonSerializationException.cs" />
+    <Compile Include="JSON\JsonSerializer.cs" />
+    <Compile Include="JSON\JsonToken.cs" />
+    <Compile Include="JSON\JsonWriter.cs" />
+    <Compile Include="JSON\JsonWriterException.cs" />
+    <Compile Include="JSON\StringBuffer.cs" />
+    <Compile Include="JSON\Utilities\CollectionUtils.cs" />
+    <Compile Include="JSON\Utilities\ReflectionUtils.cs" />
+    <Compile Include="JSON\Utilities\StringUtils.cs" />
+    <Compile Include="MozBar\ImageListPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MozBar\ImageMapEditor.cs" />
+    <Compile Include="MozBar\MozItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MozBar\MozPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MozBar\ScrollableControlWithScrollEvents.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MozBar\ThemeManager.cs" />
+    <Compile Include="PortEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PortEdit.Designer.cs">
+      <DependentUpon>PortEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageNetwork.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageNetwork.Designer.cs">
+      <DependentUpon>PageNetwork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageFilters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageFilters.Designer.cs">
+      <DependentUpon>PageFilters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PageMain.Designer.cs">
+      <DependentUpon>PageMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectFilters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectFilters.Designer.cs">
+      <DependentUpon>ProjectFilters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detector.cs" />
+    <Compile Include="EventLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventLog.Designer.cs">
+      <DependentUpon>EventLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FilterTable.Designer.cs">
+      <DependentUpon>FilterTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuExtender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configuration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration.Designer.cs">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdvancedSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AdvancedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterMenu.resx">
+      <DependentUpon>FilterMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterTester.resx">
+      <DependentUpon>FilterTester.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirefoxDialog\EtchedLine.resx">
+      <DependentUpon>EtchedLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirefoxDialog\FirefoxDialog.resx">
+      <DependentUpon>FirefoxDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirefoxDialog\PropertyPage.resx">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MozBar\ImageListPanel.resx">
+      <DependentUpon>ImageListPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageNetwork.resx">
+      <DependentUpon>PageNetwork.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageFilters.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PageFilters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PageMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PageMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectFilters.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectFilters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventLog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EventLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterTable.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FilterTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScannerProgress.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ScannerProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomExceptionDialog.resx">
+      <DependentUpon>CustomExceptionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Context.cs" />
+    <Compile Include="Model.cs">
+      <DependentUpon>Model.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ScannerProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScannerProgress.Designer.cs">
+      <DependentUpon>ScannerProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Server.cs" />
+    <Compile Include="ShellIcon.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="TimeoutEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TimeoutEdit.Designer.cs">
+      <DependentUpon>TimeoutEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomExceptionHandler.cs" />
+    <Compile Include="CustomExceptionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomExceptionDialog.Designer.cs">
+      <DependentUpon>CustomExceptionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="Worker.cs" />
+    <Compile Include="XPTableTweaks.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Editors\CellEditor.cs" />
+    <Compile Include="XPTable\Editors\ColorCellEditor.cs" />
+    <Compile Include="XPTable\Editors\ComboBoxCellEditor.cs" />
+    <Compile Include="XPTable\Editors\DateTimeCellEditor.cs" />
+    <Compile Include="XPTable\Editors\DropDownCellEditor.cs" />
+    <Compile Include="XPTable\Editors\DropDownContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XPTable\Editors\DropDownStyle.cs" />
+    <Compile Include="XPTable\Editors\EditStartAction.cs" />
+    <Compile Include="XPTable\Editors\ICellEditor.cs" />
+    <Compile Include="XPTable\Editors\IEditorUsesRendererButtons.cs" />
+    <Compile Include="XPTable\Editors\IKeyMessageFilterClient.cs" />
+    <Compile Include="XPTable\Editors\IMouseMessageFilterClient.cs" />
+    <Compile Include="XPTable\Editors\KeyMessageFilter.cs" />
+    <Compile Include="XPTable\Editors\MouseMessageFilter.cs" />
+    <Compile Include="XPTable\Editors\NumberCellEditor.cs" />
+    <Compile Include="XPTable\Editors\TextCellEditor.cs" />
+    <Compile Include="XPTable\Events\CellButtonEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellCheckBoxEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellEditEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellEventArgsBase.cs" />
+    <Compile Include="XPTable\Events\CellEventType.cs" />
+    <Compile Include="XPTable\Events\CellFocusEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellKeyEventArgs.cs" />
+    <Compile Include="XPTable\Events\CellMouseEventArgs.cs" />
+    <Compile Include="XPTable\Events\ColumnEventArgs.cs" />
+    <Compile Include="XPTable\Events\ColumnEventType.cs" />
+    <Compile Include="XPTable\Events\ColumnModelEventArgs.cs" />
+    <Compile Include="XPTable\Events\HeaderMouseEventArgs.cs" />
+    <Compile Include="XPTable\Events\PaintCellEventArgs.cs" />
+    <Compile Include="XPTable\Events\PaintHeaderEventArgs.cs" />
+    <Compile Include="XPTable\Events\RowEventArgs.cs" />
+    <Compile Include="XPTable\Events\RowEventType.cs" />
+    <Compile Include="XPTable\Events\SelectionEventArgs.cs" />
+    <Compile Include="XPTable\Events\TableModelEventArgs.cs" />
+    <Compile Include="XPTable\Models\ButtonColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\Cell.cs" />
+    <Compile Include="XPTable\Models\CellCheckStyle.cs" />
+    <Compile Include="XPTable\Models\CellCollection.cs" />
+    <Compile Include="XPTable\Models\CellImageStyle.cs" />
+    <Compile Include="XPTable\Models\CellPadding.cs" />
+    <Compile Include="XPTable\Models\CellPos.cs" />
+    <Compile Include="XPTable\Models\CellStyle.cs" />
+    <Compile Include="XPTable\Models\CheckBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\CheckBoxColumnStyle.cs" />
+    <Compile Include="XPTable\Models\ColorColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\Column.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\ColumnAlignment.cs" />
+    <Compile Include="XPTable\Models\ColumnCollection.cs" />
+    <Compile Include="XPTable\Models\ColumnModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\ColumnState.cs" />
+    <Compile Include="XPTable\Models\ComboBoxColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\DateTimeColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\Design\CellCollectionEditor.cs" />
+    <Compile Include="XPTable\Models\Design\CellConverter.cs" />
+    <Compile Include="XPTable\Models\Design\ColumnCollectionEditor.cs" />
+    <Compile Include="XPTable\Models\Design\HelpfulCollectionEditor.cs" />
+    <Compile Include="XPTable\Models\Design\RowCollectionEditor.cs" />
+    <Compile Include="XPTable\Models\Design\RowComparer.cs" />
+    <Compile Include="XPTable\Models\Design\RowConverter.cs" />
+    <Compile Include="XPTable\Models\DropDownColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\GridLines.cs" />
+    <Compile Include="XPTable\Models\GridLineStyle.cs" />
+    <Compile Include="XPTable\Models\HeaderContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\ImageColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\ImageSizeMode.cs" />
+    <Compile Include="XPTable\Models\NumberColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\ProgressBarColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\Row.cs" />
+    <Compile Include="XPTable\Models\RowAlignment.cs" />
+    <Compile Include="XPTable\Models\RowCollection.cs" />
+    <Compile Include="XPTable\Models\RowStyle.cs" />
+    <Compile Include="XPTable\Models\SelectionStyle.cs" />
+    <Compile Include="XPTable\Models\Table.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\TableModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Models\TableRegion.cs" />
+    <Compile Include="XPTable\Models\TableState.cs" />
+    <Compile Include="XPTable\Models\TextColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XPTable\Renderers\ButtonCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\ButtonRendererData.cs" />
+    <Compile Include="XPTable\Renderers\CellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\CheckBoxCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\CheckBoxRendererData.cs" />
+    <Compile Include="XPTable\Renderers\ColorCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\ComboBoxCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\DateTimeCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\DropDownCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\DropDownRendererData.cs" />
+    <Compile Include="XPTable\Renderers\FlatHeaderRenderer.cs" />
+    <Compile Include="XPTable\Renderers\GradientHeaderRenderer.cs" />
+    <Compile Include="XPTable\Renderers\HeaderRenderer.cs" />
+    <Compile Include="XPTable\Renderers\ICellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\IHeaderRenderer.cs" />
+    <Compile Include="XPTable\Renderers\ImageCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\IRenderer.cs" />
+    <Compile Include="XPTable\Renderers\NumberCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\NumberRendererData.cs" />
+    <Compile Include="XPTable\Renderers\ProgressBarCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\Renderer.cs" />
+    <Compile Include="XPTable\Renderers\TextCellRenderer.cs" />
+    <Compile Include="XPTable\Renderers\XPHeaderRenderer.cs" />
+    <Compile Include="XPTable\Sorting\CheckBoxComparer.cs" />
+    <Compile Include="XPTable\Sorting\ColorComparer.cs" />
+    <Compile Include="XPTable\Sorting\ComparerBase.cs" />
+    <Compile Include="XPTable\Sorting\DateTimeComparer.cs" />
+    <Compile Include="XPTable\Sorting\HeapSorter.cs" />
+    <Compile Include="XPTable\Sorting\IComparerCollection.cs" />
+    <Compile Include="XPTable\Sorting\ImageComparer.cs" />
+    <Compile Include="XPTable\Sorting\InsertionSorter.cs" />
+    <Compile Include="XPTable\Sorting\MergeSorter.cs" />
+    <Compile Include="XPTable\Sorting\NumberComparer.cs" />
+    <Compile Include="XPTable\Sorting\ShellSorter.cs" />
+    <Compile Include="XPTable\Sorting\SortColumn.cs" />
+    <Compile Include="XPTable\Sorting\SortColumnCollection.cs" />
+    <Compile Include="XPTable\Sorting\SorterBase.cs" />
+    <Compile Include="XPTable\Sorting\TextComparer.cs" />
+    <Compile Include="XPTable\Themes\ButtonParts.cs" />
+    <Compile Include="XPTable\Themes\CheckBoxStates.cs" />
+    <Compile Include="XPTable\Themes\ColumnHeaderParts.cs" />
+    <Compile Include="XPTable\Themes\ColumnHeaderStates.cs" />
+    <Compile Include="XPTable\Themes\ComboBoxParts.cs" />
+    <Compile Include="XPTable\Themes\ComboBoxStates.cs" />
+    <Compile Include="XPTable\Themes\ListViewParts.cs" />
+    <Compile Include="XPTable\Themes\ListViewStates.cs" />
+    <Compile Include="XPTable\Themes\ProgressBarParts.cs" />
+    <Compile Include="XPTable\Themes\PushButtonStates.cs" />
+    <Compile Include="XPTable\Themes\RadioButtonStates.cs" />
+    <Compile Include="XPTable\Themes\ScrollBarParts.cs" />
+    <Compile Include="XPTable\Themes\ScrollBarStates.cs" />
+    <Compile Include="XPTable\Themes\TabParts.cs" />
+    <Compile Include="XPTable\Themes\TextBoxParts.cs" />
+    <Compile Include="XPTable\Themes\TextBoxStates.cs" />
+    <Compile Include="XPTable\Themes\ThemeClasses.cs" />
+    <Compile Include="XPTable\Themes\ThemeManager.cs" />
+    <Compile Include="XPTable\Themes\UpDownParts.cs" />
+    <Compile Include="XPTable\Themes\UpDownStates.cs" />
+    <Compile Include="XPTable\Win32\AsciiChars.cs" />
+    <Compile Include="XPTable\Win32\DLLVERSIONINFO.cs" />
+    <Compile Include="XPTable\Win32\KeyEventFFlags.cs" />
+    <Compile Include="XPTable\Win32\MSG.cs" />
+    <Compile Include="XPTable\Win32\NativeMethods.cs" />
+    <Compile Include="XPTable\Win32\NativeWindow.cs" />
+    <Compile Include="XPTable\Win32\POINT.cs" />
+    <Compile Include="XPTable\Win32\RECT.cs" />
+    <Compile Include="XPTable\Win32\SIZE.cs" />
+    <Compile Include="XPTable\Win32\TRACKMOUSEEVENT.cs" />
+    <Compile Include="XPTable\Win32\WindowExtendedStyles.cs" />
+    <Compile Include="XPTable\Win32\WindowMessages.cs" />
+    <Compile Include="XPTable\Win32\WindowStyles.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\DriveWarning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\DriveActivity.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\DriveConfig.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\Accept.png" />
+    <None Include="Icons\Created.png" />
+    <None Include="Icons\Deleted.png" />
+    <None Include="Icons\Changed.png" />
+    <None Include="Icons\Activity.png" />
+    <None Include="Icons\Cog.png" />
+    <None Include="Icons\Bug.png" />
+    <None Include="Icons\Cancel.png" />
+    <None Include="Icons\Add.png" />
+    <Content Include="Icons\Drive.ico" />
+    <None Include="Icons\icon.png" />
+    <None Include="Icons\XRefreshIgnore.ico" />
+    <None Include="Icons\XRefreshDisconnected.ico" />
+    <None Include="Icons\XRefreshConnected.ico" />
+    <None Include="Icons\XRefreshActive.ico" />
+    <EmbeddedResource Include="Icons\Refresh.ico" />
+    <None Include="Icons\Tick.png" />
+    <EmbeddedResource Include="XPTable\Models\TableModel.bmp" />
+    <EmbeddedResource Include="XPTable\Models\Table.bmp" />
+    <EmbeddedResource Include="XPTable\Models\ColumnModel.bmp" />
+    <EmbeddedResource Include="MozBar\MozPane.bmp" />
+    <EmbeddedResource Include="MozBar\MozItem.bmp" />
+    <EmbeddedResource Include="MozBar\MozItem.resx">
+      <DependentUpon>MozItem.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MozBar\MozPane.resx">
+      <DependentUpon>MozPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MozBar\ScrollableControlWithScrollEvents.resx">
+      <DependentUpon>ScrollableControlWithScrollEvents.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XPTable\Editors\DropDownContainer.resx">
+      <DependentUpon>DropDownContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XPTable\Models\Table.resx">
+      <DependentUpon>Table.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XPTable\Models\TableModel.resx">
+      <DependentUpon>TableModel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Icons\Settings.png" />
+    <None Include="Icons\Include.png" />
+    <None Include="Icons\Ignore.png" />
+    <None Include="Icons\Error.png" />
+    <None Include="Icons\Renamed.png" />
+    <None Include="Icons\InternetExplorer.png" />
+    <None Include="Icons\Firefox.png" />
+    <None Include="Icons\Safari.png" />
+    <None Include="Icons\Opera.png" />
+    <None Include="Icons\Information.png" />
+    <None Include="Icons\Folder.ico" />
+    <None Include="Icons\FolderTable.ico" />
+    <None Include="Icons\FolderStar.ico" />
+    <None Include="Icons\FolderPageWhite.ico" />
+    <None Include="Icons\FolderPage.ico" />
+    <None Include="Icons\FolderHeart.ico" />
+    <None Include="Icons\FolderDelete.ico" />
+    <None Include="Icons\FolderBell.ico" />
+    <None Include="Icons\FolderAdd.ico" />
+    <None Include="Icons\DriveKey.ico" />
+    <None Include="Icons\DriveError.ico" />
+    <None Include="Icons\DriveBurn.ico" />
+    <None Include="Icons\FolderWrench.ico" />
+    <None Include="Icons\Folder.png" />
+    <None Include="Model.xsc">
+      <DependentUpon>Model.xsd</DependentUpon>
+    </None>
+    <None Include="Model.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Model.xss">
+      <DependentUpon>Model.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

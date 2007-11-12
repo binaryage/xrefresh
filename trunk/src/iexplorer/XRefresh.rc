@@ -1,0 +1,282 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1250)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_TOOLMENU MENU 
+BEGIN
+    POPUP "PopupMenu"
+    BEGIN
+        MENUITEM "Visit xrefresh.com",          ID_POPUPMENU_VISITSITE
+        MENUITEM SEPARATOR
+        MENUITEM "About XRefresh",              ID_POPUPMENU_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_ABOUTBOX            BITMAP                  "res\\aboutbox.bmp"
+IDB_LISTITEMS           BITMAP                  "res\\ListItems.bmp"
+IDB_ICONS               BITMAP                  "res\\icons.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EMPTY_DIALOG DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 283, 110
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "About XRefresh"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         208,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,283,40
+    DEFPUSHBUTTON   "OK",IDOK,232,94,50,14,BS_FLAT
+    CONTROL         "0.1.2003",IDC_VERSION,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,119,5,30,8
+    LTEXT           "http://xrefresh.com",IDC_HOMEPAGE,56,58,187,8
+    LTEXT           "Homepage:",IDC_HOMEPAGE_LABEL,9,58,38,8
+    LTEXT           "Contributors:",IDC_CONTRIB_LABEL,9,67,44,8
+    LTEXT           "Donations:",IDC_DONATIONS_LABEL,9,76,44,8
+    LTEXT           "http://xrefresh.com/people",IDC_PEOPLE,56,67,187,8
+    LTEXT           "http://xrefresh.com/donate",IDC_DONATE,56,76,187,8
+    LTEXT           "XRefresh is a tool which can refresh Internet Explorer due to filesystem activity.",IDC_STATIC,9,45,258,8
+    LTEXT           "This program is open source software.",IDC_STATIC,9,91,124,8
+    LTEXT           "Copyright © 2007",IDC_STATIC,10,99,59,8
+    LTEXT           "Antonin Hildebrand",IDC_AUTHOR,71,99,62,8
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "CompanyName", "Antonin Hildebrand"
+            VALUE "FileDescription", "XRefresh IE addon"
+            VALUE "FileVersion", "1, 0, 0, 0"
+            VALUE "InternalName", "XRefreshAddon.dll"
+            VALUE "LegalCopyright", "© 2007 Antonin Hildebrand"
+            VALUE "OriginalFilename", "XRefreshAddon.dll"
+            VALUE "ProductName", "XRefresh"
+            VALUE "ProductVersion", "1, 0, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_XREFRESH            REGISTRY                "XRefresh.rgs"
+IDR_XREFRESHBHO         REGISTRY                "XRefreshBHO.rgs"
+IDR_XREFRESHTOOLBAR     REGISTRY                "XRefreshToolbar.rgs"
+IDR_XREFRESHHELPERBAR   REGISTRY                "XRefreshHelperbar.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 276
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 103
+    END
+
+    IDD_OPTIONPAGE_SEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 214
+        VERTGUIDE, 16
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 165
+    END
+
+    IDD_OPTIONPAGE_GENERAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 215
+        VERTGUIDE, 16
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_OPTIONPAGE_FREEDB, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 214
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 135
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_XREFRESHA           ICON                    "res\\XRefreshA.ico"
+IDI_XREFRESHZ           ICON                    "res\\XRefreshD.ico"
+IDI_XREFRESHS           ICON                    "res\\XRefreshS.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_HYPERLINK           CURSOR                  "res\\hand.cur"
+IDC_DIVIDER             CURSOR                  "res\\divider.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "XRefresh"
+    IDS_ABOUT               "XRefresh Application"
+    IDS_TOOLBAR_NAME        "XRefresh Error"
+    IDS_ERROR_NOPARENTWINDOW "No parent window was specified for the toolbar"
+    IDS_ERROR_BASEMESSAGE   "An error has occurred in ""XRefresh"": "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_ADDBITMAP     "Unable to add images to the toolbar."
+    IDS_HELPERBAR_CAPTION   "XRefresh Console"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOK                    "OK"
+    IDCANCEL                "Cancel"
+    IDRETRY                 "Retry"
+    IDYES                   "Yes"
+    IDNO                    "No"
+    IDCLOSE                 "Close"
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Czech resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+#ifdef _WIN32
+LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_IKONY               ICON                    "C:\\ikony.ico"
+IDI_IKONY1              ICON                    "res\\ikony1.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""XRefresh.tlb""\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Czech resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "XRefresh.tlb"
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

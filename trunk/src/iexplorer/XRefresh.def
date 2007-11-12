@@ -1,0 +1,9 @@
+; XRefresh.def : Declares the module parameters.
+
+LIBRARY      "XRefreshAddon.dll"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

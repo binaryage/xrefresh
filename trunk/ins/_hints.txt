@@ -1,0 +1,5 @@
+1. zvys verzi (kde vsude?)
+2. zmen verzi v build.bat
+3. updatuj changelog
+4. spust clean.bat
+5. spust build.bat

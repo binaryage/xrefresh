@@ -1,0 +1,73 @@
+// XRefresh.idl : IDL source for XRefresh
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XRefresh.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(50AE34F6-670A-4807-B11A-8CA4C9136B10),
+	dual,
+	nonextensible,
+	helpstring("IXRefreshBHO Interface"),
+	pointer_default(unique)
+]
+interface IXRefreshBHO : IDispatch{
+};
+[
+	object,
+	uuid(36B7E346-E901-4EE9-B888-696D4C0BBF80),
+	dual,
+	nonextensible,
+	helpstring("IXRefreshToolbar Interface"),
+	pointer_default(unique)
+]
+interface IXRefreshToolbar : IDispatch{
+};
+[
+	object,
+	uuid(A8FE27A6-2251-4A4B-8EAF-E5E2ABA4DC80),
+	dual,
+	nonextensible,
+	helpstring("IXRefreshHelperbar Interface"),
+	pointer_default(unique)
+]
+interface IXRefreshHelperbar : IDispatch{
+};
+//////////////////////////////////////////////////////////
+[
+	uuid(753A4046-6863-42AC-9C85-24468A489720),
+	version(1.0),
+	helpstring("XRefresh 1.0 Type Library")
+]
+library XRefreshLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(8774C0B1-6697-43B8-8D0E-6179F48838B0),
+		helpstring("XRefresh Core")
+	]
+	coclass XRefreshBHO
+	{
+		[default] interface IXRefreshBHO;
+	};
+	[
+		uuid(551012C5-352D-48D9-9E29-E90F293D19F0),
+		helpstring("XRefresh Toolbar")
+	]
+	coclass XRefreshToolbar
+	{
+		[default] interface IXRefreshToolbar;
+	};
+	[
+		uuid(0A839FF4-F7CA-41E0-8EA1-F5E2913139D0),
+		helpstring("XRefresh Helperbar")
+	]
+	coclass XRefreshHelperbar
+	{
+		[default] interface IXRefreshHelperbar;
+	};
+};
