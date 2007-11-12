@@ -92,7 +92,7 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
             <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Name="BarSize" Value="4100000000000000" Type="binary" Action="write" />
             <RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Action="createAndRemoveOnUninstall" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="BandCLSID" Value="[XRefreshHelperbar_CLSID]" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="ButtonName" Value="XRefresh" Type="string" Action="write" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="ButtonText" Value="XRefresh" Type="string" Action="write" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="CLSID" Value="{E0DD6CAB-2D10-11D2-8F1A-0000F87ABD16}" Type="string" Action="write" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="Default Visible" Value="Yes" Type="string" Action="write" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="HotIcon" Value="[INSTALLLOCATION]XRefreshAddon.dll,214" Type="string" Action="write" />
