@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- WiX a MSI system jsou ty nejzkurvenejsi tooly, ktere jsem za poslednich par let poznal. 
-Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy s tim nechci prijit do styku. -->
+<!--
+WiX a MSI system jsou ty nejzkurvenejsi tooly, ktere jsem za poslednich par let poznal. 
+Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy s tim nechci prijit do styku.
+
+All things are installed for Everyone into HKLM, I wasn't able to figure out how to install COM stuff and other things separatelly.
+-->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <!-- NOTE: some bits were taken from TortoiseSVN project, thanks guys! -->
   <Product Id="44386a7b-7093-4fdc-8b52-5f7e8b968960"
@@ -14,6 +18,8 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
              Description="XRefresh"
              InstallerVersion="300"
              Compressed="yes" />
+
+    <Property Id="ALLUSERS"><![CDATA[2]]></Property>
 
     <Property Id="XRefreshHelperbar_CLSID" Value="{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}" />
     <Property Id="XRefreshToolbar_CLSID" Value="{551012C5-352D-48D9-9E29-E90F293D19F0}" />
@@ -107,16 +113,16 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
 
           <!-- Server Settings (registry) -->
           <Component Id="ServerSettings" Guid="f16ac6bb-a125-4a11-9fe0-dabe741d2230">
-            <RegistryKey Root="HKCU" Key="Software\XRefresh" Action="create" />
-            <RegistryValue Root="HKCU" Key="Software\XRefresh" Value="[INSTALLLOCATION]" Type="string" Action="write" />
+            <RegistryKey Root="HKLM" Key="Software\XRefresh" Action="create" />
+            <RegistryValue Root="HKLM" Key="Software\XRefresh" Value="[INSTALLLOCATION]" Type="string" Action="write" />
           </Component>
 
           <!-- Addon Settings (registry) -->
           <Component Id="AddonSettings" Guid="a16ac6cc-a325-4a11-9fe0-dabe741d2230">
-            <RegistryKey Root="HKCU" Key="Software\XRefresh\IEAddon" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Host" Value="localhost" Type="string" Action="write" />
-            <RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Port" Value="41258" Type="integer" Action="write" />
-            <RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Range" Value="16" Type="integer" Action="write" />
+            <RegistryKey Root="HKLM" Key="Software\XRefresh\IEAddon" Action="createAndRemoveOnUninstall" />
+            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Host" Value="localhost" Type="string" Action="write" />
+            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Port" Value="41258" Type="integer" Action="write" />
+            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Range" Value="16" Type="integer" Action="write" />
           </Component>
 
           <Directory Id="firefox" Name="Extension">
@@ -200,47 +206,43 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
           </Directory>
 
           <Component Id="FirefoxExt" Guid="a16ac6cc-a325-4a11-1fe8-dabe741d2230">
-            <RegistryValue Root="HKCU" Key="Software\Mozilla\Firefox\Extensions" Name="xrefresh@xrefresh.com" Value="[INSTALLLOCATION]Extension" Type="string" Action="write" />
+            <RegistryValue Root="HKLM" Key="Software\Mozilla\Firefox\Extensions" Name="xrefresh@xrefresh.com" Value="[INSTALLLOCATION]Extension" Type="string" Action="write" />
           </Component>
 
-          <Component Id="XRefreshFiles" Guid="b13ac6cc-a325-4a11-1fe8-dabe741d2230">
-            <File Id="License.txt" Name="License.txt" DiskId="1" Source="../License.txt" Vital="yes" />
-            <File Id="History.txt" Name="History.txt" DiskId="1" Source="../History.txt" Vital="yes" />
-            <File Id="Readme.txt" Name="Readme.txt" DiskId="1" Source="../Readme.txt" Vital="yes" />
-            <File Id="Help.html" Name="Help.html" DiskId="1" Source="../Help.html" Vital="yes" />
-            <File Id="Website.url" Name="Website.url" DiskId="1" Source="../Website.url" Vital="yes" />
-          </Component>
+			<Component Id="XRefreshFiles" Guid="b13ac6cc-a325-4a11-1fe8-dabe741d2230">
+				<File Id="License.txt" Name="License.txt" DiskId="1" Source="../License.txt" Vital="no" />
+				<File Id="History.txt" Name="History.txt" DiskId="1" Source="../History.txt" Vital="no" />
+				<File Id="Readme.txt" Name="Readme.txt" DiskId="1" Source="../Readme.txt" Vital="no"/>
+				<File Id="Help.html" Name="Help.html" DiskId="1" Source="../Help.html" Vital="no"/>
+				<File Id="Website.url" Name="Website.url" DiskId="1" Source="../Website.url" Vital="no"/>
+			</Component>
           
           <Component Id="ServerBinary" Guid="b22ac6cc-a325-4a11-1fe8-dabe741d2230">
-            <File Id="XRefresh.exe" Name="XRefresh.exe" DiskId="1" Source="../bin/XRefresh.exe" Vital="yes" />
-          </Component>
-
+			  <File Id="XRefresh.exe" Name="XRefresh.exe" DiskId="1" Source="../bin/XRefresh.exe" Vital="yes">
+				  <Shortcut Id="XRefreshEXE" Directory="IDProgramGroup" Name="XRefresh" Advertise="yes" Description="XRefresh Monitor executable" />
+			  </File>
+			</Component>
         </Directory>
       </Directory>
 
-      <Directory Id='ProgramMenuFolder' Name='ProgramMenuFolder'>
-         <Directory Id='IDProgramGroup' Name='XRefresh'>  
-            <Component Id='IDProgramGroup' Guid='b13ac6cc-a325-4a11-1fe8-dabe00002231'>
-               <CreateFolder/>
-               <RemoveFolder Id='IDProgramGroup' On='uninstall'/>
-               <RegistryValue Root='HKCU' Key='SOFTWARE\XRefresh'
-                              Type='string' Value='XRefresh' 
-                              KeyPath='yes' />                                    
-              <Shortcut Id="Readme" Directory="IDProgramGroup" Name="Readme" Advertise="no"
-                  Target="[INSTALLLOCATION]Readme.txt" Description="XRefresh Readme" />
-              <Shortcut Id="History" Directory="IDProgramGroup" Name="History" Advertise="no"
-                  Target="[INSTALLLOCATION]History.txt" Description="XRefresh History" />
-              <Shortcut Id="Website" Directory="IDProgramGroup" Name="Website" Advertise="no"
-                  Target="[INSTALLLOCATION]Website.url" Description="XRefresh Website" />
-              <Shortcut Id="XRefreshEXE" Directory="IDProgramGroup" Name="XRefresh" Advertise="no"
-                  Target="[INSTALLLOCATION]XRefresh.exe" Description="XRefresh Monitor executable" />
-            </Component>
-         </Directory>
-      </Directory>
-      
-    </Directory>
-    
-      <CustomAction 
+		<Directory Id='ProgramMenuFolder' Name='ProgramMenuFolder'>
+			<Directory Id='IDProgramGroup' Name='XRefresh'>
+				<Component Id='IDProgramGroup' Guid='b13ac6cc-a325-4a11-1fe8-dabe00002231'>
+					<CreateFolder/>
+					<RemoveFolder Id='IDProgramGroup' On='uninstall'/>
+					<RegistryValue Root='HKCU' Key='SOFTWARE\XRefresh'
+								   Type='string' Value='XRefresh'
+								   KeyPath='yes' />
+					<Shortcut Id="Readme" Directory="IDProgramGroup" Name="Readme" Advertise="no" Target="[INSTALLLOCATION]Readme.txt" Description="XRefresh Readme" />
+					<Shortcut Id="Help" Directory="IDProgramGroup" Name="Help" Advertise="no" Target="[INSTALLLOCATION]Help.html" Description="XRefresh Help Page" />
+					<Shortcut Id="History" Directory="IDProgramGroup" Name="History" Advertise="no" Target="[INSTALLLOCATION]History.txt" Description="XRefresh History" />
+					<Shortcut Id="Website" Directory="IDProgramGroup" Name="Website" Advertise="no" Target="[INSTALLLOCATION]Website.url" Description="XRefresh Website" />
+				</Component>
+			</Directory>
+		</Directory>
+	</Directory>
+
+	  <CustomAction 
        Id="LaunchMonitor" 
        Directory="INSTALLLOCATION" 
        ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
@@ -252,41 +254,24 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
        ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
        Return="asyncNoWait" /> 
        
-    <!--<CustomAction Id="OpenChangeLog" BinaryKey="WixCA" DllEntry="WixShellExec" Execute="immediate" Return="check" Impersonate="yes" /> -->
-    <!--<Property Id="WixShellExecTarget"></Property>-->
-    <!-- <CustomAction Id="UzMeTentoSystemMrda" Property="WixShellExecTarget" Value="[INSTALLLOCATION]History.txt" /> -->
-       
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX">1</Property>
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch XRefresh Monitor" />
-<!--    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT2" Value="Open Help" />
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT3" Value="Open ChangeLog" />-->
     <UI>
       <UIRef Id="WixUI_Mondo" />
       <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchMonitor" Order="1">NOT Installed AND WIXUI_EXITDIALOGOPTIONALCHECKBOX</Publish>
     </UI>
-     <!--
-    <UI>
-      <UIRef Id="WixUI_Mondo" />
-      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="OpenHelp" Order="1">NOT Installed AND WIXUI_EXITDIALOGOPTIONALCHECKBOX2</Publish>
-    </UI>
-     
-    <UI>
-      <UIRef Id="WixUI_Mondo" />
-      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="OpenChangeLog" Order="1">NOT Installed AND WIXUI_EXITDIALOGOPTIONALCHECKBOX3</Publish>
-    </UI>
-     -->
   
     <Feature Id="Server"
              Title="XRefresh Monitor"
-             Absent="disallow"
+             Absent="allow"
              Level="1"
              Display="expand"
              Description="XRefresh filesystem Monitor. This is little traybar application watching for changes in your web projects."
              ConfigurableDirectory="INSTALLLOCATION" >
       <ComponentRef Id="ServerBinary" />
-      <ComponentRef Id="ServerSettings" />
+		<ComponentRef Id="IDProgramGroup" />
+		<ComponentRef Id="ServerSettings" />
       <ComponentRef Id="XRefreshFiles" />
-      <ComponentRef Id="IDProgramGroup" />
       
     </Feature>
 
@@ -298,9 +283,9 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
              Description="Addon for Internet Explorer. This tool is able to refresh the browser when requested by XRefresh Monitor."
              ConfigurableDirectory="INSTALLLOCATION" >
       <ComponentRef Id="AddonBinary" />
-      <ComponentRef Id="AddonSettings" />
+		<ComponentRef Id="IDProgramGroup" />
+		<ComponentRef Id="AddonSettings" />
       <ComponentRef Id="XRefreshFiles" />
-      <ComponentRef Id="IDProgramGroup" />
     </Feature>
 
     <Feature Id="Extension"
@@ -311,9 +296,9 @@ Jednoduche veci se delaji extremne slozite a slozite veci jsou nemozne. Uz nikdy
              Description="Extension for Mozilla Firefox. This tool is able to refresh the browser when requested by XRefresh Monitor."
              ConfigurableDirectory="INSTALLLOCATION" >
       <ComponentRef Id="FirefoxExt" />
-      <ComponentRef Id="XRefreshFiles" />
-      <ComponentRef Id="IDProgramGroup" />
-      <ComponentRef Id="firefox" />
+	<ComponentRef Id="XRefreshFiles" />
+	<ComponentRef Id="IDProgramGroup" />
+		<ComponentRef Id="firefox" />
       <ComponentRef Id="skin" />
       <ComponentRef Id="lib" />
       <ComponentRef Id="content" />
