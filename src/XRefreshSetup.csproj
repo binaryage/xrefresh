@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.20706</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{14E61496-BF33-4C72-9662-0584EBCF8CD3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XRefreshSetup</RootNamespace>
+    <AssemblyName>XRefreshSetup</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <None Include="..\ins\WixUI_en-us.wxl">
+      <Link>WixUI_en-us.wxl</Link>
+    </None>
+    <None Include="..\ins\_build.bat">
+      <Link>_build.bat</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ins\AdvancedWelcomeEulaDlg.wxs">
+      <Link>AdvancedWelcomeEulaDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\BrowseDlg.wxs">
+      <Link>BrowseDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\CancelDlg.wxs">
+      <Link>CancelDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\Common.wxs">
+      <Link>Common.wxs</Link>
+    </Content>
+    <Content Include="..\ins\CustomizeDlg.wxs">
+      <Link>CustomizeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\DiskCostDlg.wxs">
+      <Link>DiskCostDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\ErrorDlg.wxs">
+      <Link>ErrorDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\ErrorProgressText.wxs">
+      <Link>ErrorProgressText.wxs</Link>
+    </Content>
+    <Content Include="..\ins\ExitDialog.wxs">
+      <Link>ExitDialog.wxs</Link>
+    </Content>
+    <Content Include="..\ins\FatalError.wxs">
+      <Link>FatalError.wxs</Link>
+    </Content>
+    <Content Include="..\ins\FeaturesDlg.wxs">
+      <Link>FeaturesDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\FilesInUse.wxs">
+      <Link>FilesInUse.wxs</Link>
+    </Content>
+    <Content Include="..\ins\InstallDirDlg.wxs">
+      <Link>InstallDirDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\InstallScopeDlg.wxs">
+      <Link>InstallScopeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\LicenseAgreementDlg.wxs">
+      <Link>LicenseAgreementDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\MaintenanceTypeDlg.wxs">
+      <Link>MaintenanceTypeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\MaintenanceWelcomeDlg.wxs">
+      <Link>MaintenanceWelcomeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\MsiRMFilesInUse.wxs">
+      <Link>MsiRMFilesInUse.wxs</Link>
+    </Content>
+    <Content Include="..\ins\OutOfDiskDlg.wxs">
+      <Link>OutOfDiskDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\OutOfRbDiskDlg.wxs">
+      <Link>OutOfRbDiskDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\PrepareDlg.wxs">
+      <Link>PrepareDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\ProgressDlg.wxs">
+      <Link>ProgressDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\ResumeDlg.wxs">
+      <Link>ResumeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\SetupTypeDlg.wxs">
+      <Link>SetupTypeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\UserExit.wxs">
+      <Link>UserExit.wxs</Link>
+    </Content>
+    <Content Include="..\ins\VerifyReadyDlg.wxs">
+      <Link>VerifyReadyDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WaitForCostingDlg.wxs">
+      <Link>WaitForCostingDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WelcomeDlg.wxs">
+      <Link>WelcomeDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WelcomeEulaDlg.wxs">
+      <Link>WelcomeEulaDlg.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WixUI_Advanced.wxs">
+      <Link>WixUI_Advanced.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WixUI_FeatureTree.wxs">
+      <Link>WixUI_FeatureTree.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WixUI_InstallDir.wxs">
+      <Link>WixUI_InstallDir.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WixUI_Minimal.wxs">
+      <Link>WixUI_Minimal.wxs</Link>
+    </Content>
+    <Content Include="..\ins\WixUI_Mondo.wxs">
+      <Link>WixUI_Mondo.wxs</Link>
+    </Content>
+    <Content Include="..\ins\xrefresh.wxs">
+      <Link>xrefresh.wxs</Link>
+    </Content>
+    <Content Include="..\ins\_hints.txt">
+      <Link>_hints.txt</Link>
+    </Content>
+  </ItemGroup>
+</Project>
