@@ -39,7 +39,7 @@ namespace XRefresh
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.linkLabelSite = new System.Windows.Forms.LinkLabel();
 			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
+			this.labelThanks = new System.Windows.Forms.Label();
 			this.linkLabelContact = new System.Windows.Forms.LinkLabel();
 			this.linkLabelPeople = new System.Windows.Forms.LinkLabel();
 			this.label3 = new System.Windows.Forms.Label();
@@ -155,15 +155,15 @@ namespace XRefresh
 			this.label4.TabIndex = 9;
 			this.label4.Text = "Homepage:";
 			// 
-			// label5
+			// labelThanks
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(254, 123);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(159, 13);
-			this.label5.TabIndex = 10;
-			this.label5.Text = "thank you for using this software";
+			this.labelThanks.AutoSize = true;
+			this.labelThanks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelThanks.Location = new System.Drawing.Point(254, 123);
+			this.labelThanks.Name = "labelThanks";
+			this.labelThanks.Size = new System.Drawing.Size(159, 13);
+			this.labelThanks.TabIndex = 10;
+			this.labelThanks.Text = "thank you for using this software";
 			// 
 			// linkLabelContact
 			// 
@@ -271,7 +271,7 @@ namespace XRefresh
 			this.Controls.Add(this.linkLabelPeople);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.linkLabelContact);
-			this.Controls.Add(this.label5);
+			this.Controls.Add(this.labelThanks);
 			this.Controls.Add(this.linkLabelSite);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.buttonOK);
@@ -306,7 +306,7 @@ namespace XRefresh
 		private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelThanks;
         internal System.Windows.Forms.LinkLabel linkLabelContact;
 		internal System.Windows.Forms.LinkLabel linkLabelPeople;
 		private System.Windows.Forms.Label label3;

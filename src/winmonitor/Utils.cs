@@ -148,17 +148,19 @@ namespace XRefresh
 
 	class Utils
 	{
+		const string RootKey = "Software\\XRefresh";
+
 		static public string GetSettingsPath()
 		{
 			try {
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(RootKey);
 				string path = (string)key.GetValue("SettingsPath");
 				if (path.Length == 0) return "settings.xml";
 				return path;
 			}
 			catch (NullReferenceException)
 			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 				SetSettingsPath("settings.xml");
 				return "settings.xml";
 			}
@@ -166,7 +168,7 @@ namespace XRefresh
 
 		static public void SetSettingsPath(string path)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+			RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 			key.SetValue("SettingsPath", path);
 		}
 
@@ -174,12 +176,12 @@ namespace XRefresh
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(RootKey);
 				return (int)key.GetValue("RefreshCounter");
 			}
 			catch (NullReferenceException)
 			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 				SetRefreshCounter(0);
 				return 0;
 			}
@@ -187,7 +189,7 @@ namespace XRefresh
 
 		static public void SetRefreshCounter(int count)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+			RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 			key.SetValue("RefreshCounter", count);
 		}
 
@@ -195,14 +197,14 @@ namespace XRefresh
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(RootKey);
 				string id = (string)key.GetValue("UniqueId");
 				if (id.Length == 0) throw new NullReferenceException();
 				return id;
 			}
 			catch (NullReferenceException)
 			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 				System.Random r = new System.Random();
 				int a = r.Next();
 				int b = r.Next();
@@ -214,7 +216,7 @@ namespace XRefresh
 
 		static public void SetUniqueId(string id)
 		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+			RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 			key.SetValue("UniqueId", id);
 		}
 
@@ -227,12 +229,12 @@ namespace XRefresh
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(RootKey);
 				return ((int)key.GetValue("RunningFirstTime")==0)?false:true;
 			}
 			catch (NullReferenceException)
 			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\XRefresh");
+				RegistryKey key = Registry.LocalMachine.CreateSubKey(RootKey);
 				key.SetValue("RunningFirstTime", 0);
 				return true;
 			}
@@ -247,7 +249,7 @@ namespace XRefresh
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run");
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run");
 				string value = key.GetValue("XRefresh") as string;
 				return value.ToLower().TrimEnd(Path.DirectorySeparatorChar) == path.ToLower().TrimEnd(Path.DirectorySeparatorChar);
 			}
@@ -262,11 +264,11 @@ namespace XRefresh
 			RegistryKey key;
 			try
 			{
-				key = Registry.CurrentUser.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+				key = Registry.LocalMachine.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 			}
 			catch (NullReferenceException)
 			{
-				key = Registry.CurrentUser.CreateSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run");
+				key = Registry.LocalMachine.CreateSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run");
 			}
 			key.SetValue("XRefresh", path);
 			return true;
@@ -276,7 +278,7 @@ namespace XRefresh
 		{
 			try
 			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+				RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 				key.DeleteValue("XRefresh", true);
 				return true;
 			}
@@ -295,11 +297,11 @@ namespace XRefresh
 			RegistryKey key;
 			try 
 			{
-				key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\PCHealth\ErrorReporting\ExclusionList", true);
+				key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\PCHealth\ErrorReporting\ExclusionList", true);
 			}
 			catch (NullReferenceException)
 			{
-				key = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\PCHealth\ErrorReporting\ExclusionList");
+				key = Registry.LocalMachine.CreateSubKey(@"Software\Microsoft\PCHealth\ErrorReporting\ExclusionList");
 			}
 			if (key == null) return false;
 			key.SetValue(executable, 1, RegistryValueKind.DWord);
