@@ -12,8 +12,8 @@ namespace XRefresh
 		{
 			// note: the order is important for filtering in ServerMessageRefresh
 			Deleted = 1, // the deletion of a file
-			Changed = 2, // the change of a file
-			Created = 3, // the creation of a file
+			Created = 2, // the creation of a file
+			Changed = 3, // the change of a file
 			Renamed = 4, // the renaming of a file
 		}
 
@@ -209,6 +209,11 @@ namespace XRefresh
 					// test folder ignore filter
 					MatchReason reason = new MatchReason();
 					bool passed = folder.PassesFilters(path1, reason);
+					if (type == Model.ActivityType.Renamed)
+					{
+						// when renaming be more tolerant and see also final names
+						passed = passed || folder.PassesFilters(path2, reason);
+					}
 
 					// create and register activity
 					Activity activity = new Activity(type, DateTime.Now, path1, path2, passed, reason.text);

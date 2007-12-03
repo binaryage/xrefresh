@@ -100,26 +100,61 @@ namespace XRefresh
 					while (folder.activities.Count > 0)
 					{
 						Model.Activity activity = folder.activities.Dequeue();
-						if (!positive || activity.passed)
+						string sourcePath = activity.path1;
+						string destPath = activity.type == Model.ActivityType.Renamed ? activity.path2 : activity.path1;
+
+						// here is quite difficult logic to explain
+						// I try to track and accumulate file change events and keep most significant information about what happened to files
+						//
+						// for example Microsoft Visual Studio 200 does this during file save (CTRL+S):
+						//   1) saves file into temporary file (I get 'created' event and possibly many 'changed' events)
+						//   2) deletes old file
+						//   3) renames temporary file to the original name (location)
+						// I need here to track renames and keep up-to-date location
+						// I also keep most significant event: (deleted|created)>renamed>changed
+						// if there was delete and create in row, I then change the event type to 'Changed'
+
+						Model.Activity lastActivity = null;
+						if (ops.ContainsKey(sourcePath)) lastActivity = ops[sourcePath];
+						if (ops.ContainsKey(destPath)) lastActivity = ops[destPath];
+						if (lastActivity!=null)
 						{
-							if (ops.ContainsKey(activity.path1))
+							// nonsense of modifying deleted file ? stay on deleted message
+							if (lastActivity.type == Model.ActivityType.Deleted && activity.type == Model.ActivityType.Changed) activity = lastActivity;
+							// some apps may delete file and then recreate it, instead of changing it's content
+							if (lastActivity.type == Model.ActivityType.Deleted && (activity.type == Model.ActivityType.Renamed || activity.type == Model.ActivityType.Created))
 							{
-								// take more significant activity
-								if (activity > ops[activity.path1]) ops[activity.path1] = activity;
+								activity.type = Model.ActivityType.Changed;
+								activity.path1 = destPath;
 							}
-							else
-							{
-								ops.Add(activity.path1, activity);
-							}
+							// creation is more significant than modification and renaming
+							if (lastActivity.type == Model.ActivityType.Created && (activity.type == Model.ActivityType.Renamed || activity.type == Model.ActivityType.Changed)) activity = lastActivity;
+							// renaming is more significant to modification
+							if (lastActivity.type == Model.ActivityType.Renamed && activity.type == Model.ActivityType.Changed) activity = lastActivity;
+							// purge last activity
+							activity.passed = activity.passed || lastActivity.passed;
+							if (ops.ContainsKey(sourcePath)) ops.Remove(sourcePath);
+							if (ops.ContainsKey(destPath)) ops.Remove(destPath);
 						}
+						// store new activity
+						ops.Add(destPath, activity);
 					}
 
-					files = new File[ops.Count];
-					int i = ops.Count;
+					int passedCount = 0;
 					foreach (Model.Activity activity in ops.Values)
 					{
-						i--;
-						files[i] = new File(root, activity);
+						if (activity.passed) passedCount++;
+					}
+
+					files = new File[passedCount];
+					int i = 0;
+					foreach (Model.Activity activity in ops.Values)
+					{
+						if (activity.passed)
+						{
+							files[i] = new File(root, activity);
+							i++;
+						}
 					}
 				}
 			}
