@@ -126,6 +126,7 @@ namespace XRefresh
 							{
 								activity.type = Model.ActivityType.Changed;
 								activity.path1 = destPath;
+								activity.path2 = "";
 							}
 							// creation is more significant than modification and renaming
 							if (lastActivity.type == Model.ActivityType.Created && (activity.type == Model.ActivityType.Renamed || activity.type == Model.ActivityType.Changed)) activity = lastActivity;

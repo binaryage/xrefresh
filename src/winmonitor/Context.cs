@@ -180,12 +180,16 @@ namespace XRefresh
 
 		public void Exit(object sender, EventArgs e)
 		{
-			Application.Exit();
+			try
+			{
+				Application.Exit();
+			}
+			catch (Exception)
+			{ }
 		}
 
 		public void Help(object sender, EventArgs e)
 		{
-			Application.Exit();
 		}
 
 		public void About(object sender, EventArgs e)
