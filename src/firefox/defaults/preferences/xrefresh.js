@@ -1,6 +1,6 @@
 // Global
 pref("extensions.xrefresh.disabledAlways", false);
-pref("extensions.xrefresh.disabledRecorder", false);
+pref("extensions.xrefresh.disabledRecorder", true);
 pref("extensions.xrefresh.localConnectionsOnly", true);
 pref("extensions.xrefresh.localPagesOnly", true);
 

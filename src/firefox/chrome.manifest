@@ -1,4 +1,4 @@
 content xrefresh chrome/content/ xpcnativewrappers=no
-skin	xrefresh classic/1.0 chrome/skin/
+skin xrefresh classic/1.0 chrome/skin/
 
-overlay chrome://firebug/content/firebugOverlay.xul         chrome://xrefresh/content/overlay.xul
+overlay chrome://firebug/content/firebugOverlay.xul chrome://xrefresh/content/overlay.xul

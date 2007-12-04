@@ -1,24 +1,24 @@
 /*****************************************************************************************/
 
 #fbXRefreshMenu {
-    margin: 0 4px 0 0;
-    padding: 0 0 0 4px;
-    list-style-image: url(chrome://xrefresh/skin/xrefresh.png);
-    -moz-opacity: 0.8;
+	margin: 0 4px 0 0;
+	padding: 0 0 0 4px;
+	list-style-image: url(chrome://xrefresh/skin/xrefresh.png);
+	-moz-opacity: 0.8;
 }
 
 #fbXRefreshMenu:hover,
 #fbXRefreshMenu[open="true"] {
-    -moz-opacity: 1.0;
+	-moz-opacity: 1.0;
 }
 
 #fbXRefreshMenu > .toolbarbutton-text,
 #fbXRefreshMenu > .toolbarbutton-menu-dropmarker {
-    display: none;
+	display: none;
 }
 
 .toolbar-text-label {
-    padding: 3px 8px 3px 4px;
+	padding: 3px 8px 3px 4px;
 	background-color: #f00;
 }
 
@@ -36,7 +36,7 @@
 #fbXRefreshExtensionRecorderPause,
 #fbXRefreshExtensionRecorderReplay 
 {
-    -moz-image-region: rect(auto,auto,auto,auto) !important;
+	-moz-image-region: rect(auto,auto,auto,auto) !important;
 
 }
 
@@ -126,24 +126,24 @@
 
 .logRow-blink > .blinkHead > .blinkTitle
 {
-    background-repeat: no-repeat;
-    background-position: 2px 2px;
+	background-repeat: no-repeat;
+	background-position: 2px 2px;
 }
 
 .logRow-blink > .blinkHead.closed > .blinkTitle
 {
-    background-image: url(twistyClosed.png);
+	background-image: url(twistyClosed.png);
 }
 
 .logRow-blink > .blinkHead.opened > .blinkTitle
 {
-    background-image: url(twistyOpen.png);
+	background-image: url(twistyOpen.png);
 }
 
 .logRow-blink > .blinkHead > .blinkTitle {
-    padding-left: 18px;
-    background-repeat: no-repeat;
-    background-position: 3px 3px;
+	padding-left: 18px;
+	background-repeat: no-repeat;
+	background-position: 3px 3px;
 }
 
 .logRow-blink 
@@ -152,39 +152,39 @@
 }
 
 .refresh > .blinkTitle {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .logRow-blink {
-    padding: 2px 0 1px 0;
+	padding: 2px 0 1px 0;
 }
 
 .logRow-blink,
 .logRow-blink .objectLink-sourceLink {
-    background: url(group.gif) repeat-x #FFFFFF;
+	background: url(group.gif) repeat-x #FFFFFF;
 }
 
 .logRow-blink.opened {
-    padding-bottom: 4px;
-    border-bottom: none;    
+	padding-bottom: 4px;
+	border-bottom: none;    
 }
 
 .blinkTitle {
-    padding-top: 1px;
-    color: #000000;
+	padding-top: 1px;
+	color: #000000;
 }
 
 .refresh > .blinkTitle {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .refresh > .blinkTitle:hover {
-    color: blue;
-    text-decoration: none !important;
+	color: blue;
+	text-decoration: none !important;
 }
 
 .refresh > .blinkTitle:hover > .blinkURI {
-    text-decoration: underline !important;
+	text-decoration: underline !important;
 }
 
 .blinkDate {
@@ -192,7 +192,7 @@
 	font-size: 8pt;
 	color: gray;
 	font-weight: normal;
-    margin-right: 6px;
+	margin-right: 6px;
 }
 
 .blinkInfo {
@@ -204,103 +204,103 @@
 }
 
 .blinkIcon {
-    margin-right: 2px;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    background: transparent no-repeat 0 0;
+	margin-right: 2px;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	background: transparent no-repeat 0 0;
 }
 
 .blinkProgress {
-    margin-right: 6px;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    background: transparent no-repeat 0 0;
+	margin-right: 6px;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	background: transparent no-repeat 0 0;
 }
 
 .logRow-blink > .blinkHead.refresh > .blinkTitle > .blinkIcon {
-    background-image: url(refresh.png);
+	background-image: url(refresh.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.info > .blinkTitle > .blinkIcon {
-    background-image: url(info.png);
+	background-image: url(info.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.error > .blinkTitle > .blinkIcon {
-    background-image: url(error.png);
+	background-image: url(error.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect > .blinkTitle > .blinkIcon {
-    background-image: url(connect.png);
+	background-image: url(connect.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.disconnect > .blinkTitle > .blinkIcon {
-    background-image: url(disconnect.png);
+	background-image: url(disconnect.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect_btn > .blinkTitle > .blinkIcon {
-    background-image: url(connect_btn.png);
+	background-image: url(connect_btn.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.disconnect_btn > .blinkTitle > .blinkIcon {
-    background-image: url(disconnect_btn.png);
+	background-image: url(disconnect_btn.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect > .blinkTitle > .blinkIcon {
-    background-image: url(connect.png);
+	background-image: url(connect.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.rreq > .blinkTitle > .blinkIcon {
-    background-image: url(refresh.png);
+	background-image: url(refresh.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.rstop > .blinkTitle > .blinkIcon {
-    background-image: url(control_stop.png);
+	background-image: url(control_stop.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.rstart > .blinkTitle > .blinkIcon {
-    background-image: url(control_rec.png);
+	background-image: url(control_rec.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.rpause > .blinkTitle > .blinkIcon {
-    background-image: url(control_pause.png);
+	background-image: url(control_pause.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.rreplay > .blinkTitle > .blinkIcon {
-    background-image: url(control_repeat.png);
+	background-image: url(control_repeat.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.warn > .blinkTitle > .blinkIcon {
-    background-image: url(warn.png);
+	background-image: url(warn.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead.bulb > .blinkTitle > .blinkIcon {
-    background-image: url(lightbulb.png);
+	background-image: url(lightbulb.png);
 	background-position: right;
 }
 
 .logRow-blink > .blinkHead > .details {
-    display: none;
+	display: none;
 }
 
 .logRow-blink > .blinkHead.opened > .details {
-    margin-top: 10px;
-    display: block;
+	margin-top: 10px;
+	display: block;
 }
 
 .ftable {
@@ -346,21 +346,21 @@
 }
 
 .faction.changed {
-    background-image: url(mini_changed.png);
+	background-image: url(mini_changed.png);
 }
 
 .faction.created {
-    background-image: url(mini_created.png);
+	background-image: url(mini_created.png);
 }
 
 .faction.deleted {
-    background-image: url(mini_deleted.png);
+	background-image: url(mini_deleted.png);
 }
 
 .faction.renamed {
-    background-image: url(mini_renamed.png);
+	background-image: url(mini_renamed.png);
 }
 
 .twisty {
-    background-position: 2px 0;
+	background-position: 2px 0;
 }
