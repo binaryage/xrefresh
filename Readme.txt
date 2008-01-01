@@ -1,8 +1,8 @@
 XRefresh for Windows
 ====================
 
-XRefresh is a productivity tool for web developers. 
-XRefresh can refresh current web browser page due to some file changes in selected folder(s).
+XRefresh is a productivity tool for web developers.
+XRefresh can refresh web browser when you modify and save source file (html, js, css, etc.).
 
 Here is typical usage scenario for local web development on machine with two monitors:
 
@@ -13,7 +13,7 @@ Here is typical usage scenario for local web development on machine with two mon
 
 
 XRefresh project contains:
-  
+
   XRefresh Monitor 
   ----------------
     * standalone windows traybar application watching for changes in selected folder(s)
@@ -31,12 +31,12 @@ XRefresh project contains:
     * browser plugin which listens for monitor requests and performs refresh commands
     * requires Firefox 1.5 or higher + Firebug 1.0 or higher (http://getfirebug.com)
     * runs on any platform supported by Firefox (tested on Windows)
-     
+
 
 
 License notes
 -------------
-XRefresh is a free software. For full details see License.txt. 
+XRefresh is a free software. For full details see License.txt.
 
 XRefresh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -51,8 +51,3 @@ Thank you for using this software.
 ---
 Antonin Hildebrand
 http://xrefresh.com
-
-
-Technical note: 
-Program binaries were compiled in Visual Studio 2008 BETA, so consider 
-the whole thing as a BETA software.

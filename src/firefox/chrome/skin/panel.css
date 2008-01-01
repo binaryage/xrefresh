@@ -23,7 +23,7 @@
 }
 
 .toolbar-text-button > .toolbarbutton-icon {
-  display: block !important;
+	display: block !important;
 }
 
 #fbXRefreshExtensionRecorderStatusLabel 
@@ -37,33 +37,32 @@
 #fbXRefreshExtensionRecorderReplay 
 {
 	-moz-image-region: rect(auto,auto,auto,auto) !important;
-
 }
 
 #fbXRefreshExtensionRecorderStart 
 {
 	list-style-image: url(control_rec.png);
-}	
+}
 
 #fbXRefreshExtensionRecorderStop
 {
 	list-style-image: url(control_stop.png);
-}	
+}
 
 #fbXRefreshExtensionRecorderPause
 {
 	list-style-image: url(control_pause.png);
-}	
+}
 
 #fbXRefreshExtensionRecorderPause.paused
 {
 	list-style-image: url(control_play.png) !important;
-}	
+}
 
 #fbXRefreshExtensionRecorderReplay
 {
 	list-style-image: url(control_repeat.png);
-}	
+}
 
 .toolbar-recorder-status 
 {

@@ -30,6 +30,8 @@ const xrefreshURLs =
 
 const xrefreshPrefDomain = "extensions.xrefresh";
 
+const consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+
 // see http://www.xulplanet.com/tutorials/mozsdk/sockets.php
 var drumTransport = null;
 var drumOutStream = null;
@@ -49,7 +51,13 @@ var recorders = {};
 
 var debug = false;
 
+var readyStateTimer = null;
 var xrefreshOptionUpdateMap = {};
+
+function debugLog(msg) {
+	consoleService.logStringMessage("XREFRESH: " + msg);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 // Firebug.XRefreshExtension, here we go!
@@ -229,6 +237,8 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	installGate: function(context)
 	{
+		if (debug) debugLog("installed gate for>"+context.window.document.URL);
+		
 		// the gate is here to stop propagation of some events 
 		// beyond HTML document borders.
 
@@ -242,14 +252,14 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		this.savedParents = [];
 		for (i = 0; i<keys.length; i++) 
 		{
-			if (debug) this.log("keyset: "+keys[i].id);
+			if (debug) debugLog("keyset: "+keys[i].id);
 			this.savedKeys[i] = keys[i];
 			this.savedParents[i] = keys[i].parentNode;
 		}
 		
 		for (j = 0; j<this.savedKeys.length; j++)
 		{
-			if (debug) this.log("key: "+this.savedKeys[j].id+ " ?");
+			if (debug) debugLog("key: "+this.savedKeys[j].id+ " ?");
 			this.savedParents[j].removeChild(this.savedKeys[j]);
 		}
 		
@@ -258,13 +268,15 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	uninstallGate: function(context)
 	{
+		if (debug) debugLog("uninstalling gate for>"+context.window.document.URL);
+		
 		this.restorePageOffset(context);
 
 		// restore keyset elements
 		for (i = 0; i < this.savedKeys.length; i++) 
 		{
 			this.savedParents[i].appendChild(this.savedKeys[i]);
-			if (debug) this.log("restored key: "+this.savedKeys[i].id+ "! into: " + this.savedParents[i].id);
+			if (debug) debugLog("restored key: "+this.savedKeys[i].id+ "! into: " + this.savedParents[i].id);
 		}
 		
 		// start recording new session
@@ -284,7 +296,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		{
 			if (recorders.hasOwnProperty(r))
 			{
-				this.log("  "+r+" >> "+recorders[r].getStats()+" "+recorders[r].state);
+				this.log("  "+r+" >> "+recorders[r].getStats()+" "+recorders[r].state + " C="+recorders[r].destroyMarker);
 			}
 		}
 	},
@@ -294,35 +306,40 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		return recorders[context.window.document.URL];
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	destroyRecorder: function(url)
+	destroyRecorder: function(url, counter)
 	{	
 		var recorder = recorders[url];
-		if (recorder && recorder.toBeDestroyed)
+		if (recorder && recorder.destroyMarker==counter)
 		{
+			if (debug) debugLog("destroying recorder due to timeout ["+(counter+"")+"] >"+url);
 			delete recorders[url];
 			this.printRecordersStats();
 		}
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
+	documentStateWatcher: function(context) {
+	
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
 	initContext: function(context)
 	{
-		if (debug) this.log("init context>"+context.window.document.URL);
+		if (debug) debugLog("init context>"+context.window.document.URL);
 		this.printRecordersStats();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	reattachContext: function(context)
 	{
-		if (debug) this.log("reattach context>"+context.window.document.URL);
+		if (debug) debugLog("reattach context>"+context.window.document.URL);
 		this.printRecordersStats();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	destroyContext: function(context, persistedState)
 	{
 		var panel = FirebugContext.getPanel("XRefreshExtension");
-		if (debug) this.log("destroy context>"+context.window.document.URL);
+		if (debug) debugLog("destroy context>"+context.window.document.URL);
 		
 		// we need to destroy recorders to prevent leaks
-		// we will defer recorder destroyfor recorderKeepAlive time
+		// we will defer recorder destroy for recorderKeepAlive time
 		// if there is activity on him (revisit) I won't destroy it
 		//
 		// we need to do this, because we get this order during refresh:
@@ -337,8 +354,8 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		var recorder = recorders[context.window.document.URL];
 		if (recorder)
 		{
-			recorder.toBeDestroyed = true;
-			setTimeout(bindFixed(this.destroyRecorder, this, context.window.document.URL+""), this.getPref('recorderKeepAlive'));
+			var counter = recorder.destroyMarker;
+			setTimeout(bindFixed(this.destroyRecorder, this, context.window.document.URL+"", counter), this.getPref('recorderKeepAlive'));
 			if (recorder.state=="replaying") 
 			{
 				recorder.stopReplay();
@@ -351,21 +368,25 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	showContext: function(browser, context)
 	{
-		//if (debug) this.log("show context>"+context.window.document.URL);
-		//this.updatePanel();
-		//this.printRecordersStats();
+		if (debug) debugLog("show context>"+context.window.document.URL);
+		this.updatePanel();
+		this.printRecordersStats();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	loadedContext: function(context)
 	{
 		var recorder = this.getRecorder(context);
-		if (recorder) recorder.toBeDestroyed = false; // visiting old page prevent destroying recorder if found
+		var nextDestroyMarker = 0;
+		if (recorder) nextDestroyMarker = recorder.destroyMarker + 1; // visiting old page prevent destroying recorder if found
 		
-		if (debug) this.log("loaded context>" + context.window.document.URL);
+		if (debug) debugLog("loaded context>" + context.window.document.URL);
 		this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
 
 		if (drumInitiatedRefresh) 
 		{
+			if (!recorder) alert('inconsitency!');
+			
+			if (debug) debugLog("drum initiated refresh>" + context.window.document.URL);
 			drumInitiatedRefresh = false;
 			if (recorder && recorder.state!="stopped")
 			{
@@ -375,21 +396,27 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		}
 		else
 		{
+			if (debug) debugLog("not drum initiated refresh>" + context.window.document.URL);
 			var wasPaused = recorder?recorder.state=="paused":false;
 			var wasRecording = recorder?recorder.state=="recording":(!this.getPref("disabledRecorder"));
 			
 			// create new recorder
 			recorder = new Casper.Events.recorder(bind(this.updateRecorderPanel, this));
+			if (debug) debugLog("created recorder>" + recorder);
 			for (var eventName in Casper.Events.handler) 
 			{
 				recorder.listener.addListener(eventName);
 			}
 
-			// register recorder		
+			// register recorder
+			if (debug) debugLog("starting recorder>" + recorder);
 			if (wasRecording) recorder.start(context.window, wasPaused);
-			recorders[context.window.document.URL] = recorder;
+			if (debug) debugLog("registering recorder as>" + context.window.document.URL);
 		}
 
+		recorder.destroyMarker = nextDestroyMarker;
+		recorders[context.window.document.URL] = recorder;
+		
 		this.printRecordersStats();
 		this.updateRecorderPanel();
 	},
@@ -486,13 +513,13 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	connectDrum: function()
 	{
 		var transportService = Components.classes["@mozilla.org/network/socket-transport-service;1"]
-							   .getService(Components.interfaces.nsISocketTransportService);
+			.getService(Components.interfaces.nsISocketTransportService);
 		drumTransport = transportService.createTransport(null, 0, this.getPref("host"), this.getPref("port"), null);
 		drumOutStream = drumTransport.openOutputStream(0,0,0);
 		
 		var stream = drumTransport.openInputStream(0,0,0);
 		drumInStream = Components.classes["@mozilla.org/scriptableinputstream;1"]
-					   .createInstance(Components.interfaces.nsIScriptableInputStream);
+			.createInstance(Components.interfaces.nsIScriptableInputStream);
 		drumInStream.init(stream);
 	
 		var dataListener = {
@@ -511,7 +538,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		};
 	
 		drumPump = Components.classes["@mozilla.org/network/input-stream-pump;1"]
-				   .createInstance(Components.interfaces.nsIInputStreamPump);
+			.createInstance(Components.interfaces.nsIInputStreamPump);
 		drumPump.init(stream, -1, -1, 0, 0, false);
 		drumPump.asyncRead(dataListener, null);
 
@@ -609,7 +636,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	{
 		// try to parse message
 		var data = UTF8.decode(listener.data);
-		if (debug) this.log(data);
+		if (debug) debugLog(data);
 		var message = Casper.JSON.parse(data);
 		if (!message) return; // we have only partial message ? wait for next chunk
 
@@ -627,7 +654,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	processMessage: function(message)
 	{
-		if (debug) this.log("Received message:"+message.command);
+		if (debug) debugLog("Received message:"+message.command);
 		if (message.command=="DoRefresh")
 		{
 			this.showEvent(message);
@@ -867,13 +894,13 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	storePageOffset: function(context)
 	{
-		if (debug) this.log("Storing offsets for "+context.window.document.URL);
+		if (debug) debugLog("Storing offsets for "+context.window.document.URL);
 		recorders[context.window.document.URL].offsets = [context.window.pageXOffset, context.window.pageYOffset];
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	restorePageOffset: function(context)
 	{
-		if (debug) this.log("Restoring offsets for "+context.window.document.URL);
+		if (debug) debugLog("Restoring offsets for "+context.window.document.URL);
 		var data = recorders[context.window.document.URL].offsets;
 		if (!data) return;
 		context.window.scrollTo(data[0], data[1]);
