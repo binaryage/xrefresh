@@ -1127,6 +1127,7 @@ XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
 		
 		if (localOnly)
 		{
+			// TODO: refresh localhost only
 			var localhost = true;
 			if (!(uri.scheme == "file" || localhost)) return;
 		}

@@ -77,14 +77,15 @@ BEGIN
     LTEXT           "Antonin Hildebrand",IDC_AUTHOR,71,99,62,8
 END
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 0,6,0,0
+ PRODUCTVERSION 0,6,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -101,12 +102,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Antonin Hildebrand"
             VALUE "FileDescription", "XRefresh IE addon"
-            VALUE "FileVersion", "1, 0, 0, 0"
+            VALUE "FileVersion", "0, 6, 0, 0"
             VALUE "InternalName", "XRefreshAddon.dll"
             VALUE "LegalCopyright", "© 2007 Antonin Hildebrand"
             VALUE "OriginalFilename", "XRefreshAddon.dll"
             VALUE "ProductName", "XRefresh"
-            VALUE "ProductVersion", "1, 0, 0, 0"
+            VALUE "ProductVersion", "0, 6, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
@@ -140,32 +141,6 @@ BEGIN
         RIGHTMARGIN, 276
         TOPMARGIN, 7
         BOTTOMMARGIN, 103
-    END
-
-    IDD_OPTIONPAGE_SEARCH, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 214
-        VERTGUIDE, 16
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 165
-    END
-
-    IDD_OPTIONPAGE_GENERAL, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 215
-        VERTGUIDE, 16
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 168
-    END
-
-    IDD_OPTIONPAGE_FREEDB, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 214
-        TOPMARGIN, 6
-        BOTTOMMARGIN, 135
     END
 END
 #endif    // APSTUDIO_INVOKED

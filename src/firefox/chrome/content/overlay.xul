@@ -35,7 +35,7 @@
 						<menuitem label="Disable XRefresh" tooltiptext="Disables whole XRefresh functionality" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="disabledAlways"/>
 						<menuitem label="Disable automatic macro recording" tooltiptext="Disables automatic macro recorder. For case you don't like it." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="disabledRecorder"/>
 						<menuitem label="Accept only local connections" tooltiptext="Accepts only connections from this computer (security feature)" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localConnectionsOnly"/>
-						<menuitem label="Trigger refresh only for local pages" tooltiptext="Performs refresh only for pages sitting on 127.0.0.1 (localhost)" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localPagesOnly"/>
+						<!--<menuitem label="Trigger refresh only for local pages" tooltiptext="Performs refresh only for pages sitting on 127.0.0.1 (localhost)" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localPagesOnly"/>-->
 						<!--<menuitem label="Advanced Settings..." type="checkbox" oncommand="Firebug.XRefreshExtension.advancedSettings(this)"/>-->
 						<menuseparator/>
 						<menuitem label="Website..." command="cmd_XRefreshSite"/>
