@@ -84,7 +84,7 @@
 				Name="VCLinkerTool"
 				RegisterOutput="true"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="comctl32.lib Ws2_32.lib Urlmon.lib bugtrapu.lib ad1.lib"
+				AdditionalDependencies="comctl32.lib Ws2_32.lib Urlmon.lib"
 				OutputFile="..\..\bin\XRefreshAddon.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="bugtrap;lib;&quot;C:\Program Files\Microsoft SDKs\Windows\v6.0\Lib&quot;"
@@ -584,11 +584,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\XRefreshStop.ico"
+				RelativePath="..\..\ico\XRefreshStop.ico"
 				>
 			</File>
 			<File
-				RelativePath="..\..\ico\XRefreshStop.ico"
+				RelativePath=".\res\XRefreshStop.ico"
 				>
 			</File>
 			<File

@@ -68,6 +68,7 @@ public:
 		SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_DOWNLOADBEGIN, OnDownloadBegin)
 		SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_DOWNLOADCOMPLETE, OnDownloadComplete)
 		SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_WINDOWSTATECHANGED, OnWindowStateChanged)
+		SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_TITLECHANGE, OnWindowTitleChanged)
 		
 		//SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_COMMANDSTATECHANGE, OnCommandStateChange)
 		//SINK_ENTRY_EX(1, DIID_DWebBrowserEvents2, DISPID_PROGRESSCHANGE, OnProgressChange) // needed for processing F5 (refresh)
@@ -101,6 +102,7 @@ public:
 	STDMETHOD(OnDownloadBegin)();
 	STDMETHOD(OnDownloadComplete)();
 	STDMETHOD(OnWindowStateChanged)(DWORD dwFlags, DWORD dwValidFlagsMask);
+	STDMETHOD(OnWindowTitleChanged)(BSTR bstrTitleText);
 
 	//// IDocHostUIHandler
 	//STDMETHOD(ShowContextMenu)(DWORD dwID, POINT FAR* ppt, IUnknown FAR* pcmdTarget, IDispatch FAR* pdispReserved);
@@ -166,6 +168,9 @@ private:
 	CLogger														m_Logger;
 	bool														m_Paused;
 	static CToolWindow											m_IE7ToolWindow;
+
+	CString														m_LastSentTitle;
+	CString														m_LastSentURL;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(XRefreshBHO), CXRefreshBHO)

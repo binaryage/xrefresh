@@ -244,9 +244,18 @@ CXRefreshBHO::SendInfoAboutPage()
 {
 	// send message
 	if (!m_TopBrowser) return;
-	CString title = GetLocationName(m_TopBrowser);
-	CString url = GetLocationURL(m_TopBrowser);
-	m_ConnectionManager.SendSetPage(title, url);
+
+	CComPtr<IHTMLDocument2> doc = GetDocument(m_TopBrowser);
+	if (!doc) return;
+	
+	CString title = GetTitle(doc);
+	CString url = GetURL(doc);
+	if (m_LastSentTitle!=title || m_LastSentURL!=url) // prevent duplicit page info messages
+	{
+		m_ConnectionManager.SendSetPage(title, url);
+		m_LastSentTitle = title;
+		m_LastSentURL = url;
+	}
 }
 
 bool 
@@ -366,6 +375,15 @@ CXRefreshBHO::OnWindowStateChanged(DWORD dwFlags, DWORD dwValidFlagsMask)
 	m_IE7ToolWindow.SetParent(this);
 	return S_OK;
 }
+
+STDMETHODIMP
+CXRefreshBHO::OnWindowTitleChanged(BSTR bstrTitleText)
+{
+	DTI(TRACE_LI(FS(_T("BHO[%08X]: OnWindowTitleChanged()"), this)));
+	SendInfoAboutPage();
+	return S_OK;
+}
+
 /*
 // IDocHostUIHandler
 HRESULT 
