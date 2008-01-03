@@ -40,8 +40,6 @@ CAboutBox::OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 LRESULT 
 CAboutBox::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	CAxDialogImpl<CAboutBox>::OnInitDialog(uMsg, wParam, lParam, bHandled);
-
 	m_Version.SubclassWindow(GetDlgItem(IDC_VERSION));
 	DLLVERSIONINFO dllVerInfo;
 	ZeroMemory(&dllVerInfo, sizeof(DLLVERSIONINFO));

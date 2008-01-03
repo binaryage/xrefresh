@@ -6,7 +6,7 @@
 #include <atlhost.h>
 
 // CAboutBox
-class CAboutBox : public CAxDialogImpl<CAboutBox> {
+class CAboutBox : public CDialogImpl<CAboutBox> {
 public:
 	CAboutBox();
 	~CAboutBox();
@@ -18,7 +18,6 @@ public:
 		COMMAND_HANDLER(IDOK, BN_CLICKED, OnClickedOK)
 		COMMAND_HANDLER(IDCANCEL, BN_CLICKED, OnClickedOK)
 		MESSAGE_HANDLER(WM_COMMAND, OnCommand)
-		CHAIN_MSG_MAP(CAxDialogImpl<CAboutBox>)
 		MESSAGE_HANDLER(WM_CTLCOLORSTATIC, OnCtlColorStatic)
 	ALT_MSG_MAP(1) // version
 	END_MSG_MAP()
