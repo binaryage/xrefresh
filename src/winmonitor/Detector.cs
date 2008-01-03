@@ -183,6 +183,8 @@ namespace XRefresh
 		}
 		public override string SuggestName(string path)
 		{
+			path.TrimEnd(Path.DirectorySeparatorChar);
+			path += Path.DirectorySeparatorChar;
 			string dir = Path.GetDirectoryName(path);
 			if (dir.Length == 0) return "";
 			int last = dir.LastIndexOf(Path.DirectorySeparatorChar);

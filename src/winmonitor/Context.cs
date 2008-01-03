@@ -152,6 +152,11 @@ namespace XRefresh
 		public void ShowConfiguration(object sender, EventArgs e)
 		{
 			Debug.Assert(mainThreadID == Thread.CurrentThread.GetHashCode());
+			if (configuration.Visible)
+			{
+				if (configuration.WindowState == FormWindowState.Minimized) configuration.WindowState = FormWindowState.Normal;
+				return;
+			}
 			if (configuration.IsDisposed) configuration = new Configuration();
 			configuration.LoadConfiguration();
 			Activate(configuration);
@@ -160,6 +165,11 @@ namespace XRefresh
 		public void ShowActivityLog(object sender, EventArgs e)
 		{
 			Debug.Assert(mainThreadID == Thread.CurrentThread.GetHashCode());
+			if (activityLog.Visible)
+			{
+				if (activityLog.WindowState == FormWindowState.Minimized) activityLog.WindowState = FormWindowState.Normal;
+				return;
+			}
 			if (activityLog.IsDisposed) activityLog = new ActivityLog();
 			Activate(activityLog);
 		}

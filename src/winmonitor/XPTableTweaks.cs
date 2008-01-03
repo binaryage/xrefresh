@@ -1417,9 +1417,8 @@ namespace XRefresh
 			inBrowseMode = true;
 			DialogResult res = browser.ShowDialog();
 			inBrowseMode = false;
+			if (res == DialogResult.OK) TextBox.Text = browser.SelectedPath;
 			EditingTable.StopEditing();
-			if (res != DialogResult.OK) return;
-			TextBox.Text = browser.SelectedPath;
 		}
 
 		protected override void SetCellValue()
