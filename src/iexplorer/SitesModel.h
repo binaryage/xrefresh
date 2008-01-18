@@ -16,9 +16,11 @@ enum ESiteAction {
 // CSiteRecord
 class CSiteRecord {
 public:
-	CSiteRecord();
 	CSiteRecord(CString site, ESiteAction action, bool active = true);
 	~CSiteRecord();
+
+	CSiteRecord(const CSiteRecord& r);
+	CSiteRecord&                                  operator=(const CSiteRecord& r);
 
 	bool                                          Test(tstring& s);
 	CString                                       GetSite();

@@ -19,6 +19,25 @@ CSiteRecord::~CSiteRecord()
 	delete m_Pattern;
 }
 
+CSiteRecord::CSiteRecord(const CSiteRecord& r):
+	m_Active(r.m_Active),
+	m_Site(r.m_Site),
+	m_Action(r.m_Action),
+	m_Pattern(NULL) // do not copy pattern cache!
+{
+}
+
+CSiteRecord&
+CSiteRecord::operator=(const CSiteRecord& r)
+{
+	m_Active = r.m_Active;
+	m_Site = r.m_Site;
+	m_Action = r.m_Action;
+	delete m_Pattern; // release pattern cache
+	m_Pattern = NULL; // do not copy pattern cache!
+	return *this;
+}
+
 bool
 CSiteRecord::Test(tstring& s)
 {
