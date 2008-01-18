@@ -1079,14 +1079,6 @@
 			>
 		</File>
 		<File
-			RelativePath=".\Guid.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\Guid.h"
-			>
-		</File>
-		<File
 			RelativePath=".\HelperbarWindow.cpp"
 			>
 		</File>
