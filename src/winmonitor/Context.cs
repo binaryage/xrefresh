@@ -190,6 +190,8 @@ namespace XRefresh
 
 		public void Exit(object sender, EventArgs e)
 		{
+			configuration.Close();
+			activityLog.Close();
 			try
 			{
 				Application.Exit();
