@@ -296,7 +296,7 @@ public:
 		HFONT hOldFont = dcClient.SelectFont( m_fntListFont );
 		
 		CSize sizeExtent;
-		if ( !dcClient.GetTextExtent( _T( "Height" ), -1, &sizeExtent ) )
+		if ( !dcClient.GetTextExtent( _T( "Heighty" ), -1, &sizeExtent ) )
 			return FALSE;
 		
 		dcClient.SelectFont( hOldFont );
@@ -576,6 +576,7 @@ public:
 	
 	BOOL AddItem()
 	{
+		NotifyParent( 0, 0, LCN_CHANGED );
 		ResetScrollBars();
 		return Invalidate();
 	}
@@ -583,6 +584,7 @@ public:
 	BOOL DeleteItem( int nItem )
 	{
 		m_setSelectedItems.erase( nItem );		
+		NotifyParent( 0, 0, LCN_CHANGED );
 		ResetScrollBars();
 		return Invalidate();
 	}
@@ -590,6 +592,7 @@ public:
 	BOOL DeleteAllItems()
 	{
 		m_setSelectedItems.clear();		
+		NotifyParent( 0, 0, LCN_CHANGED );
 		ResetScrollBars();
 		return Invalidate();
 	}
@@ -653,7 +656,7 @@ public:
 		return m_fntListFont; // may be implemented in a derived class
 	}
 	
-	BOOL GetItemColours( int nItem, int nSubItem, COLORREF& rgbBackground, COLORREF& rgbText )
+	virtual BOOL GetItemColours( int nItem, int nSubItem, COLORREF& rgbBackground, COLORREF& rgbText )
 	{
 		rgbBackground = m_rgbBackground;
 		rgbText = m_rgbItemText;
@@ -1047,8 +1050,8 @@ public:
 		// start visible timer (scrolls list to partially hidden item)
 		if ( !IsItemVisible( nItem, m_setSelectedItems.size() > 1 ? NULL_SUBITEM : nSubItem, FALSE ) )
 			SetTimer( ITEM_VISIBLE_TIMER, ITEM_VISIBLE_PERIOD );
-		else if ( m_nFocusItem != NULL_ITEM && m_nFocusSubItem != NULL_SUBITEM )
-			EditItem( m_nFocusItem, m_nFocusSubItem );
+		/*else if ( m_nFocusItem != NULL_ITEM && m_nFocusSubItem != NULL_SUBITEM )
+			EditItem( m_nFocusItem, m_nFocusSubItem );*/
 
 		return Invalidate();
 	}
@@ -1717,7 +1720,7 @@ public:
 		return TRUE;
 	}
 	
-	BOOL EditItem( int nItem, int nSubItem = NULL_SUBITEM )
+	virtual BOOL EditItem( int nItem, int nSubItem = NULL_SUBITEM, CPoint point = CPoint() )
 	{
 		T* pT = static_cast<T*>(this);
 		
@@ -2198,8 +2201,14 @@ public:
 			}
 			
 			// only select item if not already selected
-			if ( ( nFlags & MK_SHIFT ) || ( nFlags & MK_CONTROL ) || !IsSelected( nItem ) || m_setSelectedItems.size() <= 1 )
+			if (IsSelected( nItem ))
+			{
+				EditItem( nItem, nSubItem, point);
+			}
+			else if ( ( nFlags & MK_SHIFT ) || ( nFlags & MK_CONTROL ) || !IsSelected( nItem ) || m_setSelectedItems.size() <= 1 )
+			{
 				SelectItem( nItem, nSubItem, nFlags );
+			}
 			
 			int nIndex = GetColumnIndex( nSubItem );
 			if ( !( pT->GetItemFlags( nItem, nIndex ) & ITEM_FLAGS_READ_ONLY ) )
@@ -3294,7 +3303,7 @@ public:
 				m_ilItemImages.GetIconSize( sizeIcon );
 				
 				CRect rcItemImage;
-				rcItemImage.left = strItemText.IsEmpty() ? ( ( rcItemText.left + rcItemText.right ) / 2 ) - ( sizeIcon.cx / 2 ) - ( ( !m_bShowThemed || m_thmHeader.IsThemeNull() ) ? 0 : 1 ) : rcItemText.left;
+				rcItemImage.left = rcItemText.left;
 				rcItemImage.right = min( rcItemImage.left + sizeIcon.cx, rcSubItem.right );
 				rcItemImage.top = ( ( rcSubItem.top + rcSubItem.bottom ) / 2 ) - ( sizeIcon.cy / 2 );
 				rcItemImage.bottom = min( rcItemImage.top + sizeIcon.cy, rcSubItem.bottom );

@@ -2,8 +2,9 @@
 // Microsoft Visual C++ generated include file.
 // Used by XRefresh.rc
 //
+#define ID_ADD_SITE                     3
+#define ID_TEST_QUERY                   4
 #define IDS_PROJNAME                    100
-#define IDD_EMPTY_DIALOG                100
 #define IDR_XREFRESH                    101
 #define IDS_ABOUT                       101
 #define IDR_XREFRESHBHO                 102
@@ -35,22 +36,35 @@
 #define IDC_HOMEPAGE                    203
 #define IDB_LISTITEMS                   204
 #define IDC_SUPPORT                     204
-#define IDD_ABOUTBOX                    205
 #define IDC_HOMEPAGE_LABEL              205
+#define IDD_SITESDIALOG                 205
 #define IDC_CREDITS                     206
 #define IDC_CONTRIB_LABEL               206
 #define IDC_DONATIONS_LABEL             207
+#define IDC_SITE_EDIT                   207
 #define IDB_ABOUTBOX                    208
 #define IDC_PEOPLE                      208
+#define IDC_QUERY_EDIT                  208
 #define IDB_ICONS                       209
 #define IDC_HOMEPAGE3                   209
 #define IDC_DONATE                      209
+#define IDC_MOVE_UP                     209
 #define IDC_AUTHOR                      210
+#define IDC_MOVE_DOWN                   210
+#define IDB_ICONS1                      210
+#define IDB_STATES                      210
 #define IDI_XREFRESHA                   211
+#define IDC_REMOVE                      211
 #define IDI_XREFRESHS                   213
+#define IDC_QUERY_RESULT                213
+#define IDC_QUERY_SEP                   214
 #define IDI_XREFRESHZ                   215
+#define IDC_QUERY_TITLE                 215
+#define IDC_HELP1                       216
 #define IDI_IKONY                       217
+#define IDC_HELP2                       217
 #define IDI_IKONY1                      218
+#define IDD_ABOUTBOX                    220
 #define IDC_RADIO_NAMES_1               1006
 #define IDC_RADIO_NAMES_2               1007
 #define IDC_RADIO_NAMES_3               1008
@@ -79,6 +93,7 @@
 #define ID_POPUPMENU_GENERATECRASH      32773
 #define ID_POPUPMENU_VISITSITE          32774
 #define ID_POPUPMENU_TESTDIALOG         32775
+#define ID_POPUPMENU_ALLOWEDSITES       32776
 #define ID_POPUPMENU_VISITOOKII         40009
 #define ID_POPUPMENU_CHECKFORUPDATES    40010
 #define ID_POPUPMENU_ABOUT              40011
@@ -88,8 +103,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        218
-#define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         207
+#define _APS_NEXT_COMMAND_VALUE         32777
+#define _APS_NEXT_CONTROL_VALUE         217
 #define _APS_NEXT_SYMED_VALUE           124
 #endif
 #endif

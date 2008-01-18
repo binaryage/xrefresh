@@ -1,0 +1,3505 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 11 (filtered)">
+<title>The GRETA Regular Expression Template Archive for C++</title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc4, li.MsoToc4, div.MsoToc4
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc5, li.MsoToc5, div.MsoToc5
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:48.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc6, li.MsoToc6, div.MsoToc6
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:60.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc7, li.MsoToc7, div.MsoToc7
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc8, li.MsoToc8, div.MsoToc8
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:84.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc9, li.MsoToc9, div.MsoToc9
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:96.0pt;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:Tahoma;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.Section1
+	{page:Section1;}
+@page Section2
+	{size:8.5in 11.0in;
+	margin:1.0in 81.0pt 1.0in 81.0pt;}
+div.Section2
+	{page:Section2;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<h1 align=center style='text-align:center'><a name="_Toc39890864">GRETA: <br
+clear=all>
+The GRETA Regular Expression Template Archive</a> </h1>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal align=center style='text-align:center'>Copyright <a
+href="mailto:ericne@microsoft.com?subject=greta%20gripe">Eric Niebler</a>, 2002</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The purpose of this document is to describe how to use the
+GRETA Regular Expression Template Archive.  It describes the objects in the
+library, the methods defined on the objects, and the ways to use the objects
+and methods to perform regular expression pattern matching on strings in C++. 
+It does not describe regular expression syntax.  It is enough to say that the
+full Perl 5 syntax is supported.  If you are not familiar with Perl’s regular
+expression syntax, I recommend reading Chapter 2 of <u>Programming Perl, 2<sup>nd</sup>
+Ed.</u> (a.k.a. The Camel Book), one of the many fine books put out by O’Reilly
+publishers.  </p>
+
+</div>
+
+<span style='font-size:12.0pt;font-family:"Times New Roman"'><br clear=all
+style='page-break-before:always'>
+</span>
+
+<div class=Section2>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890864">GRETA:  The
+GRETA Regular Expression Template Archive<span style='color:windowtext;
+display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>1</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890865">Overview<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>3</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890866">A Word about
+Speed<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>4</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890867">Notice to
+Users of Version 1.x<span style='color:windowtext;display:none;text-decoration:
+none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>5</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890868">The rpattern
+Object<span style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>5</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890869">rpattern::string_type<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>6</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890870">rpattern::rpattern<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>6</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890871">rpattern::match<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>7</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890872">rpattern::substitute<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>8</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890873">rpattern::count<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>9</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890874">rpattern::split<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>9</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890875">rpattern::set_substitution<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>9</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890876">rpattern::cgroups<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>10</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890877">match_results,
+subst_results and split_results<span style='color:windowtext;display:none;
+text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>10</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890878">match_results::cbackrefs<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>10</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890879">match_results::backref<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>10</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890880">match_results::rstart<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>10</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890881">match_results::rlength<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>11</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890882">match_results::all_backrefs<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>11</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890883">subst_results::backref_str<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>11</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890884">split_results::strings<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>11</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890885">The Syntax
+Module<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>12</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890886">register_intrinsic_charset<span
+style='color:windowtext;display:none;text-decoration:none'> </span><span
+style='color:windowtext;display:none;text-decoration:none'>14</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890887">Customizing
+Your Search<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>14</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890888">NOCASE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890889">GLOBAL<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890890">MULTILINE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890891">SINGLELINE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890892">EXTENDED<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890893">RIGHTMOST<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890894">NOBACKREFS<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>15</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890895">ALLBACKREFS<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>16</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890896">FIRSTBACKREFS<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>16</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890897">NORMALIZE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>16</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890898">Matching
+Modes<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>16</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890899">MODE_FAST<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890900">MODE_SAFE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890901">MODE_MIXED<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890902">Known Issues
+and Perl Incompatibilities<span style='color:windowtext;display:none;
+text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890903">Embedded Code
+in a Regular Expression<span style='color:windowtext;display:none;text-decoration:
+none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890904">Pattern
+Modifier Scope<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>17</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890905">Comment
+Blocks Before Quantifiers<span style='color:windowtext;display:none;text-decoration:
+none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>18</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890906">Variable
+Width Look-Behind Assertions<span style='color:windowtext;display:none;
+text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>18</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890907">Recursive
+Patterns<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>18</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890908">Compile-Time
+Switches<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890909">REGEX_WIDE_AND_NARROW<span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890910">REGEX_POSIX<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890911">REGEX_NO_PERL<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890912">REGEX_DEBUG<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890913">REGEX_DEBUG_HEAP<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890914">REGEX_STACK_ALIGNMENT<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>19</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890915">REGEX_FOLD_INSTANTIATIONS<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>20</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890916">REGEX_TO_INSTANTIATE<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>20</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890917">Miscellaneous<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>20</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890918">Static Const
+Patterns<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>20</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890919">Thread-safety<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>21</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890920">Stack Usage<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>21</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890921">DBCS<span
+style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>22</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890922">STL<span
+style='color:windowtext;display:none;text-decoration:none'>.. </span><span
+style='color:windowtext;display:none;text-decoration:none'>22</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890923">VC7 and
+Managed Code<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>22</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890924">Template
+Instantiation<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>22</span></a></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><a href="#_Toc39890925">Contact
+Information<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>23</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890926">Appendix 1:
+History<span style='color:windowtext;display:none;text-decoration:none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>24</span></a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc39890927">Appendix 2:
+Implementation Details<span style='color:windowtext;display:none;text-decoration:
+none'>. </span><span
+style='color:windowtext;display:none;text-decoration:none'>27</span></a></span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h1><a name="_Toc39890865">Overview</a></h1>
+
+<p class=MsoNormal>The regular expression template library contains objects and
+functions that make it possible to perform pattern matching and substitution on
+strings in C++.  They are:</p>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal><span style='font-family:"Courier New"'>rpattern</span>:
+     the pattern to use during the search.</li>
+ <li class=MsoNormal><span style='font-family:"Courier New"'>match_results/subst_results</span>:
+     container for the results of a match/substitution. </li>
+</ul>
+
+<p class=MsoNormal>To perform a search or replace operation, you will typically
+first initialize an <span style='font-family:"Courier New"'>rpattern</span>
+object by giving it a string representing the pattern against which to match. 
+You will then call a method on the rpattern object (<span style='font-family:
+"Courier New"'>match()</span> or <span style='font-family:"Courier New"'>substitute()</span>,
+for instance), passing it a string to match against and a <span
+style='font-family:"Courier New"'>match_results</span> objects to receive the
+results of the match.  If the <span style='font-family:"Courier New"'>match()</span>/<span
+style='font-family:"Courier New"'>substitute()</span> fails, the method returns
+false.  If it succeeds, it returns true, and the <span style='font-family:"Courier New"'>match_results</span>
+object stores the resulting array of <i>backreferences</i> internally.  (Here,
+the term <i>backreference</i> has the same meaning as it does in Perl. 
+Backreferences provide extra information about what parts of the pattern
+matched which parts of the string.)  There are methods on the <span
+style='font-family:"Courier New"'>match_results</span> object to make the
+backreference information available.  For example:</p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>#include &lt;iostream&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>#include &lt;string&gt;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>#include “regexpr2.h”</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>using namespace std;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>using namespace regex;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>int main() {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    match_results results;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    string str( “The book
+cost $12.34” );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    rpattern pat(
+“\\$(\\d+)(\\.(\\d\\d))?” );  </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    <span style='color:#339966'>//
+Match a dollar sign followed by one or more digits,</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    <span style='color:#339966'>//
+optionally followed by a period and two more digits.</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    <span style='color:#339966'>//
+The double-escapes are necessary to satisfy the compiler.</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>   
+match_results::backref_type br = pat.match( str, results );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    if( br.matched ) {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>        cout &lt;&lt; “match
+success!” &lt;&lt; endl;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>        cout &lt;&lt; “price:
+” &lt;&lt; br &lt;&lt; endl;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    } else {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>        cout &lt;&lt; “match
+failed!” &lt;&lt; endl;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    }</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    return 0;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>}</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The above program would print out the following:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>match success!</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>price: $12.34</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The following sections discuss the <span style='font-family:
+"Courier New"'>rpattern</span> object in detail and how to customize your searches
+to be faster and more efficient.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Note: all declarations in the header file (regexpr2.h) are
+contained in the <span style='font-family:"Courier New"'>regex</span>
+namespace.  To use any of the objects, methods or enumerations described in
+this document, you must prepend all declarations with “<span style='font-family:
+"Courier New"'>regex::</span>” or you must have the “<span style='font-family:
+"Courier New"'>using namespace regex;</span>” directive somewhere within the
+enclosing scope of your declarations.  For simplicity, I’ve left off the “<span
+style='font-family:"Courier New"'>regex::</span>” prefixes in the rest of my
+code snippets.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h1><a name="_Toc39890866">A Word about Speed</a></h1>
+
+<p class=MsoNormal>Different regex engines are good on different types of
+patterns.  That said, I have found my regex engine to be pretty quick.  For a
+benchmark, I matched the pattern “<span style='font-family:"Courier New"'>^([0-9]+)(\-|
+|$)(.*)$</span>” against the string “<span style='font-family:"Courier New"'>100-
+this is a line of ftp response which contains a message string</span>”.  GRETA
+is about 7 times faster than the regex library in boost (<a
+href="http://www.boost.org/">http://www.boost.org</a>), and about 10 times
+faster than the regular expression classes in ATL7.  For this input, GRETA is
+even faster than Perl, although Perl is faster for some other patterns.  Most
+regex engines I have seen build up an NFA <i>(non-deterministic finite state
+automaton)</i> and execute it iteratively, often with a big, slow switch
+statement.  I have a different approach: patterns are compiled into a directed,
+possibly cyclic graph, and matching happens by traversing this graph
+recursively.  In addition, the code makes heavy use of templates to freeze the
+state of the flags into the compiled pattern so that they don’t need to be
+checked at match time.  The result is a pretty lean blob of code that can match
+your pattern quickly.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Even the best algorithms have their weaknesses, though. 
+Matching regular expressions with backreferences is an NP-complete problem. 
+There are patterns that will make any backtracking regex engine take
+exponential time to finish.  (These usually involve nested quantifiers.)  If
+you have a performance critical app, you would be smart to test your patterns
+for speed, or profile your app to make sure you are not spending too much time
+thrashing around in the regex code.  You’ve been warned!</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Also, see the section <a href="#_VC7_and_Managed_Code">VC7
+and Managed Code</a> for some advice for compiling GRETA under VC7.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h1><a name="_Toc39890867">Notice to Users of Version 1.x</a></h1>
+
+<p class=MsoNormal>Many things have changed since version 1.x of the Regular
+Expression Template Archive.  If you have code which uses version 1.x, you will
+not be able to use version 2 without making changes to your code.  Sorry! 
+There were a number of unsafe, unintuitive interface features of version 1 that
+I felt were worth fixing for version 2.  If you need version 1, I have a copy
+and I’d be happy to give it to you.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Most notably, the <span style='font-family:"Courier New"'>regexpr</span>
+object has gone away.  It was a subclass of <span style='font-family:"Courier New"'>std::string</span>,
+with <span style='font-family:"Courier New"'>match()</span> and <span
+style='font-family:"Courier New"'>substitute()</span> methods, and it stored the
+results of the match/substitute internally.  Subclassing <span
+style='font-family:"Courier New"'>std::string</span> is dangerous because <span
+style='font-family:"Courier New"'>std::string</span> doesn’t have a virtual
+destructor.  Also, matching is conceptually a const operation, and it seemed
+wrong that it should change internal state.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>match/count/substitute</span>
+methods have moved to the <span style='font-family:"Courier New"'>rpattern</span>
+object.  The state that used to be stored in the <span style='font-family:"Courier New"'>regexpr</span>
+object is now put in a <span style='font-family:"Courier New"'>match_results/subst_results</span>
+container, which is passed as an out parameter to the <span style='font-family:
+"Courier New"'>match/substitute</span> methods.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Also, the <span style='font-family:"Courier New"'>CSTRINGS</span>
+flag has gone away.  It is no longer necessary to optimize a pattern for use
+with C-style NULL-terminated strings.  When you pass a C-style string to the <span
+style='font-family:"Courier New"'>rpattern::match</span> method, the same
+optimization is used automatically.  (In early 2.X versions of the library,
+there was a <span style='font-family:"Courier New"'>basic_rpattern_c</span>
+object for performing this optimization, but it is no longer necessary and has
+been deprecated.)</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Another minor change involves the <span style='font-family:
+"Courier New"'>register_intrinsic_charset()</span> method.  It used to be a
+part of <span style='font-family:"Courier New"'>rpattern</span>’s interface,
+but it has moved to the syntax module.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Despite the sweeping interface changes, the majority of the
+back-end code is unchanged.  You should expect patterns that worked in version
+1.x to continue to work in version 2.</p>
+
+<h1><a name="_Toc39890868">The rpattern Object</a></h1>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> object contains the regular expression pattern
+against which to match.  It also exposes the </span><span style='font-size:
+12.0pt;font-family:"Courier New"'>match()</span><span style='font-size:12.0pt'>,
+</span><span style='font-size:12.0pt;font-family:"Courier New"'>substitute()</span><span
+style='font-size:12.0pt'>, and </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>count()</span><span style='font-size:12.0pt'> methods you will
+use to perform regular expression matches.  When you instantiate an </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> object, the pattern is “compiled” into a structure
+that speeds up pattern matching.  Once compiled, you may reuse the same pattern
+for multiple match operations.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Here is how </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> is declared:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>template&lt; typename CI,</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>          typename SY =
+perl_syntax&lt;std::iterator_traits&lt;CI&gt;::value_type&gt; &gt;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>class basic_rpattern {</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>…</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>};</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>typedef
+basic_rpattern&lt;std::basic_string&lt;TCHAR&gt;::const_iterator&gt; rpattern;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>typedef
+basic_rpattern&lt;TCHAR const *&gt; rpattern_c;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> class is a template on iterator type.  It is also a
+template on the syntax module.  By default, the Perl syntax module is used, but
+you are free to write your own syntax and specify it as a template parameter. 
+See the section on the <a href="#_The_Syntax_Module">Syntax Module</a>.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The following sections
+describe the methods available on the </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>rpattern</span><span style='font-size:12.0pt'>
+object.</span></p>
+
+<h2><a name="_Toc39890869"></a><a name="_rpattern::string_type"></a>rpattern::string_type</h2>
+
+<p class=MsoNormal><span style='font-family:"Courier New"'>rpattern::string_type</span>
+is a typedef that is used in many of the following function prototypes.  It is
+defined as follows:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>typedef CI const_iterator;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>typedef
+std::iterator_traits&lt;const_iterator&gt;::value_type char_type;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>typedef std::basic_string&lt;char_type&gt;
+string_type;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal>The typedef is a little complicated, but its effect is what
+you would expect.  If the result of dereferencing a <span style='font-family:
+"Courier New"'>const_iterator</span> is a <span style='font-family:"Courier New"'>char</span>,
+then <span style='font-family:"Courier New"'>string_type</span> is the same as <span
+style='font-family:"Courier New"'>std::string</span>.  If dereferencing a <span
+style='font-family:"Courier New"'>const_iterator</span> results in a <span
+style='font-family:"Courier New"'>wchar_t</span>, then <span style='font-family:
+"Courier New"'>string_type</span> is the same as <span style='font-family:"Courier New"'>std::wstring</span>.</p>
+
+<h2><a name="_Toc39890870">rpattern::rpattern</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>There are two
+constructors for instantiating an </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>rpattern</span><span style='font-size:12.0pt'>
+object.  Here are their prototypes:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern::rpattern( </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const <a
+href="#_rpattern::string_type">string_type</a> &amp; pat, </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>REGEX_FLAGS
+flags=NOFLAGS,</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>REGEX_MODE
+mode=MODE_DEFAULT ); <span style='color:#339966'>//
+throw(bad_alloc,bad_regexpr);</span></span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern::rpattern( </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const <a
+href="#_rpattern::string_type">string_type</a> &amp; pat, </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const <a
+href="#_rpattern::string_type">string_type</a> &amp; sub, </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>REGEX_FLAGS
+flags=NOFLAGS,</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>REGEX_MODE
+mode=MODE_DEFAULT ); <span style='color:#339966'>//
+throw(bad_alloc,bad_regexpr);</span></span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Both methods require you
+to specify a string containing the pattern to match.  Both methods allow you to
+specify some flags that customize your search and the mode with which the
+pattern should be matched (see <a href="#_Matching_Modes">Matching Modes</a>). 
+The first method does not require you to specify a substitution string; the
+second one does.  If you do not specify a substitution string, it is assumed to
+be the null string.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'> </span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Notice the (commented
+out) exception specification, “</span><span style='font-size:12.0pt;font-family:
+"Courier New"'>throw(bad_alloc, bad_regexpr)</span><span style='font-size:12.0pt'>,”
+on the constructors.  This means that the constructor of an </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> object can throw an exception of type </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>bad_regexpr</span><span
+style='font-size:12.0pt'> or </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>bad_alloc</span><span style='font-size:12.0pt'>.  This can
+happen when the specified pattern contains illegal regular expression syntax,
+such as unbalanced parentheses.  It can also occur when the substitution string
+refers to a backref that does not exist (for instance, if the substitution
+string contains “</span><span style='font-size:12.0pt;font-family:"Courier New"'>$6</span><span
+style='font-size:12.0pt'>”, and there are not 6 groups in the pattern). The </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>bad_regexpr</span><span
+style='font-size:12.0pt'> exception inherits from the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>std::invalid_argument</span><span
+style='font-size:12.0pt'> exception.  The </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>bad_regexpr::what()</span><span style='font-size:
+12.0pt'> method returns a pointer to a C-style string that contains a
+description of the problem.</span></p>
+
+<h2><a name="_Toc39890871">rpattern::match</a></h2>
+
+<p class=MsoNormal>The match method is used to find patterns in strings.  There
+are a couple of different versions of the match method.  The first takes a <span
+style='font-family:"Courier New"'>std::basic_string</span> as a parameter.  The
+second version takes two iterators, the beginning and end of the string to
+match.  Finally, there is a version of the <span style='font-family:"Courier New"'>match()</span>
+method that takes a pointer to a NULL-terminated string.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>template&lt; typename CH,
+typename TR, typename AL &gt;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern::backref_type
+rpattern::match( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const
+std::basic_string&lt;CH,TR,AL&gt; &amp; str,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>match_results
+&amp; results,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    size_type pos =
+0,            <span style='color:#339966'>// offset to the start of the
+substring to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>size_type len =
+npos ) const; <span style='color:#339966'>//</span> <span style='color:#339966'>length
+of the substring to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern::backref_type
+rpattern::match( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+ibegin,        <span style='color:#339966'>// start of the string to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+iend,          <span style='color:#339966'>// one past end of string to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>match_results
+&amp; results ) const;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern::backref_type
+rpattern::match( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const char_type
+* sz,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>match_results_c
+&amp; results ) const;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'>&nbsp;</p>
+
+<p class=MsoNormal>Notice that the <span style='font-family:"Courier New"'>match()</span>
+method that takes a <span style='font-family:"Courier New"'>std::basic_string</span>
+is a template on character, character traits and allocator.  This is necessary
+given that <span style='font-family:"Courier New"'>basic_rpattern</span> is a
+template only on iterator, but it gives us a little more flexibility then we
+really want.  If you accidentally pass in the wrong string type (say, a <span
+style='font-family:"Courier New"'>std::wstring</span> when the match method is
+really expecting a <span style='font-family:"Courier New"'>std::string</span>)
+you will get a compile-time error informing you of your mistake.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>match()</span>
+method returns an object of type <span style='font-family:"Courier New"'>rpattern::backref_type</span>.  
+If the match fails, an “empty backref” will be returned.  An empty backref
+contains “false” in the <span style='font-family:"Courier New"'>matched</span>
+member.  If the match succeeds, the backref contains information about where
+the pattern matched the string, and contains “true” in the <span
+style='font-family:"Courier New"'>matched</span> member.  The following code
+demonstrates the usage of the <span style='font-family:"Courier New"'>match()</span>
+method:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>const char * sz = “Here is a
+string to match.”;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern_c pat( “str.ng” ); <span
+style='color:#339966'>// matches “string”, “strong”, etc.</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>match_results_c results;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>rpattern_c::backref_type br =
+pat.match( sz, results );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>if( br.matched ) {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    printf( “Backref: %.*s”,
+br.second – br.first, br.first );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>} else {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    printf( “No match found.”
+);</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>}</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>In the above code, <span style='font-family:"Courier New"'>br.first</span>
+is a pointer to the first character in the string that matched the pattern and <span
+style='font-family:"Courier New"'>br.second</span> is a pointer to the last+1
+character that matched the pattern.  Therefore, the length of the matched
+pattern is <span style='font-family:"Courier New"'>br.second – br.first</span>. 
+(You’ll notice that this value is used as the precision of the string in the <span
+style='font-family:"Courier New"'>printf()</span> format statement.)  The above
+code will generate the following output: “<span style='font-family:"Courier New"'>Backref:
+string</span>”.  </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Notice the use of <span style='font-family:"Courier New"'>rpattern_c</span>
+and <span style='font-family:"Courier New"'>match_results_c</span> in the above
+example.  These are typedefs for <span style='font-family:"Courier New"'>basic_rpattern&lt;const
+TCHAR *&gt;</span> and <span style='font-family:"Courier New"'>basic_match_results&lt;const
+TCHAR *&gt;</span>, respectively.</p>
+
+<h2><a name="_Toc39890872">rpattern::substitute</a></h2>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>substitute()</span>
+method finds patterns and replaces the found substrings with insertion strings
+you specify.  It takes a <span style='font-family:"Courier New"'>std::string</span>
+object as a parameter, and a <span style='font-family:"Courier New"'>subst_results</span>
+container.  It also takes two optional integer parameters, which you can use to
+specify the offset of the first character to search and the length of the
+search string.  Here is the prototype:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>template&lt; typename CH,
+typename TR, typename AL &gt;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>size_t rpattern::substitute(
+std::basic_string&lt;CH,TR,AL&gt; &amp; str, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>                            
+subst_results &amp; results,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>                            
+size_type pos = 0, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>                            
+size_type len = npos );</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoToc1>The return type is an unsigned integer representing the number
+of substitutions made.  If the pattern is not found, no substitutions are made and
+the return value is 0.  The following example finds all instances of <span
+style='font-family:"Courier New"'>\n</span> not preceded by <span
+style='font-family:"Courier New"'>\r</span> and replaces them with <span
+style='font-family:"Courier New"'>\r\n</span>:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>size_t insert_crlf( string
+&amp; str ) {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>static const
+rpattern s_crlf( “(?&lt;!\r)\n”, “\r\n”, GLOBAL );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>subst_results
+results;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    return s_crlf.substitute(
+str, results );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;page-break-after:avoid'><span
+style='font-size:8.0pt;font-family:"Courier New"'>}</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoToc1>Later sections will describe the significance of “<span
+style='font-family:"Courier New"'><a href="#_Optimizations">static const</a></span>”
+and “<span style='font-family:"Courier New"'><a href="#_GLOBAL">GLOBAL</a></span>”
+in the above example.  Note the use of the look-behind assertion, <span
+style='font-family:"Courier New"'>(?&lt;!\r)</span>, in the example.  It
+evaluates to true when the preceding character is not a return character, but
+it doesn’t include the preceding character in the match.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>When doing a global substitution, the next match operation
+begins where the last substitution left off.  Thus, if the search string
+contains the word “<span style='font-family:"Courier New"'>foo</span>”, pattern
+is “<span style='font-family:"Courier New"'>o</span>”, and the substitution is
+“<span style='font-family:"Courier New"'>oo</span>”, the resulting string will
+be, “<span style='font-family:"Courier New"'>foooo</span>”.</p>
+
+<h2><a name="_Toc39890873">rpattern::count</a></h2>
+
+<p class=MsoNormal>Use the <span style='font-family:"Courier New"'>count()</span>
+method when you want to know the number of times a given pattern matches a
+string, but you don’t care about where the matches occur or what they are
+exactly.  The <span style='font-family:"Courier New"'>count()</span> method has
+three variants, which are analogous to the three <span style='font-family:"Courier New"'>match()</span>
+methods.  Here’s one if its prototypes:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t rpattern::count( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+ibegin,        <span style='color:#339966'>// start of the string to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+iend ) const;  <span style='color:#339966'>// one past end of string to match</span></span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoToc1>Like the <span style='font-family:"Courier New"'>substitute()</span>
+method, the next match begins where the previous one ended.  Thus, if you want
+to know how many times the pattern “<span style='font-family:"Courier New"'>oo</span>”
+shows up in the string “<span style='font-family:"Courier New"'>fooooo</span>”,
+the answer is 2, even though this pattern could conceivably match the string in
+4 unique places.  Overlapping matches are not counted.</p>
+
+<h2><a name="_Toc39890874">rpattern::split</a></h2>
+
+<p class=MsoNormal>Use the <span style='font-family:"Courier New"'>split()</span>
+method when you have a string that you want to split into substrings, using a
+regular expression as a delimiter.  Here’s one if its prototypes:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t rpattern::split( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+ibegin,    <span style='color:#339966'>// start of the string to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>const_iterator
+iend,      <span style='color:#339966'>// one past end of string to match</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>split_results
+&amp; results,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt;page-break-after:
+avoid'><span style='font-size:8.0pt;font-family:"Courier New"'>int limit = 0 )
+const;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoToc1>The <span style='font-family:"Courier New"'>split()</span> function
+takes an optional “int limit” parameter which defaults to 0.  If it is greater
+than 0, it is the upper limit on the number of fields to split the string
+into.  If it is 0, then there is no limit, except that trailing empty fields
+are dropped.  If it is less that 0, then there is no limit, and empty trailing
+fields are kept.  As in perl, an empty leading field is always dropped.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If your regular expression has capturing groups, these
+back-references become fields in the split_results.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>split_results</span>
+struct behaves like an STL container of std:strings.</p>
+
+<h2><a name="_Toc39890875">rpattern::set_substitution</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Sometimes you may want
+to set the substitution string after the </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>rpattern</span><span style='font-size:12.0pt'>
+object has been instantiated.  For this, you would use the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>set_substitution()</span><span
+style='font-size:12.0pt'> method.  </span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>void rpattern::set_substitution( const <a
+href="#_rpattern::string_type">string_type</a> &amp; sub );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in;text-indent:.5in'><span
+style='font-size:8.0pt;font-family:"Courier New";color:#339966'>//
+throw(bad_alloc,bad_regexpr);</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>set_substitution()</span><span
+style='font-size:12.0pt'> method can be called as many times as you like.  Each
+time it is called, it replaces the old substitution string with the new one. 
+Notice that the </span><span style='font-size:12.0pt;font-family:"Courier New"'>set_substitution()</span><span
+style='font-size:12.0pt'> method can also throw a </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>bad_regexpr</span><span
+style='font-size:12.0pt'> exception for ill-formed substitution strings.</span></p>
+
+<h2><a name="_Toc39890876">rpattern::cgroups</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This method returns the
+count of groups in the pattern string.  For a successfully parsed pattern, this
+number is always at least one, because the entire pattern is considered group
+number 0.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t rpattern::cgroups() const;</span></p>
+
+<h1><a name="_Toc39890877"></a><a name="_The_CSTRINGS_Optimization"></a><a
+name="_The_Rpattern_c_Object"></a>match_results, subst_results and
+split_results</h1>
+
+<p class=MsoNormal>The results of a <span style='font-family:"Courier New"'>match()</span>,
+<span style='font-family:"Courier New"'>substitute()</span>, or <span
+style='font-family:"Courier New"'>split()</span> operation are stored in the <span
+style='font-family:"Courier New"'>match_results</span>, <span style='font-family:
+"Courier New"'>subst_results</span>, and <span style='font-family:"Courier New"'>split_results</span>
+containers, respectively.  After a successful <span style='font-family:"Courier New"'>match()</span>,
+<span style='font-family:"Courier New"'>substitute()</span> or <span
+style='font-family:"Courier New"'>split()</span>, they contain useful
+information that can be queried for using the following methods.  All the <span
+style='font-family:"Courier New"'>match_results</span> methods are also
+available on <span style='font-family:"Courier New"'>subst_results</span>.</p>
+
+<h2><a name="_Toc39890878">match_results::cbackrefs</a></h2>
+
+<p class=MsoNormal>This method returns the count of the internally saved
+backrefs.  It takes no parameters.  Here is the prototype:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t match_results::cbackrefs() const;</span></p>
+
+<p class=MsoToc1>&nbsp;</p>
+
+<p class=MsoNormal>After a successful <span style='font-family:"Courier New"'>match()</span>
+operation, <span style='font-family:"Courier New"'>cbackrefs()</span> will
+always return at least one.  That is because the part of the string that
+matched the entire pattern is always saved in backref number 0 (like <span
+style='font-family:"Courier New"'>$&amp;</span> in Perl).</p>
+
+<h2><a name="_Toc39890879">match_results::backref</a></h2>
+
+<p class=MsoNormal>This method returns the requested backref.  It takes one
+parameter, which is the integer representing the backref to return.  The
+prototype for this method looks like:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>const backref_type &amp; match_results::backref(
+size_t cbackref ) const;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>As in Perl, backreferences are created as a side effect of
+grouping.  The substring that matched the entire pattern is saved in backref
+number 0; the substring that matched the pattern enclosed in the first set of
+parentheses is backref number 1, the second set of parentheses is backref
+number 2, and so on.  Sets of parentheses are numbered by counting opening
+parentheses from left to right.  </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If <span style='font-family:"Courier New"'>cbackref</span>
+is greater than the number of saved backrefs, <span style='font-family:"Courier New"'>match_results::backref()</span>
+throws a <span style='font-family:"Courier New"'>std::out_of_range</span>
+exception.</p>
+
+<h2><a name="_Toc39890880"></a><a name="_regexpr::backref_str"></a>match_results::rstart</h2>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>rstart()</span>
+method returns the offset to the first character in the specified backref. 
+Here is the prototype:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t match_results::rstart( size_t cbackref = 0 )
+const;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>After a global substitution operation, <span
+style='font-family:"Courier New"'>rstart()</span> returns the offset to the
+point in the string that would be the start of the backref if the string had
+not been modified.  That’s because it is really an index into the backref
+string. See <span style='font-family:"Courier New"'><a
+href="#_subst_results::backref_str">subst_results::backref_str</a></span>
+below.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If <span style='font-family:"Courier New"'>cbackref</span>
+is greater than the number of saved backrefs, <span style='font-family:"Courier New"'>match_results::rstart()</span>
+throws a <span style='font-family:"Courier New"'>std::out_of_range</span>
+exception.  </p>
+
+<h2><a name="_Toc39890881">match_results::rlength</a></h2>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>rlength()</span>
+method returns the length of the specified backref.  Here is the prototype:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>size_t match_results::rlength( size_t cbackref = 0 )
+const;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal>If <span style='font-family:"Courier New"'>cbackref</span>
+is greater than the number of saved backrefs, <span style='font-family:"Courier New"'>match_results::rlength()</span>
+throws a <span style='font-family:"Courier New"'>std::out_of_range</span>
+exception.</p>
+
+<h2><a name="_Toc39890882">match_results::all_backrefs</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This method returns a
+const reference to the internal vector of backrefs.  The return value is const
+to prevent writing to this vector.   It is intended for read-only.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>const match_results::backref_vector &amp;
+match_results::all_backrefs() const;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc39890883"></a><a name="_subst_results::backref_str"></a>subst_results::backref_str</h2>
+
+<p class=MsoNormal>This method is only defined on the <span style='font-family:
+"Courier New"'>subst_results</span> container.  It returns a const reference to
+the string to which the backreferences point.  Here is the prototype:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>const string_type &amp; subst_results::backref_str()
+const;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>As I mentioned earlier, backrefs are really just a pair of
+iterators into a string.  But a substitution modifies the string, and the
+backreferences need to refer to the string as it was before it was modified. 
+For this to work, a copy of the string must be made before it is changed.  The
+backreferences are pointers into the copy of the string.  The <span
+style='font-family:"Courier New"'>backref_str()</span> method returns a const
+reference to the copy.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Note: this implies that doing substitutions on really big
+strings is costly, because the regex engine must first make a copy of the
+string before performing the substitution.  Often, you don’t need
+backreferences after a substitution, and a copy does not need to be made. 
+There is a flag to turn off this expensive feature for these cases.  This is
+discussed in the section entitled <span style='font-family:"Courier New"'><a
+href="#_NOBACKREFS">NOBACKREFS</a></span>.</p>
+
+<h2><a name="_Toc39890884"></a><a name="_rpattern::register_intrinsic_charset"></a>split_results::strings</h2>
+
+<p class=MsoNormal>Use the <span style='font-family:"Courier New"'>split_results::strings()</span>
+method to retrieve a read/write STL container of the strings representing the
+results of a <span style='font-family:"Courier New"'>split()</span> operation.</p>
+
+<h1><a name="_Toc39890885">The Syntax Module</a></h1>
+
+<p class=MsoNormal>The regular expression syntax supported by default is the
+syntax of Perl 5.6.  The syntax is defined in a separate module and is
+incorporated into the <span style='font-family:"Courier New"'>rpattern</span>
+class by means of a template parameter.  You can define your own syntax module
+if you like.  Your module must implement the following interface:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>template&lt; typename CH &gt;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>class my_syntax {</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>public:</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    typedef CH char_type;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    typedef std::basic_string&lt;CH&gt;::iterator
+iterator;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    typedef
+std::basic_string&lt;CH&gt;::const_iterator const_iterator;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>my_syntax( REGEX_FLAGS flags
+);</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>REGEX_FLAGS get_flags()
+const;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>void set_flags( REGEX_FLAGS
+flags );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    TOKEN reg_token( iterator &amp; icur, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>                     const_iterator iend );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    TOKEN quant_token( iterator &amp; icur, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>                       const_iterator iend );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    TOKEN charset_token( iterator &amp; icur, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>                         const_iterator iend );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    TOKEN subst_token( iterator &amp; icur, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>                       const_iterator iend );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    TOKEN ext_token( iterator &amp; icur, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>                     const_iterator iend );</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>void
+register_intrinsic_charset( </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    char_type ch, </span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:19.5pt'><span
+style='font-size:8.0pt;font-family:"Courier New"'>    const
+std::basic_string&lt;CH&gt; &amp; str ); <span style='color:#339966'>//
+throw(bad_regexpr,std::bad_alloc);</span></span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>};</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The <span style='font-family:"Courier New"'>TOKEN</span>
+type is an enumeration, defined as follows:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>enum TOKEN { </span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Can be returned by any syntax method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    NO_TOKEN = 0,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Token that can be returned by the reg_token
+method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    BEGIN_GROUP,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    END_GROUP,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ALTERNATION,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    BEGIN_LINE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    END_LINE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    BEGIN_CHARSET,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    MATCH_ANY,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESCAPE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Tokens that can be returned by the
+quant_token method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ONE_OR_MORE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ZERO_OR_MORE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ZERO_OR_ONE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ONE_OR_MORE_MIN,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ZERO_OR_MORE_MIN,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ZERO_OR_ONE_MIN,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    BEGIN_RANGE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    RANGE_SEPARATOR,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    END_RANGE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    END_RANGE_MIN,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // These may also be returned by the reg_token
+method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_DIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_NOT_DIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_SPACE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_NOT_SPACE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_WORD,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_NOT_WORD,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_BEGIN_STRING,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_END_STRING,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_END_STRING_z,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_WORD_BOUNDARY,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_NOT_WORD_BOUNDARY,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_WORD_START,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_WORD_STOP,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_QUOTE_META_ON,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    ESC_QUOTE_META_OFF,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Tokens that can be returned by the
+subst_token method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_BACKREF,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_PREMATCH,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_POSTMATCH,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_MATCH,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_ESCAPE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_QUOTE_META_ON,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_UPPER_ON,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_UPPER_NEXT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_LOWER_ON,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_LOWER_NEXT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    SUBST_ALL_OFF,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Tokens that can be returned by the charset_token
+method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NEGATE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_ESCAPE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_RANGE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_BACKSPACE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_END,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_ALNUM,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_ALNUM,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_ALPHA,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_ALPHA,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_BLANK,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_BLANK,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_CNTRL,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_</span> <span style='font-size:8.0pt;
+font-family:"Courier New"'>NOT_CNTRL,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_DIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_</span> <span style='font-size:8.0pt;
+font-family:"Courier New"'>NOT_DIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_GRAPH,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_GRAPH,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_LOWER,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_LOWER,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_PRINT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_PRINT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_PUNCT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_PUNCT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_SPACE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_SPACE,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_UPPER,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_UPPER,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_XDIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    CHARSET_NOT_XDIGIT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    // Tokens that can be returned by the ext_token
+method</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_NOBACKREF,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_POS_LOOKAHEAD,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_NEG_LOOKAHEAD,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_POS_LOOKBEHIND,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_NEG_LOOKBEHIND,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_INDEPENDENT,</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    EXT_UNKNOWN</span></p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>};</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If any syntax method returns a token other than <span
+style='font-family:"Courier New"'>NO_TOKEN</span>, the character pointer (<span
+style='font-family:"Courier New"'>icur</span>) must be advanced past the
+token.  <span style='font-family:"Courier New"'>icur</span> must not be
+advanced past the end of the string, <span style='font-family:"Courier New"'>iend</span>. 
+If <span style='font-family:"Courier New"'>NO_TOKEN</span> is returned, <span
+style='font-family:"Courier New"'>icur</span> should not be modified, except to
+move past any characters that should be ignored.</p>
+
+<p class=MsoToc1>&nbsp;</p>
+
+<p class=MsoNormal>Once you have defined your syntax module, you need to
+instantiate an <span style='font-family:"Courier New"'>rpattern</span> template
+that uses it.  See the section on <a href="#_Template_Instantiation">Template
+Instantiation</a> for help.</p>
+
+<h2><a name="_Toc39890886">register_intrinsic_charset</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The intrinsic character
+sets are pretty handy.  For instance, “</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>\s</span><span style='font-size:12.0pt'>” matches
+the same thing as </span><span style='font-size:12.0pt;font-family:"Courier New"'>“[\t\f\r\n
+]</span><span style='font-size:12.0pt'>”, and “</span><span style='font-size:
+12.0pt;font-family:"Courier New"'>\w</span><span style='font-size:12.0pt'>” is
+(roughly) a shorthand for “</span><span style='font-size:12.0pt;font-family:
+"Courier New"'>[a-zA-Z_0-9]</span><span style='font-size:12.0pt'>”.  With the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>register_intrinsic_charset()</span><span
+style='font-size:12.0pt'> method, you can create your own.  Here’s the
+prototype:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>static void my_syntax::register_intrinsic_charset( </span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    char_type ch, const
+std::basic_string&lt;char_type&gt; &amp; str );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    <span style='color:#339966'>//
+throw(bad_regexpr,std::bad_alloc);</span></span></p>
+
+<p class=MsoCommentText><a name="_The_Syntax_Module"></a><span
+style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>You would use it as follows:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>my_syntax&lt;char&gt;::register_intrinsic_charset(
+‘p’, “[aeiouAEIOU]” );</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This maps “</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>\p</span><span
+style='font-size:12.0pt'>” to “</span><span style='font-size:12.0pt;font-family:
+"Courier New"'>[</span><span style='font-family:"Courier New"'>aeiouAEIOU</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>]</span><span
+style='font-size:12.0pt'>”.  In implementation, the character set is “compiled”
+when you call </span><span style='font-size:12.0pt;font-family:"Courier New"'>register_intrinsic_charset()</span><span
+style='font-size:12.0pt'>, and when “</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>\p</span><span style='font-size:12.0pt'>” appears in
+any new patterns, this compiled form gets linked into your pattern.  This
+speeds up pattern compilation, and reduces memory usage, since the compiled
+character set is shared across all your patterns.  Note that with the above
+call to </span><span style='font-size:12.0pt;font-family:"Courier New"'>register_intrinsic_charset()</span><span
+style='font-size:12.0pt'>, no mapping of “</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>\P</span><span style='font-size:12.0pt'>” to “</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>[^</span><span
+style='font-family:"Courier New"'>aeiouAEIOU</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>]</span><span style='font-size:12.0pt'>” is
+created.  If you want that mapping, you need to create it yourself with another
+call to </span><span style='font-size:12.0pt;font-family:"Courier New"'>register_intrinsic_charset()</span><span
+style='font-size:12.0pt'>.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The case-sensitivity of
+a user-defined intrinsic character set is taken from the context in which it is
+used.  For instance, if you define “</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>\y</span><span style='font-size:12.0pt'>” to be “</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>[a-z]</span><span
+style='font-size:12.0pt'>”, then in a case-sensitive pattern, it matches only </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>a-z</span><span
+style='font-size:12.0pt'>, but in a case-insensitive pattern, it matches </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>a-z</span><span
+style='font-size:12.0pt'> and </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>A-Z</span><span style='font-size:12.0pt'>.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>If you redefine an
+intrinsic character set, any compiled patterns that refer to that character set
+are now invalid.  You must reinitialize them.</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h1><a name="_Toc39890887"></a><a name="_Customizing_Your_Search"></a>Customizing
+Your Search</h1>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>It is possible to
+customize your searches by specifying some flags in the rpattern constructor. 
+Here is an example:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>// Find all instances of ‘foo’, replace with ‘bar’,
+ignore case</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>rpattern pat( “foo”, “bar”, NOCASE | GLOBAL );</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<h2><a name="_Toc39890888">NOCASE</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Do a case-insensitive
+search.  Searches are by default case-sensitive.</span></p>
+
+<h2><a name="_Toc39890889"></a><a name="_GLOBAL"></a>GLOBAL</h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This flag causes the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern::substitute()</span><span
+style='font-size:12.0pt'> method to replace all substrings that match the
+pattern.  By default, only the first substring that matches the pattern is
+replaced.  When used with the </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>rpattern::match()</span><span style='font-size:12.0pt'> method,
+it causes all substrings that match the pattern to be found.  See the section
+on </span><span style='font-size:12.0pt;font-family:"Courier New"'><a
+href="#_NOBACKREFS">NOBACKREFS</a></span><span style='font-size:12.0pt'>, </span><span
+style='font-size:12.0pt;font-family:"Courier New"'><a href="#_FIRSTBACKREFS">FIRSTBACKREFS</a></span><span
+style='font-size:12.0pt'> and </span><span style='font-size:12.0pt;font-family:
+"Courier New"'><a href="#_ALLBACKREFS">ALLBACKREFS</a></span><span
+style='font-size:12.0pt'> to find out how to control what information gets
+saved in the backref vector.  This flag is ignored by the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern::count()</span><span
+style='font-size:12.0pt'> method.</span></p>
+
+<h2><a name="_Toc39890890">MULTILINE</a></h2>
+
+<p class=MsoNormal>By default, ‘<span style='font-family:"Courier New"'>^</span>’
+matches only the beginning of the string, and ‘<span style='font-family:"Courier New"'>$</span>’
+matches only the end of the string (or at the newline preceding the end of the
+string).  When you use the <span style='font-family:"Courier New"'>MULTILINE</span>
+flag, ‘<span style='font-family:"Courier New"'>^</span>’ will also match the
+beginning of a line (immediately after a newline character) and ‘<span
+style='font-family:"Courier New"'>$</span>’ will also match before the end of
+the line (immediately before a carriage return or newline character).  The
+assertions ‘<span style='font-family:"Courier New"'>\A</span>’ and ‘<span
+style='font-family:"Courier New"'>\Z</span>’ are used to match only the
+beginning and end of the string respectively, regardless of whether the <span
+style='font-family:"Courier New"'>MULTILINE</span> flag has been specified.</p>
+
+<h2><a name="_Toc39890891">SINGLELINE</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>By default, ‘</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>.</span><span
+style='font-size:12.0pt'>’ matches any character besides the newline
+character.  When you specify </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>SINGLELINE</span><span style='font-size:12.0pt'>, ‘</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>.</span><span
+style='font-size:12.0pt'>’ will match the newline character, also.  This can be
+used together with the </span><span style='font-size:12.0pt;font-family:"Courier New"'>MULTILINE</span><span
+style='font-size:12.0pt'> option.  The two only sound mutually exclusive.</span></p>
+
+<h2><a name="_Toc39890892">EXTENDED</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This is the equivalent
+of the </span><span style='font-size:12.0pt;font-family:"Courier New"'>/x</span><span
+style='font-size:12.0pt'> pattern modifier in Perl.  When you specify </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>EXTENDED</span><span
+style='font-size:12.0pt'>, any white space in you pattern that is not escaped
+or in a character class is ignored.  In addition, any text following a </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>#</span><span
+style='font-size:12.0pt'> up to and including a newline character is considered
+a comment and is ignored.  The idea is to make patterns more readable.</span></p>
+
+<h2><a name="_Toc39890893">RIGHTMOST</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Find the rightmost,
+longest match.  The default is to find the leftmost, longest match.</span></p>
+
+<h2><a name="_Toc39890894"></a><a name="_NOBACKREFS"></a>NOBACKREFS</h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This flag is used to
+optimize substitution operations.  By default, backreferences are saved during
+substitution operations.  To make the backreferences available even after the
+substitution operation has changed the string, it is necessary to save a copy
+of the string before modifying it.  This can be an expensive operation, particularly
+if the string is very long.  Often, there is no need to know the backreferences
+after a substitution operation completes, in which case the copy operation was
+wasteful.  The </span><span style='font-size:12.0pt;font-family:"Courier New"'>NOBACKREFS</span><span
+style='font-size:12.0pt'> flag is a hint to the regular expression engine that
+you will not be using the backreferences after the substitution operation
+completes.  This eliminates the need to make a copy of the string.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>If your substitution
+string contains backreferences, such as ‘</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>$2</span><span style='font-size:12.0pt'>’, then a
+copy of the string needs to be made anyway, and the </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>NOBACKREFS</span><span
+style='font-size:12.0pt'> flag is ignored.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This flags is ignored by
+the </span><span style='font-size:12.0pt;font-family:"Courier New"'>match()</span><span
+style='font-size:12.0pt'> and </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>count()</span><span style='font-size:12.0pt'> methods.</span></p>
+
+<h2><a name="_Toc39890895"></a><a name="_ALLBACKREFS"></a>ALLBACKREFS</h2>
+
+<p class=MsoNormal>By default, when doing a global match or substitute
+operation, the backref vector only contains the backrefs from the last
+successful match.  Sometimes, it is helpful to know the backref information for
+all the matches.  If you specify <span style='font-family:"Courier New"'>ALLBACKREFS</span>,
+then the backref information for each successive match will be appended to the
+backref vector, instead of replacing it.</p>
+
+<h2><a name="_Toc39890896"></a><a name="_FIRSTBACKREFS"></a>FIRSTBACKREFS</h2>
+
+<p class=MsoNormal>This flag is like <span style='font-family:"Courier New"'><a
+href="#_ALLBACKREFS">ALLBACKREFS</a></span>, except that only information from
+the complete match (backref 0) is saved for each successive match.</p>
+
+<h2><a name="_Toc39890897">NORMALIZE</a></h2>
+
+<p class=MsoNormal>If the <span style='font-family:"Courier New"'>NORMALIZE</span>
+flag is specified, the regular expression parser performs the following
+normalizations:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\n</span>” is turned into the newline character, ‘<span
+style='font-family:"Courier New"'>\n</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\r</span>” is turned into the return character, ‘<span
+style='font-family:"Courier New"'>\r</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\t</span>” is turned into the tab character, ‘<span
+style='font-family:"Courier New"'>\t</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\f</span>” is turned into the form-feed character, ‘<span
+style='font-family:"Courier New"'>\f</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\v</span>” is turned into the vertical-feed character, ‘<span
+style='font-family:"Courier New"'>\v</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\a</span>” is turned into the bell character, ‘<span
+style='font-family:"Courier New"'>\a</span>’.</p>
+
+<p class=MsoNormal style='margin-left:.5in'>The string “<span style='font-family:
+"Courier New"'>\\\\</span>” is turned into the backslash character, ‘<span
+style='font-family:"Courier New"'>\\</span>’.</p>
+
+<p class=MsoToc1>&nbsp;</p>
+
+<p class=MsoNormal>This can be especially useful if you are accepting the
+pattern and substitution strings from a user as input.</p>
+
+<h1><a name="_Toc39890898"></a><a name="_Matching_Modes"></a>Matching Modes</h1>
+
+<p class=MsoNormal>By default, the pattern matching algorithm is a depth-first,
+recursive search.  It is fast and effective, but it has a limitation: the size
+of your process’s stack.  If you run out of stack space during a match
+operation, one of two things will happen.  If you are on a Microsoft platform,
+the exception is handled and execution continues as if the pattern failed to
+match (which may or may not be the right answer).  If you are not on a
+Microsoft platform, the exception cannot be handled, and your process will dump
+core and die.  It’s not very nice to have a process die when given legal input,
+so GRETA gives you the option to perform matches in a completely safe manner,
+using an iterative algorithm that is stack-conservative.  The different
+matching-modes are described below.  You can specify these modes to the <span
+style='font-family:"Courier New"'>rpattern</span> constructor.</p>
+
+<h2><a name="_Toc39890899">MODE_FAST</a></h2>
+
+<p class=MsoNormal>On Microsoft platforms, this is the default mode.  It uses
+the recursive algorithm.  As the name suggests, it is fast, but it can tear
+through stack space pretty quick for certain types of patterns.  The worst
+offender is a group quantifier.  This pattern eats lots of stack: “<span
+style='font-family:"Courier New"'>(.)+</span>” whereas this one does not: “<span
+style='font-family:"Courier New"'>.+</span>”.  You should use fast mode when
+your patterns do not quantify groups or use the <span style='font-family:"Courier New"'>(?R)</span>
+extension (see <a href="#_Recursive_Patterns">Recursive Patterns</a>), or when
+you are not accepting the string and the pattern from users.</p>
+
+<h2><a name="_Toc39890900"></a><a name="_MODE_SAFE"></a>MODE_SAFE</h2>
+
+<p class=MsoNormal>This mode uses the slower, safer iterative algorithm.  It
+will not overflow the stack.  Use this mode when you cannot make assumptions
+about the pattern and the string (eg., you are accepting them as input from
+users).  Also, you can use this mode when your stack space is small, or if you
+are in a DLL and you cannot make assumptions about the size of your process’s
+stack space.  </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>You should be aware that safe mode will occasionally need to
+make heap allocations, which could fail in low-memory situations and generate
+an exception.  You should wrap calls to <span style='font-family:"Courier New"'>match()</span>,
+<span style='font-family:"Courier New"'>count()</span> and <span
+style='font-family:"Courier New"'>substitute()</span> in a <span
+style='font-family:"Courier New"'>try/catch</span> block and handle any <span
+style='font-family:"Courier New"'>std::bad_alloc</span> exceptions that may get
+thrown.</p>
+
+<h2><a name="_Toc39890901">MODE_MIXED</a></h2>
+
+<p class=MsoNormal>This is the default mode on non-Microsoft platforms.  When
+operating in mixed mode, GRETA uses a simple heuristic to determine on a
+per-pattern basis which algorithm is the best to use.  Patterns that contain
+quantified groups, like “<span style='font-family:"Courier New"'>(.)+</span>”,
+are matched using safe mode, as are patterns that use the <span
+style='font-family:"Courier New"'>(?R)</span> extension.  All other patterns
+are matched using the fast mode.</p>
+
+<h1><a name="_Toc39890902">Known Issues and Perl Incompatibilities</a></h1>
+
+<p class=MsoNormal>There are a few things my code does a bit differently than
+Perl.  These are things that could trip you up, and you should be aware of
+them.</p>
+
+<h2><a name="_Toc39890903">Embedded Code in a Regular Expression</a></h2>
+
+<p class=MsoNormal>Perl lets you put Perl code directly into a regex with the <span
+style='font-family:"Courier New"'>(?{ <i>code</i> })</span> extension.  You
+can’t embed Perl code in a GRETA regular expression.  Duh!  But see <a
+href="#_Recursive_Patterns">Recursive Patterns</a> for a useful hack that might
+get you what you’re looking for.</p>
+
+<h2><a name="_Toc39890904">Pattern Modifier Scope</a></h2>
+
+<p class=MsoNormal>In the pattern “<span style='font-family:"Courier New"'>a(?i)b</span>”,
+<span style='font-family:"Courier New"'>(?i)</span> turns on case-insensitive
+pattern matching.  In both Perl and GRETA, pattern modifiers such as <span
+style='font-family:"Courier New"'>(?i)</span> have the scope of the nearest
+enclosing group.  Outside of that group, they have no effect.  However, in
+GRETA, the scope of the pattern modifier extends only to the right, whereas in
+Perl it extends both to the right and left.  For example, in Perl, the above
+example would match the string “<span style='font-family:"Courier New"'>AB</span>”,
+but in GRETA it would not because the “<span style='font-family:"Courier New"'>a</span>”
+appears to the left of the <span style='font-family:"Courier New"'>(?i)</span>
+modifier.</p>
+
+<h2><a name="_Toc39890905">Comment Blocks Before Quantifiers</a></h2>
+
+<p class=MsoNormal>Perl lets you write patterns like <span style='font-family:
+"Courier New"'>/X(?#Match X 3 times){3}/</span>, where the bit in <span
+style='font-family:"Courier New"'>(?#...)</span> is a comment, and <span
+style='font-family:"Courier New"'>{3}</span> is a quantifier that applies to <span
+style='font-family:"Courier New"'>X</span>.  (I don’t know who would write such
+a pattern, but Perl programmers are a pretty sick bunch.)  In GRETA, comment
+groups logically separate quantifiers from the things quantified, so this will
+not match <span style='font-family:"Courier New"'>XXX</span> like it does in
+Perl.</p>
+
+<h2><a name="_Toc39890906"></a><a name="_POSIX-style_Intrinsic_Character"></a>Variable
+Width Look-Behind Assertions</h2>
+
+<p class=MsoNormal>Perl doesn’t allow variable-width look-behind assertions,
+probably because it can be really expensive.  GRETA allows it, and lets you
+shoot yourself if you’re not careful.  For variable-width look-behind
+assertions, every evaluation of the look-behind is like a rightmost pattern
+match unto itself, complete with backtracking.  This can result in very severe
+exponential behavior, especially if you’re using your pattern to match very
+long strings.  I have done my best to protect you, though.  GRETA does static
+width analysis of your look-behind assertions.  This analysis is fairly robust;
+for example, it recognizes that the pattern “<span style='font-family:"Courier New"'>(\d{3}-){2}\d{4}</span>”
+must match exactly 12 characters (a hyphen-separated telephone number, for
+instance).  If the static analysis reveals that the look-behind assertion must
+match between <span style='font-family:"Courier New"'>N</span> and <span
+style='font-family:"Courier New"'>M</span> characters, it only tries matching
+in those places where a match is possible.  In the previous example, the
+pattern matcher would back up exactly 12 characters and look for a phone
+number.  If it fails, it gives up without looking anyplace else.</p>
+
+<p class=MsoNormal> </p>
+
+<p class=MsoNormal>By the way, you are allowed to create back-references in
+your positive look-behind assertions and use them later in your pattern and
+access then after a successful match.</p>
+
+<h2><a name="_Toc39890907"></a><a name="_Recursive_Patterns"></a>Recursive
+Patterns</h2>
+
+<p class=MsoNormal>Perl lets you embed code directly into your patters with the
+<span style='font-family:"Courier New"'>(?{ <i>code</i> })</span> extension,
+which relies on the Perl interpreter to interpolate the code and execute it at
+pattern match time.  One very nice application of this is to write recursive
+patterns for matching things like balanced, nested parenthesis, XML tags, etc. 
+Obviously, I can’t call out to an interpreter in C++.  But I have included
+experimental support for recursive patterns with the <span style='font-family:
+"Courier New"'>(?R)</span> extension.  For example, consider the following
+pattern (assume EXTENDED is used so white space is ignored):</p>
+
+<p class=MsoNormal style='margin-left:.5in'><span style='font-family:"Courier New"'>\(
+( (?&gt;[^()]+) | (?R) )* \)</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>First, you match an opening paren.  Then you match a bunch
+of stuff that is not an opening or closing paren.  Then, if you can match a
+closing paren you are done.  Otherwise, you recurse by matching an opening
+paren again, followed by a bunch of stuff that is not a paren, etc, etc.  You
+finish when you find a matching paren for the first one you found.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>This extension was inspired by PCRE (Perl-compatible regular
+expressions) at <a href="http://www.pcre.org/">http://www.pcre.org</a>.  </p>
+
+<h1><a name="_Toc39890908">Compile-Time Switches</a></h1>
+
+<p class=MsoNormal>Here are some #define’s to give you control of some aspects
+of GRETA’s behavior.</p>
+
+<h2><a name="_Toc39890909"></a><a name="_REGEX_WIDE_AND_NARROW"></a>REGEX_WIDE_AND_NARROW</h2>
+
+<p class=MsoNormal>Define <span style='font-size:10.0pt;font-family:"Courier New"'>REGEX_WIDE_AND_NARROW</span>
+if you plan to match wide and narrow strings in the same executable.  This
+forces the instantiation of both the wide and narrow versions of the pattern
+matching routines.  Note that this will make your executable bigger.</p>
+
+<h2><a name="_Toc39890910"></a><a name="_REGEX_POSIX"></a>REGEX_POSIX</h2>
+
+<p class=MsoNormal>Define <span style='font-family:"Courier New"'>REGEX_POSIX</span>
+if you want to use the POSIX syntax module.  It causes the appropriate
+templates to get instantiated.</p>
+
+<h2><a name="_Toc39890911"></a><a name="_REGEX_NO_PERL"></a>REGEX_NO_PERL</h2>
+
+<p class=MsoNormal>Define <span style='font-family:"Courier New"'>REGEX_NO_PERL</span>
+if you are not planning on using the Perl syntax module.  It prevents the Perl
+templates from getting instantiated.  This saves some space.</p>
+
+<h2><a name="_Toc39890912">REGEX_DEBUG</a></h2>
+
+<p class=MsoNormal>In debug mode, the GRETA performs sanity checks at
+run-time.  Among other things, it turns off the arena allocator and turns on
+run-time type checking in the type-unsafe parts of the code.  This makes the
+code run very slow, but it’s a good idea to try your patterns a few times with
+REGEX_DEBUG on (-DREGEX_DEBUG=1), just to make sure everything is kosher.  If
+you define any of: DEBUG, _DEBUG or DBG, then REGEX_DEBUG gets turned on
+automatically.  To override this, explicitly turn it off with –DREGEX_DEBUG=0.</p>
+
+<h2><a name="_Toc39890913">REGEX_DEBUG_HEAP</a></h2>
+
+<p class=MsoNormal>When parsing a pattern, GRETA does a number of allocations. 
+To speed up the parsing phase, the allocations come from an arena.  This is a
+significant performance enhancement, but it can interfere with debug tools like
+AppVerifier and PageHeap which track allocations.  By turning REGEX_DEBUG_HEAP
+on (-DREGEX_DEBUG_HEAP=1), you can effectively turn off arena allocation.  By
+default, REGEX_DEBUG_HEAP is turned on when REGEX_DEBUG is on.</p>
+
+<h2><a name="_Toc39890914">REGEX_STACK_ALIGNMENT</a></h2>
+
+<p class=MsoNormal>Anyone who has written a low-level memory routine and tried
+to make it portable has run into alignment problems.  I hit one such problem
+when writing GRETA’s stack class.  It constructs objects of unknown type in
+place from a block of pre-allocated memory, and it tries to be clever about
+alignment.  But it’s not perfect.  (Blame the C++ standardization committee or
+Bjarne Stroustrup, but don’t blame me.)  If you’re getting a compiler error in <span
+style='font-family:"Courier New"'>restack.h</span> on a line that looks like
+this:</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-autospace:none'><span
+style='font-size:10.0pt;font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-autospace:none'><span
+style='font-size:10.0pt;font-family:"Courier New"'>static_assert&lt; (ALIGNMENT
+&gt;= alignof&lt;T&gt;::value) &gt; <span style='color:blue'>const</span>
+align_test;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>then you have hit an alignment problem.  Relax, it is easy
+to fix.  Just compile with: –DREGEX_STACK_ALIGNMENT=8.  If that doesn’t work,
+try an alignment of 16 or 32.</p>
+
+<h2><a name="_Toc39890915"></a><a name="_REGEX_FOLD_INSTANTIATIONS"></a>REGEX_FOLD_INSTANTIATIONS</h2>
+
+<p class=MsoNormal>On many implementations of the STL, <span style='font-family:
+"Courier New"'>string::iterator</span> is not a <span style='font-family:"Courier New"'>typedef</span>
+for <span style='font-family:"Courier New"'>char*</span>. Rather, it is a
+wrapper class. As a result, the regex code gets instantiated twice, once for
+bare pointers (<span style='font-family:"Courier New"'>rpattern_c</span>) and
+once for the wrapped pointers (<span style='font-family:"Courier New"'>rpattern</span>).
+But if there is a conversion from the bare pointer to the wrapped pointer, then
+we only need to instantiate the template for the wrapped pointers, and the code
+will work for the bare pointers, too. This can be a significant space savings. 
+The <span style='font-family:"Courier New"'>REGEX_FOLD_INSTANTIONS</span> macro
+controls this optimization. The default is &quot;off&quot; for backwards
+compatibility. To turn the optimization on, compile with:
+-DREGEX_FOLD_INSTANTIATIONS=1.  When instantiation-folding is enabled, <span
+style='font-family:"Courier New"'>rpattern_c</span> and <span style='font-family:
+"Courier New"'>match_results_c</span> are typedefs for <span style='font-family:
+"Courier New"'>rpattern</span> and <span style='font-family:"Courier New"'>match_results</span>,
+and attempts to use <span style='font-family:"Courier New"'>basic_rpattern&lt;const
+TCHAR *&gt;</span> directly will result in linker errors.</p>
+
+<h2><a name="_Toc39890916"></a><a name="_REGEX_TO_INSTANTIATE"></a>REGEX_TO_INSTANTIATE</h2>
+
+<p class=MsoNormal>To allow separate compilation of the <span style='font-family:
+"Courier New"'>basic_rpattern</span> template, I instantiate it on the iterator
+types that I think would be most useful. By default, I instantiate <span
+style='font-family:"Courier New"'>basic_rpattern</span> on <span
+style='font-family:"Courier New"'>std::basic_string&lt;TCHAR&gt;::const_iterator</span>
+and <span style='font-family:"Courier New"'>const TCHAR*</span>.  Your
+requirements may be different, however.  If you would like to create additional
+instantiations, or if you don’t need one of the standard instantiations, you should
+use the <span style='font-family:"Courier New"'>REGEX_TO_INSTANTIATE</span> macro. 
+Just set it equal to a comma-separated list of iterator types for which you
+would like to create instantiations.  For instance, if you need to match <span
+style='font-family:"Courier New"'>std::wstring</span> and <span
+style='font-family:"Courier New"'>char*</span>, then you could <span
+style='font-family:"Courier New"'>–DREGEX_TO_INSTANTIATE=std::wstring::const_iterator,char*</span>. 
+With this macro definition, you will be able to use <span style='font-family:
+"Courier New"'>basic_rpattern&lt;std::wstring:: const_iterator&gt;</span> and <span
+style='font-family:"Courier New"'>basic_rpattern&lt;char*&gt;</span> in your
+code.  As a side-note, if you use a non-const iterator type with <span
+style='font-family:"Courier New"'>basic_rpattern</span> (like <span
+style='font-family:"Courier New"'>char*</span>), then the resulting
+backreferences will also be non-const.  This gives you the nice benefit of
+being able to modify the underlying string by writing through your
+backreferences.</p>
+
+<h1><a name="_Toc39890917">Miscellaneous</a></h1>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Here are a couple of
+random things to be aware of.</span></p>
+
+<h2><a name="_Toc39890918"></a><a name="_Optimizations"></a>Static Const
+Patterns</h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Make your patterns “</span><span
+style='font-size:12.0pt;font-family:"Courier New"'>static const</span><span
+style='font-size:12.0pt'>” if you can.  That way, they are compiled once when
+the thread of execution passes over their declarations, not every time. 
+Consider the two following functions:</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>void good_function( string &amp; str ) {</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    static const rpattern static_pattern( “your
+pattern here” );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    static_pattern.substitute( str );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>}</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>void bad_function( string &amp; str ) {</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    rpattern auto_pattern( “your pattern here” );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>    auto_pattern.substitute( str );</span></p>
+
+<p class=MsoCommentText style='margin-left:.5in'><span style='font-size:8.0pt;
+font-family:"Courier New"'>}</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>In </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>good_function()</span><span
+style='font-size:12.0pt'>, the </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>static_pattern</span><span style='font-size:12.0pt'> object is
+initialized once the first time </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>good_function()</span><span style='font-size:12.0pt'>
+is called.  Thereafter, </span><span style='font-size:12.0pt;font-family:"Courier New"'>good_function()</span><span
+style='font-size:12.0pt'> can be called as many times as you like, and you
+won’t incur the penalty of recompiling the pattern.  The </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>static_pattern</span><span
+style='font-size:12.0pt'> object is cleaned up only when the program
+terminates.  In </span><span style='font-size:12.0pt;font-family:"Courier New"'>bad_function()</span><span
+style='font-size:12.0pt'>, the </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>auto_pattern</span><span style='font-size:12.0pt'> object is
+initialized every time </span><span style='font-size:12.0pt;font-family:"Courier New"'>bad_function()</span><span
+style='font-size:12.0pt'> is called, and it is cleaned up every time </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>bad_function()</span><span
+style='font-size:12.0pt'> returns.  This is unnecessary overhead since the
+pattern you are looking for is not changing each time.  But read the <a
+href="#_Thread-safety">Thread-safety</a> section below for one small caveat.</span></p>
+
+<h2><a name="_Toc39890919"></a><a name="_Thread-safety"></a>Thread-safety</h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>A const </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> object is completely thread-safe.  For instance, if
+you declare an </span><span style='font-size:12.0pt;font-family:"Courier New"'>rpattern</span><span
+style='font-size:12.0pt'> object to be “</span><span style='font-size:12.0pt;
+font-family:"Courier New"'>static const</span><span style='font-size:12.0pt'>”,
+you can use it in multiple threads to perform simultaneous </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>match() </span><span
+style='font-size:12.0pt'>or </span><span style='font-size:12.0pt;font-family:
+"Courier New"'>substitute()</span><span style='font-size:12.0pt'> operations.  </span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>However, VC does no
+synchronization while <i>constructing</i> function-local, static objects. 
+(Sad, but true.)  It’s possible for two threads to try to initialize a static
+const pattern simultaneously.  But fear not! I’ve provided a work-around.  You
+can use the </span><span style='font-size:12.0pt;font-family:"Courier New"'>STATIC_RPATTERN</span><span
+style='font-size:12.0pt'> macro to declare all your static const patterns.  If </span><span
+style='font-size:12.0pt;font-family:"Courier New"'>_MT</span><span
+style='font-size:12.0pt'> is defined, then </span><span style='font-size:12.0pt;
+font-family:"Courier New"'>STATIC_RPATTERN</span><span style='font-size:12.0pt'>
+will guard all your rpattern constructions with a critical section.</span></p>
+
+<h2><a name="_Toc39890920">Stack Usage</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>By default, GRETA uses
+recursion in a depth-first search for matches.  If you are matching against a
+very long string (several thousands of characters long), then there is a chance
+you could overflow the stack.  If you use the VC compiler on a Win32 platform,
+then GRETA traps the stack overflow exception and resets the stack guard page
+so that any additional stack overflows that may occur can also be handled.  In
+that case, execution will continue as if the pattern had failed to match.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>An ounce of prevention
+goes a long way, however.  There are some simple things you can do to prevent
+stack overflows.  The first is to not match against strings that are 1000’s of
+characters long.  </span><span style='font-size:12.0pt;font-family:Wingdings'>J</span><span
+style='font-size:12.0pt'>  Next, you can avoid constructs that require deep
+recursion.  Quantifying a group is one such construct.  So for instance, this
+pattern recurses deeply: “</span><span style='font-size:12.0pt;font-family:
+"Courier New"'>(.)+</span><span style='font-size:12.0pt'>”, whereas this one
+does not: “</span><span style='font-size:12.0pt;font-family:"Courier New"'>.+</span><span
+style='font-size:12.0pt'>”.  Also, you should compile GRETA with full
+optimization, making sure to turn on inline expansion (/Ob1 or /Ob2).  This
+drastically reduces GRETA’s stack usage.  Finally, you can use the /STACK
+switch to the linker to increase your stack reserve.  By default, the VC linker
+gives executables 1 Mb of stack reserve.  By contrast, the version of perl.exe
+that I have (from ActiveState) has a whopping 16 Mb of stack reserve.  For most
+situations, 1 Mb is plenty, but if you allow deeply recursive patterns to match
+long strings, then you might want to bump your stack reserve up to 2 or 4 Mb. 
+With 4 Mb of stack, you can match a deeply recursive pattern against a string
+of 35,000 characters without overflowing your stack.</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>Finally, if you are
+still concerned about stack overflows, you can use the “safe” mode to match
+patterns.  When in safe mode, pattern matching is done using an iterative
+algorithm, eliminating the possibility of stack overflows.  Safe mode is
+slower, however.  See <a href="#_Matching_Modes">Matching Modes</a> for more
+information.</span></p>
+
+<h2><a name="_Toc39890921">DBCS</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>The regular expression
+engine is not DBCS-aware.  You can use only fixed-width character sets (that
+is, ANSI and UNICODE).  Sorry.</span></p>
+
+<h2><a name="_Toc39890922">STL</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>This regular expression
+package makes heavy use of STL (The Standard Template Library).  STL is available
+in VC5 and higher.  If you are not currently using STL in your projects (why
+not?!) you may have to make some modifications to your build settings to use
+this package.  If you are using the NT build environment, you should add the
+line “</span><span style='font-size:12.0pt;font-family:"Courier New"'>USE_STL=1</span><span
+style='font-size:12.0pt'>” to your sources file.  If you are building in VC,
+you may need to explicitly link to one of the STL libraries (msvcprt.lib or
+libcp.lib, or their debug equivalents).</span></p>
+
+<h2><a name="_Toc39890923"></a><a name="_VC7_and_Managed_Code"></a>VC7 and
+Managed Code</h2>
+
+<p class=MsoNormal>If you are compiling GRETA under VC7, and you care about
+speed, you should not compile the code with managed extensions turned on.  I
+have found that the performance of the regex engine degrades badly with managed
+code.  You should compile GRETA as unmanaged code into a separate library, and
+then link the lib to your managed app.</p>
+
+<h2><a name="_Toc39890924"></a><a name="_Template_Instantiation"></a>Template
+Instantiation</h2>
+
+<p class=MsoNormal style='page-break-after:avoid'>I’ve needed to instantiate
+the <span style='font-family:"Courier New"'>basic_rpattern</span> classes I
+thought would be most useful.  By default, only the classes necessary to
+perform Perl-style pattern matches on strings of type <span style='font-family:
+"Courier New"'>TCHAR</span> are instantiated.  If you would like to do pattern
+matching on both <span style='font-family:"Courier New"'>char</span> and <span
+style='font-family:"Courier New"'>wchar_t</span> strings, then compile with <span
+style='font-size:10.0pt;font-family:"Courier New"'><a
+href="#_REGEX_WIDE_AND_NARROW">REGEX_WIDE_AND_NARROW</a></span> defined.  Note
+that this will make your code twice as big.  See the section <span
+style='font-family:"Courier New"'><a href="#_REGEX_TO_INSTANTIATE">REGEX_TO_INSTANTIATE</a></span>
+to find out how to have finer control over the template instantiation.  </p>
+
+<p class=MsoNormal style='page-break-after:avoid'>&nbsp;</p>
+
+<p class=MsoNormal style='page-break-after:avoid'>By default, the Perl syntax
+module is compiled, and the POSIX syntax is not.  If you want to use the POSIX
+syntax, then define <span style='font-family:"Courier New"'><a
+href="#_REGEX_POSIX">REGEX_POSIX</a></span>.  If you don’t plan on using Perl
+syntax, you can turn off Perl template instantiation by defining <span
+style='font-family:"Courier New"'><a href="#_REGEX_NO_PERL">REGEX_NO_PERL</a></span>.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If you have defined your own syntax module that you want to
+use with the <span style='font-family:"Courier New"'>rpattern</span> class,
+then you need to do something fancier.  You can set the <span style='font-family:
+"Courier New"'><a href="#_REGEX_TO_INSTANTIATE">REGEX_TO_INSTANTIATE</a> </span>macro
+to null (<span style='font-family:"Courier New"'>-DREGEX_TO_INSTANTIATE=</span>)
+and provide your own explicit instantiations at the bottom of regexpr2.cpp,
+using the template parameters of your choosing.  Or you can <span
+style='font-family:"Courier New"'>#include “regexpr2.cpp”</span> and use
+implicit instantiation.  If you do this, you should also set <span
+style='font-family:"Courier New"'><a href="#_REGEX_TO_INSTANTIATE">REGEX_TO_INSTANTIATE</a></span>
+to null.  But be aware of how many template instantiations you have, because
+each additional instantiation will greatly increase the size of your compiled
+code.</p>
+
+<h2><a name="_Toc39890925">Contact Information</a></h2>
+
+<p class=MsoCommentText><span style='font-size:12.0pt'>You should send bug
+reports and feature requests to me, <a
+href="mailto:ericne@microsoft.com?subject=greta%20gripe">Eric Niebler</a>. 
+I’ll get to them as soon as I can.</span></p>
+
+<b><span style='font-size:16.0pt;font-family:Arial'><br clear=all
+style='page-break-before:always'>
+</span></b>
+
+<h1><a name="_Toc39890926">Appendix 1: History</a></h1>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>7/18/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Folded
+  VC6 code into main code-base for easier maintenance.<br>
+  Minor code clean-up.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>7/10/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fixed
+  off-by-one in lookbehind assertions that could result in an out-of-range
+  iterator access. <br>
+  Use _isctype on VC6. <br>
+  Miscellaneous code cleanup.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>6/09/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Patterns
+  that begin with a string literal now use the Boyer-Moore algorithm to limit
+  the search space, resulting in huge perf wins for some patterns.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>6/03/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>GRETA
+  now builds on VC6 again &lt;sigh&gt;. <br>
+  Added 1-char look-ahead to groups and alternates, greatly speeding up some
+  patterns.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/10/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Modified
+  GRETA so it builds in the NT / CoReXT build environment (that is, with the
+  VC6 STL headers). </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/5/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Added
+  split().<br>
+  10% perf win across the board. <br>
+  Fixed bug with VC8’s debug iterators. <br>
+  Reduced memory footprint of charsets by 20%.<br>
+  Made match_results/subst_results/split_results template on allocator. <br>
+  Miscellaneous code clean-up. </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/29/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Make
+  GRETA work with debug iterators. <br>
+  basic_rpattern::swap wasn’t swapping m_invisible_groups; now it does.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>2/2/03</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Use
+  pseudo-vtables in hetero_stack to increase exception safety when
+  pushing/popping objects with non-trivial destructors. <br>
+  Use Instantiator to move more implementation out of the headers.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>11/3/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Use Instantiator
+  idiom for separate compilation of templates.<br>
+  Minor performance tweaks.<br>
+  Miscellaneous code clean-up.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/11/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Remove
+  implementation-dependent code that relied on STL containters accepting
+  allocators with per-instance state.  (Hence, the REGEX_NO_ALLOCATOR macro is
+  no longer needed.)<br>
+  Use of singly-linked lists reduces memory footprint of compiled patterns.<br>
+  Miscellaneous code clean-up, resulting in almost 200 fewer lines of code.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>6/11/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Move
+  implementation details into internal namespace “detail&quot;.<br>
+  Use REGEX_CHAR macro for more correct handling of character literals.<br>
+  Miscellaneous code clean-up.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/30/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fixed
+  bad interaction between NORMALIZE and EXTENDED flags that was causing “\n”
+  escape sequences to be ignored as white-space.<br>
+  Fix linking problem when compiling with gcc 3.1 and –O3. <br>
+  Included ostream output operator for backrefs in namespace regex.<br>
+  Minor performance tweaks.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/22/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fixed
+  some compile problems.<br>
+  Add REGEX_TO_INSTANTIATE macro, which controls exactly which instantiations
+  of basic_rpattern you want to create.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/17/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>rpattern
+  can now be instantiated with non-const iterators.<br>
+  Added typename in all places where the standard requires it.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/16/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>rpattern::set_flags()
+  method has gone away.<br>
+  Bring back implicit conversion of backref to bool using “safe bool” idiom.<br>
+  rpattern object now has copy constructor, assignment operator and
+  non-throwing swap(), all of which are exception-safe.<br>
+  init() and set_substitution() are now exception-safe.<br>
+  hetero_stack now has much faster runtime type checking.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>5/02/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>bad_regexpr
+  now inherits from std::invalid_argument, as it should.<br>
+  Fix alignof struct to not use offsetof().<br>
+  Fix potential alignment fault in hetero_stack.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/24/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix
+  NOBACKREFS flag, which has been broken since 3/15. Many thanks to Michael Nelte
+  for the bug report.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/22/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Make
+  heterogeneous stack exception safe and more generally useful.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/10/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix
+  linker error caused by 4/8 change. <br>
+  Compiles and runs on VC7.1.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/8/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Safer
+  alignment handling in unsafe_stack.<br>
+  Relaxed the iterator requirements to the match/count/substitute methods. Any
+  iterator will now be accepted as long as it is convertible to the rpattern’s
+  const_iterator type.<br>
+  Implemented template instantiation folding to save space in the executable
+  image (disabled by default for backward compatibility). See <a
+  href="#_REGEX_FOLD_INSTANTIATIONS">REGEX_FOLD_INSTANTIATIONS</a> for details.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/24/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix
+  potential crashing bug in unsafe_stack. Only safe mode is affected.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/15/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Retarget
+  the code for VC7. <br>
+  basic_rpattern_c and basic_match_results_c are no longer needed, and are
+  marked deprecated. <br>
+  The implicit conversion from a backref to a bool is deprecated. <br>
+  subst_results now inherits directly from match_results.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/6/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Faster
+  implementation of unsafe_stack resulting in an overall 10% perf improvement
+  in “safe” mode.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/28/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Some
+  fixes for gcc 3.0.3.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/25/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>20%
+  performance improvement in character set matching.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/23/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix VC7
+  build problem with the forward declaration of _resetstkoflw.  Thanks to Steve
+  West for the suggested fix.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/17/02</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Various
+  portability fixes. Compiles with gcc-2.96 with STLPort.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>12/5/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Compiles
+  cleanly on VC6 with /W4 and on VC7 with /W4 and /Wp64.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>11/29/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>GLOBAL
+  match/substitute operations with patterns that match zero-length substrings
+  are now handled as they are in Perl. <br>
+  Performance work on safe mode.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>11/26/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Finally,
+  a fix for the infamous Repeated Pattern Matching Zero-Length Substring bug.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>11/16/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Big
+  perf improvement for quantified literals and character sets. <br>
+  Add “safe mode,” a stack-conservative, iterative (slow) way to match
+  patterns.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>10/30/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Statically
+  initialize the Perl syntax look-up tables to prevent global rpattern objects
+  from using the tables before they are initialized. <br>
+  Do away with pointless exception specifications.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>10/5/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Use
+  group extent information to make lookahead and lookbehind assertions and
+  independent subexpressions more efficient in both time and (stack) space.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>9/27/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix a
+  bug when matching a zero-width pattern (e.g. /^\s*$/) to an empty
+  std::string.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>9/20/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Add
+  nathann’s debug heap support.<br>
+  Trap EXCEPTION_STACK_OVERFLOW and reset the guard page. </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>9/12/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix AV
+  when trying to match against an uninitialized std::string.<br>
+  Fix compile problem on IA64. <br>
+  Fix alignment fault on IA64 (thanks to nathann for debugging this).<br>
+  Backreferences to nonexistent groups now generates an error. <br>
+  Code clean up / small reduction in stack usage.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>9/5/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Add
+  conditional subexpressions a-la Perl.<br>
+  Fix potential memory leak when parsing invalid character sets with
+  REGEX_NO_ALLOCATOR defined.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/31/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix
+  backtracking bug in non-greedy group quantifiers.<br>
+  Null character is allowed as lower bound of range in charset.<br>
+  Major improvements in Perl compliance:<br>
+  - Add (?#...) comment group. <br>
+  - Add Perl /x modifier for non-significant white space in patterns.<br>
+  - Add Perl escape sequences \e, \777, \xFF, \cC.<br>
+  - backrefs in patterns can refer to enclosing groups<br>
+  Add experimental (?R) extension for recursive patterns.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/21/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Fix bug
+  in nested POSIX-style character sets.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/20/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Use
+  small-object allocator to speed up pattern compilation.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/15/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana'>Complete
+  overhaul of the interface. <br>
+  Remove regexpr class; add match_results/subst_results. <br>
+  Intrinsic charsets (\w, \d, \s) respect locale settings. <br>
+  CSTRINGS flag functionally replaced by rpattern_c object.<br>
+  Custom intrinsic charsets are managed by syntax module. <br>
+  Compiles and runs on Linux (STLport-4.0, gcc 2.96).</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>7/31/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Big performance improvements. <br>
+  Fix for STATIC_RPATTERN macro.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>7/9/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Add negative posix charsets like [:^alpha:]. <br>
+  Make posix charsets play nice with user-defined intrinsic charsets.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/17/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Remove vertical tab character (‘\v’) from \s intrinsic
+  character set.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/10/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Explicitly zero Perl syntax look-up tables.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/31/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Fix assert when parsing certain invalid patterns.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/25/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Fix AV when reinitializing an rpattern.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>1/5/01</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Remove platform-dependent assumption that string
+  iterators are char*.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>10/13/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Compiles and runs with VC7.<br>
+  Add new Perl \z assertion.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/14/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Use pattern width analysis to optimize matching.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>8/10/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Add lookbehind assertions, which can be arbitrarily
+  complicated (Perl only allows fixed-width lookbehinds).<br>
+  Allow posix-style nested charsets, like [:alpha:] (Perl 5.6 negative posix
+  charsets like [:^alpha:] not supported).</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/18/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Include basic POSIX syntax module.<br>
+  Don't allow uninitialized backrefs to match the empty string.<br>
+  ] doesn't close a character class if it is the first character in the class.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/27/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Fix leak when parsing invalid substitution strings.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>3/22/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Support quotemeta (\Q and \E) in pattern and substitution
+  strings.<br>
+  Support upper- and lower-case escape sequences (\L \l \U \u) in substitution
+  strings.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>2/9/00</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>regexpr is now template on character type, traits and
+  allocator!<br>
+  rpattern is also template on syntax module.<br>
+  Fixed bug with ^ when doing global multiline match.<br>
+  Fixed problem with $' when doing global substitution.<br>
+  Made $ more Perl-like.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>9/20/99</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Fixed bug in Unicode charset matching.<br>
+  Performance improvements.<br>
+  Allow user-defined intrinsic character sets.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>6/23/99</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Expanded the global match and substitute functionality<br>
+  Improved performance of character set matching<br>
+  Open source'd it!</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>6/4/99</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Just fixed a memory leak! Get the latest version.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:68.0pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.05in'><span
+   style='font-size:10.0pt;font-family:Verdana'>4/1/99</span></p>
+  </td>
+  <td width=524 valign=top style='width:392.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-right:.5in'><span style='font-size:10.0pt;
+  font-family:Verdana'>Submitted to <a href="http://toolbox/"><span
+  style='font-size:12.0pt;font-family:"Times New Roman"'>http://toolbox/</span></a></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<b><span style='font-size:16.0pt;font-family:Arial'><br clear=all
+style='page-break-before:always'>
+</span></b>
+
+<h1><a name="_Toc39890927">Appendix 2: Implementation Details</a></h1>
+
+<p class=MsoNormal>So, you want to know how GRETA works, huh?  Well, it is a
+hybrid of a standard state machine and the Interpreter design pattern, as
+described in <u>Design Patterns</u>, by Gamma, et al.  A state machine has
+states and transitions in a directed, possibly cyclic, graph.  It also has a
+clear flow from the initial state to the terminal state.  It is generally
+implemented with a p-code interpreter or with jump tables.  The Interpreter
+pattern, on the other hand, doesn't deal with states -- it deals with grammar
+rules.  Each rule in your language (e.g. regular expressions) gets its own
+polymorphic class, and you parse sentences in your language into trees of these
+polymorphic nodes according to your grammar rules.  Recognizing sentences in
+your language (e.g., matching a pattern) happens by recursively traversing this
+tree.</p>
+
+<p class=MsoNormal> </p>
+
+<p class=MsoNormal>GRETA is somewhere in between these two.  It is basically a
+state machine, but the states are polymorphic nodes in a graph, and transitions
+are virtual function calls between nodes, much like Interpreter.  There is one
+start node, and (essentially) one end node.  In between, there are branches and
+loops.  The goal is to find a way to the end state using only legal
+transitions.  Each node either matches or it doesn't.  If it doesn't, it
+returns false.  If it does, it passes execution to the next node in the graph
+recursively.  If there are branches, it picks one, and if its first guess fails
+to match (returns false), it tries the next one.  The entire execution state
+during pattern matching is maintained in local variables on the stack.  Since
+there is no dynamic allocation, it is very fast.</p>
+
+<p class=MsoNormal> </p>
+
+<p class=MsoNormal>This approach can actually be as fast/faster that a
+traditional p-code state machine.  With p-code, to move between states, you
+have an op-code and you execute a big switch on your op-code.  Big switches are
+inefficient -- they introduce branches and blow locality out of the water. 
+Compare that to a virtual function call.  A couple of indirections and you're
+executing the code you want to be executing, with no branches.  This is similar
+to the jump table school of state machines.  But jump tables are hard to write,
+hard to understand and hard to maintain.  With GRETA, the v-tables are the jump
+tables, and I let the compiler worry about writing them and maintaining them.</p>
+
+<p class=MsoNormal> </p>
+
+<p class=MsoNormal>Finally, I use a lot of template tricks to choose branches
+at compile time and to turn virtual function calls into inline function calls. 
+(Try <i>that</i> with a jump table!)  This speeds things up a lot, at the
+expense of some code bloat.  I have an article about this trick in the January
+2003 issue of the C/C++ User's Journal.  You can read online it here: <a
+href="http://www.cuj.com/articles/2003/0301/0301d/0301d.htm?topic=articles">http://www.cuj.com/articles/2003/0301/0301d/0301d.htm?topic=articles</a>.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

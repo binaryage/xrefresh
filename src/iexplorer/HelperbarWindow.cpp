@@ -3,6 +3,7 @@
 #include "HelperbarWindow.h"
 #include "BrowserManager.h"
 #include "XRefreshBHO.h"
+#include "SitesDialog.h"
 
 //#include "Debug.h"
 
@@ -54,7 +55,7 @@ CHelperbarWindow::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 	m_Console.SetFont(m_Font);
 
 	DWORD style = WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_TABSTOP | CCS_TOP | CCS_NODIVIDER | CCS_NORESIZE | CCS_NOPARENTALIGN | TBSTYLE_FLAT | TBSTYLE_LIST | TBSTYLE_TRANSPARENT | TBSTYLE_TOOLTIPS;
-	m_Toolbar.Create(m_hWnd, rcDefault, MAIN_TOOLBAR_WINDOW_NAME, style, 0, IDC_TB_TOOLBAR);
+	m_Toolbar.Create(m_hWnd, rcDefault, MAIN_TOOLBAR_WINDOW_NAME, style, 0, IDC_HB_TOOLBAR);
 	RECT  rc;
 	GetClientRect(&rc);
 	
@@ -201,6 +202,19 @@ CHelperbarWindow::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 			{
 				CAboutBox kAboutBox;
 				kAboutBox.DoModal();
+			}
+			break;
+		case ID_POPUPMENU_ALLOWEDSITES:
+			{
+				CComQIPtr<IWebBrowser2> browser;
+				{
+					BrowserManagerLock browserManager;
+					CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
+					if (!window) return 0;
+					browser = window->GetBrowserInterface();
+				}
+				CSitesDialog kSitesDialog(GetSiteRootUrl(browser));
+				kSitesDialog.DoModal();
 			}
 			break;
 	}

@@ -68,6 +68,7 @@ inline int GetStringValueFromRegistry(LPCTSTR keyRoot, LPCTSTR keyName, LPCTSTR 
 	else result = 2;
 
 	free(fullKeyName);
+	RegCloseKey(hKey);
 	return result;
 }
 
@@ -98,7 +99,7 @@ inline int SetStringValueToRegistry(LPCTSTR keyRoot, LPCTSTR keyName, LPCTSTR va
 	}
 
 	DWORD dwType = REG_SZ;
-	DWORD dwSize = (DWORD)_tcslen(value)+1;
+	DWORD dwSize = (DWORD)(_tcslen(value)+1)*sizeof(TCHAR);
 	lRes = RegSetValueEx(hKey, valueName, NULL, dwType, (LPBYTE)value, dwSize);
 	if (lRes != ERROR_SUCCESS) 
 	{
@@ -107,6 +108,7 @@ inline int SetStringValueToRegistry(LPCTSTR keyRoot, LPCTSTR keyName, LPCTSTR va
 	}
 
 	free(fullKeyName);
+	RegCloseKey(hKey);
 	return result;
 }
 
@@ -137,6 +139,7 @@ inline int GetDWORDValueFromRegistry(LPCTSTR keyRoot, LPCTSTR keyName, LPCTSTR v
 	else result = 2;
 
 	free(fullKeyName);
+	RegCloseKey(hKey);
 	return result;
 }
 
@@ -176,5 +179,6 @@ inline int SetDWORDValueToRegistry(LPCTSTR keyRoot, LPCTSTR keyName, LPCTSTR val
 	}
 
 	free(fullKeyName);
+	RegCloseKey(hKey);
 	return result;
 }

@@ -2,8 +2,10 @@
 
 #pragma once
 
-#define GUID_STRING_LEN	40
+#define GUID_STRING_LEN                           40
 
+//////////////////////////////////////////////////////////////////////////
+// CGuid
 class CGuid {
 public:
 
@@ -15,7 +17,7 @@ public:
 		unsigned long  Data5;
 	} TGUID;
 
-	static const TGUID                             m_Null;
+	static const TGUID                            m_Null;
 
 	CGuid();
 	virtual ~CGuid();
@@ -66,6 +68,6 @@ public:
 protected:
 	void copy(const CGuid& g);	
 
-	TGUID                                          m_GUID;
-	TCHAR                                          m_Buffer[GUID_STRING_LEN];
+	TGUID                                         m_GUID;
+	TCHAR                                         m_Buffer[GUID_STRING_LEN];
 };

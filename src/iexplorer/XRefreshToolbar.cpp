@@ -4,11 +4,12 @@
 #include "XRefreshToolbar.h"
 #include "Services.h"
 #include "AboutBox.h"
+#include "SitesDialog.h"
 #include "DialogManager.h"
 #include "BrowserManager.h"
 #include "XRefreshBHO.h"
 
-//#include "Debug.h"
+#include "Debug.h"
 
 const wchar_t *g_wcToolbarWindowText = _T("XRefreshToolbarWindow");
 
@@ -19,6 +20,7 @@ m_dwBandId(0),
 m_dwViewMode(0), 
 m_iToolbarHeight(22)
 {
+	InitRoot();
 	DT(TRACE_I(FS(_T("Toolbar[%08X]: constructor"), this)));
 
 	CBitmap toolbar;
@@ -95,7 +97,7 @@ CXRefreshToolbar::UIActivateIO(BOOL fActivate, LPMSG lpMsg)
 STDMETHODIMP 
 CXRefreshToolbar::HasFocusIO()
 {
-	// generic implementation, override in base class
+	// TODO: properly indicate when my UI has focus
 	return S_FALSE;
 }
 
@@ -122,21 +124,28 @@ CXRefreshToolbar::SetSite(IUnknown *pUnknownSite)
 		if (!!pUnknownSite)
 		{
 			// attach the window
-			HWND hMyWindow;
+			HWND hWnd;
 			CComPtr<IUnknown> site(pUnknownSite);
 			CComQIPtr<IOleWindow> window(site);
-			window->GetWindow(&hMyWindow);
-			if (!hMyWindow) 
+			window->GetWindow(&hWnd);
+			if (!hWnd) 
 			{
 				TRACE_E(FS(_T("Toolbar[%08X]: Cannot retrieve toolbar base window"), this));
 				return E_FAIL;
 			}
-			SubclassWindow(hMyWindow);
+			SubclassWindow(hWnd);
 
 			// get a WebBrowser reference
 			CComQIPtr<IServiceProvider> serviceProvider(site);
 			serviceProvider->QueryService(IID_IWebBrowserApp, IID_IWebBrowser2, (void**)&m_Browser);
 			site->QueryInterface(IID_IInputObjectSite, (void**)&m_Site);
+
+			// retrive browser id
+			{
+				BrowserManagerLock browserManager;
+				m_BrowserId = browserManager->AllocBrowserId(m_Browser, this);
+				ATLASSERT(m_BrowserId!=NULL_BROWSER);
+			}
 
 			// create main window
 			CreateMainWindow();
@@ -345,6 +354,12 @@ CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 				kAboutBox.DoModal();
 			}
 			break;
+		case ID_POPUPMENU_ALLOWEDSITES:
+			{
+				CSitesDialog kSitesDialog(GetSiteRootUrl(m_Browser));
+				kSitesDialog.DoModal();
+			}
+			break;
 		case ID_POPUPMENU_GENERATECRASH:
 			{
 				int* p = 0;
@@ -353,10 +368,6 @@ CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 			break;
 		case ID_POPUPMENU_TESTDIALOG:
 			{
-				//int nButtonPressed = 0;
-				//::TaskDialog(NULL, GetBaseModule().GetModuleInstance(), _T("Title"), _T("Nejakej text"), _T("nevim"),
-				//	TDCBF_OK_BUTTON, TD_INFORMATION_ICON, &nButtonPressed);
-
 				DialogManagerLock dialogManager;
 				dialogManager->TestDialog();
 			}
@@ -374,7 +385,7 @@ CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 	return 0;
 }
 
-LRESULT 
+LRESULT
 CXRefreshToolbar::OnToolbarNeedText(int idCtrl, LPNMHDR pnmh, BOOL& bHandled)
 {
 	LPNMTTDISPINFO pttdi = reinterpret_cast<LPNMTTDISPINFO>(pnmh);
@@ -391,4 +402,31 @@ CXRefreshToolbar::OnToolbarNeedText(int idCtrl, LPNMHDR pnmh, BOOL& bHandled)
 
 	//-- message processed
 	return 0;
+}
+
+CComPtr<IWebBrowser2>
+CXRefreshToolbar::GetBrowser()
+{
+	return m_Browser;
+}
+
+POINTL
+CXRefreshToolbar::GetMinSize() const
+{
+	POINTL pt = { 20, m_iToolbarHeight };
+	return pt;
+}
+
+POINTL
+CXRefreshToolbar::GetMaxSize() const
+{
+	POINTL pt = { -1, m_iToolbarHeight };
+	return pt;
+}
+
+POINTL
+CXRefreshToolbar::GetActualSize() const
+{
+	POINTL pt = { -1, m_iToolbarHeight };
+	return pt;
 }

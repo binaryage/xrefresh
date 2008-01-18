@@ -2,15 +2,15 @@
 // Copyright (c) 2006, Sven Groot, see license.txt for details
 #pragma once
 
-#define FS                                     	FormatString
+#define FS                                        FormatString
 
-#define TRACE_I                                	TTrace::Debug()->Send
-#define TRACE_E                                	WarningBeep(),TTrace::Error()->Send
-#define TRACE_W                                	TTrace::Warning()->Send
+#define TRACE_I                                   TTrace::Debug()->Send
+#define TRACE_E                                   WarningBeep(),TTrace::Error()->Send
+#define TRACE_W                                   TTrace::Warning()->Send
 
-#define TRACE_LI(x)										Debug()->Send(x); TTrace::Debug()->Send(FS(_T("%s: %s"), id2.c_str(), x));
-#define TRACE_LE(x)										WarningBeep(),m_Trace->Error()->Send(x); TTrace::Error()->Send(FS(_T("%s: %s"), id2.c_str(), x));
-#define TRACE_LW(x)										Warning()->Send(x); TTrace::Warning()->Send(FS(_T("%s: %s"), id2.c_str(), x));
+#define TRACE_LI(x)                               Debug()->Send(x); TTrace::Debug()->Send(FS(_T("%s: %s"), id2.c_str(), x));
+#define TRACE_LE(x)                               WarningBeep(),m_Trace->Error()->Send(x); TTrace::Error()->Send(FS(_T("%s: %s"), id2.c_str(), x));
+#define TRACE_LW(x)                               Warning()->Send(x); TTrace::Warning()->Send(FS(_T("%s: %s"), id2.c_str(), x));
 
 
 inline void WarningBeep() 
@@ -471,34 +471,6 @@ public:
 
 //////////////////////////////////////////////////////////////////////////
 // custom global functions
-template<class _Key, class _HashFcn, class _LessKey>
-class CDinkumHasher : public stdext::hash_compare<_Key> {
-public:
-	inline const size_t operator()(const _Key &s) const
-	{
-		return m_HashFcn(s);
-	}
-	inline bool operator()(const _Key &a, const _Key &b) const
-	{
-		return m_LessKey(a,b);
-	}
-
-	_HashFcn m_HashFcn;
-	_LessKey m_LessKey;
-};
-
-class CGuidHasher : public stdext::hash_compare<CGuid> {
-public:
-	inline const size_t operator()(const CGuid &s) const
-	{
-		return s.GetKey();
-	}
-	inline bool operator()(const CGuid &a, const CGuid &b) const
-	{
-		return a<b;
-	}
-};
-
 template<class T>
 class CComPtrHasher : public stdext::hash_compare<CComPtr<T> > {
 public:
@@ -638,7 +610,7 @@ WaitForDocumentReadyState(CComPtr<IHTMLDocument2> spDocument)
 
 		// process some messages, otherwise we never get READYSTATE_COMPLETE.
 		// BEWARE! other parts of the code can be called when dispatching messages
-		//         risk deadlocks !
+		//         the risk of deadlocks !
 		MSG msg;
 		while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))	::DispatchMessage(&msg);
 	}
@@ -647,32 +619,45 @@ WaitForDocumentReadyState(CComPtr<IHTMLDocument2> spDocument)
 }
 
 inline CString
-GetURL(CComPtr<IWebBrowser2> spBrowser)
-{
-	CComBSTR url;
-	CHECK_COM(spBrowser->get_LocationURL(&url), FS(_T("Cannot retrieve location URL from browser %08X"), spBrowser));
-	return CString(url);
-}
-
-inline CString
 GetURL(CComPtr<IHTMLDocument2> spDocument)
 {
+	ATLASSERT(!!spDocument);
 	CComBSTR url;
 	CHECK_COM(spDocument->get_URL(&url), FS(_T("Cannot retrieve location URL from document %08X"), spDocument));
 	return CString(url);
 }
 
 inline CString
+GetURL(CComPtr<IWebBrowser2> spBrowser)
+{
+	ATLASSERT(!!spBrowser);
+	CComPtr<IHTMLDocument2> doc = GetDocument(spBrowser);
+	if (!doc) return _T("");
+	return GetURL(doc);
+}
+
+inline CString
 GetTitle(CComPtr<IHTMLDocument2> spDocument)
 {
+	ATLASSERT(!!spDocument);
 	CComBSTR title;
 	CHECK_COM(spDocument->get_title(&title), FS(_T("Cannot retrieve title from document %08X"), spDocument));
 	return CString(title);
 }
 
 inline CString
+GetTitle(CComPtr<IWebBrowser2> spBrowser)
+{
+	ATLASSERT(!!spBrowser);
+	CComPtr<IHTMLDocument2> doc = GetDocument(spBrowser);
+	if (!doc) return _T("");
+	return GetTitle(doc);
+}
+
+inline CString
 GetLocationName(CComPtr<IWebBrowser2> spBrowser)
 {
+	ATLASSERT(!!spBrowser);
 	CComBSTR title;
 	CHECK_COM(spBrowser->get_LocationName(&title), FS(_T("Cannot retrieve location name from browser %08X"), spBrowser));
 	return CString(title);
@@ -681,8 +666,24 @@ GetLocationName(CComPtr<IWebBrowser2> spBrowser)
 inline CString
 GetLocationURL(CComPtr<IWebBrowser2> spBrowser)
 {
+	ATLASSERT(!!spBrowser);
 	CComBSTR title;
 	CHECK_COM(spBrowser->get_LocationURL(&title), FS(_T("Cannot retrieve location URL from browser %08X"), spBrowser));
 	return CString(title);
 }
 
+inline CString
+GetSiteRootUrl(CComPtr<IWebBrowser2> spBrowser)
+{
+	ATLASSERT(!!spBrowser);
+	CString url = GetURL(spBrowser);
+	int index = url.Find(_T("//"));
+	if (index<0) index = 0; else index+=2;
+	int trim = url.Find(_T("/"), index);
+	//int trim = url.Find(_T("?"), index);
+	if (trim!=-1)
+	{
+		url.Delete(trim, url.GetLength()-trim);
+	}
+	return url;
+}

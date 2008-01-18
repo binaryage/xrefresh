@@ -6,7 +6,7 @@
 #include "Module.h"
 #include "XRefreshHelperbar.h"
 
-//#include "Debug.h"
+#include "Debug.h"
 
 CToolWindow CXRefreshBHO::m_IE7ToolWindow;
 
@@ -133,7 +133,6 @@ CXRefreshBHO::SetSite(IUnknown* pUnkSite)
 			m_ConnectionManager.Disconnect();
 
 			m_IE7ToolWindow.DetachFromIE();
-			//ATLASSERT(m_IE7ToolWindow.m_hWnd==NULL);
 
 			// unregister event sink.
 			if (m_IsAdvised)
@@ -141,12 +140,6 @@ CXRefreshBHO::SetSite(IUnknown* pUnkSite)
 				DispEventUnadvise(m_TopBrowser);
 				m_IsAdvised = false;
 			}
-
-			//if (!!m_HookedDoc) 
-			//{
-			//	m_HookedDoc->SetUIHandler(NULL);
-			//	m_HookedDoc = NULL;
-			//}
 
 			BrowserManagerLock browserManager;
 			browserManager->ReleaseBrowserId(m_BrowserId);
@@ -244,18 +237,15 @@ CXRefreshBHO::SendInfoAboutPage()
 {
 	// send message
 	if (!m_TopBrowser) return;
-
-	CComPtr<IHTMLDocument2> doc = GetDocument(m_TopBrowser);
-	if (!doc) return;
 	
-	CString title = GetTitle(doc);
-	CString url = GetURL(doc);
-	if (m_LastSentTitle!=title || m_LastSentURL!=url) // prevent duplicit page info messages
-	{
-		m_ConnectionManager.SendSetPage(title, url);
-		m_LastSentTitle = title;
-		m_LastSentURL = url;
-	}
+	CString title = GetTitle(m_TopBrowser);
+	CString url = GetURL(m_TopBrowser);
+	if (m_LastSentTitle==title && m_LastSentURL==url) return; // prevent duplicit page info messages
+
+	// send message
+	m_LastSentTitle = title;
+	m_LastSentURL = url;
+	m_ConnectionManager.SendSetPage(title, url);
 }
 
 bool 
@@ -602,4 +592,3 @@ CXRefreshBHO::UpdateIcon()
 {
 	m_IE7ToolWindow.UpdateIcon();
 }
-

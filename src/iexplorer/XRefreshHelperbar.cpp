@@ -6,7 +6,7 @@
 #include "BrowserManager.h"
 #include "Module.h"
 
-//#include "Debug.h"
+#include "Debug.h"
 
 // CXRefreshHelperbar
 CXRefreshHelperbar::CXRefreshHelperbar():
@@ -74,14 +74,13 @@ CXRefreshHelperbar::UIActivateIO(BOOL fActivate, LPMSG lpMsg)
 STDMETHODIMP 
 CXRefreshHelperbar::HasFocusIO()
 {
-	// generic implementation, override in base class
+	// TODO: properly indicate when my UI has focus
 	return S_FALSE;
 }
 
 STDMETHODIMP 
 CXRefreshHelperbar::TranslateAcceleratorIO(LPMSG lpMsg)
 {
-	// generic implementation, override in base class to handle accelerators
 	if( (lpMsg->message == WM_KEYDOWN || lpMsg->message == WM_KEYUP) && 
 		(lpMsg->wParam == VK_TAB || lpMsg->wParam == VK_F6) )
 		return S_FALSE;
@@ -186,7 +185,7 @@ CXRefreshHelperbar::GetBandInfo(DWORD dwBandId, DWORD dwViewMode, DESKBANDINFO *
 
 	if( pdbi->dwMask & DBIM_BKCOLOR )
 	{
-		//Use the default background color by removing this flag.
+		// use the default background color by removing this flag.
 		pdbi->dwMask &= ~DBIM_BKCOLOR;
 	}
 	return S_OK;
@@ -195,7 +194,7 @@ CXRefreshHelperbar::GetBandInfo(DWORD dwBandId, DWORD dwViewMode, DESKBANDINFO *
 void 
 CXRefreshHelperbar::CreateMainWindow()
 {
-	// Only create the window if it doesn't exist yet.
+	// only create the window if it doesn't exist yet.
 	if (m_MainWindow) return;
 
 	HWND parent = GetParent();

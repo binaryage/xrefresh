@@ -4,10 +4,9 @@
 
 #define IDC_LISTCTRL                              1000
 
-// TODO: restore column widths
-// TODO: copy to clipboard
-// TODO: don't track new items (option)
-class CConsoleWindow : public CWindowImpl<CConsoleWindow> {
+//////////////////////////////////////////////////////////////////////////
+// CConsoleWindow
+class CConsoleWindow: public CWindowImpl<CConsoleWindow> {
 public:
 	CConsoleWindow();
 	virtual ~CConsoleWindow();
@@ -21,19 +20,19 @@ public:
 		REFLECT_NOTIFICATIONS()
 	END_MSG_MAP()
 
-	virtual LRESULT									OnWindowPosChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	virtual LRESULT									OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	virtual LRESULT									OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	virtual LRESULT                               OnWindowPosChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	virtual LRESULT                               OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	virtual LRESULT                               OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
-	bool											SetBrowserId(TBrowserId browserId) { m_BrowserId = browserId; m_LoggerConsole.m_BrowserId = browserId; return true; }
+	bool                                          SetBrowserId(TBrowserId browserId) { m_BrowserId = browserId; m_LoggerConsole.m_BrowserId = browserId; return true; }
 
 protected:
-	virtual void									Layout();
-	virtual void									InitList();
+	virtual void                                  Layout();
+	virtual void                                  InitList();
 
 private:
-	CLoggerConsole									m_LoggerConsole; ///< logger object
-	CImageList										m_ImageList;
-	CFont											m_Font;
-	TBrowserId										m_BrowserId;
+	CLoggerConsole                                m_LoggerConsole; ///< logger object
+	CImageList                                    m_ImageList;
+	CFont                                         m_Font;
+	TBrowserId                                    m_BrowserId;
 };

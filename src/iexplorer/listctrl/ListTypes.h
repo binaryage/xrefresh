@@ -5,7 +5,7 @@
 #define NULL_ITEM					-1
 #define NULL_SUBITEM				-1
 #define ITEM_HEIGHT_MARGIN			1
-#define HEADER_HEIGHT_MARGIN        2
+#define HEADER_HEIGHT_MARGIN        4
 #define ITEM_WIDTH_MARGIN			20
 #define ITEM_SCROLL_OFFSET			0
 #define DRAG_HEADER_OFFSET			4
@@ -77,6 +77,7 @@
 #define LCN_ENDEDIT					( LCN_FIRST - 5 )
 #define LCN_MODIFIED				( LCN_FIRST - 6 )
 #define LCN_HYPERLINK				( LCN_FIRST - 7 )
+#define LCN_CHANGED					( LCN_FIRST - 8 )
 
 struct CListNotify
 {

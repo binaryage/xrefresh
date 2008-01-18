@@ -80,8 +80,6 @@ CConsoleWindow::InitList()
 	m_Font.CreatePointFontIndirect(&logFont);
 
 	m_LoggerConsole.SetSmoothScroll(FALSE);
-	m_LoggerConsole.SetFocusItem(FALSE);
-	m_LoggerConsole.SetFocusSubItem(FALSE);
 	m_LoggerConsole.SetSingleSelect(TRUE);
 	m_LoggerConsole.SetDragDrop(FALSE);
 

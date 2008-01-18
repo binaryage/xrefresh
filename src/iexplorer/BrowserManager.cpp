@@ -2,6 +2,7 @@
 #include "BrowserManager.h"
 #include "XRefreshBHO.h"
 #include "XRefreshHelperbar.h"
+#include "XRefreshToolbar.h"
 
 //#include "Debug.h"
 
@@ -40,23 +41,18 @@ CBrowserMessageWindow::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-CBrowserMessageWindow::CBrowserMessageWindow( IUnknown* browserInterface, CXRefreshBHO* pBHO ):
-	m_RefCount(1), 
-	m_BrowserInterface(browserInterface), 
+CBrowserMessageWindow::CBrowserMessageWindow(IUnknown* browserInterface, CXRefreshBHO* pBHO, CXRefreshHelperbar* pHelperbar, CXRefreshToolbar* pToolbar):
+	m_RefCount(1),
+	m_BrowserInterface(browserInterface),
+	m_BHO(NULL),
 	m_Helperbar(NULL),
+	m_Toolbar(NULL),
 	m_ThreadId(0)
 {
 	CreateMessageWindow();
 	SetBHO(pBHO);
-}
-
-CBrowserMessageWindow::CBrowserMessageWindow( IUnknown* browserInterface, CXRefreshHelperbar* pHelperbar ):
-	m_RefCount(1), 
-	m_BrowserInterface(browserInterface), 
-	m_Helperbar(pHelperbar), 
-	m_BHO(NULL)
-{
-	CreateMessageWindow();
+	SetHelperbar(pHelperbar);
+	SetToolbar(pToolbar);
 }
 
 CBrowserMessageWindow::~CBrowserMessageWindow()
@@ -114,19 +110,25 @@ CBrowserManager::~CBrowserManager()
 TBrowserId
 CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshBHO* pBHO)
 {
-	return AllocBrowserId(browserInterface, pBHO, NULL);
+	return AllocBrowserId(browserInterface, pBHO, NULL, NULL);
 }
 
 TBrowserId
 CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshHelperbar* pHelperbar)
 {
-	return AllocBrowserId(browserInterface, NULL, pHelperbar);
+	return AllocBrowserId(browserInterface, NULL, pHelperbar, NULL);
 }
 
 TBrowserId
-CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshBHO* pBHO, CXRefreshHelperbar* pHelperbar)
+CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshToolbar* pToolbar)
 {
-	DT(TRACE_LI(FS(_T("AllocBrowserId(browserInterface=%08X, BHO=%08X, Helperbar=%08X)"), browserInterface, pBHO, pHelperbar)));
+	return AllocBrowserId(browserInterface, NULL, NULL, pToolbar);
+}
+
+TBrowserId
+CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshBHO* pBHO, CXRefreshHelperbar* pHelperbar, CXRefreshToolbar* pToolbar)
+{
+	DT(TRACE_LI(FS(_T("AllocBrowserId(browserInterface=%08X, BHO=%08X, Helperbar=%08X, Toolbar=%08X)"), browserInterface, pBHO, pHelperbar, pToolbar)));
 	CHECK_THREAD_OWNERSHIP;
 	TBrowserMessageWindowMap::iterator l = FindBrowserId(browserInterface);
 	if (l!=m_Browsers.end()) 
@@ -137,6 +139,7 @@ CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshBHO* pBHO, 
 		// fill missing data
 		if (pBHO) l->second->SetBHO(pBHO);
 		if (pHelperbar) l->second->SetHelperbar(pHelperbar);
+		if (pToolbar) l->second->SetToolbar(pToolbar);
 
 		DT(TRACE_LI(FS(_T("... addref to %d and return %d"), l->second->RefCount(), l->first)));
 		return l->first;
@@ -145,7 +148,7 @@ CBrowserManager::AllocBrowserId(IUnknown* browserInterface, CXRefreshBHO* pBHO, 
 	// allocate a new browser browserId
 	CHECK_THREAD_OWNERSHIP;
 	++m_NextId;
-	m_Browsers.insert(make_pair(m_NextId, new CBrowserMessageWindow(browserInterface, pBHO)));
+	m_Browsers.insert(make_pair(m_NextId, new CBrowserMessageWindow(browserInterface, pBHO, pHelperbar, pToolbar)));
 	DT(TRACE_LI(FS(_T("... created %d"), m_NextId)));
 	return m_NextId;	
 }

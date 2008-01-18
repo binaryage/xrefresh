@@ -440,15 +440,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\res\about.ico"
-				>
-			</File>
-			<File
 				RelativePath=".\res\aboutbox.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\CueSheetNamer.ico"
 				>
 			</File>
 			<File
@@ -456,23 +448,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\res\domicons.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\ExampleItems.bmp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\..\gdlogo.bmp"
-				>
-			</File>
-			<File
 				RelativePath=".\res\hand.cur"
-				>
-			</File>
-			<File
-				RelativePath=".\res\icon1.ico"
 				>
 			</File>
 			<File
@@ -480,23 +456,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\ikony.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\res\ikony1.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\res\ListItems.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\msdev_tab_icons.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\Refresh.ico"
+				RelativePath=".\res\states.bmp"
 				>
 			</File>
 			<File
@@ -505,14 +465,6 @@
 			</File>
 			<File
 				RelativePath=".\res\toolbarmask.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\tree.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\XRefresh.ico"
 				>
 			</File>
 			<File
@@ -532,67 +484,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\XRefreshBHO.rgs"
-				>
-			</File>
-			<File
 				RelativePath=".\res\XRefreshD.ico"
 				>
 			</File>
 			<File
-				RelativePath=".\XRefreshDebugCodeContext.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshDebugDocumentContext.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshDebugDocumentHelper.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\res\XRefreshDisconnected.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshEnumDebugCodeContexts.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshHelperbar.rgs"
-				>
-			</File>
-			<File
 				RelativePath=".\res\XRefreshS.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshScriptDebugger.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshScriptEngine.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshScriptSite.rgs"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshShell.rgs"
-				>
-			</File>
-			<File
-				RelativePath="..\..\ico\XRefreshStop.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\res\XRefreshStop.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\XRefreshToolbar.rgs"
 				>
 			</File>
 		</Filter>
@@ -1054,6 +950,66 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="greta"
+			>
+			<File
+				RelativePath=".\greta\regexpr2.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\greta\regexpr2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\greta\reimpl2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\greta\restack.h"
+				>
+			</File>
+			<File
+				RelativePath=".\greta\syntax2.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\greta\syntax2.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\AboutBox.cpp"
 			>
@@ -1172,6 +1128,22 @@
 		</File>
 		<File
 			RelativePath=".\Services.h"
+			>
+		</File>
+		<File
+			RelativePath=".\SitesDialog.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\SitesDialog.h"
+			>
+		</File>
+		<File
+			RelativePath=".\SitesModel.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\SitesModel.h"
 			>
 		</File>
 		<File

@@ -29,8 +29,9 @@ IDR_TOOLMENU MENU
 BEGIN
     POPUP "PopupMenu"
     BEGIN
-        MENUITEM "Visit xrefresh.com",          ID_POPUPMENU_VISITSITE
+        MENUITEM "Allowed Sites ...",           ID_POPUPMENU_ALLOWEDSITES
         MENUITEM SEPARATOR
+        MENUITEM "Visit Homepage",              ID_POPUPMENU_VISITSITE
         MENUITEM "About XRefresh",              ID_POPUPMENU_ABOUT
     END
 END
@@ -44,16 +45,33 @@ END
 IDB_ABOUTBOX            BITMAP                  "res\\aboutbox.bmp"
 IDB_LISTITEMS           BITMAP                  "res\\ListItems.bmp"
 IDB_ICONS               BITMAP                  "res\\icons.bmp"
+IDB_STATES              BITMAP                  "res\\states.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_EMPTY_DIALOG DIALOGEX 0, 0, 186, 95
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_SITESDIALOG DIALOGEX 0, 0, 293, 247
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Allowed Sites ..."
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
+    EDITTEXT        IDC_SITE_EDIT,7,7,227,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    DEFPUSHBUTTON   "Add",ID_ADD_SITE,239,7,41,14
+    PUSHBUTTON      "Move Up",IDC_MOVE_UP,7,150,50,14
+    PUSHBUTTON      "OK",IDOK,176,220,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,230,220,50,14
+    PUSHBUTTON      "Move Down",IDC_MOVE_DOWN,62,150,50,14
+    PUSHBUTTON      "Remove",IDC_REMOVE,119,150,50,14
+    EDITTEXT        IDC_QUERY_EDIT,11,180,219,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    DEFPUSHBUTTON   "Test",ID_TEST_QUERY,235,180,41,14
+    LTEXT           "Accepted by rule #1, but rejected by rule #3",IDC_QUERY_RESULT,11,201,146,8
+    CONTROL         "",IDC_QUERY_SEP,"Static",SS_ETCHEDFRAME,9,174,262,1
+    LTEXT           " Test Query ",IDC_QUERY_TITLE,33,170,41,8
+    LTEXT           "You may use regular expressions!",IDC_HELP1,171,154,109,8
+    LTEXT           "Need help?",IDC_HELP2,252,163,36,8
 END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 283, 110
@@ -63,7 +81,7 @@ CAPTION "About XRefresh"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         208,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,283,40
-    DEFPUSHBUTTON   "OK",IDOK,232,94,50,14,BS_FLAT
+    DEFPUSHBUTTON   "OK",IDOK,232,94,50,14
     CONTROL         "0.1.2003",IDC_VERSION,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,119,5,30,8
     LTEXT           "http://xrefresh.com",IDC_HOMEPAGE,56,58,187,8
     LTEXT           "Homepage:",IDC_HOMEPAGE_LABEL,9,58,38,8
@@ -135,6 +153,16 @@ IDR_XREFRESHHELPERBAR   REGISTRY                "XRefreshHelperbar.rgs"
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO 
 BEGIN
+    IDD_SITESDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        VERTGUIDE, 11
+        VERTGUIDE, 276
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 234
+    END
+
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -215,8 +243,6 @@ LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_IKONY               ICON                    "C:\\ikony.ico"
-IDI_IKONY1              ICON                    "res\\ikony1.ico"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,7 @@
-// Copyright (c) 2006, Sven Groot, see license.txt for details
+// Copyright (c) 2006, Sven Groot
+
 #include "stdafx.h"
+
 using namespace Gdiplus;
 
 const float g_baseDpi = 96.0f;

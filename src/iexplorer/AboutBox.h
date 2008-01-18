@@ -5,8 +5,9 @@
 #include "resource.h" // main symbols
 #include <atlhost.h>
 
+//////////////////////////////////////////////////////////////////////////
 // CAboutBox
-class CAboutBox : public CDialogImpl<CAboutBox> {
+class CAboutBox: public CDialogImpl<CAboutBox> {
 public:
 	CAboutBox();
 	~CAboutBox();
@@ -22,15 +23,15 @@ public:
 	ALT_MSG_MAP(1) // version
 	END_MSG_MAP()
 
-	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	LRESULT OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	LRESULT OnClickedOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
-	LRESULT OnCtlColorStatic(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT                                       OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT                                       OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT                                       OnClickedOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+	LRESULT                                       OnCtlColorStatic(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 private:
-	CContainedWindow m_Version;
-	CHyperLink m_Homepage;
-	CHyperLink m_People;
-	CHyperLink m_Donate;
-	CHyperLink m_Author;
+	CContainedWindow                              m_Version;
+	CHyperLink                                    m_Homepage;
+	CHyperLink                                    m_People;
+	CHyperLink                                    m_Donate;
+	CHyperLink                                    m_Author;
 };

@@ -112,7 +112,7 @@ CLoggerConsole::CacheLogger()
 
 //////////////////////////////////////////////////////////////////////////
 
-bool											
+bool
 CLogger::Log(CString message, int icon)
 {
 	time_t ltime;

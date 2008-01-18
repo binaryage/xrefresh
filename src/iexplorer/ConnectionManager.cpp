@@ -151,8 +151,11 @@ CConnectionManager::CConnectionManager(CXRefreshBHO* parent):
 m_Connection(this),
 m_ReconnectListener(this),
 m_Connected(false),
-m_Parent(parent)
+m_Parent(parent),
+m_hRegistryWatchDogThread(NULL)
 {
+	m_SitesModel.Load(REGISTRY_ROOT_KEY_SITES);
+	StartRegistryWatchDog();
 	StartReconnectListener();
 }
 
@@ -331,9 +334,24 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 		CString name = UnpackValue(msg["name"]);
 		CString story = GetStory(msg);
 		CString log;
-		log.Format(_T("Refresh request from %s: %s"), name, story);
-		m_Parent->Log(log, ICON_REFRESH);
-		PerformRefresh();
+
+		// test current url
+		CString url = GetURL(m_Parent->GetTopBrowser());
+		m_CS.Enter(); // m_SitesModel can be accessed by watchdog
+		bool answer = m_SitesModel.Test(url);
+		m_CS.Leave();
+
+		if (answer)
+		{
+			log.Format(_T("Refresh request from %s: %s"), name, story);
+			m_Parent->Log(log, ICON_REFRESH);
+			PerformRefresh();
+		}
+		else
+		{
+			log.Format(_T("Refresh request from %s (not allowed for this site)"), name);
+			m_Parent->Log(log, ICON_CANCEL);
+		}
 	}
 }
 
@@ -428,4 +446,53 @@ CConnectionManager::RequestStartingReconnectListener()
 
 	// refresh must be called by BHO thread
 	window->PostMessage(BMM_REQUEST_LISTEN_FOR_RECONNECT, 0, 0);
+}
+
+UINT WINAPI RegistryWatchDogThreadProc(LPVOID pParam)
+{
+	CConnectionManager* pThis = reinterpret_cast<CConnectionManager*>(pParam);
+	_ASSERTE(pThis != NULL);
+	pThis->RegistryWatchDogThread();
+	return 1L;
+}
+
+void 
+CConnectionManager::RegistryWatchDogThread()
+{
+	HKEY hKey;
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, REGISTRY_ROOT_KEY_SITES_PARENT, 0, KEY_NOTIFY, &hKey) != ERROR_SUCCESS) 
+	{
+		TRACE_E(FS(_T("Registry watchdog thread unable to open registry key: %s"), REGISTRY_ROOT_KEY_SITES_PARENT));
+		_endthreadex(2);
+		return;
+	}
+	while (true)
+	{
+		if (RegNotifyChangeKeyValue(hKey, TRUE, REG_NOTIFY_CHANGE_NAME|REG_NOTIFY_CHANGE_LAST_SET, NULL, FALSE)!=ERROR_SUCCESS)
+		{
+			TRACE_E(_T("Registry watchdog thread unable to setup next waiting operation"));
+			_endthreadex(1);
+			return;
+		}
+		TRACE_W(_T("Registry watchdog triggered"));
+		m_CS.Enter();
+		m_SitesModel.Load(REGISTRY_ROOT_KEY_SITES);
+		m_CS.Leave();
+		TRACE_W(_T("Sites model reloaded!"));
+	}
+	RegCloseKey(hKey);
+	_endthread();
+}
+
+bool 
+CConnectionManager::StartRegistryWatchDog()
+{
+	HANDLE hThread;
+	UINT uiThreadId = 0;
+	hThread = (HANDLE)_beginthreadex(NULL, 0, RegistryWatchDogThreadProc, this, CREATE_SUSPENDED, &uiThreadId);
+	if (!hThread)return false;
+
+	m_hRegistryWatchDogThread = hThread;
+	ResumeThread(hThread);
+	return true;
 }
