@@ -239,7 +239,13 @@ CConnectionManager::SendHello()
 	Json::Value msg;
 	msg["command"] = "Hello";
 	msg["type"] = "Internet Explorer";
-	msg["agent"] = "Agent?";
+
+	// obtain user agent
+	char buf[1024];
+	DWORD size = 1024;
+	ObtainUserAgentString(0, buf, &size);
+	msg["agent"] = buf;
+
 	Send(msg);
 }
 
