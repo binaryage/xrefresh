@@ -39,9 +39,9 @@
 						<!--<menuitem label="Advanced Settings..." type="checkbox" oncommand="Firebug.XRefreshExtension.advancedSettings(this)"/>-->
 						<menuseparator/>
 						<menuitem label="Website..." command="cmd_XRefreshSite"/>
-						<menuitem label="Documentation..." command="cmd_XRefreshDocs"/>
-						<menuseparator/>
-						<menuitem label="Contribute..." command="cmd_XRefreshContribute"/>
+						<!--<menuitem label="Documentation..." command="cmd_XRefreshDocs"/>-->
+						<!--<menuseparator/>-->
+						<!--<menuitem label="Contribute..." command="cmd_XRefreshContribute"/>-->
 					</menupopup>
 				</toolbarbutton>
 				
