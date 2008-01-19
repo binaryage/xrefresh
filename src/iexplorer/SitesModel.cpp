@@ -181,7 +181,12 @@ CSitesModel::Load(LPCTSTR key)
 
 	HKEY hKey;
 	LONG lRes = RegOpenKeyEx(HKEY_CURRENT_USER, key, 0, KEY_READ, &hKey);
-	if (lRes != ERROR_SUCCESS) return true; // it is correct when key does not exist
+	if (lRes != ERROR_SUCCESS) 
+	{
+		// default model
+		m_Sites.push_back(CSiteRecord(_T("localhost"), E_ALLOW, true));
+		return true; // it is correct when key does not exist
+	}
 
 	int index = 1;
 	while (index<1000) // safety cap

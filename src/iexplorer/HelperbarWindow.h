@@ -58,4 +58,5 @@ protected:
 	CAccelerator                                  m_Accelerator;
 	CImageList                                    m_ImageList;
 	CBitmap                                       m_ToolbarBitmap;
+	CBitmap                                       m_ToolbarMaskBitmap;
 };

@@ -7,207 +7,207 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <!-- NOTE: some bits were taken from TortoiseSVN project, thanks guys! -->
-  <Product Id="44386a7b-7093-4fdc-8b52-5f7e8b968960"
-           Name="XRefresh $(var.version)"
-           Language="1033"
-           Manufacturer="Antonin Hildebrand"
-           Version="$(var.version)"
-           UpgradeCode="3e4c3ec7-a32a-47a7-ad63-9c5464d0bc60">
+  <Product	Id="44386a7b-7093-4fdc-8b52-5f7e8b968960"
+			Name="XRefresh $(var.version)"
+			Language="1033"
+			Manufacturer="Antonin Hildebrand"
+			Version="$(var.version)"
+			UpgradeCode="3e4c3ec7-a32a-47a7-ad63-9c5464d0bc60">
 
-    <Package Keywords="Installer"
-             Description="XRefresh"
-             InstallerVersion="300"
-             Compressed="yes" />
+	<Package	Keywords="Installer"
+				Description="XRefresh"
+				InstallerVersion="300"
+				Compressed="yes" />
 
-    <Property Id="ALLUSERS"><![CDATA[2]]></Property>
+	<Property Id="ALLUSERS"><![CDATA[2]]></Property>
 
-    <Property Id="XRefreshHelperbar_CLSID" Value="{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}" />
-    <Property Id="XRefreshToolbar_CLSID" Value="{551012C5-352D-48D9-9E29-E90F293D19F0}" />
-    <Property Id="XRefreshBHO_CLSID" Value="{8774C0B1-6697-43B8-8D0E-6179F48838B0}" />
-    <Property Id="XRefresh_APPID" Value="{05B6ED58-9CB1-4270-82F7-30CCD8C4F8F0}" />
-    <Property Id="XRefreshTypeLib" Value="{753A4046-6863-42AC-9C85-24468A489720}" />
-    <Property Id="XRefreshBHO_Interface" Value="{50AE34F6-670A-4807-B11A-8CA4C9136B10}" />
-    <Property Id="XRefreshHelperbar_Interface" Value="{A8FE27A6-2251-4A4B-8EAF-E5E2ABA4DC80}" />
-    <Property Id="XRefreshToolbar_Interface" Value="{36B7E346-E901-4EE9-B888-696D4C0BBF80}" />
-    
-    <Upgrade Id="3e4c3ec7-a32a-47a7-ad63-9c5464d0bc60">
-      <UpgradeVersion Property="NEWERVERSIONDETECTED" Minimum="$(var.version)" OnlyDetect="yes" />
-      <UpgradeVersion Property="PREVIOUSVERSIONSINSTALLED" Maximum="$(var.version)" IncludeMaximum="no" />
-    </Upgrade>
+	<Property Id="XRefreshHelperbar_CLSID" Value="{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}" />
+	<Property Id="XRefreshToolbar_CLSID" Value="{551012C5-352D-48D9-9E29-E90F293D19F0}" />
+	<Property Id="XRefreshBHO_CLSID" Value="{8774C0B1-6697-43B8-8D0E-6179F48838B0}" />
+	<Property Id="XRefresh_APPID" Value="{05B6ED58-9CB1-4270-82F7-30CCD8C4F8F0}" />
+	<Property Id="XRefreshTypeLib" Value="{753A4046-6863-42AC-9C85-24468A489720}" />
+	<Property Id="XRefreshBHO_Interface" Value="{50AE34F6-670A-4807-B11A-8CA4C9136B10}" />
+	<Property Id="XRefreshHelperbar_Interface" Value="{A8FE27A6-2251-4A4B-8EAF-E5E2ABA4DC80}" />
+	<Property Id="XRefreshToolbar_Interface" Value="{36B7E346-E901-4EE9-B888-696D4C0BBF80}" />
+	
+	<Upgrade Id="3e4c3ec7-a32a-47a7-ad63-9c5464d0bc60">
+	  <UpgradeVersion Property="NEWERVERSIONDETECTED" Minimum="$(var.version)" OnlyDetect="yes" />
+	  <UpgradeVersion Property="PREVIOUSVERSIONSINSTALLED" Maximum="$(var.version)" IncludeMaximum="no" />
+	</Upgrade>
 
-    <PropertyRef Id="NETFRAMEWORK20"/>
-    <Condition Message="The .NET Framework 2.0 must be installed">
-       Installed OR NETFRAMEWORK20
-    </Condition>
-    
-    <Property Id="VERSIONIE">
-      <RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="raw" Win64="no"/>
-    </Property>
-    <Condition Message="[ProductName] needs at least Internet Explorer 5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
+	<PropertyRef Id="NETFRAMEWORK20"/>
+	<Condition Message="The .NET Framework 2.0 must be installed">
+	   Installed OR NETFRAMEWORK20
+	</Condition>
+	
+	<Property Id="VERSIONIE">
+	  <RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="raw" Win64="no"/>
+	</Property>
+	<Condition Message="[ProductName] needs at least Internet Explorer 5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
 
-    <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">VersionNT</Condition>
-    <Condition Message="[ProductName] requires Windows 2000 or later."><![CDATA[VersionNT >= 500]]></Condition>
-    
-    <!-- Execute Sequencing -->
-    <AdminExecuteSequence />
-    <InstallExecuteSequence>
-      <AppSearch Sequence="1"></AppSearch>
-      <LaunchConditions After="AppSearch"/>
-      <RemoveExistingProducts After="InstallValidate"><![CDATA[PREVIOUSVERSIONSINSTALLED OR (NOT NEWERVERSIONDETECTED)]]></RemoveExistingProducts>
-    </InstallExecuteSequence>
+	<Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">VersionNT</Condition>
+	<Condition Message="[ProductName] requires Windows 2000 or later."><![CDATA[VersionNT >= 500]]></Condition>
+	
+	<!-- Execute Sequencing -->
+	<AdminExecuteSequence />
+	<InstallExecuteSequence>
+	  <AppSearch Sequence="1"></AppSearch>
+	  <LaunchConditions After="AppSearch"/>
+	  <RemoveExistingProducts After="InstallValidate"><![CDATA[PREVIOUSVERSIONSINSTALLED OR (NOT NEWERVERSIONDETECTED)]]></RemoveExistingProducts>
+	</InstallExecuteSequence>
 
-    <Media Id="1" Cabinet="XRefresh.cab" EmbedCab="yes" CompressionLevel="high"/>
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLLOCATION" Name="XRefresh">
-          <!-- tuto sekci je nutne updatovat pri kazde zmene self registrace v rgs !!! => pouzij utitlitu heat.exe -->
-          <!-- AddonBinary (XRefreshAddon.dll) -->
-          <Component Id="AddonBinary" Guid="b05f0bfe-8eab-4703-bac0-98daf35d41f0">
-            <File Id="XRefreshAddon.dll" Name="XRefreshAddon.dll" DiskId="1" Vital="yes" Source="XRefreshAddon.dll">
-              <TypeLib Id="{753A4046-6863-42AC-9C85-24468A489720}" Description="XRefresh 1.0 Type Library" Language="0" MajorVersion="1" MinorVersion="0">
-                <AppId Id="{05B6ED58-9CB1-4270-82F7-30CCD8C4F8F0}" Description="XRefresh">
-                  <Class Id="{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}" Context="InprocServer32" Description="XRefresh Panel" ThreadingModel="apartment" Programmable="yes">
-                    <ProgId Id="XRefresh.XRefreshHelperbar.1" Description="XRefresh Panel">
-                      <ProgId Id="XRefresh.XRefreshHelperbar" Description="XRefresh Panel" />
-                    </ProgId>
-                  </Class>
-                  <Class Id="{551012C5-352D-48D9-9E29-E90F293D19F0}" Context="InprocServer32" Description="XRefresh Toolbar" ThreadingModel="apartment" Programmable="yes">
-                    <ProgId Id="XRefresh.XRefreshToolbar.1" Description="XRefresh Toolbar">
-                      <ProgId Id="XRefresh.XRefreshToolbar" Description="XRefresh Toolbar" />
-                    </ProgId>
-                  </Class>
-                  <Class Id="{8774C0B1-6697-43B8-8D0E-6179F48838B0}" Context="InprocServer32" Description="XRefresh BHO" ThreadingModel="apartment" Programmable="yes">
-                    <ProgId Id="XRefresh.XRefreshBHO.1" Description="XRefresh BHO">
-                      <ProgId Id="XRefresh.XRefreshBHO" Description="XRefresh BHO" />
-                    </ProgId>
-                  </Class>
-                </AppId>
-                <Interface Id="{A8FE27A6-2251-4A4B-8EAF-E5E2ABA4DC80}" Name="IXRefreshHelperbar" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                <Interface Id="{36B7E346-E901-4EE9-B888-696D4C0BBF80}" Name="IXRefreshToolbar" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                <Interface Id="{50AE34F6-670A-4807-B11A-8CA4C9136B10}" Name="IXRefreshBHO" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-              </TypeLib>
-            </File>
-            <!-- steps from XRefresh.rgs -->
-            <RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Value="[XRefreshHelperbar_CLSID]" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Name="NoExplorer" Value="1" Type="integer" Action="write" />
-            <RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Toolbar" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Toolbar" Name="[XRefreshToolbar_CLSID]" Value="XRefresh Toolbar" Type="string" Action="write" />
-            <RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Value="XRefresh Panel" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Name="BarSize" Value="4100000000000000" Type="binary" Action="write" />
-            <RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="BandCLSID" Value="[XRefreshHelperbar_CLSID]" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="ButtonText" Value="XRefresh" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="CLSID" Value="{E0DD6CAB-2D10-11D2-8F1A-0000F87ABD16}" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="Default Visible" Value="Yes" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="HotIcon" Value="[INSTALLLOCATION]XRefreshAddon.dll,214" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="Icon" Value="[INSTALLLOCATION]XRefreshAddon.dll,214" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="MenuStatusBar" Value="XRefresh Panel" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="MenuText" Value="XRefresh" Type="string" Action="write" />
-            <!-- steps from XRefreshHelperbar.rgs, which where not satisfied by typelib command -->
-            <RegistryValue Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]" Name="MenuText" Value="XRefresh Panel" Type="string" Action="write" />
-            <RegistryValue Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]" Name="HelpText" Value="Opens XRefresh Panel" Type="string" Action="write" />
-            <RegistryKey   Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]\Implemented Categories\{00021494-0000-0000-C000-000000000046}" Action="createAndRemoveOnUninstall" />
-          </Component>
+	<Media Id="1" Cabinet="XRefresh.cab" EmbedCab="yes" CompressionLevel="high"/>
+	<Directory Id="TARGETDIR" Name="SourceDir">
+	  <Directory Id="ProgramFilesFolder">
+		<Directory Id="INSTALLLOCATION" Name="XRefresh">
+		  <!-- tuto sekci je nutne updatovat pri kazde zmene self registrace v rgs !!! => pouzij utitlitu heat.exe -->
+		  <!-- AddonBinary (XRefreshAddon.dll) -->
+		  <Component Id="AddonBinary" Guid="b05f0bfe-8eab-4703-bac0-98daf35d41f0">
+			<File Id="XRefreshAddon.dll" Name="XRefreshAddon.dll" DiskId="1" Vital="yes" Source="XRefreshAddon.dll">
+			  <TypeLib Id="{753A4046-6863-42AC-9C85-24468A489720}" Description="XRefresh 1.0 Type Library" Language="0" MajorVersion="1" MinorVersion="0">
+				<AppId Id="{05B6ED58-9CB1-4270-82F7-30CCD8C4F8F0}" Description="XRefresh">
+				  <Class Id="{0A839FF4-F7CA-41E0-8EA1-F5E2913139D0}" Context="InprocServer32" Description="XRefresh Panel" ThreadingModel="apartment" Programmable="yes">
+					<ProgId Id="XRefresh.XRefreshHelperbar.1" Description="XRefresh Panel">
+					  <ProgId Id="XRefresh.XRefreshHelperbar" Description="XRefresh Panel" />
+					</ProgId>
+				  </Class>
+				  <Class Id="{551012C5-352D-48D9-9E29-E90F293D19F0}" Context="InprocServer32" Description="XRefresh Toolbar" ThreadingModel="apartment" Programmable="yes">
+					<ProgId Id="XRefresh.XRefreshToolbar.1" Description="XRefresh Toolbar">
+					  <ProgId Id="XRefresh.XRefreshToolbar" Description="XRefresh Toolbar" />
+					</ProgId>
+				  </Class>
+				  <Class Id="{8774C0B1-6697-43B8-8D0E-6179F48838B0}" Context="InprocServer32" Description="XRefresh BHO" ThreadingModel="apartment" Programmable="yes">
+					<ProgId Id="XRefresh.XRefreshBHO.1" Description="XRefresh BHO">
+					  <ProgId Id="XRefresh.XRefreshBHO" Description="XRefresh BHO" />
+					</ProgId>
+				  </Class>
+				</AppId>
+				<Interface Id="{A8FE27A6-2251-4A4B-8EAF-E5E2ABA4DC80}" Name="IXRefreshHelperbar" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+				<Interface Id="{36B7E346-E901-4EE9-B888-696D4C0BBF80}" Name="IXRefreshToolbar" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+				<Interface Id="{50AE34F6-670A-4807-B11A-8CA4C9136B10}" Name="IXRefreshBHO" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+			  </TypeLib>
+			</File>
+			<!-- steps from XRefresh.rgs -->
+			<RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Action="createAndRemoveOnUninstall" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Value="[XRefreshHelperbar_CLSID]" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\[XRefreshBHO_CLSID]" Name="NoExplorer" Value="1" Type="integer" Action="write" />
+			<RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Toolbar" Action="createAndRemoveOnUninstall" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Toolbar" Name="[XRefreshToolbar_CLSID]" Value="XRefresh Toolbar" Type="string" Action="write" />
+			<RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Action="createAndRemoveOnUninstall" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Value="XRefresh Panel" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Explorer Bars\[XRefreshHelperbar_CLSID]" Name="BarSize" Value="4100000000000000" Type="binary" Action="write" />
+			<RegistryKey   Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Action="createAndRemoveOnUninstall" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="BandCLSID" Value="[XRefreshHelperbar_CLSID]" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="ButtonText" Value="XRefresh" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="CLSID" Value="{E0DD6CAB-2D10-11D2-8F1A-0000F87ABD16}" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="Default Visible" Value="Yes" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="HotIcon" Value="[INSTALLLOCATION]XRefreshAddon.dll,214" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="Icon" Value="[INSTALLLOCATION]XRefreshAddon.dll,214" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="MenuStatusBar" Value="XRefresh Panel" Type="string" Action="write" />
+			<RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Extensions\[XRefreshBHO_CLSID]" Name="MenuText" Value="XRefresh" Type="string" Action="write" />
+			<!-- steps from XRefreshHelperbar.rgs, which where not satisfied by typelib command -->
+			<RegistryValue Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]" Name="MenuText" Value="XRefresh Panel" Type="string" Action="write" />
+			<RegistryValue Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]" Name="HelpText" Value="Opens XRefresh Panel" Type="string" Action="write" />
+			<RegistryKey   Root="HKCR" Key="CLSID\[XRefreshHelperbar_CLSID]\Implemented Categories\{00021494-0000-0000-C000-000000000046}" Action="createAndRemoveOnUninstall" />
+		  </Component>
 
-          <!-- Server Settings (registry) -->
-          <Component Id="ServerSettings" Guid="f16ac6bb-a125-4a11-9fe0-dabe741d2230">
-            <RegistryKey Root="HKLM" Key="Software\XRefresh" Action="create" />
-            <RegistryValue Root="HKLM" Key="Software\XRefresh" Value="[INSTALLLOCATION]" Type="string" Action="write" />
-          </Component>
+		  <!-- Server Settings (registry) -->
+		  <Component Id="ServerSettings" Guid="f16ac6bb-a125-4a11-9fe0-dabe741d2230">
+			<RegistryKey Root="HKCU" Key="Software\XRefresh" Action="create" />
+			<RegistryValue Root="HKCU" Key="Software\XRefresh" Value="[INSTALLLOCATION]" Type="string" Action="write" />
+		  </Component>
 
-          <!-- Addon Settings (registry) -->
-          <Component Id="AddonSettings" Guid="a16ac6cc-a325-4a11-9fe0-dabe741d2230">
-            <RegistryKey Root="HKLM" Key="Software\XRefresh\IEAddon" Action="createAndRemoveOnUninstall" />
-            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Host" Value="localhost" Type="string" Action="write" />
-            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Port" Value="41258" Type="integer" Action="write" />
-            <RegistryValue Root="HKLM" Key="Software\XRefresh\IEAddon" Name="Range" Value="16" Type="integer" Action="write" />
-          </Component>
+		  <!-- Addon Settings (registry) -->
+		  <Component Id="AddonSettings" Guid="a16ac6cc-a325-4a11-9fe0-dabe741d2230">
+			<RegistryKey Root="HKCU" Key="Software\XRefresh\IEAddon" Action="create" />
+			<RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Host" Value="localhost" Type="string" Action="write" />
+			<RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Port" Value="41258" Type="integer" Action="write" />
+			<RegistryValue Root="HKCU" Key="Software\XRefresh\IEAddon" Name="Range" Value="16" Type="integer" Action="write" />
+		  </Component>
 
-          <Directory Id="firefox" Name="Extension">
-            <Component Id="firefox" Guid="f16acccc-a125-4a11-9fe0-dabe741d2233">
-              <File Id="chrome.manifest" Name="chrome.manifest" Source="..\src\firefox\chrome.manifest" />
-              <File Id="install.rdf" Name="install.rdf" Source="..\src\firefox\install.rdf" />
-            </Component>
-            <Directory Id="defaults" Name="defaults">
-              <Directory Id="preferences" Name="preferences">
-                <Component Id="preferences" Guid="f16acccc-a125-4a11-9fe0-dabe741d2236">
-                  <File Id="xrefresh.js" Name="xrefresh.js" Source="..\src\firefox\defaults\preferences\xrefresh.js" />
-                </Component>
-              </Directory>
-            </Directory>
-            <Directory Id="chrome" Name="chrome">
-              <Directory Id="content" Name="content">
-                <Component Id="content" Guid="f16acccc-a125-4a11-9fe0-dabe741d2235">
-                  <File Id="overlay.xul" Name="overlay.xul" Source="..\src\firefox\chrome\content\overlay.xul" />
-                  <File Id="panel.js" Name="panel.js" Source="..\src\firefox\chrome\content\panel.js" />
-                </Component>
-                <Directory Id="casper" Name="casper">
-                  <Component Id="casper" Guid="f16acccc-a125-4a11-9fe0-dabe741d2234">
-                    <File Id="events.js" Name="events.js" Source="..\src\firefox\chrome\content\casper\events.js" />
-                    <File Id="json.js" Name="json.js" Source="..\src\firefox\chrome\content\casper\json.js" />
-                    <File Id="logger.js" Name="logger.js" Source="..\src\firefox\chrome\content\casper\logger.js" />
-                    <File Id="xpath.js" Name="xpath.js" Source="..\src\firefox\chrome\content\casper\xpath.js" />
-                  </Component>
-                </Directory>
-                <Directory Id="lib" Name="lib">
-                  <Component Id="lib" Guid="f16acccc-a125-4a11-9fe0-dabe741d2232">
-                    <File Id="utf8.js" Name="utf8.js" Source="..\src\firefox\chrome\content\lib\utf8.js" />
-                  </Component>
-                </Directory>
-              </Directory>
-              <Directory Id="skin" Name="skin">
-                <Component Id="skin" Guid="f16acccc-a125-4a11-9fe0-dabe741d2231">
-                  <File Id="accept.png" Name="accept.png" Source="..\src\firefox\chrome\skin\accept.png" />
-                  <File Id="connect.png" Name="connect.png" Source="..\src\firefox\chrome\skin\connect.png" />
-                  <File Id="connect_btn.png" Name="connect_btn.png" Source="..\src\firefox\chrome\skin\connect_btn.png" />
-                  <File Id="control_pause.png" Name="control_pause.png" Source="..\src\firefox\chrome\skin\control_pause.png" />
-                  <File Id="control_pause_blue.png" Name="control_pause_blue.png" Source="..\src\firefox\chrome\skin\control_pause_blue.png" />
-                  <File Id="control_play.png" Name="control_play.png" Source="..\src\firefox\chrome\skin\control_play.png" />
-                  <File Id="control_play_blue.png" Name="control_play_blue.png" Source="..\src\firefox\chrome\skin\control_play_blue.png" />
-                  <File Id="control_rec.png" Name="control_rec.png" Source="..\src\firefox\chrome\skin\control_rec.png" />
-                  <File Id="control_repeat.png" Name="control_repeat.png" Source="..\src\firefox\chrome\skin\control_repeat.png" />
-                  <File Id="control_repeat_blue.png" Name="control_repeat_blue.png" Source="..\src\firefox\chrome\skin\control_repeat_blue.png" />
-                  <File Id="control_start.png" Name="control_start.png" Source="..\src\firefox\chrome\skin\control_start.png" />
-                  <File Id="control_start_blue.png" Name="control_start_blue.png" Source="..\src\firefox\chrome\skin\control_start_blue.png" />
-                  <File Id="control_stop.png" Name="control_stop.png" Source="..\src\firefox\chrome\skin\control_stop.png" />
-                  <File Id="control_stop_blue.png" Name="control_stop_blue.png" Source="..\src\firefox\chrome\skin\control_stop_blue.png" />
-                  <File Id="disconnect.png" Name="disconnect.png" Source="..\src\firefox\chrome\skin\disconnect.png" />
-                  <File Id="disconnect_btn.png" Name="disconnect_btn.png" Source="..\src\firefox\chrome\skin\disconnect_btn.png" />
-                  <File Id="error.png" Name="error.png" Source="..\src\firefox\chrome\skin\error.png" />
-                  <File Id="folder_activity.png" Name="folder_activity.png" Source="..\src\firefox\chrome\skin\folder_activity.png" />
-                  <File Id="folder_refresh.png" Name="folder_refresh.png" Source="..\src\firefox\chrome\skin\folder_refresh.png" />
-                  <File Id="group.gif" Name="group.gif" Source="..\src\firefox\chrome\skin\group.gif" />
-                  <File Id="icon.png" Name="icon.png" Source="..\src\firefox\chrome\skin\icon.png" />
-                  <File Id="info.png" Name="info.png" Source="..\src\firefox\chrome\skin\info.png" />
-                  <File Id="lightbulb.png" Name="lightbulb.png" Source="..\src\firefox\chrome\skin\lightbulb.png" />
-                  <File Id="loading_16.gif" Name="loading_16.gif" Source="..\src\firefox\chrome\skin\loading_16.gif" />
-                  <File Id="mini_created.png" Name="mini_created.png" Source="..\src\firefox\chrome\skin\mini_created.png" />
-                  <File Id="mini_deleted.png" Name="mini_deleted.png" Source="..\src\firefox\chrome\skin\mini_deleted.png" />
-                  <File Id="mini_changed.png" Name="mini_changed.png" Source="..\src\firefox\chrome\skin\mini_changed.png" />
-                  <File Id="mini_renamed.png" Name="mini_renamed.png" Source="..\src\firefox\chrome\skin\mini_renamed.png" />
-                  <File Id="xrefresh.png" Name="xrefresh.png" Source="..\src\firefox\chrome\skin\xrefresh.png" />
-                  <File Id="xrefresha.png" Name="xrefresha.png" Source="..\src\firefox\chrome\skin\xrefresha.png" />
-                  <File Id="xrefreshg.png" Name="xrefreshg.png" Source="..\src\firefox\chrome\skin\xrefreshg.png" />
-                  <File Id="panel.css" Name="panel.css" Source="..\src\firefox\chrome\skin\panel.css" />
-                  <File Id="refresh.png" Name="refresh.png" Source="..\src\firefox\chrome\skin\refresh.png" />
-                  <File Id="statusblue.png" Name="status-blue.png" Source="..\src\firefox\chrome\skin\status-blue.png" />
-                  <File Id="statusgray.png" Name="status-gray.png" Source="..\src\firefox\chrome\skin\status-gray.png" />
-                  <File Id="statusgreen.png" Name="status-green.png" Source="..\src\firefox\chrome\skin\status-green.png" />
-                  <File Id="statusred.png" Name="status-red.png" Source="..\src\firefox\chrome\skin\status-red.png" />
-                  <File Id="stop.png" Name="stop.png" Source="..\src\firefox\chrome\skin\stop.png" />
-                  <File Id="twistyClosed.png" Name="twistyClosed.png" Source="..\src\firefox\chrome\skin\twistyClosed.png" />
-                  <File Id="twistyOpen.png" Name="twistyOpen.png" Source="..\src\firefox\chrome\skin\twistyOpen.png" />
-                  <File Id="warn.png" Name="warn.png" Source="..\src\firefox\chrome\skin\warn.png" />
-                </Component>
-              </Directory>
-            </Directory>
-          </Directory>
+		  <Directory Id="firefox" Name="Extension">
+			<Component Id="firefox" Guid="f16acccc-a125-4a11-9fe0-dabe741d2233">
+			  <File Id="chrome.manifest" Name="chrome.manifest" Source="..\src\firefox\chrome.manifest" />
+			  <File Id="install.rdf" Name="install.rdf" Source="..\src\firefox\install.rdf" />
+			</Component>
+			<Directory Id="defaults" Name="defaults">
+			  <Directory Id="preferences" Name="preferences">
+				<Component Id="preferences" Guid="f16acccc-a125-4a11-9fe0-dabe741d2236">
+				  <File Id="xrefresh.js" Name="xrefresh.js" Source="..\src\firefox\defaults\preferences\xrefresh.js" />
+				</Component>
+			  </Directory>
+			</Directory>
+			<Directory Id="chrome" Name="chrome">
+			  <Directory Id="content" Name="content">
+				<Component Id="content" Guid="f16acccc-a125-4a11-9fe0-dabe741d2235">
+				  <File Id="overlay.xul" Name="overlay.xul" Source="..\src\firefox\chrome\content\overlay.xul" />
+				  <File Id="panel.js" Name="panel.js" Source="..\src\firefox\chrome\content\panel.js" />
+				</Component>
+				<Directory Id="casper" Name="casper">
+				  <Component Id="casper" Guid="f16acccc-a125-4a11-9fe0-dabe741d2234">
+					<File Id="events.js" Name="events.js" Source="..\src\firefox\chrome\content\casper\events.js" />
+					<File Id="json.js" Name="json.js" Source="..\src\firefox\chrome\content\casper\json.js" />
+					<File Id="logger.js" Name="logger.js" Source="..\src\firefox\chrome\content\casper\logger.js" />
+					<File Id="xpath.js" Name="xpath.js" Source="..\src\firefox\chrome\content\casper\xpath.js" />
+				  </Component>
+				</Directory>
+				<Directory Id="lib" Name="lib">
+				  <Component Id="lib" Guid="f16acccc-a125-4a11-9fe0-dabe741d2232">
+					<File Id="utf8.js" Name="utf8.js" Source="..\src\firefox\chrome\content\lib\utf8.js" />
+				  </Component>
+				</Directory>
+			  </Directory>
+			  <Directory Id="skin" Name="skin">
+				<Component Id="skin" Guid="f16acccc-a125-4a11-9fe0-dabe741d2231">
+				  <File Id="accept.png" Name="accept.png" Source="..\src\firefox\chrome\skin\accept.png" />
+				  <File Id="connect.png" Name="connect.png" Source="..\src\firefox\chrome\skin\connect.png" />
+				  <File Id="connect_btn.png" Name="connect_btn.png" Source="..\src\firefox\chrome\skin\connect_btn.png" />
+				  <File Id="control_pause.png" Name="control_pause.png" Source="..\src\firefox\chrome\skin\control_pause.png" />
+				  <File Id="control_pause_blue.png" Name="control_pause_blue.png" Source="..\src\firefox\chrome\skin\control_pause_blue.png" />
+				  <File Id="control_play.png" Name="control_play.png" Source="..\src\firefox\chrome\skin\control_play.png" />
+				  <File Id="control_play_blue.png" Name="control_play_blue.png" Source="..\src\firefox\chrome\skin\control_play_blue.png" />
+				  <File Id="control_rec.png" Name="control_rec.png" Source="..\src\firefox\chrome\skin\control_rec.png" />
+				  <File Id="control_repeat.png" Name="control_repeat.png" Source="..\src\firefox\chrome\skin\control_repeat.png" />
+				  <File Id="control_repeat_blue.png" Name="control_repeat_blue.png" Source="..\src\firefox\chrome\skin\control_repeat_blue.png" />
+				  <File Id="control_start.png" Name="control_start.png" Source="..\src\firefox\chrome\skin\control_start.png" />
+				  <File Id="control_start_blue.png" Name="control_start_blue.png" Source="..\src\firefox\chrome\skin\control_start_blue.png" />
+				  <File Id="control_stop.png" Name="control_stop.png" Source="..\src\firefox\chrome\skin\control_stop.png" />
+				  <File Id="control_stop_blue.png" Name="control_stop_blue.png" Source="..\src\firefox\chrome\skin\control_stop_blue.png" />
+				  <File Id="disconnect.png" Name="disconnect.png" Source="..\src\firefox\chrome\skin\disconnect.png" />
+				  <File Id="disconnect_btn.png" Name="disconnect_btn.png" Source="..\src\firefox\chrome\skin\disconnect_btn.png" />
+				  <File Id="error.png" Name="error.png" Source="..\src\firefox\chrome\skin\error.png" />
+				  <File Id="folder_activity.png" Name="folder_activity.png" Source="..\src\firefox\chrome\skin\folder_activity.png" />
+				  <File Id="folder_refresh.png" Name="folder_refresh.png" Source="..\src\firefox\chrome\skin\folder_refresh.png" />
+				  <File Id="group.gif" Name="group.gif" Source="..\src\firefox\chrome\skin\group.gif" />
+				  <File Id="icon.png" Name="icon.png" Source="..\src\firefox\chrome\skin\icon.png" />
+				  <File Id="info.png" Name="info.png" Source="..\src\firefox\chrome\skin\info.png" />
+				  <File Id="lightbulb.png" Name="lightbulb.png" Source="..\src\firefox\chrome\skin\lightbulb.png" />
+				  <File Id="loading_16.gif" Name="loading_16.gif" Source="..\src\firefox\chrome\skin\loading_16.gif" />
+				  <File Id="mini_created.png" Name="mini_created.png" Source="..\src\firefox\chrome\skin\mini_created.png" />
+				  <File Id="mini_deleted.png" Name="mini_deleted.png" Source="..\src\firefox\chrome\skin\mini_deleted.png" />
+				  <File Id="mini_changed.png" Name="mini_changed.png" Source="..\src\firefox\chrome\skin\mini_changed.png" />
+				  <File Id="mini_renamed.png" Name="mini_renamed.png" Source="..\src\firefox\chrome\skin\mini_renamed.png" />
+				  <File Id="xrefresh.png" Name="xrefresh.png" Source="..\src\firefox\chrome\skin\xrefresh.png" />
+				  <File Id="xrefresha.png" Name="xrefresha.png" Source="..\src\firefox\chrome\skin\xrefresha.png" />
+				  <File Id="xrefreshg.png" Name="xrefreshg.png" Source="..\src\firefox\chrome\skin\xrefreshg.png" />
+				  <File Id="panel.css" Name="panel.css" Source="..\src\firefox\chrome\skin\panel.css" />
+				  <File Id="refresh.png" Name="refresh.png" Source="..\src\firefox\chrome\skin\refresh.png" />
+				  <File Id="statusblue.png" Name="status-blue.png" Source="..\src\firefox\chrome\skin\status-blue.png" />
+				  <File Id="statusgray.png" Name="status-gray.png" Source="..\src\firefox\chrome\skin\status-gray.png" />
+				  <File Id="statusgreen.png" Name="status-green.png" Source="..\src\firefox\chrome\skin\status-green.png" />
+				  <File Id="statusred.png" Name="status-red.png" Source="..\src\firefox\chrome\skin\status-red.png" />
+				  <File Id="stop.png" Name="stop.png" Source="..\src\firefox\chrome\skin\stop.png" />
+				  <File Id="twistyClosed.png" Name="twistyClosed.png" Source="..\src\firefox\chrome\skin\twistyClosed.png" />
+				  <File Id="twistyOpen.png" Name="twistyOpen.png" Source="..\src\firefox\chrome\skin\twistyOpen.png" />
+				  <File Id="warn.png" Name="warn.png" Source="..\src\firefox\chrome\skin\warn.png" />
+				</Component>
+			  </Directory>
+			</Directory>
+		  </Directory>
 
-          <Component Id="FirefoxExt" Guid="a16ac6cc-a325-4a11-1fe8-dabe741d2230">
-            <RegistryValue Root="HKLM" Key="Software\Mozilla\Firefox\Extensions" Name="xrefresh@xrefresh.com" Value="[INSTALLLOCATION]Extension" Type="string" Action="write" />
-          </Component>
+		  <Component Id="FirefoxExt" Guid="a16ac6cc-a325-4a11-1fe8-dabe741d2230">
+			<RegistryValue Root="HKCU" Key="Software\Mozilla\Firefox\Extensions" Name="xrefresh@xrefresh.com" Value="[INSTALLLOCATION]Extension" Type="string" Action="write" />
+		  </Component>
 
 			<Component Id="XRefreshFiles" Guid="b13ac6cc-a325-4a11-1fe8-dabe741d2230">
 				<File Id="License.txt" Name="License.txt" DiskId="1" Source="../License.txt" Vital="no" />
@@ -216,14 +216,14 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 				<File Id="Help.html" Name="Help.html" DiskId="1" Source="../Help.html" Vital="no"/>
 				<File Id="Website.url" Name="Website.url" DiskId="1" Source="../Website.url" Vital="no"/>
 			</Component>
-          
-          <Component Id="ServerBinary" Guid="b22ac6cc-a325-4a11-1fe8-dabe741d2230">
+		  
+		  <Component Id="ServerBinary" Guid="b22ac6cc-a325-4a11-1fe8-dabe741d2230">
 			  <File Id="XRefresh.exe" Name="XRefresh.exe" DiskId="1" Source="../bin/XRefresh.exe" Vital="yes">
 				  <Shortcut Id="XRefreshEXE" Directory="IDProgramGroup" Name="XRefresh" Advertise="yes" Description="XRefresh Monitor executable" />
 			  </File>
 			</Component>
-        </Directory>
-      </Directory>
+		</Directory>
+	  </Directory>
 
 		<Directory Id='ProgramMenuFolder' Name='ProgramMenuFolder'>
 			<Directory Id='IDProgramGroup' Name='XRefresh'>
@@ -243,78 +243,78 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 	</Directory>
 
 	  <CustomAction 
-       Id="LaunchMonitor" 
-       Directory="INSTALLLOCATION" 
-       ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
-       Return="asyncNoWait" /> 
+	   Id="LaunchMonitor" 
+	   Directory="INSTALLLOCATION" 
+	   ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
+	   Return="asyncNoWait" /> 
 
-      <CustomAction 
-       Id="OpenHelp" 
-       Directory="INSTALLLOCATION" 
-       ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
-       Return="asyncNoWait" /> 
-       
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX">1</Property>
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch XRefresh Monitor" />
-    <UI>
-      <UIRef Id="WixUI_Mondo" />
-      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchMonitor" Order="1">NOT Installed AND WIXUI_EXITDIALOGOPTIONALCHECKBOX</Publish>
-    </UI>
+	  <CustomAction 
+	   Id="OpenHelp" 
+	   Directory="INSTALLLOCATION" 
+	   ExeCommand="[INSTALLLOCATION]XRefresh.exe" 
+	   Return="asyncNoWait" /> 
+	   
+	<Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX">1</Property>
+	<Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch XRefresh Monitor" />
+	<UI>
+	  <UIRef Id="WixUI_Mondo" />
+	  <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchMonitor" Order="1">NOT Installed AND WIXUI_EXITDIALOGOPTIONALCHECKBOX</Publish>
+	</UI>
   
-    <Feature Id="Server"
-             Title="XRefresh Monitor"
-             Absent="allow"
-             Level="1"
-             Display="expand"
-             Description="XRefresh filesystem Monitor. This is little traybar application watching for changes in your web projects."
-             ConfigurableDirectory="INSTALLLOCATION" >
-      <ComponentRef Id="ServerBinary" />
+	<Feature Id="Server"
+			 Title="XRefresh Monitor"
+			 Absent="allow"
+			 Level="1"
+			 Display="expand"
+			 Description="XRefresh filesystem Monitor. This is little traybar application watching for changes in your web projects."
+			 ConfigurableDirectory="INSTALLLOCATION" >
+	  <ComponentRef Id="ServerBinary" />
 		<ComponentRef Id="IDProgramGroup" />
 		<ComponentRef Id="ServerSettings" />
-      <ComponentRef Id="XRefreshFiles" />
-      
-    </Feature>
+	  <ComponentRef Id="XRefreshFiles" />
+	  
+	</Feature>
 
-    <Feature Id="Addon"
-             Title="Addon for Internet Explorer"
-             Absent="allow"
-             Level="1"
-             Display="expand"
-             Description="Addon for Internet Explorer. This tool is able to refresh the browser when requested by XRefresh Monitor."
-             ConfigurableDirectory="INSTALLLOCATION" >
-      <ComponentRef Id="AddonBinary" />
+	<Feature Id="Addon"
+			 Title="Addon for Internet Explorer"
+			 Absent="allow"
+			 Level="1"
+			 Display="expand"
+			 Description="Addon for Internet Explorer. This tool is able to refresh the browser when requested by XRefresh Monitor."
+			 ConfigurableDirectory="INSTALLLOCATION" >
+	  <ComponentRef Id="AddonBinary" />
 		<ComponentRef Id="IDProgramGroup" />
 		<ComponentRef Id="AddonSettings" />
-      <ComponentRef Id="XRefreshFiles" />
-    </Feature>
+	  <ComponentRef Id="XRefreshFiles" />
+	</Feature>
 
-    <Feature Id="Extension"
-             Title="Extension for Firefox"
-             Absent="allow"
-             Level="1"
-             Display="expand"
-             Description="Extension for Mozilla Firefox. This tool is able to refresh the browser when requested by XRefresh Monitor."
-             ConfigurableDirectory="INSTALLLOCATION" >
-      <ComponentRef Id="FirefoxExt" />
+	<Feature Id="Extension"
+			 Title="Extension for Firefox"
+			 Absent="allow"
+			 Level="1"
+			 Display="expand"
+			 Description="Extension for Mozilla Firefox. This tool is able to refresh the browser when requested by XRefresh Monitor."
+			 ConfigurableDirectory="INSTALLLOCATION" >
+	  <ComponentRef Id="FirefoxExt" />
 	<ComponentRef Id="XRefreshFiles" />
 	<ComponentRef Id="IDProgramGroup" />
 		<ComponentRef Id="firefox" />
-      <ComponentRef Id="skin" />
-      <ComponentRef Id="lib" />
-      <ComponentRef Id="content" />
-      <ComponentRef Id="casper" />
-      <ComponentRef Id="preferences" />
-    </Feature>
+	  <ComponentRef Id="skin" />
+	  <ComponentRef Id="lib" />
+	  <ComponentRef Id="content" />
+	  <ComponentRef Id="casper" />
+	  <ComponentRef Id="preferences" />
+	</Feature>
 
-    <UIRef Id="WixUI_Mondo" />
-    <UIRef Id="WixUI_ErrorProgressText" />
+	<UIRef Id="WixUI_Mondo" />
+	<UIRef Id="WixUI_ErrorProgressText" />
 
-    <Property Id='ARPCONTACT'>antonin@hildebrand.cz</Property>
-    <Property Id='ARPHELPLINK'>http://xrefresh.com/help</Property>
-    <Property Id='ARPURLINFOABOUT'>http://xrefresh.com</Property>
-    <Property Id='ARPURLUPDATEINFO'>http://xrefresh.com/download</Property>
-    <Property Id='ARPSIZE'>800</Property>
-    <Property Id='ARPPRODUCTICON'>XRefreshIcon</Property>
-    <Icon Id="XRefreshIcon" SourceFile="../bin/XRefresh.exe" />
+	<Property Id='ARPCONTACT'>antonin@hildebrand.cz</Property>
+	<Property Id='ARPHELPLINK'>http://xrefresh.com/help</Property>
+	<Property Id='ARPURLINFOABOUT'>http://xrefresh.com</Property>
+	<Property Id='ARPURLUPDATEINFO'>http://xrefresh.com/download</Property>
+	<Property Id='ARPSIZE'>800</Property>
+	<Property Id='ARPPRODUCTICON'>XRefreshIcon</Property>
+	<Icon Id="XRefreshIcon" SourceFile="../bin/XRefresh.exe" />
   </Product>
 </Wix>
