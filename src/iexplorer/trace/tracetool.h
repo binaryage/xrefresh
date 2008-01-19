@@ -5,7 +5,7 @@
 //
 // HomePage :  http://www.codeproject.com/csharp/TraceTool.asp
 // Download :  http://sourceforge.net/projects/tracetool/
-// See License.txt for license information (GPL)
+// See License.txt for license information
 
 #pragma once
 

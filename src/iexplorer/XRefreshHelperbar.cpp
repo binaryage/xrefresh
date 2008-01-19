@@ -6,7 +6,7 @@
 #include "BrowserManager.h"
 #include "Module.h"
 
-#include "Debug.h"
+//#include "Debug.h"
 
 // CXRefreshHelperbar
 CXRefreshHelperbar::CXRefreshHelperbar():

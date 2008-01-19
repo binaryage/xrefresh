@@ -6,7 +6,7 @@
 #include "Module.h"
 #include "XRefreshHelperbar.h"
 
-#include "Debug.h"
+//#include "Debug.h"
 
 CToolWindow CXRefreshBHO::m_IE7ToolWindow;
 

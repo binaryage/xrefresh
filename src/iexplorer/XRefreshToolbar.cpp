@@ -9,7 +9,7 @@
 #include "BrowserManager.h"
 #include "XRefreshBHO.h"
 
-#include "Debug.h"
+//#include "Debug.h"
 
 const wchar_t *g_wcToolbarWindowText = _T("XRefreshToolbarWindow");
 
