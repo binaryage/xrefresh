@@ -29,6 +29,7 @@ const int IDC_TOOLBUTTON                          = 1;
 const int IDC_DISABLEBUTTON                       = 2;
 
 #define PRODUCT_ID_TEXT                           _T("44386A7B-7093-4FDC-8B52-5F7E8B968960")
+#define IS_BETA                                   1
 
 // system script IDs
 #define REGISTRY_ROOT_KEY                         _T("Software\\XRefresh\\")

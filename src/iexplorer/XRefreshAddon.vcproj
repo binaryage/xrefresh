@@ -440,7 +440,15 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath=".\res\about.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\aboutbox.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\allowed.bmp"
 				>
 			</File>
 			<File
@@ -452,7 +460,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\homepage.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\icons.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\ListItems.bmp"
 				>
 			</File>
 			<File
@@ -484,11 +500,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\XRefreshBHO.rgs"
+				>
+			</File>
+			<File
 				RelativePath=".\res\XRefreshD.ico"
 				>
 			</File>
 			<File
+				RelativePath=".\XRefreshHelperbar.rgs"
+				>
+			</File>
+			<File
 				RelativePath=".\res\XRefreshS.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\XRefreshToolbar.rgs"
 				>
 			</File>
 		</Filter>

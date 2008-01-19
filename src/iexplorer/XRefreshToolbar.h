@@ -96,6 +96,7 @@ protected:
 
 	int                                           m_iToolbarHeight;
 	CImageList                                    m_kImageList;
+	CBitmap                                       m_ToolbarBitmap;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(XRefreshToolbar), CXRefreshToolbar)

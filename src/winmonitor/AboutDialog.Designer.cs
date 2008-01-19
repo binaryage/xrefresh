@@ -32,8 +32,6 @@ namespace XRefresh
 			this.panelTop = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelVersion = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelDevider = new System.Windows.Forms.Panel();
 			this.labelStat1 = new System.Windows.Forms.Label();
 			this.buttonOK = new System.Windows.Forms.Button();
@@ -55,10 +53,8 @@ namespace XRefresh
 			// panelTop
 			// 
 			this.panelTop.BackColor = System.Drawing.SystemColors.Window;
-			this.panelTop.Controls.Add(this.pictureBox1);
 			this.panelTop.Controls.Add(this.labelVersion);
-			this.panelTop.Controls.Add(this.label2);
-			this.panelTop.Controls.Add(this.labelTitle);
+			this.panelTop.Controls.Add(this.pictureBox1);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.Location = new System.Drawing.Point(0, 0);
 			this.panelTop.Name = "panelTop";
@@ -67,10 +63,10 @@ namespace XRefresh
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Image = global::XRefresh.Properties.Resources.icon;
-			this.pictureBox1.Location = new System.Drawing.Point(15, 18);
+			this.pictureBox1.Image = global::XRefresh.Properties.Resources.AboutBox;
+			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+			this.pictureBox1.Size = new System.Drawing.Size(425, 63);
 			this.pictureBox1.TabIndex = 4;
 			this.pictureBox1.TabStop = false;
 			// 
@@ -79,28 +75,9 @@ namespace XRefresh
 			this.labelVersion.AutoSize = true;
 			this.labelVersion.Location = new System.Drawing.Point(172, 9);
 			this.labelVersion.Name = "labelVersion";
-			this.labelVersion.Size = new System.Drawing.Size(0, 13);
+			this.labelVersion.Size = new System.Drawing.Size(35, 13);
 			this.labelVersion.TabIndex = 3;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(49, 9);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(136, 31);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "XRefresh";
-			// 
-			// labelTitle
-			// 
-			this.labelTitle.AutoSize = true;
-			this.labelTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelTitle.Location = new System.Drawing.Point(53, 40);
-			this.labelTitle.Name = "labelTitle";
-			this.labelTitle.Size = new System.Drawing.Size(165, 13);
-			this.labelTitle.TabIndex = 0;
-			this.labelTitle.Text = "automagical browser refresh tool";
+			this.labelVersion.Text = "BETA";
 			// 
 			// panelDevider
 			// 
@@ -115,7 +92,7 @@ namespace XRefresh
 			// 
 			this.labelStat1.AutoSize = true;
 			this.labelStat1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelStat1.ForeColor = System.Drawing.Color.IndianRed;
+			this.labelStat1.ForeColor = System.Drawing.Color.ForestGreen;
 			this.labelStat1.Location = new System.Drawing.Point(12, 82);
 			this.labelStat1.Name = "labelStat1";
 			this.labelStat1.Size = new System.Drawing.Size(342, 14);
@@ -170,7 +147,7 @@ namespace XRefresh
 			this.linkLabelContact.AutoSize = true;
 			this.linkLabelContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
 			this.linkLabelContact.LinkColor = System.Drawing.Color.RoyalBlue;
-			this.linkLabelContact.Location = new System.Drawing.Point(100, 213);
+			this.linkLabelContact.Location = new System.Drawing.Point(129, 213);
 			this.linkLabelContact.Name = "linkLabelContact";
 			this.linkLabelContact.Size = new System.Drawing.Size(97, 13);
 			this.linkLabelContact.TabIndex = 11;
@@ -204,7 +181,7 @@ namespace XRefresh
 			// 
 			this.labelStat2.AutoSize = true;
 			this.labelStat2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelStat2.ForeColor = System.Drawing.Color.IndianRed;
+			this.labelStat2.ForeColor = System.Drawing.Color.ForestGreen;
 			this.labelStat2.Location = new System.Drawing.Point(12, 99);
 			this.labelStat2.Name = "labelStat2";
 			this.labelStat2.Size = new System.Drawing.Size(344, 14);
@@ -240,9 +217,9 @@ namespace XRefresh
 			this.label6.ForeColor = System.Drawing.Color.DarkGray;
 			this.label6.Location = new System.Drawing.Point(12, 213);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(91, 14);
+			this.label6.Size = new System.Drawing.Size(119, 14);
 			this.label6.TabIndex = 18;
-			this.label6.Text = "Copyright © 2007";
+			this.label6.Text = "Copyright © 2007-2008";
 			// 
 			// label7
 			// 
@@ -300,10 +277,8 @@ namespace XRefresh
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Panel panelDevider;
 		private System.Windows.Forms.Label labelStat1;
-        private System.Windows.Forms.Button buttonOK;
-        internal System.Windows.Forms.Label labelTitle;
-        internal System.Windows.Forms.LinkLabel linkLabelSite;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button buttonOK;
+		internal System.Windows.Forms.LinkLabel linkLabelSite;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelThanks;

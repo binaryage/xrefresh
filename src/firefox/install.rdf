@@ -17,7 +17,7 @@
 		</em:targetApplication>
 
 		<em:name>XRefresh</em:name>
-		<em:description>Automagical refresh tool for web developers</em:description>
+		<em:description>Browser refresh automation for web developers</em:description>
 		<em:creator>Antonin Hildebrand</em:creator>
 		<em:homepageURL>http://xrefresh.com</em:homepageURL>
 		<!--<em:optionsURL>chrome://xrefresh/content/settings.xul</em:optionsURL>-->

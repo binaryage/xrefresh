@@ -23,22 +23,15 @@ m_iToolbarHeight(22)
 	InitRoot();
 	DT(TRACE_I(FS(_T("Toolbar[%08X]: constructor"), this)));
 
-	CBitmap toolbar;
-	toolbar.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
-	if (toolbar.IsNull()) throw CXRefreshWindowsError(GetLastError());
-
-	CBitmap mask;
-	mask.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
-	if (mask.IsNull()) throw CXRefreshWindowsError(GetLastError());
-
-	CDPIHelper::ScaleBitmap(toolbar);
-	CDPIHelper::ScaleBitmap(mask);
+	m_ToolbarBitmap.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
+	if (m_ToolbarBitmap.IsNull()) throw CXRefreshWindowsError(GetLastError());
+	CDPIHelper::ScaleBitmap(m_ToolbarBitmap);
 
 	int width = (int)CDPIHelper::ScaleX(16);
 	int height = (int)CDPIHelper::ScaleY(16);
 	m_kImageList.Create(width, height, ILC_COLOR24 | ILC_MASK, 3, 3);
 	if (m_kImageList.IsNull()) throw CXRefreshWindowsError(GetLastError());
-	if (m_kImageList.Add(toolbar, mask) == -1) throw CXRefreshWindowsError(GetLastError());
+	if (m_kImageList.Add(m_ToolbarBitmap, m_ToolbarBitmap) == -1) throw CXRefreshWindowsError(GetLastError());
 }
 
 CXRefreshToolbar::~CXRefreshToolbar()

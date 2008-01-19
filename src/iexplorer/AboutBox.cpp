@@ -46,7 +46,11 @@ CAboutBox::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	dllVerInfo.cbSize  = sizeof(DLLVERSIONINFO);
 	DllGetVersion(GetBaseModule().GetModuleInstance(), &dllVerInfo);
 	TCHAR version[100];
+#ifdef IS_BETA
+	_stprintf_s(version, _T("BETA %d.%d"), dllVerInfo.dwMajorVersion, dllVerInfo.dwMinorVersion);
+#else
 	_stprintf_s(version, _T("%d.%d"), dllVerInfo.dwMajorVersion, dllVerInfo.dwMinorVersion);
+#endif
 	m_Version.SetWindowText(version);
 	m_Version.Invalidate();
 

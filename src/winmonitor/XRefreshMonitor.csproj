@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{25C4E083-5741-477B-A153-D0C24F80C245}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -516,6 +516,7 @@
     <None Include="Icons\Bug.png" />
     <None Include="Icons\Cancel.png" />
     <None Include="Icons\Add.png" />
+    <None Include="Icons\AboutBox.bmp" />
     <Content Include="Icons\Drive.ico" />
     <None Include="Icons\icon.png" />
     <None Include="Icons\XRefreshIgnore.ico" />

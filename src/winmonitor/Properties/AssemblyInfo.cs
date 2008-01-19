@@ -7,11 +7,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("XRefresh")]
-[assembly: AssemblyDescription("Automagical browser refresh tool")]
+[assembly: AssemblyDescription("Browser refresh automation for web developers")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("xrefresh.com")]
 [assembly: AssemblyProduct("XRefresh")]
-[assembly: AssemblyCopyright("Copyright © 2007 Antonin Hildebrand")]
+[assembly: AssemblyCopyright("Copyright © 2007-2008 Antonin Hildebrand")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
