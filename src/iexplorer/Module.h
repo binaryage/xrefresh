@@ -1,16 +1,10 @@
 #pragma once
 
 // resource accessors
-#define ServicesLock                              CResourceLock<CServices> 
 #define BrowserManagerLock                        CResourceLock<CBrowserManager> 
-#define DialogManagerLock                         CResourceLock<CDialogManager> 
-
-#define ResourceUnlock(rid)                       CResourceUnlock<rid> __unlocker__##rid;
 
 enum ESharedResourceId {
-	SR_SERVICES,
 	SR_BROWSERMANAGER,
-	SR_DIALOGMANAGER,
 	SR_LAST
 };
 
@@ -54,17 +48,6 @@ protected:
 };
 
 //////////////////////////////////////////////////////////////////////////
-// CResourceUnlock
-template <ESharedResourceId rid> 
-class CResourceUnlock {
-public:
-	CResourceUnlock(): m_Count(GetRoot().ReleaseAll(rid)) {}
-	~CResourceUnlock() { GetRoot().AcquireMany(rid, m_Count); }
-
-	int                                           m_Count;
-};
-
-//////////////////////////////////////////////////////////////////////////
 // CXRefreshRoot
 class CXRefreshRoot {
 public:
@@ -74,9 +57,6 @@ public:
 	virtual void                                  Release(ESharedResourceId rid) = 0;
 
 	virtual bool                                  CheckThreadOwnership(ESharedResourceId rid) = 0;
-
-	virtual int                                   ReleaseAll(ESharedResourceId rid) = 0;
-	virtual void*                                 AcquireMany(ESharedResourceId rid, int count) = 0;
 };
 
 //////////////////////////////////////////////////////////////////////////

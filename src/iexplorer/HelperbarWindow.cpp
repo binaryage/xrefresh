@@ -21,23 +21,16 @@ CHelperbarWindow::CHelperbarWindow():
 	DT(TRACE_I(FS(_T("HelperbarMainWindow[%08X]: constructor"), this)));
 	m_Font.CreateFont(16, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, ANSI_CHARSET,	OUT_STROKE_PRECIS, CLIP_STROKE_PRECIS, PROOF_QUALITY, FF_MODERN, NULL);
 
-	CBitmap toolbar;
-	CBitmap mask;
+	m_ToolbarBitmap.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
+	if (m_ToolbarBitmap.IsNull()) throw CXRefreshWindowsError(GetLastError());
 
-	toolbar.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
-	if (toolbar.IsNull()) throw CXRefreshWindowsError(GetLastError());
-
-	mask.LoadBitmap(MAKEINTRESOURCE(IDB_ICONS));
-	if (mask.IsNull()) throw CXRefreshWindowsError(GetLastError());
-
-	CDPIHelper::ScaleBitmap(toolbar);
-	CDPIHelper::ScaleBitmap(mask);
+	CDPIHelper::ScaleBitmap(m_ToolbarBitmap);
 
 	int width = (int)CDPIHelper::ScaleX(16);
 	int height = (int)CDPIHelper::ScaleY(16);
 	m_ImageList.Create(width, height, ILC_COLOR24 | ILC_MASK, 3, 3);
 	if (m_ImageList.IsNull()) throw CXRefreshWindowsError(GetLastError());
-	if (m_ImageList.Add(toolbar, mask) == -1) throw CXRefreshWindowsError(GetLastError());
+	if (m_ImageList.Add(m_ToolbarBitmap, m_ToolbarBitmap) == -1) throw CXRefreshWindowsError(GetLastError());
 }
 
 CHelperbarWindow::~CHelperbarWindow()
@@ -188,7 +181,7 @@ CHelperbarWindow::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 			break;
 		case ID_POPUPMENU_VISITSITE:
 			{
-				CComPtr<IWebBrowser2> browser = BHO->GetTopBrowser();
+				CComPtr<IWebBrowser2> browser = BHO->GetBrowser();
 				if (!!browser)
 				{
 					CComBSTR url = _T("http://xrefresh.com");
@@ -212,6 +205,7 @@ CHelperbarWindow::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 					CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
 					if (!window) return 0;
 					browser = window->GetBrowserInterface();
+					if (!browser) return 0;
 				}
 				CSitesDialog kSitesDialog(GetSiteRootUrl(browser));
 				kSitesDialog.DoModal();
@@ -297,4 +291,10 @@ CHelperbarWindow::OnToolbarNeedText(int idCtrl, LPNMHDR pnmh, BOOL& bHandled)
 
 	//-- message processed
 	return 0;
+}
+
+void
+CHelperbarWindow::Update()
+{
+	m_Console.Update();
 }

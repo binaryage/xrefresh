@@ -6,44 +6,36 @@
 
 //#include "Debug.h"
 
+IUnknown*
+CBrowserMessageWindow::GetBrowserInterface() const
+{
+	ATLASSERT(!!m_BHO || !!m_Helperbar || !!m_Toolbar);
+	if (!!m_BHO) return m_BHO->GetBrowser(); 
+	if (!!m_Helperbar) return m_Helperbar->GetBrowser(); 
+	if (!!m_Toolbar) return m_Toolbar->GetBrowser(); 
+	return NULL;
+}
+
 LRESULT
 CBrowserMessageWindow::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (!m_BHO) return FALSE;
-	if (uMsg==BMM_REQUEST_REFRESH) 
-	{
-		m_BHO->PerformRefresh();
+	if (!m_BHO) return S_OK;
+	switch (uMsg) {
+		case BMM_REQUEST_REFRESH: m_BHO->PerformRefresh(); break;
+		case BMM_REQUEST_LISTEN_FOR_RECONNECT: m_BHO->ListenForReconnect(); break;
+		case BMM_REQUEST_INFO_ABOUT_PAGE: m_BHO->SendInfoAboutPage(); break;
+		case BMM_REQUEST_PAUSE: m_BHO->PauseXRefresh(); break;
+		case BMM_REQUEST_UNPAUSE: m_BHO->UnpauseXRefresh(); break;
+		case BMM_REQUEST_UPDATE_ICON: m_BHO->UpdateIcon(); break;
+		case BMM_REQUEST_DISCONNECTED_NOTIFY: m_BHO->DisconnectedNotify(); break;
+		case BMM_REQUEST_LOG: m_BHO->Log((LPCTSTR)lParam, wParam); break;
+		case BMM_REQUEST_RESET_LAST_SENT_TITLE: m_BHO->ResetLastSentTitle(); break;
 	}
-	if (uMsg==BMM_REQUEST_LISTEN_FOR_RECONNECT)
-	{
-		m_BHO->ListenForReconnect();
-	}
-	if (uMsg==BMM_REQUEST_INFO_ABOUT_PAGE)
-	{
-		m_BHO->SendInfoAboutPage();
-	}
-	if (uMsg==BMM_REQUEST_PAUSE)
-	{
-		m_BHO->PauseXRefresh();
-	}
-	if (uMsg==BMM_REQUEST_UNPAUSE)
-	{
-		m_BHO->UnpauseXRefresh();
-	}
-	if (uMsg==BMM_REQUEST_UPDATE_ICON)
-	{
-		m_BHO->UpdateIcon();
-	}
-	if (uMsg==BMM_REQUEST_DISCONNECTED_NOTIFY)
-	{
-		m_BHO->DisconnectedNotify();
-	}
-	return FALSE;
+	return S_OK;
 }
 
 CBrowserMessageWindow::CBrowserMessageWindow(IUnknown* browserInterface, CXRefreshBHO* pBHO, CXRefreshHelperbar* pHelperbar, CXRefreshToolbar* pToolbar):
 	m_RefCount(1),
-	m_BrowserInterface(browserInterface),
 	m_BHO(NULL),
 	m_Helperbar(NULL),
 	m_Toolbar(NULL),
@@ -88,11 +80,11 @@ CBrowserMessageWindow::SetBHO(CXRefreshBHO* pBHO)
 	if (!m_BHO) return;
 
 	// re-parent message window
-	HWND hwnd;
-	CComPtr<IWebBrowser2> browser = m_BHO->GetTopBrowser();
-	ATLASSERT(!!browser);
-	CHECK(browser->get_HWND((LONG_PTR*)&hwnd));
-	SetParent(hwnd);
+	//HWND hwnd;
+	//CComPtr<IWebBrowser2> browser = m_BHO->GetBrowser();
+	//ATLASSERT(!!browser);
+	//CHECK(browser->get_HWND((LONG_PTR*)&hwnd));
+	//SetParent(hwnd);
 }
 //////////////////////////////////////////////////////////////////////////
 

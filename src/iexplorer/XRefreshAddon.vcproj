@@ -1087,14 +1087,6 @@
 			>
 		</File>
 		<File
-			RelativePath=".\DialogManager.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\DialogManager.h"
-			>
-		</File>
-		<File
 			RelativePath=".\DPIHelper.cpp"
 			>
 		</File>
@@ -1140,14 +1132,6 @@
 		</File>
 		<File
 			RelativePath=".\Resource.h"
-			>
-		</File>
-		<File
-			RelativePath=".\Services.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\Services.h"
 			>
 		</File>
 		<File

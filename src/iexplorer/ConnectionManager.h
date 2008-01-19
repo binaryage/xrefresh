@@ -68,9 +68,11 @@ public:
 	void                                          StopReconnectListener();
 	bool                                          StartRegistryWatchDog();
 	void                                          RegistryWatchDogThread();
+	void                                          AsyncConnectThread();
 
 	void                                          RequestStartingReconnectListener();
 	void                                          RequestSendInfoAboutPage();
+	void                                          RequestResetLastSentTitle();
 	void                                          UpdateIcon();
 
 protected:
@@ -86,5 +88,6 @@ protected:
 	CString                                       m_Version;
 	CSitesModel                                   m_SitesModel;
 	HANDLE                                        m_hRegistryWatchDogThread;
+	HANDLE                                        m_hAsyncConnectThread;
 	CCS                                           m_CS;
 };

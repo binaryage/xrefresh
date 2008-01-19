@@ -12,6 +12,8 @@
 #define BMM_REQUEST_UNPAUSE                       (BMM_BASE+4)
 #define BMM_REQUEST_UPDATE_ICON                   (BMM_BASE+5)
 #define BMM_REQUEST_DISCONNECTED_NOTIFY           (BMM_BASE+6)
+#define BMM_REQUEST_LOG                           (BMM_BASE+7)
+#define BMM_REQUEST_RESET_LAST_SENT_TITLE         (BMM_BASE+8)
 #define BMM_LAST                                  (BMM_BASE+100)
 
 typedef CWinTraits<WS_OVERLAPPED, 0> TBrowserWindowTraits; // must be hidden
@@ -43,7 +45,7 @@ public:
 	unsigned int                                  DecRef() { return --m_RefCount; }
 	unsigned int                                  RefCount() const { return m_RefCount; }
 
-	IUnknown*                                     GetBrowserInterface() const { return m_BrowserInterface; }
+	IUnknown*                                     GetBrowserInterface() const;
 	DWORD                                         GetThreadId() { return m_ThreadId; }
 
 protected:
@@ -51,7 +53,6 @@ protected:
 	bool                                          DestroyMessageWindow();
 
 	unsigned int                                  m_RefCount;
-	IUnknown*                                     m_BrowserInterface; ///< IUnknown of top level browser
 	CXRefreshBHO*                                 m_BHO;
 	CXRefreshHelperbar*                           m_Helperbar;
 	CXRefreshToolbar*                             m_Toolbar;
@@ -62,7 +63,7 @@ typedef hash_map<TBrowserId, CBrowserMessageWindow*> TBrowserMessageWindowMap;
 
 //////////////////////////////////////////////////////////////////////////
 // CBrowserManager
-class CBrowserManager: public CResourceInit<SR_BROWSERMANAGER>, public WinTrace {
+class CBrowserManager: public CResourceInit<SR_BROWSERMANAGER> {
 public:
 	CBrowserManager();
 	~CBrowserManager();

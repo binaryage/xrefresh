@@ -6,8 +6,10 @@
 // HomePage :  http://www.codeproject.com/csharp/TraceTool.asp
 // Download :  http://sourceforge.net/projects/tracetool/
 // See License.txt for license information 
-
 #include "stdafx.h"   // remove precompiled header
+
+#ifdef _DEBUG
+
 #include <windows.h>
 #include <stdio.h>
 #include <winsock.h>
@@ -2431,3 +2433,4 @@ public:
 }  _traceTool_Cleaner ;
 
 //==========================================================================
+#endif

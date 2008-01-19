@@ -43,6 +43,7 @@ public:
 	virtual LRESULT                               OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled);
 
 	void                                          Log(CString message, int icon);
+	void                                          Update();
 
 protected:
 	virtual void                                  UpdateLayout();
@@ -56,4 +57,5 @@ protected:
 	int                                           m_ToolbarHeight;
 	CAccelerator                                  m_Accelerator;
 	CImageList                                    m_ImageList;
+	CBitmap                                       m_ToolbarBitmap;
 };

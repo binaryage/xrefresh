@@ -43,7 +43,6 @@ CConnection::CConnection(CConnectionManager* parent):
 
 CConnection::~CConnection()
 {
-
 }
 
 void 
@@ -152,7 +151,8 @@ m_Connection(this),
 m_ReconnectListener(this),
 m_Connected(false),
 m_Parent(parent),
-m_hRegistryWatchDogThread(NULL)
+m_hRegistryWatchDogThread(NULL),
+m_hAsyncConnectThread(NULL)
 {
 	m_SitesModel.Load(REGISTRY_ROOT_KEY_SITES);
 	StartRegistryWatchDog();
@@ -164,15 +164,17 @@ CConnectionManager::~CConnectionManager()
 	StopReconnectListener();
 }
 
-void
-CConnectionManager::Connect()
+UINT WINAPI AsyncConnectThreadProc(LPVOID pParam)
 {
-	if (m_Connection.IsOpen()) 
-	{
-		m_Parent->Log(_T("Already connected."), ICON_INFO);
-		return;
-	}
-	TRACE_I(_T("Trying to connect ..."));
+	CConnectionManager* pThis = reinterpret_cast<CConnectionManager*>(pParam);
+	_ASSERTE(pThis != NULL);
+	pThis->AsyncConnectThread();
+	return 1L;
+}
+
+void 
+CConnectionManager::AsyncConnectThread()
+{
 	DWORD size = 1024;
 	TCHAR host[1024] = _T("localhost");
 	if (GetStringValueFromRegistry(REGISTRY_ROOT_KEY, REGISTRY_SETTINGS_KEY, REGISTRY_SETTINGS_HOST, host, &size)!=0)
@@ -190,18 +192,37 @@ CConnectionManager::Connect()
 	sport.Format(_T("%d"), port);
 	if (!m_Connection.ConnectTo(host, sport, AF_INET, SOCK_STREAM))
 	{
-		CString msg;
-		msg.Format(_T("Unable to see XRefresh Monitor."));
-		m_Parent->Log(msg, ICON_WARNING);
-		msg.Format(_T("Please check if you have running XRefresh Monitor. On Windows, it is program running in system tray. Look for Programs -> XRefresh -> XRefresh.exe"));
-		m_Parent->Log(msg, ICON_BULB);
-		msg.Format(_T("You may also want to check your firewall settings. XRefresh IE Addon expects Monitor to talk from %s on port %d"), host, port);
-		m_Parent->Log(msg, ICON_BULB);
+		BrowserManagerLock browserManager;
+		CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_Parent->GetBrowserId());
+		if (!window) return;
+
+		window->PostMessage(BMM_REQUEST_LOG, ICON_WARNING, (LPARAM)FS(_T("Unable to see XRefresh Monitor.")));
+		window->PostMessage(BMM_REQUEST_LOG, ICON_BULB, (LPARAM)FS(_T("Please check if you have running XRefresh Monitor. On Windows, it is program running in system tray. Look for Programs -> XRefresh -> XRefresh.exe")));
+		window->PostMessage(BMM_REQUEST_LOG, ICON_BULB, (LPARAM)FS(_T("You may also want to check your firewall settings. XRefresh IE Addon expects Monitor to talk from %s on port %d"), host, port));
 		TRACE_I(_T("server not available"));
 		return;
 	}
 	m_Connection.WatchComm();
 	SendHello();
+}
+
+void
+CConnectionManager::Connect()
+{
+	if (m_Connection.IsOpen()) 
+	{
+		m_Parent->Log(_T("Already connected."), ICON_INFO);
+		return;
+	}
+	TRACE_I(_T("Trying to connect ..."));
+	
+	HANDLE hThread;
+	UINT uiThreadId = 0;
+	hThread = (HANDLE)_beginthreadex(NULL, 0, AsyncConnectThreadProc, this, CREATE_SUSPENDED, &uiThreadId);
+	if (!hThread) return;
+
+	m_hAsyncConnectThread = hThread;
+	ResumeThread(hThread);
 }
 
 void
@@ -332,6 +353,7 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 		CString log;
 		log.Format(_T("Connected to XRefresh Monitor: %s %s"), m_Agent, m_Version);
 		m_Parent->Log(log, ICON_CONNECTED);
+		RequestResetLastSentTitle();
 		RequestSendInfoAboutPage();
 		UpdateIcon();
 	}
@@ -342,7 +364,7 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 		CString log;
 
 		// test current url
-		CString url = GetURL(m_Parent->GetTopBrowser());
+		CString url = GetURL(m_Parent->GetBrowser());
 		m_CS.Enter(); // m_SitesModel can be accessed by watchdog
 		bool answer = m_SitesModel.Test(url);
 		m_CS.Leave();
@@ -383,6 +405,16 @@ CConnectionManager::RequestSendInfoAboutPage()
 	window->PostMessage(BMM_REQUEST_INFO_ABOUT_PAGE, 0, 0);
 }
 
+void 
+CConnectionManager::RequestResetLastSentTitle()
+{
+	BrowserManagerLock browserManager;
+	CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_Parent->GetBrowserId());
+	if (!window) return;
+
+	// refresh must be called by BHO thread
+	window->PostMessage(BMM_REQUEST_RESET_LAST_SENT_TITLE, 0, 0);
+}
 
 void 
 CConnectionManager::PerformRefresh()

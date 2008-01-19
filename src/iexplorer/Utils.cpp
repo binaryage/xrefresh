@@ -19,7 +19,7 @@ CString LoadStringResource(UINT id)
 static CRITICAL_SECTION g_kFormatStringCS;
 static bool g_bFormatStringCS = false;
 
-#define FORMAT_STRING_BUFFER_COUNT 20000
+#define FORMAT_STRING_BUFFER_COUNT 100000
 const TCHAR *
 FormatStringVA(const TCHAR * format, va_list arglist)
 {

@@ -19,20 +19,20 @@ public:
 	CXRefreshHelperbar();
 	virtual ~CXRefreshHelperbar();
 
-DECLARE_REGISTRY_RESOURCEID(IDR_XREFRESHHELPERBAR)
+	DECLARE_REGISTRY_RESOURCEID(IDR_XREFRESHHELPERBAR)
 
-DECLARE_NOT_AGGREGATABLE(CXRefreshHelperbar)
+	DECLARE_NOT_AGGREGATABLE(CXRefreshHelperbar)
 
-BEGIN_COM_MAP(CXRefreshHelperbar)
-	COM_INTERFACE_ENTRY(IXRefreshHelperbar)
-	COM_INTERFACE_ENTRY(IDispatch)
-	COM_INTERFACE_ENTRY(IObjectWithSite)
-	COM_INTERFACE_ENTRY(IDeskBand)
-	COM_INTERFACE_ENTRY(IDockingWindow)
-END_COM_MAP()
+	BEGIN_COM_MAP(CXRefreshHelperbar)
+		COM_INTERFACE_ENTRY(IXRefreshHelperbar)
+		COM_INTERFACE_ENTRY(IDispatch)
+		COM_INTERFACE_ENTRY(IObjectWithSite)
+		COM_INTERFACE_ENTRY(IDeskBand)
+		COM_INTERFACE_ENTRY(IDockingWindow)
+	END_COM_MAP()
 
-BEGIN_MSG_MAP(CXRefreshHelperbar)
-END_MSG_MAP()
+	BEGIN_MSG_MAP(CXRefreshHelperbar)
+	END_MSG_MAP()
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
@@ -62,9 +62,10 @@ public:
 	STDMETHODIMP                                  GetSite(REFIID riid, void **ppvSite);
 
 	void                                          Log(CString message, int icon);
+	void                                          Update();
 
-protected:
 	CComPtr<IWebBrowser2>                         GetBrowser();
+protected:
 
 	virtual POINTL                                GetMinSize() const;
 	virtual POINTL                                GetMaxSize() const;

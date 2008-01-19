@@ -156,7 +156,7 @@ CSitesModel::LoadRecord(HKEY hKey, int index, CSiteRecord& record)
 	LONG lRes;
 	
 	TCHAR buf[1024];
-	dwSize = _tcslen(buf);
+	dwSize = 1024*sizeof(TCHAR);
 	lRes = RegQueryValueEx(hKey, FS(_T("%ds"), index), NULL, &dwType, (LPBYTE)buf, &dwSize);
 	if (lRes!=ERROR_SUCCESS) return false;
 	record.SetSite(buf);

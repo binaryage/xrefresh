@@ -69,8 +69,9 @@ public:
 
 	static void                                   HandleError(const CString &errorMessage);
 
-protected:
 	CComPtr<IWebBrowser2>                         GetBrowser();
+protected:
+
 	virtual POINTL                                GetMinSize() const;
 	virtual POINTL                                GetMaxSize() const;
 	virtual POINTL                                GetActualSize() const;

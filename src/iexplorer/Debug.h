@@ -1,4 +1,5 @@
 // DT == debug trace
+#ifdef _DEBUG
 #ifdef DT
 #  undef DT
 #endif 
@@ -9,3 +10,4 @@
 
 #define DT(x) x;
 #define DTI(x) x;INDENT_WATCHER;
+#endif

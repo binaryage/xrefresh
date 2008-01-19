@@ -4,6 +4,7 @@
 
 #define FS                                        FormatString
 
+#ifdef _DEBUG
 #define TRACE_I                                   TTrace::Debug()->Send
 #define TRACE_E                                   WarningBeep(),TTrace::Error()->Send
 #define TRACE_W                                   TTrace::Warning()->Send
@@ -11,7 +12,15 @@
 #define TRACE_LI(x)                               Debug()->Send(x); TTrace::Debug()->Send(FS(_T("%s: %s"), id2.c_str(), x));
 #define TRACE_LE(x)                               WarningBeep(),m_Trace->Error()->Send(x); TTrace::Error()->Send(FS(_T("%s: %s"), id2.c_str(), x));
 #define TRACE_LW(x)                               Warning()->Send(x); TTrace::Warning()->Send(FS(_T("%s: %s"), id2.c_str(), x));
+#else
+#define TRACE_I                                   
+#define TRACE_E                                   
+#define TRACE_W                                   
 
+#define TRACE_LI(x)                               
+#define TRACE_LE(x)                               
+#define TRACE_LW(x)                               
+#endif
 
 inline void WarningBeep() 
 {
@@ -122,7 +131,6 @@ private:
 
 extern DWORD gUIThreadId;
 #define I_AM_UI_THREAD (GetCurrentThreadId()==gUIThreadId)
-#define I_AM_BROWSER_THREAD(browserId) GetBrowserManager().IsBrowserThread(GetCurrentThreadId(), browserId)
 
 extern HWND gUIThreadHWND;
 #define UI_THREAD_HWND (ATLASSERT(gUIThreadHWND),gUIThreadHWND)
@@ -171,8 +179,6 @@ private:
 #else
 #define CHECK_REFCOUNT_BEFORE_DELETE2(p) 
 #endif
-
-#define INIT_TRACE(name) WinTrace(FS(_T(#name) _T("[%08X]"), this), FS(_T(#name) _T("[%08X]"), this))
 
 #define CHECK_THREAD_OWNERSHIP ATLASSERT(GetRoot().CheckThreadOwnership(GetResourceId()));
 
@@ -284,8 +290,6 @@ namespace ATL {
 #if defined _DEBUG && defined DEBUG_COM_OBJECTS
 #define CComObject CComObjectDebug
 #endif
-
-typedef CComObject<CXRefreshScriptSite>		TScriptSite;
 
 //////////////////////////////////////////////////////////////////////////
 // Class that adds wstring support to runtimem_Error

@@ -1,9 +1,6 @@
 #pragma once
 
-class CXRefreshScriptSite;
-class CXRefreshScriptEngine;
-class CScript;
-class CLogger;
+class CLoggerModel;
 class CConsoleWindow;
 class CXRefreshBHO;
 class CXRefreshHelperbar;
@@ -15,14 +12,8 @@ typedef unsigned int                              TBrowserId;
 const TBrowserId                                  NULL_BROWSER = 0;
 typedef LONG                                      THandle;
 const THandle                                     NULL_HANDLE = 0;
-typedef THandle                                   TScriptId;
-const TScriptId                                   NULL_SCRIPT = 0;
-typedef THandle                                   TScriptInstanceId;
-const TScriptInstanceId                           NULL_SCRIPT_INSTANCE = 0;
 typedef unsigned long                             TWindowId;
 const TWindowId                                   NULL_WINDOW = 0;
-
-#define WM_UPDATEDOM                              (WM_APP + 100) // custom message sent to dialog to update DOM tree and its title
 
 // messages
 const int IDC_TOOLBUTTON                          = 1;
@@ -80,6 +71,3 @@ const int IDC_DISABLEBUTTON                       = 2;
 
 #define WAIT_GRANULARITY                          20 // in ms
 #define ALLOWED_SITES_HELP_LINK                   _T("http://xrefresh.com/help/sites")
-
-// window.XRefreshShell
-#define JAVASCRIPT_FRAMEID_VARIABLE               _T("XRefreshFrameId")

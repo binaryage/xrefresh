@@ -15,16 +15,15 @@ public:
 
 	BEGIN_MSG_MAP(CConsoleWindow)
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
-		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
 		MESSAGE_HANDLER(WM_WINDOWPOSCHANGED, OnWindowPosChanged)
 		REFLECT_NOTIFICATIONS()
 	END_MSG_MAP()
 
 	virtual LRESULT                               OnWindowPosChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual LRESULT                               OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	virtual LRESULT                               OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	bool                                          SetBrowserId(TBrowserId browserId) { m_BrowserId = browserId; m_LoggerConsole.m_BrowserId = browserId; return true; }
+	void                                          Update();
 
 protected:
 	virtual void                                  Layout();

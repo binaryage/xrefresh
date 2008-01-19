@@ -13,12 +13,6 @@ CConsoleWindow::~CConsoleWindow()
 }
 
 LRESULT
-CConsoleWindow::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{
-	return S_OK;
-}
-
-LRESULT
 CConsoleWindow::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	DWORD consoleStyle = WS_VISIBLE | WS_CHILD | WS_CLIPSIBLINGS;
@@ -84,4 +78,10 @@ CConsoleWindow::InitList()
 	m_LoggerConsole.SetDragDrop(FALSE);
 
 	m_LoggerConsole.SetImageList(m_ImageList);
+}
+
+void
+CConsoleWindow::Update()
+{
+	m_LoggerConsole.Update();
 }

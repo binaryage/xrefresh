@@ -32,14 +32,14 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////
-// CLogger
-class CLogger {
+// CLoggerModel
+class CLoggerModel {
 public:
-	CLogger(): m_Console(NULL) {}
-	bool                                          Log(CString message, int icon);
+	CLoggerModel(TBrowserId id): m_BrowserId(id) {}
+	bool                                          Log(LPCTSTR message, int icon);
 
 	CListArray<CLogMessage>                       m_Messages;
-	CLoggerConsole*                               m_Console;
+	TBrowserId                                    m_BrowserId;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -74,6 +74,8 @@ public:
 	CLoggerConsole();
 	virtual ~CLoggerConsole();
 
+	void                                          Update();
+
 	BOOL                                          Initialise();
 	int                                           GetItemCount(); // required by CListImpl
 	BOOL                                          GetLogMessage(int nItem, CLogMessage& logMessage);
@@ -81,9 +83,7 @@ public:
 	int                                           GetItemImage(int nItem, int nSubItem); // overrides CListImpl::GetItemImage
 	void                                          ReverseItems(); // overrides CListImpl::ReverseItems
 	void                                          SortItems(int nColumn, BOOL bAscending); // overrides CListImpl::SortItems
-	void                                          MessageAdded();
-	bool                                          CacheLogger();
+	CLoggerModel*                                 GetModel();
 
 	TBrowserId                                    m_BrowserId;
-	CLogger*                                      m_Logger; // cached
 };

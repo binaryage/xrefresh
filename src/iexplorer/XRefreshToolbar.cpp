@@ -2,10 +2,8 @@
 
 #include "stdafx.h"
 #include "XRefreshToolbar.h"
-#include "Services.h"
 #include "AboutBox.h"
 #include "SitesDialog.h"
-#include "DialogManager.h"
 #include "BrowserManager.h"
 #include "XRefreshBHO.h"
 
@@ -332,11 +330,10 @@ LRESULT
 CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 {
 	switch (wId) {
-		case ID_POPUPMENU_OPTIONS:
-			// bring options dialog
+		case ID_POPUPMENU_ALLOWEDSITES:
 			{
-				ServicesLock services;
-				services->OpenSettingsDialog();
+				CSitesDialog kSitesDialog(GetSiteRootUrl(m_Browser));
+				kSitesDialog.DoModal();
 			}
 			break;
 		case ID_POPUPMENU_VISITSITE:
@@ -354,24 +351,6 @@ CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 			{
 				CAboutBox kAboutBox;
 				kAboutBox.DoModal();
-			}
-			break;
-		case ID_POPUPMENU_ALLOWEDSITES:
-			{
-				CSitesDialog kSitesDialog(GetSiteRootUrl(m_Browser));
-				kSitesDialog.DoModal();
-			}
-			break;
-		case ID_POPUPMENU_GENERATECRASH:
-			{
-				int* p = 0;
-				*p = 1;
-			}
-			break;
-		case ID_POPUPMENU_TESTDIALOG:
-			{
-				DialogManagerLock dialogManager;
-				dialogManager->TestDialog();
 			}
 			break;
 		case ID_POPUPMENU_CHECKFORUPDATES:

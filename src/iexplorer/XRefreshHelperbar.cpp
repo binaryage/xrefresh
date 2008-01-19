@@ -244,3 +244,9 @@ CXRefreshHelperbar::Log(CString message, int icon)
 {
 	m_MainWindow.Log(message, icon);
 }
+
+void
+CXRefreshHelperbar::Update()
+{
+	m_MainWindow.Update();
+}

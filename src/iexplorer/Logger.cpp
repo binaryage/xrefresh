@@ -5,14 +5,24 @@
 #include "XRefreshBHO.h"
 
 CLoggerConsole::CLoggerConsole():
-	m_BrowserId(NULL_BROWSER),
-	m_Logger(NULL)
+	m_BrowserId(NULL_BROWSER)
 {
 }
 
 CLoggerConsole::~CLoggerConsole()
 {
-	if (m_Logger) m_Logger->m_Console = NULL;
+}
+
+CLoggerModel*
+CLoggerConsole::GetModel()
+{
+	BrowserManagerLock browserManager;
+	ATLASSERT(browserManager->IsBrowserThread(GetCurrentThreadId(), m_BrowserId));
+	CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
+	if (!window) return NULL;
+	CXRefreshBHO* bho = window->GetBHO();
+	if (!bho) return NULL;
+	return bho->GetLogger();
 }
 
 BOOL
@@ -29,16 +39,18 @@ CLoggerConsole::Initialise()
 int
 CLoggerConsole::GetItemCount() // required by CListImpl
 {
-	if (!CacheLogger()) return 0;
-	return m_Logger->m_Messages.GetSize();
+	CLoggerModel* model = GetModel();
+	if (!model) return 0;
+	return model->m_Messages.GetSize();
 }
 
 BOOL
 CLoggerConsole::GetLogMessage(int nItem, CLogMessage& logMessage)
 {
-	if (!CacheLogger()) return FALSE;
 	if (nItem < 0 || nItem >= GetItemCount()) return FALSE;
-	logMessage = m_Logger->m_Messages[nItem];
+	CLoggerModel* model = GetModel();
+	if (!model) return FALSE;
+	logMessage = model->m_Messages[nItem];
 	return TRUE;
 }
 
@@ -74,19 +86,21 @@ CLoggerConsole::GetItemImage(int nItem, int nSubItem) // overrides CListImpl::Ge
 void
 CLoggerConsole::SortItems(int nColumn, BOOL bAscending) // overrides CListImpl::SortItems
 {
-	if (!CacheLogger()) return;
-	m_Logger->m_Messages.Sort(CompareItem((UserColumns)nColumn));
+	CLoggerModel* model = GetModel();
+	if (!model) return;
+	model->m_Messages.Sort(CompareItem((UserColumns)nColumn));
 }
 
 void
 CLoggerConsole::ReverseItems() // overrides CListImpl::ReverseItems
 {
-	if (!CacheLogger()) return;
-	m_Logger->m_Messages.Reverse();
+	CLoggerModel* model = GetModel();
+	if (!model) return;
+	model->m_Messages.Reverse();
 }
 
 void
-CLoggerConsole::MessageAdded()
+CLoggerConsole::Update()
 {
 	// track new item
 	if (!m_hWnd) return; // HACK
@@ -95,29 +109,24 @@ CLoggerConsole::MessageAdded()
 	EnsureItemVisible(GetItemCount());
 }
 
-bool 
-CLoggerConsole::CacheLogger()
-{
-	if (m_Logger) return true;
-	if (m_BrowserId==NULL_BROWSER) return false;
-	BrowserManagerLock browserManager;
-	CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
-	if (!window) return false;
-	CXRefreshBHO* BHO = window->GetBHO();
-	if (!BHO) return false;
-	m_Logger = BHO->GetLogger();
-	m_Logger->m_Console = this;
-	return m_Logger!=NULL;
-}
-
 //////////////////////////////////////////////////////////////////////////
 
 bool
-CLogger::Log(CString message, int icon)
+CLoggerModel::Log(LPCTSTR message, int icon)
 {
 	time_t ltime;
 	time(&ltime);
 	bool res = m_Messages.Add(CLogMessage(ltime, message, icon))?true:false;
-	if (m_Console) m_Console->MessageAdded();
+
+	// notify console
+	if (m_BrowserId==NULL_BROWSER) return false;
+	BrowserManagerLock browserManager;
+	ATLASSERT(browserManager->IsBrowserThread(GetCurrentThreadId(), m_BrowserId));
+	CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
+	if (!window) return false;
+	CXRefreshHelperbar* bar = window->GetHelperbar();
+	if (!bar) return false;
+
+	bar->Update();
 	return true;
 }
