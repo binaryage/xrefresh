@@ -143,6 +143,15 @@ CXRefreshToolbar::SetSite(IUnknown *pUnknownSite)
 			// create main window
 			CreateMainWindow();
 		}
+		else
+		{
+			BrowserManagerLock browserManager;
+			CBrowserMessageWindow* bw = browserManager->FindBrowserMessageWindow(m_BrowserId);
+			ATLASSERT(bw);
+			bw->SetToolbar(NULL);
+			browserManager->ReleaseBrowserId(m_BrowserId);
+			m_BrowserId = NULL_BROWSER;
+		}
 	}
 	catch (CXRefreshRuntimeError &ex)
 	{

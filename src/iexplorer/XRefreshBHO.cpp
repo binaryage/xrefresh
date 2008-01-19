@@ -142,6 +142,9 @@ CXRefreshBHO::SetSite(IUnknown* pUnkSite)
 			}
 
 			BrowserManagerLock browserManager;
+			CBrowserMessageWindow* bw = browserManager->FindBrowserMessageWindow(m_BrowserId);
+			ATLASSERT(bw);
+			bw->SetBHO(NULL);
 			browserManager->ReleaseBrowserId(m_BrowserId);
 			m_BrowserId = NULL_BROWSER;
 

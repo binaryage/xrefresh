@@ -129,6 +129,9 @@ CXRefreshHelperbar::SetSite(IUnknown *pUnknownSite)
 	else
 	{
 		BrowserManagerLock browserManager;
+		CBrowserMessageWindow* bw = browserManager->FindBrowserMessageWindow(m_BrowserId);
+		ATLASSERT(bw);
+		bw->SetHelperbar(NULL);
 		browserManager->ReleaseBrowserId(m_BrowserId);
 		m_BrowserId = NULL_BROWSER;
 	}
