@@ -4,13 +4,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Abhinaba.SysTray;
 
 namespace XRefresh
 {
 	class Context : ApplicationContext
 	{
 		public static Context Current;
-		NotifyIcon notifyIcon = new NotifyIcon();
+		NotifyIcon notifyIcon;
 		Configuration configuration = new Configuration();
 		ActivityLog activityLog = new ActivityLog();
 		static Model model = new Model();
@@ -19,11 +20,11 @@ namespace XRefresh
 		Detector detector = new Detector();
 		Menu menu;
 		Icon icon = Properties.Resources.XRefreshDisconnected;
-		System.Timers.Timer flashTimer = new System.Timers.Timer();
 		System.Timers.Timer memTimer = new System.Timers.Timer();
 		System.Timers.Timer counterTimer = new System.Timers.Timer();
 		int mainThreadID = -1;
 		int refreshCounter;
+		SysTray sysTray;
 
 		public int RefreshCounter
 		{
@@ -50,9 +51,6 @@ namespace XRefresh
 			refreshCounter = Utils.GetRefreshCounter();
 			mainThreadID = Thread.CurrentThread.GetHashCode();
 
-			flashTimer.Interval = 200;
-			flashTimer.Elapsed += new System.Timers.ElapsedEventHandler(TimerElapsed);
-
 			memTimer.Interval = 1000; // execute after one second
 			memTimer.Elapsed += new System.Timers.ElapsedEventHandler(memTimer_Elapsed);
 
@@ -62,18 +60,19 @@ namespace XRefresh
 			LoadSettings();
 			model.Init();
 
+			menu = new Menu();
+			sysTray = new SysTray("", icon, menu);
+			notifyIcon = sysTray.m_notifyIcon;
+			notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
+
 			server = new Server();
 			server.Start();
 
+			menu.RebuildMenu();
+			UpdateTrayIcon();
+
 			worker = new Worker();
 			model.Start();
-
-			menu = new Menu();
-
-			notifyIcon.ContextMenu = menu;
-			notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
-			UpdateTrayIcon();
-			notifyIcon.Visible = true;
 
 			ThreadExit += new EventHandler(OnThreadExit);
 			memTimer.Start();
@@ -238,8 +237,9 @@ namespace XRefresh
 
 		public void SetIcon(Icon icon)
 		{
-			this.icon = icon;
-			if (flashTimer.Enabled==false) notifyIcon.Icon = icon;
+			sysTray.m_DefaultIcon = icon;
+			sysTray.StopAnimation();
+			notifyIcon.Icon = icon;
 		}
 
 		public static string GetClientTypeString(string type)
@@ -274,17 +274,19 @@ namespace XRefresh
 		public void FlashIcon(bool active)
 		{
 			if (active)
-				notifyIcon.Icon = Properties.Resources.XRefreshActive;
+				sysTray.SetAnimationClip(Properties.Resources.AnimA16);
 			else
-				notifyIcon.Icon = Properties.Resources.XRefreshIgnore;
-			flashTimer.Stop();
-			flashTimer.Start();
-		}
-
-		void TimerElapsed(object sender, EventArgs e)
-		{
-			flashTimer.Stop();
-			notifyIcon.Icon = icon;
+			{
+				if (server.IsAnyClientConnected())
+				{
+					sysTray.SetAnimationClip(Properties.Resources.AnimI16);
+				}
+				else
+				{
+					sysTray.SetAnimationClip(Properties.Resources.AnimD16);
+				}
+			}
+			sysTray.StartAnimation(50, 0);
 		}
 
 		public void IncreaseRefreshCounter()

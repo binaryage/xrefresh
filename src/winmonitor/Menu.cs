@@ -17,7 +17,6 @@ namespace XRefresh
 
 			menuExtender = new MenuExtender();
 			menuExtender.ImageList = imageList;
-			RebuildMenu();
 		}
 
 		protected override void OnPopup(EventArgs e)
@@ -25,11 +24,11 @@ namespace XRefresh
 			RebuildMenu();
 		}
 
-		void RebuildMenu()
+		public void RebuildMenu()
 		{
 			MenuItems.Clear();
 			MenuItem item; 
-                
+
 			item = new MenuItem("&Configuration", new EventHandler(Context.Current.ShowConfiguration));
 			item.DefaultItem = true;
 			EnableExtension(item, 0);

@@ -81,6 +81,27 @@ namespace XRefresh.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AnimA16 {
+            get {
+                object obj = ResourceManager.GetObject("AnimA16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap AnimD16 {
+            get {
+                object obj = ResourceManager.GetObject("AnimD16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap AnimI16 {
+            get {
+                object obj = ResourceManager.GetObject("AnimI16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Bug {
             get {
                 object obj = ResourceManager.GetObject("Bug", resourceCulture);

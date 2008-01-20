@@ -297,6 +297,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="ShellIcon.cs" />
     <Compile Include="Sound.cs" />
+    <Compile Include="SysTray.cs" />
     <Compile Include="TimeoutEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -517,6 +518,9 @@
     <None Include="Icons\Cancel.png" />
     <None Include="Icons\Add.png" />
     <None Include="Icons\AboutBox.bmp" />
+    <None Include="Icons\AnimA16.png" />
+    <None Include="Icons\AnimD16.png" />
+    <None Include="Icons\AnimI16.png" />
     <Content Include="Icons\Drive.ico" />
     <None Include="Icons\icon.png" />
     <None Include="Icons\XRefreshIgnore.ico" />
