@@ -1,0 +1,19 @@
+--- 
+:timeout: 0
+:debug: false
+:mime_map: 
+:prefix: 
+:daemon: false
+:log_file: log\mongrel.log
+:config_file: 
+:group: 
+:includes: 
+- mongrel
+:pid_file: log\mongrel.pid
+:config_script: 
+:environment: development
+:num_processors: 1024
+:host: 0.0.0.0
+:docroot: public
+:user: 
+:port: 3000

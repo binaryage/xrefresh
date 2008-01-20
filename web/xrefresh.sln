@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{325B8569-0C7C-4A6A-8AF8-89C3B6BC9E74}") = "xrefresh", "xrefresh.stproj", "{BC1E4AFA-025A-432F-BDFD-F5FEB0BC9CDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC1E4AFA-025A-432F-BDFD-F5FEB0BC9CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1E4AFA-025A-432F-BDFD-F5FEB0BC9CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1E4AFA-025A-432F-BDFD-F5FEB0BC9CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1E4AFA-025A-432F-BDFD-F5FEB0BC9CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
