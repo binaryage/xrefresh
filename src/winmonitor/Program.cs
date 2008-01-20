@@ -4,32 +4,10 @@ using System.IO;
 using System.Web;
 using System.Windows.Forms;
 using Zayko.Dialogs.UnhandledExceptionDlg;
+using System.Threading;
 
 namespace XRefresh
 {
-	public class SingleInstanceTracker
-	{
-		bool isFirstInstance = true;
-		
-		public SingleInstanceTracker(string name)
-		{
-			// get the name of our process
-			string proc = Process.GetCurrentProcess().ProcessName;
-			// get the list of all processes by that name
-			Process[] processes = Process.GetProcessesByName(proc);
-			// if there is more than one process...
-			isFirstInstance = !(processes.Length > 1);
-		}
-		
-		public bool IsFirstInstance
-		{
-			get
-			{
-				return isFirstInstance;
-			}
-		}
-	}
-
 	static class Program
 	{
 		static CustomExceptionHandler exceptionHandler;
@@ -41,8 +19,9 @@ namespace XRefresh
 		static void Main()
 		{
 #if !DEBUG
-			SingleInstanceTracker tracker = new SingleInstanceTracker("XRefresh");
-			if (!tracker.IsFirstInstance)
+			bool ok;
+			Mutex mutex = new Mutex(true, "XRefreshMutex", out ok);
+			if (!ok)
 			{
 				MessageBox.Show("Another instance of XRefresh is already running. See icons in tray-bar.", "Multiple instances", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 				return;
@@ -57,6 +36,8 @@ namespace XRefresh
 			Application.SetCompatibleTextRenderingDefault(false);
 			// instead of running a form, we run an ApplicationContext
 			Application.Run(new Context());
+
+			GC.KeepAlive(mutex); // important!
 		}
 
 		private static void ResetWorkingDirectory()
