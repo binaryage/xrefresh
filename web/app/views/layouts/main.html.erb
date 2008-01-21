@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>XRefresh</title>
+		<%= stylesheet_link_tag "reset.css" %>
+		<%= stylesheet_link_tag "main.css" %>
+		<%= javascript_include_tag "prototype", "effects" %>
+		<script>
+// CSS Browser Selector   v0.2.5
+// Documentation:         http://rafael.adm.br/css_browser_selector
+// License:               http://creativecommons.org/licenses/by/2.5/
+// Author:                Rafael Lima (http://rafael.adm.br)
+// Contributors:          http://rafael.adm.br/css_browser_selector#contributors
+var css_browser_selector = function() {
+var ua=navigator.userAgent.toLowerCase(),
+is=function(t){ return ua.indexOf(t) != -1; },
+h=document.getElementsByTagName('html')[0],
+        b=(!(/opera|webtv/i.test(ua))&&/msie (\d)/.test(ua))?('ie ie'+RegExp.$1):is('gecko/')? 'gecko':is('opera/9')?'opera opera9':/opera (\d)/.test(ua)?'opera opera'+RegExp.$1:is('konqueror')?'konqueror':is('applewebkit/')?'webkit safari':is('mozilla/')?'gecko':'',
+        os=(is('x11')||is('linux'))?' linux':is('mac')?' mac':is('win')?' win':'';
+    var c=b+os+' js';
+    h.className += h.className?' '+c:c;
+}();
+		</script>
+	</head>
+
+	<body>
+		<div id="doc" class="yui-t7">
+			<div id="hd">
+				<h1>XRefresh</h1>
+				<h2>Browser refresh automation tool for web developers</h2>
+				<a id="logo" href="/"><img src="/images/logo.png" width="300" height="60" alt="XRefresh home" /></a>
+				<ul id="nav">
+					<% location = request.env['PATH_INFO']
+					select = 'class="active"' %>
+					<li id="download" <%= select if location =~ /^\/$/ || location =~ /^\/download/ -%>><a href="/">Download</a></li>
+					<li id="about" <%= select if location =~ /^\/about/ -%>><a href="/about">About</a></li>
+					<li id="support" <%= select if location =~ /^\/support/ -%>><a href="/support">Support</a></li>
+				</ul>
+				
+			</div>
+			<div id="bd">
+				<div id="top" class="yui-g <%=@top_partial%>">
+					<%= render :partial => @top_partial %>
+				</div>
+				<div class="yui-gc">
+					<div id="content" class="yui-u first">
+						<%= yield %>
+					</div>
+					<div id="sidebar" class="yui-u">
+						<!-- YOUR DATA GOES HERE -->
+					</div>
+				</div>
+			</div>
+			<div id="ft"><p>xrefresh.com &copy; 2008 Antonin Hildebrand, all rights reserved</p></div>
+		</div>
+	</body>
+</html>

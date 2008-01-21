@@ -1,7 +1,11 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Ruby Include="app\controllers\application.rb" />
+    <Ruby Include="app\controllers\home_controller.rb" />
+    <Ruby Include="app\controllers\root_controller.rb" />
     <Ruby Include="app\helpers\application_helper.rb" />
+    <Ruby Include="app\helpers\home_helper.rb" />
+    <Ruby Include="app\helpers\root_helper.rb" />
     <Ruby Include="config\environments\development.rb" />
     <Ruby Include="config\environments\production.rb" />
     <Ruby Include="config\environments\test.rb" />
@@ -44,6 +48,8 @@
     <None Include="script\runner" />
     <None Include="script\server" />
     <Ruby Include="script\steelserver.rb" />
+    <Ruby Include="test\functional\home_controller_test.rb" />
+    <Ruby Include="test\functional\root_controller_test.rb" />
     <Ruby Include="test\test_helper.rb" />
     <None Include="Rakefile" />
     <None Include="README" />
@@ -54,7 +60,9 @@
     <Folder Include="app\helpers\" />
     <Folder Include="app\models\" />
     <Folder Include="app\views\" />
+    <Folder Include="app\views\home" />
     <Folder Include="app\views\layouts\" />
+    <Folder Include="app\views\root" />
     <Folder Include="config\" />
     <Folder Include="config\environments\" />
     <Folder Include="config\initializers\" />
@@ -86,6 +94,19 @@
     <Folder Include="vendor\" />
     <Folder Include="vendor\plugins\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="log\development.log" />
+    <Content Include="log\production.log" />
+    <Content Include="log\server.log" />
+    <Content Include="log\test.log" />
+    <Content Include="public\stylesheets\main.css" />
+    <Content Include="public\stylesheets\reset.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedRuby Include="app\views\layouts\main.html.erb" />
+    <EmbeddedRuby Include="app\views\root\index.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_download.html.erb" />
+  </ItemGroup>
   <PropertyGroup>
     <RailsProject>True</RailsProject>
     <SteelVersion>1.2</SteelVersion>
@@ -96,8 +117,8 @@
     <RailsDebugScript>C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb</RailsDebugScript>
     <RailsFilter>.log</RailsFilter>
     <RailsServer>WEBrick</RailsServer>
-    <RubyInterpreter>C:\InstantRails\ruby\bin\ruby.exe</RubyInterpreter>
-    <RubyExeNoDebug>C:\InstantRails\ruby\bin\ruby.exe</RubyExeNoDebug>
+    <RubyInterpreter>C:\InstantRails2\ruby\bin\ruby.exe</RubyInterpreter>
+    <RubyExeNoDebug>C:\InstantRails2\ruby\bin\ruby.exe</RubyExeNoDebug>
     <ServerPort>3000</ServerPort>
     <SQLServerPath>C:\Program Files\Microsoft SQL Server\90\Tools\binn</SQLServerPath>
     <TraceLevel>0</TraceLevel>
@@ -123,6 +144,8 @@
     <RubyTimeout>60</RubyTimeout>
     <ERBTimeout>60</ERBTimeout>
     <ProjectGuid>{bc1e4afa-025a-432f-bdfd-f5feb0bc9cdb}</ProjectGuid>
+    <RakeWorkingDirectory>C:\InstantRails2\rails_apps\xrefresh</RakeWorkingDirectory>
+    <SynchronizationExcludeNoExtension>False</SynchronizationExcludeNoExtension>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Name>Debug</Name>

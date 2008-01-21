@@ -1,0 +1,206 @@
+a
+{
+	color: #50A7DD;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+#hd 
+{
+	border-bottom: solid 2px #50A7DD;
+	height: 80px;
+}
+
+#hd h1,#hd h2 
+{
+	display: none;
+}
+
+#hd #logo 
+{
+	float: left;
+	position: relative;
+	top: 20px;
+}
+
+#top
+{
+	background-color: #FFfefe;
+	border-bottom: solid 2px #50A7DD;
+	height: 400px;
+}
+
+#top.download
+{
+	background-image: url(/images/howto.png);
+	background-repeat: no-repeat;
+	background-position: 20px 90px;
+	padding: 8px;
+}
+#top.download h2 
+{
+	font-size: 160%;
+	padding-bottom: 8px;
+	font-weight: bold;
+	padding-top: 20px;
+	width: 420px;
+}
+#top.download h3
+{
+	position: relative;
+	top: -12px;
+	left: 230px;
+	font-size: 100%;
+	color: #666;
+}
+
+#content
+{
+	padding: 5px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#sidebar
+{
+}
+
+ul#nav
+{
+	float: right;
+	position: relative;
+	top: 53px;
+	padding-right: 10px;
+}
+
+.ie ul#nav
+{
+	top: 52px;
+}
+
+#nav li {
+	list-style-type: none;
+	list-style-position: inside;
+	display: inline;
+	line-height: 30px;
+	font-size: 120%;
+	font-weight: bold;
+	padding-left: 8px;
+}
+
+#nav li a {
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-decoration: none;
+	background-color: #fff;
+	color: #999;
+	border-top: 2px solid #A3DDFF;
+	border-left: 2px solid #A3DDFF;
+	border-right: 2px solid #A3DDFF;
+}
+
+#nav li.active a {
+	background-color: #FFfefe;
+	border-top: 2px solid #50A7DD;
+	border-left: 2px solid #50A7DD;
+	border-right: 2px solid #50A7DD;
+	border-bottom: 2px solid #FFfefe;
+	color: #444;
+}
+
+#nav li a:hover {
+	color: #444;
+}
+
+#ft
+{
+	padding-top: 4px;
+	border-top: solid 2px #50A7DD;
+	font-size: 80%;
+	color: #888;
+	text-align: center;
+}
+
+#download-box
+{
+	margin: 10px;
+	border: 4px solid #50A7DD;
+	position: relative;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 160%;
+	font-weight: bold;
+	top: -80px;
+	left: 480px;
+	text-align: center;
+}
+
+#download-button 
+{
+	padding-bottom: 6px;
+}
+#download-win 
+{
+	font-size: 60%;
+	font-weight: bold;
+}
+
+#get-box 
+{
+	margin-top: 0px;
+	position: relative;
+	top: -40px;
+	left: 500px;
+}
+
+#get-box ul
+{
+	font-size: 160%;
+}
+
+#get-box li
+{
+	font-size: 60%;
+	list-style-type: square;
+	list-style-position: inside;
+}
+
+#need-box 
+{
+	margin-top: 20px;
+	position: relative;
+	top: -40px;
+	left: 500px;
+}
+
+#need-box ul
+{
+	font-size: 160%;
+}
+
+#need-box li
+{
+	font-size: 60%;
+	list-style-type: square;
+	list-style-position: inside;
+}
+
+#free-box 
+{
+	margin-top: 20px;
+	position: relative;
+	top: -40px;
+	left: 500px;
+	font-size: 120%;
+}
+
+#download-wrap 
+{
+	position: absolute;
+}
