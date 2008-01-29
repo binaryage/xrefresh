@@ -105,7 +105,11 @@
   <ItemGroup>
     <EmbeddedRuby Include="app\views\layouts\main.html.erb" />
     <EmbeddedRuby Include="app\views\root\index.html.erb" />
-    <EmbeddedRuby Include="app\views\root\_download.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_download1.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_download2.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_step1.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_step2.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_step3.html.erb" />
   </ItemGroup>
   <PropertyGroup>
     <RailsProject>True</RailsProject>
