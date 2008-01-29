@@ -233,7 +233,15 @@ CXRefreshBHO::DisconnectedNotify()
 void
 CXRefreshBHO::Log(LPCTSTR message, int icon)
 {
-	m_Logger.Log(message, icon);
+	BrowserManagerLock browserManager;
+	if (browserManager->IsBrowserThread(GetCurrentThreadId(), m_BrowserId))
+	{
+		m_Logger.Log(message, icon);
+		return;
+	}
+	CBrowserMessageWindow* window = browserManager->FindBrowserMessageWindow(m_BrowserId);
+	if (!window) return;
+	window->PostMessage(BMM_REQUEST_LOG, icon, (LPARAM)FS(_T("%s"), message));
 }
 
 void

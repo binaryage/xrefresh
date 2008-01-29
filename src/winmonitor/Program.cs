@@ -37,7 +37,9 @@ namespace XRefresh
 			// instead of running a form, we run an ApplicationContext
 			Application.Run(new Context());
 
+#if !DEBUG
 			GC.KeepAlive(mutex); // important!
+#endif
 		}
 
 		private static void ResetWorkingDirectory()
