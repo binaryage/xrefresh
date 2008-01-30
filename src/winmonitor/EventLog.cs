@@ -49,12 +49,11 @@ namespace XRefresh
 				Add(e);
 
 				// keep limit count
-				while (Count>MAX_EVENT_COUNT) 
+				if (EventRemoved == null) return;
+				
+				while (Count > MAX_EVENT_COUNT) 
 				{
-					if (EventRemoved!=null)
-					{
-						EventRemoved(GetRange(0,1)[0]);
-					}
+					EventRemoved(GetRange(0,1)[0]);
 					RemoveAt(0);
 				}
 			}

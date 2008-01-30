@@ -74,25 +74,23 @@ BEGIN
     LTEXT           "Need help?",IDC_HELP2,252,163,36,8
 END
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 283, 110
+IDD_ABOUTBOX DIALOGEX 0, 0, 283, 100
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "About XRefresh"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         208,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,283,40
-    DEFPUSHBUTTON   "OK",IDOK,232,94,50,14
+    DEFPUSHBUTTON   "OK",IDOK,232,84,50,14
     CONTROL         "0.1.2003",IDC_VERSION,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,119,5,30,8
     LTEXT           "http://xrefresh.com",IDC_HOMEPAGE,56,58,187,8
     LTEXT           "Homepage:",IDC_HOMEPAGE_LABEL,9,58,38,8
     LTEXT           "Contributors:",IDC_CONTRIB_LABEL,9,67,44,8
-    LTEXT           "Donations:",IDC_DONATIONS_LABEL,9,76,44,8
-    LTEXT           "http://xrefresh.com/people",IDC_PEOPLE,56,67,187,8
-    LTEXT           "http://xrefresh.com/donate",IDC_DONATE,56,76,187,8
-    LTEXT           "XRefresh can refresh Internet Explorer when you save your modified source code.",IDC_STATIC,9,45,267,8
-    LTEXT           "This program is open source software.",IDC_STATIC,9,91,124,8
-    LTEXT           "Copyright © 2007-2008",IDC_STATIC,10,99,78,8
-    LTEXT           "Antonin Hildebrand",IDC_AUTHOR,91,99,62,8
+    LTEXT           "http://xrefresh.com/about",IDC_PEOPLE,56,67,187,8
+    LTEXT           "XRefresh can refresh Internet Explorer when you modify and save source code.",IDC_STATIC,9,45,267,8
+    LTEXT           "This program is open source software.",IDC_STATIC,9,81,124,8
+    LTEXT           "Copyright © 2007-2008",IDC_STATIC,10,89,78,8
+    LTEXT           "Antonin Hildebrand",IDC_AUTHOR,91,89,62,8
 END
 
 
@@ -168,7 +166,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 276
         TOPMARGIN, 7
-        BOTTOMMARGIN, 103
+        BOTTOMMARGIN, 93
     END
 END
 #endif    // APSTUDIO_INVOKED

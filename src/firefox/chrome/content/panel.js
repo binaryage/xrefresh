@@ -665,7 +665,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 			drumReady = true;
 			drumName = message.agent;
 			drumVersion = message.version;
-			this.log("Connected to XRefresh Monitor: "+drumName+" "+drumVersion, "connect");
+			this.log("Connected to "+drumName+" "+drumVersion, "connect");
 			this.updateConnectionPanel();
 			this.sendSetPage(FirebugContext.browser.contentTitle, FirebugContext.window.document.URL);
 		}

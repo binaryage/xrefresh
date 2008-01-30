@@ -31,7 +31,6 @@ public:
 private:
 	CContainedWindow                              m_Version;
 	CHyperLink                                    m_Homepage;
-	CHyperLink                                    m_People;
-	CHyperLink                                    m_Donate;
+	CHyperLink                                    m_About;
 	CHyperLink                                    m_Author;
 };

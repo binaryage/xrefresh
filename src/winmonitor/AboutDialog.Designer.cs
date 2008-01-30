@@ -30,8 +30,8 @@ namespace XRefresh
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutDialog));
 			this.panelTop = new System.Windows.Forms.Panel();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelVersion = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.panelDevider = new System.Windows.Forms.Panel();
 			this.labelStat1 = new System.Windows.Forms.Label();
 			this.buttonOK = new System.Windows.Forms.Button();
@@ -42,8 +42,6 @@ namespace XRefresh
 			this.linkLabelPeople = new System.Windows.Forms.LinkLabel();
 			this.label3 = new System.Windows.Forms.Label();
 			this.labelStat2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
-			this.linkDonate = new System.Windows.Forms.LinkLabel();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.panelTop.SuspendLayout();
@@ -61,15 +59,6 @@ namespace XRefresh
 			this.panelTop.Size = new System.Drawing.Size(425, 63);
 			this.panelTop.TabIndex = 0;
 			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.Image = global::XRefresh.Properties.Resources.AboutBox;
-			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(425, 63);
-			this.pictureBox1.TabIndex = 4;
-			this.pictureBox1.TabStop = false;
-			// 
 			// labelVersion
 			// 
 			this.labelVersion.AutoSize = true;
@@ -78,6 +67,15 @@ namespace XRefresh
 			this.labelVersion.Size = new System.Drawing.Size(35, 13);
 			this.labelVersion.TabIndex = 3;
 			this.labelVersion.Text = "BETA";
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = global::XRefresh.Properties.Resources.AboutBox;
+			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(425, 63);
+			this.pictureBox1.TabIndex = 4;
+			this.pictureBox1.TabStop = false;
 			// 
 			// panelDevider
 			// 
@@ -115,7 +113,7 @@ namespace XRefresh
 			this.linkLabelSite.AutoSize = true;
 			this.linkLabelSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
 			this.linkLabelSite.LinkColor = System.Drawing.Color.RoyalBlue;
-			this.linkLabelSite.Location = new System.Drawing.Point(84, 144);
+			this.linkLabelSite.Location = new System.Drawing.Point(84, 149);
 			this.linkLabelSite.Name = "linkLabelSite";
 			this.linkLabelSite.Size = new System.Drawing.Size(98, 13);
 			this.linkLabelSite.TabIndex = 8;
@@ -126,7 +124,7 @@ namespace XRefresh
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(12, 144);
+			this.label4.Location = new System.Drawing.Point(12, 149);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(62, 13);
 			this.label4.TabIndex = 9;
@@ -160,18 +158,18 @@ namespace XRefresh
 			this.linkLabelPeople.AutoSize = true;
 			this.linkLabelPeople.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
 			this.linkLabelPeople.LinkColor = System.Drawing.Color.RoyalBlue;
-			this.linkLabelPeople.Location = new System.Drawing.Point(84, 160);
+			this.linkLabelPeople.Location = new System.Drawing.Point(84, 165);
 			this.linkLabelPeople.Name = "linkLabelPeople";
-			this.linkLabelPeople.Size = new System.Drawing.Size(135, 13);
+			this.linkLabelPeople.Size = new System.Drawing.Size(130, 13);
 			this.linkLabelPeople.TabIndex = 12;
 			this.linkLabelPeople.TabStop = true;
-			this.linkLabelPeople.Text = "http://xrefresh.com/people";
-			this.linkLabelPeople.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelPeople_LinkClicked);
+			this.linkLabelPeople.Text = "http://xrefresh.com/about";
+			this.linkLabelPeople.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAbout_LinkClicked);
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(12, 160);
+			this.label3.Location = new System.Drawing.Point(12, 165);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(66, 13);
 			this.label3.TabIndex = 13;
@@ -187,28 +185,6 @@ namespace XRefresh
 			this.labelStat2.Size = new System.Drawing.Size(344, 14);
 			this.labelStat2.TabIndex = 14;
 			this.labelStat2.Text = "It had saved you approximatelly 1000000 mouse clicks";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 176);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(58, 13);
-			this.label1.TabIndex = 16;
-			this.label1.Text = "Donations:";
-			// 
-			// linkDonate
-			// 
-			this.linkDonate.AutoSize = true;
-			this.linkDonate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-			this.linkDonate.LinkColor = System.Drawing.Color.RoyalBlue;
-			this.linkDonate.Location = new System.Drawing.Point(84, 176);
-			this.linkDonate.Name = "linkDonate";
-			this.linkDonate.Size = new System.Drawing.Size(136, 13);
-			this.linkDonate.TabIndex = 17;
-			this.linkDonate.TabStop = true;
-			this.linkDonate.Text = "http://xrefresh.com/donate";
-			this.linkDonate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDonate_LinkClicked);
 			// 
 			// label6
 			// 
@@ -242,8 +218,6 @@ namespace XRefresh
 			this.ControlBox = false;
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.linkDonate);
-			this.Controls.Add(this.label1);
 			this.Controls.Add(this.labelStat2);
 			this.Controls.Add(this.linkLabelPeople);
 			this.Controls.Add(this.label3);
@@ -287,8 +261,6 @@ namespace XRefresh
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label labelStat2;
 		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.Label label1;
-		internal System.Windows.Forms.LinkLabel linkDonate;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
     }

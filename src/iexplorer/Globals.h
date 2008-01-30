@@ -71,3 +71,5 @@ const int IDC_DISABLEBUTTON                       = 2;
 
 #define WAIT_GRANULARITY                          20 // in ms
 #define ALLOWED_SITES_HELP_LINK                   _T("http://xrefresh.com/help/sites")
+
+#define MAX_LOGGER_MESSAGES                       200

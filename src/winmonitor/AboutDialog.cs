@@ -60,15 +60,9 @@ namespace XRefresh
 			Process.Start(message);
 		 }
 
-		private void linkLabelPeople_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		private void linkLabelAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			string message = "http://xrefresh.com/people";
-			Process.Start(message);
-		}
-
-		private void linkDonate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			string message = "http://xrefresh.com/donate";
+			string message = "http://xrefresh.com/about";
 			Process.Start(message);
 		}
 	}

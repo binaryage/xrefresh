@@ -351,7 +351,7 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 		m_Agent = UnpackValue(msg["agent"]);
 		m_Version = UnpackValue(msg["version"]);
 		CString log;
-		log.Format(_T("Connected to XRefresh Monitor: %s %s"), m_Agent, m_Version);
+		log.Format(_T("Connected to %s %s"), m_Agent, m_Version);
 		m_Parent->Log(log, ICON_CONNECTED);
 		RequestResetLastSentTitle();
 		RequestSendInfoAboutPage();
