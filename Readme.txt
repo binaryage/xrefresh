@@ -36,15 +36,14 @@ XRefresh project contains:
 
 License notes
 -------------
-XRefresh is a free software. For full details see License.txt.
+XRefresh is free software. For full details see License.txt.
 
 XRefresh is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 If you find this program usefull, please spread a word about it.
-You can support it by more ways, see http://xrefresh.com/donate
-
-List of contributors is available here: http://xrefresh.com/people
+You can support it by more ways, see http://xrefresh.com/about
+There is also list of project contributors.
 
 Thank you for using this software.
 

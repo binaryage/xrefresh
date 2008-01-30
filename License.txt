@@ -1,3 +1,10 @@
+This program is opensource under MIT-style license with exception of 
+logo, graphics, website and installer which are licensed under 
+Creative Commons Attribution Noncommercial No Derivative license.
+http://creativecommons.org/licenses/by-nc-nd/3.0
+
+---
+
 Copyright (c) 2007-2008, Antonin Hildebrand
 All rights reserved.
 
