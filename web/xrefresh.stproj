@@ -1,10 +1,10 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Ruby Include="app\controllers\application.rb" />
-    <Ruby Include="app\controllers\home_controller.rb" />
+    <Ruby Include="app\controllers\help_controller.rb" />
     <Ruby Include="app\controllers\root_controller.rb" />
     <Ruby Include="app\helpers\application_helper.rb" />
-    <Ruby Include="app\helpers\home_helper.rb" />
+    <Ruby Include="app\helpers\help_helper.rb" />
     <Ruby Include="app\helpers\root_helper.rb" />
     <Ruby Include="config\environments\development.rb" />
     <Ruby Include="config\environments\production.rb" />
@@ -48,7 +48,7 @@
     <None Include="script\runner" />
     <None Include="script\server" />
     <Ruby Include="script\steelserver.rb" />
-    <Ruby Include="test\functional\home_controller_test.rb" />
+    <Ruby Include="test\functional\help_controller_test.rb" />
     <Ruby Include="test\functional\root_controller_test.rb" />
     <Ruby Include="test\test_helper.rb" />
     <None Include="Rakefile" />
@@ -60,8 +60,9 @@
     <Folder Include="app\helpers\" />
     <Folder Include="app\models\" />
     <Folder Include="app\views\" />
-    <Folder Include="app\views\home" />
+    <Folder Include="app\views\help" />
     <Folder Include="app\views\layouts\" />
+    <Folder Include="app\views\shared" />
     <Folder Include="app\views\root" />
     <Folder Include="config\" />
     <Folder Include="config\environments\" />
@@ -99,17 +100,33 @@
     <Content Include="log\production.log" />
     <Content Include="log\server.log" />
     <Content Include="log\test.log" />
+    <Content Include="public\images\config.png" />
+    <Content Include="public\images\ffintro.png" />
+    <Content Include="public\images\howto.png" />
+    <Content Include="public\images\ie7console.png" />
+    <Content Include="public\images\ie7toolbar.png" />
+    <Content Include="public\images\logo.png" />
+    <Content Include="public\images\step1.png" />
+    <Content Include="public\images\tray.png" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="public\stylesheets\reset.css" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedRuby Include="app\views\help\index.html.erb" />
+    <EmbeddedRuby Include="app\views\help\_side.html.erb" />
     <EmbeddedRuby Include="app\views\layouts\main.html.erb" />
+    <EmbeddedRuby Include="app\views\root\about.html.erb" />
     <EmbeddedRuby Include="app\views\root\index.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_download.html.erb" />
     <EmbeddedRuby Include="app\views\root\_download1.html.erb" />
     <EmbeddedRuby Include="app\views\root\_download2.html.erb" />
-    <EmbeddedRuby Include="app\views\root\_step1.html.erb" />
-    <EmbeddedRuby Include="app\views\root\_step2.html.erb" />
-    <EmbeddedRuby Include="app\views\root\_step3.html.erb" />
+    <EmbeddedRuby Include="app\views\root\_side.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_analytics.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_final_step.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_satisfaction.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_step1.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_step2.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_step3.html.erb" />
   </ItemGroup>
   <PropertyGroup>
     <RailsProject>True</RailsProject>

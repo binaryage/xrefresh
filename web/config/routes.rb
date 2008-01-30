@@ -30,7 +30,9 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.root :controller => "root"
+  map.connect 'help/:action', :controller => 'help'
+  map.connect ':action', :controller => 'root'
+  map.root :controller => 'root'
   map.connect 'notfound', :controller => 'root', :action => 'handle_unknown_request'
   map.connect '*anything', :controller => 'root', :action => 'handle_unknown_request'
 end

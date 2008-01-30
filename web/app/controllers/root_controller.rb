@@ -3,6 +3,11 @@ class RootController < ApplicationController
 	
 	def index
 		@top_partial = 'download'
+		@side_partial = 'side'
+	end
+
+	def about
+		@side_partial = 'side'
 	end
 	
 	def handle_unknown_request

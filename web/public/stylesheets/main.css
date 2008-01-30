@@ -1,3 +1,12 @@
+hr
+{
+	margin-top: 40px;
+	margin-bottom: 30px;
+	height: 2px;
+	background-color: #50A7DD;
+	border: none;
+}
+
 a
 {
 	color: #50A7DD;
@@ -5,7 +14,13 @@ a
 
 b
 {
-	color: #622;
+	color: #376;
+}
+
+p
+{
+	padding: 4px;
+	color: #444;
 }
 
 a:hover
@@ -17,11 +32,6 @@ a:hover
 {
 	border-bottom: solid 2px #50A7DD;
 	height: 80px;
-}
-
-p 
-{
-	color: #444;
 }
 
 h3
@@ -75,15 +85,9 @@ h2
 	width: 420px;
 }
 
-#content
+#mid-content, #mid-sidebar
 {
-	padding: 5px;
 	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#sidebar
-{
 }
 
 ul#nav
@@ -97,6 +101,11 @@ ul#nav
 .ie ul#nav
 {
 	top: 52px;
+}
+
+.ie #download-button a 
+{
+	text-decoration: none;
 }
 
 #nav li {
@@ -137,7 +146,9 @@ ul#nav
 
 #ft
 {
-	padding-top: 4px;
+	margin-top: 20px;
+	padding-top: 2px;
+	padding-bottom: 10px;
 	border-top: solid 2px #50A7DD;
 	font-size: 80%;
 	color: #888;
@@ -237,8 +248,8 @@ ul#nav
 
 .step
 {
-	padding-top: 20px;
 	clear: both;
+	padding-top: 20px;
 }
 
 .step h3
@@ -248,7 +259,7 @@ ul#nav
 
 .step p
 {
-	padding: 4px;
+	padding-top: 4px;
 	padding-left: 18px;
 }
 
@@ -259,8 +270,35 @@ ul#nav
 	float: left;
 }
 
-.separated 
+.step .separated 
 {
 	clear: both;
+	padding-top: 40px;
+}
+
+.step.start
+{
+	padding-top: 10px;
+}
+
+#last-box 
+{
 	padding-top: 20px;
+}
+
+/* satisfaction */
+div#gsfn_list_widget img { border: none; }
+div#gsfn_list_widget { font-size: 12px; border: 2px solid #50A7DD; padding: 10px; }
+div#gsfn_list_widget a.widget_title { color: #000; display: block; margin-bottom: 10px; font-weight: bold; }
+div#gsfn_list_widget .powered_by { margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD; }
+div#gsfn_list_widget .powered_by a { color: #333; font-size: 90%; }
+div#gsfn_list_widget div#gsfn_content { }
+div#gsfn_list_widget div#gsfn_content li { text-align:left; margin-bottom:6px; }
+div#gsfn_list_widget div#gsfn_content a.gsfn_link { line-height: 1; }
+div#gsfn_list_widget div#gsfn_content span.time { font-size: 90%; padding-left: 3px; }
+div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
+
+#ft a 
+{
+	color: #444;
 }
