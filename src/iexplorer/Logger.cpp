@@ -117,6 +117,7 @@ CLoggerModel::Log(LPCTSTR message, int icon)
 	time_t ltime;
 	time(&ltime);
 	bool res = m_Messages.Add(CLogMessage(ltime, message, icon))?true:false;
+	while (m_Messages.GetSize()>MAX_LOGGER_MESSAGES) m_Messages.RemoveAt(0); // keep the limits
 
 	// notify console
 	if (m_BrowserId==NULL_BROWSER) return false;
