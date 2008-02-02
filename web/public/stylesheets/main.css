@@ -14,7 +14,9 @@ a
 
 b
 {
-	color: #376;
+	background-color: #D4E9F6;
+	font-weight: inherit;
+	border: solid 1px #E5F5FF;
 }
 
 p
@@ -56,20 +58,20 @@ h3
 {
 	background-color: #FFfefe;
 	border-bottom: solid 2px #50A7DD;
-	height: 440px;
+	height: 690px;
 }
 
 #top .download1
 {
-	background-image: url(/images/howto.png);
+	background-image: url(/images/xrefresh_intro.png);
 	background-repeat: no-repeat;
-	background-position: 44px 130px;
-	height: 440px;
+	background-position: 24px 170px;
+	height: 690px;
 }
 
 #top .download2
 {
-	height: 420px;
+	height: 690px;
 }
 
 h2 
@@ -102,8 +104,14 @@ ul#nav
 {
 	top: 52px;
 }
+.safari ul#nav
+{
+	top: 54px;
+}
 
-.ie #download-button a 
+.ie #download-button a,
+.opera #download-button a,
+.safari #download-button a 
 {
 	text-decoration: none;
 }
@@ -147,7 +155,7 @@ ul#nav
 #ft
 {
 	margin-top: 20px;
-	padding-top: 2px;
+	padding-top: 0px;
 	padding-bottom: 10px;
 	border-top: solid 2px #50A7DD;
 	font-size: 80%;
@@ -166,9 +174,8 @@ ul#nav
 #download-box
 {
 	margin: 10px;
-	margin-top: 20px;
-	border-top: 4px solid #50A7DD;
-	border-bottom: 4px solid #50A7DD;
+	margin-top: 60px;
+	border: 5px solid #50A7DD;
 	padding: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -187,10 +194,15 @@ ul#nav
 	font-size: 60%;
 	font-weight: bold;
 }
+#download-rel
+{
+	font-size: 60%;
+	font-weight: bold;
+}
 
 #get-box 
 {
-	margin-top: 20px;
+	margin-top: 50px;
 	margin-left: 50px;
 	margin-right: 30px;
 }
@@ -211,7 +223,7 @@ ul#nav
 
 #need-box 
 {
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-left: 50px;
 	margin-right: 30px;
 }
@@ -239,11 +251,6 @@ ul#nav
 #support-box p 
 {
 	padding-bottom: 5px;
-}
-
-#download-wrap 
-{
-	position: absolute;
 }
 
 .step
@@ -298,7 +305,7 @@ div#gsfn_list_widget div#gsfn_content a.gsfn_link { line-height: 1; }
 div#gsfn_list_widget div#gsfn_content span.time { font-size: 90%; padding-left: 3px; }
 div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
 
-#ft a 
+#ft a, #ft p 
 {
-	color: #444;
+	color: #888;
 }
