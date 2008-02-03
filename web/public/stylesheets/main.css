@@ -1,3 +1,12 @@
+#doc3 {margin:auto;}
+
+.box {
+	margin:auto;text-align:left; /* leave unchanged */  
+	width:76.923em;/* non-IE */  
+	*width:75.069em;/* IE */  
+	min-width:1000px;/* optional but recommended */  
+}
+
 hr
 {
 	margin-top: 40px;
@@ -57,8 +66,34 @@ h3
 #top
 {
 	background-color: #FFfefe;
-	border-bottom: solid 2px #50A7DD;
-	height: 690px;
+	border-bottom: solid 2px #aaa;
+	height: 344px;
+}
+
+#top2
+{
+}
+
+#intro-box
+{
+	background-image: url(/images/xrefresh_loader.png);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	height: 344px;
+}
+
+#top.download 
+{
+	background-image: url(/images/bg1.png);
+	background-repeat: repeat-x;
+}
+
+#top2.download 
+{
+	background-color: #eee;
+	background-image: url(/images/bg2.png);
+	border-bottom: solid 2px #ddd;
+	background-repeat: repeat-x;
 }
 
 #top .download1
@@ -132,24 +167,38 @@ ul#nav
 	padding-top: 3px;
 	padding-bottom: 3px;
 	text-decoration: none;
-	background-color: #fff;
 	color: #999;
 	border-top: 2px solid #A3DDFF;
 	border-left: 2px solid #A3DDFF;
 	border-right: 2px solid #A3DDFF;
 }
 
+#home #nav li a {
+	background-color: #fff;
+}
+
 #nav li.active a {
-	background-color: #FFfefe;
+	background-color: #fff;
 	border-top: 2px solid #50A7DD;
 	border-left: 2px solid #50A7DD;
 	border-right: 2px solid #50A7DD;
-	border-bottom: 2px solid #FFfefe;
-	color: #444;
+	border-bottom: 2px solid #fff;
+	color: #000;
+}
+
+#home #nav li.active a 
+{
+	color: #fff;
+	background-color: #99CCFF;
+	border-bottom: 2px solid #99CCFF;
 }
 
 #nav li a:hover {
 	color: #444;
+}
+
+#nav li.active a:hover {
+	color: #fff;
 }
 
 #ft
@@ -165,23 +214,19 @@ ul#nav
 
 #intro-box
 {
-	padding-left: 44px;
-	padding-right: 56px;
-	text-align:justify;
-
 }
 
 #download-box
 {
-	margin: 10px;
-	margin-top: 60px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border: 5px solid #50A7DD;
 	padding: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
 	font-size: 130%;
 	font-weight: bold;
 	text-align: center;
+	position: relative;
+	left: -32px;
 }
 
 #download-button 
@@ -202,9 +247,9 @@ ul#nav
 
 #get-box 
 {
-	margin-top: 50px;
-	margin-left: 50px;
-	margin-right: 30px;
+	margin: 10px;
+	padding: 10px;
+	margin-top: 20px;
 }
 
 #get-box ul
@@ -223,9 +268,11 @@ ul#nav
 
 #need-box 
 {
-	margin-top: 30px;
-	margin-left: 50px;
-	margin-right: 30px;
+	margin: 10px;
+	margin-top: 20px;
+	padding: 10px;
+	position: relative;
+	left: -16px;
 }
 
 #need-box ul
@@ -308,4 +355,10 @@ div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
 #ft a, #ft p 
 {
 	color: #888;
+}
+
+#ohloh 
+{
+	padding-top: 2px;
+	float: right;
 }

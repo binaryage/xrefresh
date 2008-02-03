@@ -25,43 +25,48 @@
 		</script>
 	</head>
 
-	<body>
-		<div id="doc" class="yui-t7">
+	<body id="<%=@page%>">
+		<div id="doc3" class="yui-t7">
 			<div id="hd">
-				<h1>XRefresh</h1>
-				<h2>Browser refresh automation for web developers</h2>
-				<a id="logo" href="/"><img src="/images/logo.png" width="300" height="60" alt="XRefresh home" title="XRefresh - browser refresh automation"/></a>
-				<ul id="nav">
-					<% location = request.env['PATH_INFO']
-					select = 'class="active"' %>
-					<li id="download" <%= select if location == '' || location == '/' || location =~ /^\/download/ -%>><a href="/">Download</a></li>
-					<li id="help" <%= select if location =~ /^\/help/ -%>><a href="/help">Help</a></li>
-					<li id="about" <%= select if location =~ /^\/about/ -%>><a href="/about">About</a></li>
-					<!-- http://getsatisfaction.com/xrefresh -->
-				</ul>
-				
+				<div class="box">
+					<h1>XRefresh</h1>
+					<h2>Browser refresh automation for web developers</h2>
+					<a id="logo" href="/"><img src="/images/logo.png" width="300" height="60" alt="XRefresh home" title="XRefresh - browser refresh automation"/></a>
+					<ul id="nav">
+						<% location = request.env['PATH_INFO']
+						select = 'class="active"' %>
+						<li id="download" <%= select if location == '' || location == '/' || location =~ /^\/download/ -%>><a href="/">Download</a></li>
+						<li id="help" <%= select if location =~ /^\/help/ -%>><a href="/help">Help</a></li>
+						<li id="about" <%= select if location =~ /^\/about/ -%>><a href="/about">About</a></li>
+						<!-- http://getsatisfaction.com/xrefresh -->
+					</ul>
+				</div>
 			</div>
 			<div id="bd">
 				<% if (@top_partial) then %>
-				<div id="top" class="yui-gc <%=@top_partial%>">
-					<div id="top-content" class="yui-u first <%=@top_partial%>1">
+				<div id="top" class="<%=@top_partial%>">
+					<div class="box">
 						<%= render :partial => @top_partial+'1' %>
 					</div>
-					<div id="top-sidebar" class="yui-u <%=@top_partial%>2">
+				</div>
+				<div id="top2" class="<%=@top_partial%>">
+					<div class="box">
 						<%= render :partial => @top_partial+'2' %>
 					</div>
 				</div>
 				<% end %>
-				<div id="mid" class="yui-gc">
-					<div id="mid-content" class="yui-u first">
-						<%= yield %>
-					</div>
-					<div id="mid-sidebar" class="yui-u">
-						<%= render :partial => @side_partial %>
+				<div id="mid">
+					<div class="box yui-gc">
+						<div id="mid-content" class="yui-u first">
+							<%= yield %>
+						</div>
+						<div id="mid-sidebar" class="yui-u">
+							<%= render :partial => @side_partial %>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div id="ft"><p><a href="http://xrefresh.com">xrefresh.com</a> &copy; 2008 <a href="http://hildebrand.cz">Antonin Hildebrand</a>, <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">some rights reserved</a></p></div>
+			<div id="ft"><div class="box"><%= render :partial => 'shared/ohloh' %><p>&copy; 2008 <a href="http://xrefresh.com">xrefresh.com</a> <a href="http://hildebrand.cz">Antonin Hildebrand</a>, <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">some rights reserved</a></p></div></div>
 		</div>
 		<%= render :partial => 'shared/analytics' %>
 	</body>

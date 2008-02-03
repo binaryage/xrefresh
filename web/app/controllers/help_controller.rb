@@ -4,6 +4,7 @@ class HelpController < ApplicationController
 	def index
 		#@top_partial = 'help'
 		@side_partial = 'side'
+		@page = 'help';
 	end
 	
 	def sites

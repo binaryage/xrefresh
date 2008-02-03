@@ -123,6 +123,7 @@
     <EmbeddedRuby Include="app\views\root\_side.html.erb" />
     <EmbeddedRuby Include="app\views\shared\_analytics.html.erb" />
     <EmbeddedRuby Include="app\views\shared\_final_step.html.erb" />
+    <EmbeddedRuby Include="app\views\shared\_ohloh.html.erb" />
     <EmbeddedRuby Include="app\views\shared\_satisfaction.html.erb" />
     <EmbeddedRuby Include="app\views\shared\_step1.html.erb" />
     <EmbeddedRuby Include="app\views\shared\_step2.html.erb" />
