@@ -1,4 +1,5 @@
 class HelpController < ApplicationController
+  caches_page :index
 	layout 'main'
 	
 	def index
