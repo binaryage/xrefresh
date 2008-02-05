@@ -1,4 +1,5 @@
 class RootController < ApplicationController
+  caches_page :index, :about
 	layout 'main', :except => ['digg']
 	
 	def index
