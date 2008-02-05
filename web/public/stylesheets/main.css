@@ -1,3 +1,7 @@
+iframe {
+	border: none;
+}
+
 #doc3 {margin:auto;}
 
 .box {
@@ -18,14 +22,12 @@ hr
 
 a
 {
-	color: #50A7DD;
+	color: #4289B2;
 }
 
 b
 {
-	background-color: #D4E9F6;
-	font-weight: inherit;
-	border: solid 1px #E5F5FF;
+	font-weight: bold;
 }
 
 p
@@ -197,7 +199,7 @@ ul#nav
 	color: #444;
 }
 
-#nav li.active a:hover {
+#home #nav li.active a:hover {
 	color: #fff;
 }
 
@@ -225,8 +227,6 @@ ul#nav
 	font-size: 130%;
 	font-weight: bold;
 	text-align: center;
-	position: relative;
-	left: -32px;
 }
 
 #download-button 
@@ -291,13 +291,7 @@ ul#nav
 
 #support-box 
 {
-	padding-top: 20px;
-	padding-left: 40px;
-	font-size: 80%;
-}
-#support-box p 
-{
-	padding-bottom: 5px;
+	margin-top: 10px;
 }
 
 .step
@@ -332,7 +326,7 @@ ul#nav
 
 .step.start
 {
-	padding-top: 10px;
+	padding-top: 30px;
 }
 
 #last-box 
@@ -361,4 +355,46 @@ div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
 {
 	padding-top: 2px;
 	float: right;
+}
+
+.absolute {
+	position: absolute;
+}
+
+#share {
+	position: relative;
+	left: 410px;
+	top: 54px;
+}
+
+#digg {
+	position: relative;
+	left: 290px;
+	top: 54px;
+}
+
+#source-box { 
+	margin-top: 20px;
+	font-size: 12px; 
+	border: 2px solid #50A7DD; 
+	padding: 10px; 
+}
+
+#source-box h3 { 
+	font-size: 12px; 
+}
+
+#license {
+	border-top: 1px solid #ddd;
+	font-size: 8pt;
+	padding-top: 10px;
+	margin-top: 20px;
+}
+
+#googlecode {
+	padding-top: 10px;
+	width: 100%;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: center;
 }

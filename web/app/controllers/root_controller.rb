@@ -1,5 +1,5 @@
 class RootController < ApplicationController
-	layout 'main'
+	layout 'main', :except => ['digg']
 	
 	def index
 		@page = 'home';
@@ -9,8 +9,11 @@ class RootController < ApplicationController
 
 	def about
 		@page = 'about';
-		@side_partial = 'side'
-	end
+		@side_partial = 'side_about'
+  end
+
+  def digg
+  end
 	
 	def handle_unknown_request
 		redirect_to(:action => 'index')

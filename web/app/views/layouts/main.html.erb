@@ -31,7 +31,9 @@
 				<div class="box">
 					<h1>XRefresh</h1>
 					<h2>Browser refresh automation for web developers</h2>
+<div class="absolute">
 					<a id="logo" href="/"><img src="/images/logo.png" width="300" height="60" alt="XRefresh home" title="XRefresh - browser refresh automation"/></a>
+</div>
 					<ul id="nav">
 						<% location = request.env['PATH_INFO']
 						select = 'class="active"' %>
@@ -40,6 +42,30 @@
 						<li id="about" <%= select if location =~ /^\/about/ -%>><a href="/about">About</a></li>
 						<!-- http://getsatisfaction.com/xrefresh -->
 					</ul>
+
+<!-- AddThis Bookmark Button BEGIN -->
+<div class="absolute">
+<div id="share">
+<script type="text/javascript">
+  addthis_url    = 'http://xrefresh.com';   
+  addthis_title  = 'Browser refresh automation for web developers';  
+  addthis_pub    = 'woid';     
+</script><script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12" ></script>
+<!-- AddThis Bookmark Button END -->
+</div>
+</div>
+
+<div class="absolute">
+<div id="digg">
+	<script type="text/javascript">
+	digg_url = 'http://xrefresh.com';
+	digg_bgcolor = '#ffffff';
+	digg_skin = 'compact';
+	digg_window = 'new';
+	</script>
+	<script src="http://digg.com/tools/diggthis.js" type="text/javascript"></script> 	
+</div>
+</div>
 				</div>
 			</div>
 			<div id="bd">
