@@ -82,17 +82,19 @@
 				</div>
 				<% end %>
 				<div id="mid">
-					<div class="box yui-gc">
-						<div id="mid-content" class="yui-u first">
-							<%= yield %>
-						</div>
-						<div id="mid-sidebar" class="yui-u">
-							<%= render :partial => @side_partial %>
+					<div class="box">
+						<div class="yui-gc">
+							<div id="mid-content" class="yui-u first">
+								<%= yield %>
+							</div>
+							<div id="mid-sidebar" class="yui-u">
+								<%= render :partial => @side_partial %>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="ft"><div class="box"><%= render :partial => 'shared/ohloh' %><p>&copy; 2008 <a href="http://xrefresh.com">xrefresh.com</a> <a href="http://hildebrand.cz">Antonin Hildebrand</a>, <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">some rights reserved</a></p></div></div>
+			<div id="ft"><div class="box"><%= render :partial => 'shared/ohloh' %><p>&copy; 2008 <a href="http://xrefresh.com">xrefresh.com</a>, <a href="http://hildebrand.cz">Antonin Hildebrand</a>, <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">some rights reserved</a></p></div></div>
 		</div>
 		<%= render :partial => 'shared/analytics' %>
 	</body>

@@ -1,3 +1,10 @@
+html { height: 100%; margin-bottom: 1px; }
+
+.yui-u 
+{
+	margin-left: 0px !important;
+}
+
 iframe {
 	border: none;
 }
@@ -124,22 +131,29 @@ h2
 	width: 420px;
 }
 
-#mid-content, #mid-sidebar
-{
+#mid {
 	padding-top: 20px;
+}
+
+#mid-content {
+	height: 100%;
 }
 
 ul#nav
 {
 	float: right;
 	position: relative;
-	top: 53px;
+	top: 52px;
 	padding-right: 10px;
 }
 
 .ie ul#nav
 {
 	top: 52px;
+}
+.opera ul#nav
+{
+	top: 53px;
 }
 .safari ul#nav
 {
@@ -271,8 +285,6 @@ ul#nav
 	margin: 10px;
 	margin-top: 20px;
 	padding: 10px;
-	position: relative;
-	left: -16px;
 }
 
 #need-box ul
@@ -287,6 +299,21 @@ ul#nav
 	font-weight: normal;
 	list-style-type: square;
 	list-style-position: inside;
+}
+
+#screencast-box 
+{
+	margin: 10px;
+	margin-top: 30px;
+	padding: 10px;
+	text-align: center;;
+}
+
+#screencast-box p
+{
+	font-weight: bold;
+	font-size: 12pt;
+	color: #ddd;
 }
 
 #support-box 
@@ -305,17 +332,15 @@ ul#nav
 	padding-bottom: 6px;
 }
 
-.step p
-{
-	padding-top: 4px;
-	padding-left: 18px;
-}
-
 .step img
 {
 	padding: 4px;
 	padding-left: 18px;
 	float: left;
+}
+
+.step p {
+	padding-top: 4px;
 }
 
 .step .separated 
@@ -397,4 +422,8 @@ div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
 	font-weight: bold;
 	font-size: 12pt;
 	text-align: center;
+}
+
+.clear {
+	clear: both;
 }
