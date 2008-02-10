@@ -101,10 +101,17 @@ namespace Abhinaba.SysTray
 		///                     Each of the bitmaps must be 16x16 pixels  </param>
 		public void SetAnimationClip(Bitmap[] bitmap)
 		{
-			m_animationIcons = new Icon[bitmap.Length];
-			for (int i = 0; i < bitmap.Length; i++)
+			try
 			{
-				m_animationIcons[i] = Icon.FromHandle(bitmap[i].GetHicon());
+				m_animationIcons = new Icon[bitmap.Length];
+				for (int i = 0; i < bitmap.Length; i++)
+				{
+					m_animationIcons[i] = Icon.FromHandle(bitmap[i].GetHicon());
+				}
+			}
+			catch (Exception)
+			{
+				// I was getting generic GDI+ exceptions from time to time
 			}
 		}
 
@@ -117,12 +124,19 @@ namespace Abhinaba.SysTray
 		///                     first image and then from 16 to 32 pixel put the second image and so on</param>
 		public void SetAnimationClip(Bitmap bitmapStrip)
 		{
-			m_animationIcons = new Icon[bitmapStrip.Width / 16];
-			for (int i = 0; i < m_animationIcons.Length; i++)
+			try
 			{
-				Rectangle rect = new Rectangle(i * 16, 0, 16, 16);
-				Bitmap bmp = bitmapStrip.Clone(rect, bitmapStrip.PixelFormat);
-				m_animationIcons[i] = Icon.FromHandle(bmp.GetHicon());
+				m_animationIcons = new Icon[bitmapStrip.Width / 16];
+				for (int i = 0; i < m_animationIcons.Length; i++)
+				{
+					Rectangle rect = new Rectangle(i * 16, 0, 16, 16);
+					Bitmap bmp = bitmapStrip.Clone(rect, bitmapStrip.PixelFormat);
+					m_animationIcons[i] = Icon.FromHandle(bmp.GetHicon());
+				}
+			}
+			catch (Exception)
+			{
+				// I was getting generic GDI+ exceptions from time to time
 			}
 		}
 
