@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace XRefresh
 {
@@ -404,9 +405,17 @@ namespace XRefresh
 		/// <param name="path">Path of XML file to be overwritten</param>
 		public void Save(string path)
 		{
-			lock (this)
+			try
 			{
-				WriteXml(path, System.Data.XmlWriteMode.IgnoreSchema);
+				lock (this)
+				{
+					WriteXml(path, System.Data.XmlWriteMode.IgnoreSchema);
+				}
+			}
+			catch (Exception ex)
+			{
+				DialogResult res = MessageBox.Show(String.Format("Unable to save config file: {0}\nError: {1}", path, ex.Message), "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				if (res != DialogResult.OK) return;
 			}
 		}
 
