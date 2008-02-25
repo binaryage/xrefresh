@@ -4,6 +4,7 @@ How to prepare new release:
    install.rdf
    AssemblyInfo.cs
    VS_VERSION_INFO in XRefereshAddon project in Resource Editor
+   _build.bat
 2. alter version in build.bat
 3. update changelog
 4. run _clean.bat

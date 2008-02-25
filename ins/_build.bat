@@ -1,4 +1,4 @@
-@SET XVERSION=0.6
+@SET XVERSION=0.7
 @SET PATH=%PATH%;"C:\Program Files\Windows Installer XML v3\bin"
 call vsvars32.bat
 
