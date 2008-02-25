@@ -1,11 +1,6 @@
 /* Copyright (c) 2006 ActiveState Software Inc.
    See the file LICENSE.txt for licensing information. */
 
-function dump(s)
-{
-	FirebugContext.window.console.log(s);
-}
-
 if (typeof(Casper) == 'undefined') {
 	var Casper = {};
 }
@@ -116,7 +111,7 @@ Casper.Logging.Logger.prototype = {
 	},
 	doDump: function(level) {
 		if (this.level >= level) {
-			dump(this.name+": "+this.lastErrorMsg + "\n");
+			//TODO: dump(this.name+": "+this.lastErrorMsg + "\n");
 		}
 	},
 	debug: function(str) {

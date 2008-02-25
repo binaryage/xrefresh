@@ -158,7 +158,7 @@ Casper.XPath.XPathGenerator.prototype._elementXPath = function(node, binding)
 			prefix = node.prefix;
 		} catch(e) {
 			Casper.XPath.log.exception(e);
-			dump(Casper.XPath.log.getObjectTree(node));
+			//dump(Casper.XPath.log.getObjectTree(node));
 		}
 	}
 	if (prefix == null) {

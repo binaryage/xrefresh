@@ -1,7 +1,3 @@
-// TODO: 
-// prijmout konexe jen z localhostu
-// aplikovat refresh jen na stranky na localhostu
-
 // Thanks to:
 // Christoph Dorn <christoph@christophdorn.com>
 // Shane Caraveo
@@ -15,10 +11,10 @@
 // open custom scope
 FBL.ns(function() { with (FBL) { 
 
-const nsIPrefBranch = CI("nsIPrefBranch");
-const nsIPrefBranch2 = CI("nsIPrefBranch2");
+const nsIPrefBranch = Ci.nsIPrefBranch;
+const nsIPrefBranch2 = Ci.nsIPrefBranch2;
 
-const xrefreshPrefService = CC("@mozilla.org/preferences-service;1");
+const xrefreshPrefService = Cc["@mozilla.org/preferences-service;1"];
 
 const xrefreshPrefs = xrefreshPrefService.getService(nsIPrefBranch2);
 const xrefreshURLs = 
@@ -29,8 +25,6 @@ const xrefreshURLs =
 };
 
 const xrefreshPrefDomain = "extensions.xrefresh";
-
-const consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
 
 // see http://www.xulplanet.com/tutorials/mozsdk/sockets.php
 var drumTransport = null;
@@ -49,15 +43,15 @@ var listenerServer = null;
 
 var recorders = {};
 
-var debug = false;
+var DBG_XREFRESH = false;
+var DBG_CASPER = false;
 
 var readyStateTimer = null;
 var xrefreshOptionUpdateMap = {};
 
-function debugLog(msg) {
-	consoleService.logStringMessage("XREFRESH: " + msg);
+function debugLog() {
+	if (DBG_XREFRESH) Firebug.Console.log.apply(Firebug.Console, arguments); //FBTrace.sysout.apply(this, arguments);
 }
-
 
 ////////////////////////////////////////////////////////////////////////
 // Firebug.XRefreshExtension, here we go!
@@ -68,7 +62,6 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	initialize: function()
 	{
 		xrefreshPrefs.addObserver(xrefreshPrefDomain, this, false);
-		debug = this.getPref('debug');
 		
 		// Note: connection at this point was buggy.
 		// I didn't find out the reason. It seems delayed connection works well.
@@ -199,11 +192,6 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 			return;
 		
 		xrefreshOptionUpdateMap[name] = 1;
-		if (name == "debug")
-		{
-			debug = value;
-		}
-		
 		if (name == "disabledAlways")
 		{
 			if (value)
@@ -237,7 +225,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	installGate: function(context)
 	{
-		if (debug) debugLog("installed gate for>"+context.window.document.URL);
+		debugLog("installed gate for>"+context.window.document.URL);
 		
 		// the gate is here to stop propagation of some events 
 		// beyond HTML document borders.
@@ -252,14 +240,14 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		this.savedParents = [];
 		for (i = 0; i<keys.length; i++) 
 		{
-			if (debug) debugLog("keyset: "+keys[i].id);
+			debugLog("keyset: "+keys[i].id);
 			this.savedKeys[i] = keys[i];
 			this.savedParents[i] = keys[i].parentNode;
 		}
 		
 		for (j = 0; j<this.savedKeys.length; j++)
 		{
-			if (debug) debugLog("key: "+this.savedKeys[j].id+ " ?");
+			debugLog("key: "+this.savedKeys[j].id+ " ?");
 			this.savedParents[j].removeChild(this.savedKeys[j]);
 		}
 		
@@ -268,7 +256,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	uninstallGate: function(context)
 	{
-		if (debug) debugLog("uninstalling gate for>"+context.window.document.URL);
+		debugLog("uninstalling gate for>"+context.window.document.URL);
 		
 		this.restorePageOffset(context);
 
@@ -276,7 +264,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		for (i = 0; i < this.savedKeys.length; i++) 
 		{
 			this.savedParents[i].appendChild(this.savedKeys[i]);
-			if (debug) debugLog("restored key: "+this.savedKeys[i].id+ "! into: " + this.savedParents[i].id);
+			debugLog("restored key: "+this.savedKeys[i].id+ "! into: " + this.savedParents[i].id);
 		}
 		
 		// start recording new session
@@ -289,7 +277,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	printRecordersStats: function()
 	{
-		if (!debug) return;
+		if (!DBG_XREFRESH) return;
 		
 		this.log("Recorders:");
 		for (var r in recorders)
@@ -311,7 +299,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		var recorder = recorders[url];
 		if (recorder && recorder.destroyMarker==counter)
 		{
-			if (debug) debugLog("destroying recorder due to timeout ["+(counter+"")+"] >"+url);
+			debugLog("destroying recorder due to timeout ["+(counter+"")+"] >"+url);
 			delete recorders[url];
 			this.printRecordersStats();
 		}
@@ -323,20 +311,20 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	initContext: function(context)
 	{
-		if (debug) debugLog("init context>"+context.window.document.URL);
+		debugLog("init context>"+context.window.document.URL);
 		this.printRecordersStats();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	reattachContext: function(context)
 	{
-		if (debug) debugLog("reattach context>"+context.window.document.URL);
+		debugLog("reattach context>"+context.window.document.URL);
 		this.printRecordersStats();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	destroyContext: function(context, persistedState)
 	{
 		var panel = FirebugContext.getPanel("XRefreshExtension");
-		if (debug) debugLog("destroy context>"+context.window.document.URL);
+		debugLog("destroy context>"+context.window.document.URL);
 		
 		// we need to destroy recorders to prevent leaks
 		// we will defer recorder destroy for recorderKeepAlive time
@@ -368,7 +356,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	showContext: function(browser, context)
 	{
-		if (debug) debugLog("show context>"+context.window.document.URL);
+		debugLog("show context>"+context.window.document.URL);
 		this.updatePanel();
 		this.printRecordersStats();
 	},
@@ -379,14 +367,12 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		var nextDestroyMarker = 0;
 		if (recorder) nextDestroyMarker = recorder.destroyMarker + 1; // visiting old page prevent destroying recorder if found
 		
-		if (debug) debugLog("loaded context>" + context.window.document.URL);
+		debugLog("loaded context>" + context.window.document.URL);
 		this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
 
 		if (drumInitiatedRefresh) 
 		{
-			if (!recorder) alert('inconsitency!');
-			
-			if (debug) debugLog("drum initiated refresh>" + context.window.document.URL);
+			debugLog("drum initiated refresh>" + context.window.document.URL);
 			drumInitiatedRefresh = false;
 			if (recorder && recorder.state!="stopped")
 			{
@@ -396,22 +382,22 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		}
 		else
 		{
-			if (debug) debugLog("not drum initiated refresh>" + context.window.document.URL);
+			debugLog("not drum initiated refresh>" + context.window.document.URL);
 			var wasPaused = recorder?recorder.state=="paused":false;
 			var wasRecording = recorder?recorder.state=="recording":(!this.getPref("disabledRecorder"));
 			
 			// create new recorder
 			recorder = new Casper.Events.recorder(bind(this.updateRecorderPanel, this));
-			if (debug) debugLog("created recorder>" + recorder);
+			debugLog("created recorder>" + recorder);
 			for (var eventName in Casper.Events.handler) 
 			{
 				recorder.listener.addListener(eventName);
 			}
 
 			// register recorder
-			if (debug) debugLog("starting recorder>" + recorder);
+			debugLog("starting recorder>" + recorder);
 			if (wasRecording) recorder.start(context.window, wasPaused);
-			if (debug) debugLog("registering recorder as>" + context.window.document.URL);
+			debugLog("registering recorder as>" + context.window.document.URL);
 		}
 
 		recorder.destroyMarker = nextDestroyMarker;
@@ -421,11 +407,11 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		this.updateRecorderPanel();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	buttonRefresh: function() 
-	{ 
+	buttonRefresh: function()
+	{
 		FirebugContext.getPanel("XRefreshExtension").refresh(FirebugContext); 
 		this.log("Manual refresh performed by user", "rreq");
-	}, 
+	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	buttonConnect: function() 
 	{ 
@@ -460,13 +446,13 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		this.log("Macro Recorder has been started by user", "rstart");
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	replayRecorder: function(context) 
+	replayRecorder: function(context)
 	{ 
 		var recorder = this.getRecorder(context);
 		if (!recorder) return;
 		if (!recorder.currentTest) return;
 		if (recorder.state=="stopped") return;
-		if (recorder.state=="replaying") 
+		if (recorder.state=="replaying")
 		{
 			this.error("Cannot replay macro, recorder is in replay state."); 
 			return;
@@ -481,14 +467,14 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		this.updateRecorderPanel();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	buttonReplayRecorder: function() 
-	{ 
+	buttonReplayRecorder: function()
+	{
 		this.replayRecorder(FirebugContext);
 		this.log("Macro Recorder has been replayed by user", "rreplay");
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	buttonPauseRecorder: function() 
-	{ 
+	buttonPauseRecorder: function()
+	{
 		var currentRecorder = this.getRecorder(FirebugContext);
 		if (!currentRecorder) return;
 		
@@ -512,18 +498,16 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	connectDrum: function()
 	{
-		var transportService = Components.classes["@mozilla.org/network/socket-transport-service;1"]
-			.getService(Components.interfaces.nsISocketTransportService);
+		var transportService = Cc["@mozilla.org/network/socket-transport-service;1"].getService(Components.interfaces.nsISocketTransportService);
 		drumTransport = transportService.createTransport(null, 0, this.getPref("host"), this.getPref("port"), null);
 		drumOutStream = drumTransport.openOutputStream(0,0,0);
 		
 		var stream = drumTransport.openInputStream(0,0,0);
-		drumInStream = Components.classes["@mozilla.org/scriptableinputstream;1"]
-			.createInstance(Components.interfaces.nsIScriptableInputStream);
+		drumInStream = Cc["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
 		drumInStream.init(stream);
 	
 		var dataListener = {
-			parent: this,			
+			parent: this,
 			data : "",
 			onStartRequest: bind(function(request, context)
 			{
@@ -561,7 +545,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 			drumOutStream = null;
 		}
 		drumReady = false;
-		this.updateConnectionPanel();		
+		this.updateConnectionPanel();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	reconnectDrum: function()
@@ -624,19 +608,25 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	{
 		if (drumReady) this.error("Monitor has closed connection");
 		
-		drumInStream.close();
-		drumOutStream.close();
-		drumInStream = null;
-		drumOutStream = null;
+		if (drumInStream)
+		{
+			drumInStream.close();
+			drumInStream = null;
+		}
+		if (drumOutStream) 
+		{
+			drumOutStream.close();
+			drumOutStream = null;
+		}
 		drumReady = false;
-		this.updateConnectionPanel();		
+		this.updateConnectionPanel();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	onDataAvailable: function(listener)
 	{
 		// try to parse message
 		var data = UTF8.decode(listener.data);
-		if (debug) debugLog(data);
+		debugLog(data);
 		var message = Casper.JSON.parse(data);
 		if (!message) return; // we have only partial message ? wait for next chunk
 
@@ -652,13 +642,41 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		listener.data = ""; 
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
+	getMessageCSSFiles: function(message)
+	{
+		var files = [];
+		var re = /\.css$/;
+		for (var i=0; i<message.files.length; i++)
+		{
+			var file = message.files[i];
+			if (file.action=='changed')
+			{
+				if (file.path1.match(re))
+				{
+					files.push(message.root+'\\'+file.path1); // TODO: this should be platform specific
+				}
+			}
+		}
+		return files;
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
 	processMessage: function(message)
 	{
-		if (debug) debugLog("Received message:"+message.command);
+		debugLog("Received message:"+message.command);
 		if (message.command=="DoRefresh")
 		{
-			this.showEvent(message);
-			FirebugContext.getPanel("XRefreshExtension").refresh(FirebugContext); 
+			var panel = FirebugContext.getPanel("XRefreshExtension");
+			if (this.getPref("fastCSS"))
+			{
+				var cssFiles = this.getMessageCSSFiles(message);
+				if (cssFiles.length==message.files.length) // contains only CSS files
+				{
+					this.showEvent(message, 'fastcss');
+					return panel.updateCSS(FirebugContext, cssFiles);
+				}
+			}
+			this.showEvent(message, 'refresh');
+			panel.refresh(FirebugContext); 
 		}
 		if (message.command=="AboutMe")
 		{
@@ -680,6 +698,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	updateConnectionPanel: function()
 	{
+		if (!FirebugContext) return; // safety net
 		var panel = FirebugContext.getPanel("XRefreshExtension");
 		if (!panel) return;
 		var browser = panel.context.browser;
@@ -720,6 +739,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	updateRefreshPanel: function()
 	{
+		if (!FirebugContext) return; // safety net
 		var panel = FirebugContext.getPanel("XRefreshExtension");
 		if (!panel) return;
 		var browser = panel.context.browser;
@@ -732,6 +752,7 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	updateRecorderPanel: function()
 	{
+		if (!FirebugContext) return; // safety net
 		var panel = FirebugContext.getPanel("XRefreshExtension");
 		if (!panel) return;
 		var browser = panel.context.browser;
@@ -817,16 +838,16 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 		}
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	showEvent: function(message)
+	showEvent: function(message, icon)
 	{
 		message.time = this.getCurrentTime();
-		var event = new BlinkEvent(0, message);
+		var event = new BlinkEvent(0, message, icon);
 		return this.publishEvent(event);
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	showLog: function(text, icon)
 	{
-		var event = new BlinkEvent(1, {text:text, time:this.getCurrentTime(), icon:icon});
+		var event = new BlinkEvent(1, {text:text, time:this.getCurrentTime()}, icon);
 		return this.publishEvent(event);
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
@@ -894,14 +915,18 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	storePageOffset: function(context)
 	{
-		if (debug) debugLog("Storing offsets for "+context.window.document.URL);
-		recorders[context.window.document.URL].offsets = [context.window.pageXOffset, context.window.pageYOffset];
+		debugLog("Storing offsets for "+context.window.document.URL);
+		var recorder = recorders[context.window.document.URL];
+		if (!recorder) return;
+		recorder.offsets = [context.window.pageXOffset, context.window.pageYOffset];
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	restorePageOffset: function(context)
 	{
-		if (debug) debugLog("Restoring offsets for "+context.window.document.URL);
-		var data = recorders[context.window.document.URL].offsets;
+		debugLog("Restoring offsets for "+context.window.document.URL);
+		var recorder = recorders[context.window.document.URL];
+		if (!recorder) return;
+		var data = recorder.offsets;
 		if (!data) return;
 		context.window.scrollTo(data[0], data[1]);
 	}
@@ -910,17 +935,18 @@ Firebug.XRefreshExtension = extend(Firebug.Module,
 ////////////////////////////////////////////////////////////////////////
 //
 //
-top.BlinkEvent = function(type, message)
+top.BlinkEvent = function(type, message, icon)
 {
 	this.type = type;
 	this.message = message;
 	this.opened = false;
+	this.icon = icon;
 };
 
 Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep,
 {
 	tagRefresh: 
-		DIV({class: "blinkHead closed refresh", _repObject: "$object"},
+		DIV({class: "blinkHead closed $object|getIcon", _repObject: "$object"},
 			A({class: "blinkTitle", onclick: "$onToggleBody"},
 				IMG({class: "blinkIcon", src: "blank.gif"}),
 				SPAN({class: "blinkDate"}, "$object|getDate"),
@@ -949,7 +975,7 @@ Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep,
 	/////////////////////////////////////////////////////////////////////////////////////////
 	getIcon: function(event)
 	{
-		return event.message.icon;
+		return event.icon;
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	getDate: function(event)
@@ -1084,12 +1110,12 @@ Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep,
 	}
 });
 
-function XRefreshExtensionPanel() {} 
-XRefreshExtensionPanel.prototype = extend(Firebug.Panel, 
+function XRefreshExtensionPanel() {}
+XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
 { 
-	name: "XRefreshExtension", 
-	title: "XRefresh", 
-	searchable: false, 
+	name: "XRefreshExtension",
+	title: "XRefresh",
+	searchable: false,
 	editable: false,
 	
 	wasScrolledToBottom: true,
@@ -1103,7 +1129,7 @@ XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
 		this.restoreState();
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	applyCSS: function()	
+	applyCSS: function()
 	{
 		this.applyPanelCSS("chrome://xrefresh/skin/panel.css");
 	},
@@ -1120,7 +1146,7 @@ XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
 		}
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
-	refresh: function(context)	
+	refresh: function(context)
 	{
 		var localOnly = Firebug.XRefreshExtension.getPref('localPagesOnly');
 		var uri = this.safeGetURI();
@@ -1134,7 +1160,96 @@ XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
 		
 		Firebug.XRefreshExtension.storePageOffset(context);
 		drumInitiatedRefresh = true;
-		this.context.browser.reloadWithFlags(this.context.browser.webNavigation.LOAD_FLAGS_BYPASS_CACHE);
+		this.context.browser.reloadWithFlags(/*this.context.browser.webNavigation.LOAD_FLAGS_BYPASS_CACHE*/);
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	updateStyleSheet: function(document, element, path)
+	{
+		var file = Cc["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		file.initWithPath(path);
+		// note: async loading doesn't work
+//		var ios = Cc["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+//		var fileURI = ios.newFileURI(file);
+//		var channel = ios.newChannelFromURI(fileURI, document.characterSet, null);
+//		channel.loadFlags |= Ci.nsIRequest.LOAD_BYPASS_CACHE;
+		var observer = {
+			onStreamComplete: function(aLoader, aContext, aStatus, aLength, aResult)
+			{
+				var styleElement = document.createElement("style");
+				styleElement.setAttribute("type", "text/css");
+				styleElement.appendChild(document.createTextNode(aResult));
+				var attrs = ["media", "title", "disabled"];
+				for (var i=0; i<attrs.length; i++)
+				{
+					var attr = attrs[i];
+					if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
+				}
+				element.parentNode.replaceChild(styleElement, element);
+				styleElement.originalHref = element.originalHref?element.originalHref:element.href;
+			}
+		};
+//		var sl = Cc["@mozilla.org/network/stream-loader;1"].createInstance(Components.interfaces.nsIStreamLoader);
+//		sl.init(channel, observer, null); // <- this doesn't work on FF3b3
+
+		var inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+		var scriptableStream = Cc["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
+
+		inputStream.init(file, -1, 0, 0);
+		scriptableStream.init(inputStream);
+		var content = scriptableStream.read(scriptableStream.available());
+		scriptableStream.close();
+		inputStream.close();
+		
+		observer.onStreamComplete(null, null, null, null, content);
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	collectDocuments: function(frame)
+	{
+		var documents = [];
+		if(!frame) return documents;
+		if(frame.document) documents.push(frame.document);
+		var frames = frame.frames;
+		for(var i=0; i<frames.length; i++) documents = documents.concat(this.collectDocuments(frames[i]));
+		return documents;
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	doesCSSNameMatch: function(cssLink, cssFile)
+	{
+		var firstQ = cssLink.indexOf('?');
+		if (firstQ!=-1) cssLink = cssLink.substring(0, firstQ);
+		var lastSlash = cssLink.lastIndexOf('/');
+		if (lastSlash!=-1) cssLink = cssLink.substring(lastSlash+1);
+		var lastBackSlash = cssFile.lastIndexOf('\\');
+		if (lastBackSlash!=-1) cssFile = cssFile.substring(lastBackSlash+1);
+		return (cssFile.toLowerCase()==cssLink.toLowerCase());
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	replaceMatchingStyleSheetsInDocument: function(document, cssFile)
+	{
+		var styleSheetList = document.styleSheets;
+		for (var i=0; i<styleSheetList.length; i++)
+		{
+			var styleSheetNode = styleSheetList[i].ownerNode; // this may be <style> or <link> node 
+			if (!styleSheetNode) continue;
+			var href = styleSheetNode.href || styleSheetNode.originalHref;
+			if (!href) continue;
+			if (this.doesCSSNameMatch(href, cssFile)) this.updateStyleSheet(document, styleSheetNode, cssFile);
+		}
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	replaceMatchingStyleSheets: function(context, cssFile)
+	{
+		var documents = this.collectDocuments(context.window);
+		for (var i=0; i<documents.length; i++) this.replaceMatchingStyleSheetsInDocument(documents[i], cssFile);
+	},
+	/////////////////////////////////////////////////////////////////////////////////////////
+	updateCSS: function(context, cssFiles)
+	{
+		for (var i=0; i<cssFiles.length; i++)
+		{
+			var cssFile = cssFiles[i];
+			this.replaceMatchingStyleSheets(context, cssFile);
+		}
 	},
 	/////////////////////////////////////////////////////////////////////////////////////////
 	publish: function(event)
