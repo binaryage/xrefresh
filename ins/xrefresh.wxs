@@ -312,7 +312,7 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 	<Property Id='ARPCONTACT'>antonin@hildebrand.cz</Property>
 	<Property Id='ARPHELPLINK'>http://xrefresh.com/help</Property>
 	<Property Id='ARPURLINFOABOUT'>http://xrefresh.com</Property>
-	<Property Id='ARPURLUPDATEINFO'>http://xrefresh.com/download</Property>
+	<Property Id='ARPURLUPDATEINFO'>http://xrefresh.com</Property>
 	<Property Id='ARPSIZE'>800</Property>
 	<Property Id='ARPPRODUCTICON'>XRefreshIcon</Property>
 	<Icon Id="XRefreshIcon" SourceFile="../bin/XRefresh.exe" />
