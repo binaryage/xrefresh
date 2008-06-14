@@ -1,1 +1,30 @@
-<h1>TODO</h1>
+<div id="submit-preset">
+  <div>
+    <%= mail_to('antonin@hildebrand.cz', 'Submit your own color preset', :encode=>'javascript', :subject=>'Rainbow color preset') %>
+  </div>
+</div>
+
+<%= image_tag('import_preset.png', { :size=>'500x87', :id=>'help-preset' }) %>
+
+<div id="top-line">
+  <h2>Pick a color preset below</h2>
+  <p>and copy&amp;paste CSS code into "Import Color Presets" dialog in Rainbow</p>
+</div>
+
+<br clear="all"/>
+<ul id="snippet-selector">
+  <% for snippet in @snippets %>
+      <li class="snippet-link" onclick="if (window.oldSelection) window.oldSelection.className='snippet-link'; window.oldSelection = this; window.oldSelection.className = 'snippet-link selected'; document.getElementById('source-preview').className='<%=snippet.name %>'; var pa = document.getElementById('paste-area'); pa.innerHTML='<%= escape_javascript(snippet.code)%>'; pa.focus(); pa.select();" title="<%=h snippet.description %>">
+        <%=h snippet.title %>
+      </li>
+  <% end %>
+</ul>
+
+<div id="source-preview">
+  <%= render :partial => 'example'%>
+</div>
+
+<div id="copy-box">
+  <textarea id="paste-area"></textarea>
+</div>
+

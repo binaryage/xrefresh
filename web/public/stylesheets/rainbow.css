@@ -28,7 +28,12 @@ a:hover
 
 #hd
 {
-    height: 120px;
+    height: 70px;
+}
+
+#space-bar
+{
+    height: 50px;
 }
 
 #hd h1, #hd h2
@@ -191,4 +196,83 @@ a:hover
     width: 160px;
     height: 40px;
     line-height: 40px;
+}
+
+.panelNode {
+    width: 500px;
+    height: 400px;
+    overflow: scroll !important;
+}
+
+#snippet-selector {
+    float: left;
+    width: 246px;
+}
+
+#snippet-selector li {
+    list-style-type: decimal;
+    list-style-position: inside;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 2px 6px;
+    cursor: pointer;
+    color:blue;
+}
+
+#top-line {
+    border-top: solid 1px #BBB9BA;
+    margin-bottom: 20px;
+}
+
+#top-line h2 {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.selected {
+    background-color: #888;
+    color: white !important;
+}
+
+#source-preview {
+    border: solid 2px #888;
+    float:right;
+}
+
+#submit-preset {
+    position: absolute;
+    text-align: right;
+    width: 300px;
+}
+
+#submit-preset div {
+    left: 440px;
+}
+
+#submit-preset div {
+    position: relative;
+    top: -30px;
+}
+
+#submit-preset div a {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#copy-box {
+    border: solid 2px #888;
+    border-top: none;
+    float:right;
+    width: 500px;
+    height: 100px;
+}
+
+#copy-box textarea {
+    width: 100%;
+    height: 100%;
+}
+
+#help-preset {
+    float: right;
 }

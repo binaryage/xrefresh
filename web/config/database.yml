@@ -17,9 +17,9 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: xrefresh_development
+  database: woid_xrefresh_com
   username: root
-  password:
+  password: vypustitkrakena
   host: localhost
 
 # Warning: The database defined as 'test' will be erased and
@@ -36,7 +36,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: xrefresh_production
-  username: root
-  password: 
+  database: woid_xrefresh_com
+  username: woid
+  password: mrdkateposkace
   host: localhost

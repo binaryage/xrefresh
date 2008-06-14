@@ -1,0 +1,3 @@
+<% for snippet in @snippets %>
+  <%= snippet.code.gsub(/(\.\w|\w\.\w|\w#\w)/, ".#{snippet.name} \\1") %>
+<% end %>

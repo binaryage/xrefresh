@@ -64,4 +64,15 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  
+  #setup global constants for manipulating states
+  RAILS_ENV_VAR = "RAILS_ENV" 
+  RAILS_ENV_DEV = ENV[RAILS_ENV_VAR]=="development" 
+  RAILS_ENV_TEST = ENV[RAILS_ENV_VAR]=="test" 
+  if (RAILS_ENV_DEV) or (RAILS_ENV_TEST)
+    RAILS_ENV_PRODUCTION = false
+  else
+    RAILS_ENV_PRODUCTION = true
+  end
+  
 end

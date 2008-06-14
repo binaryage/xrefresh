@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :snippets
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -33,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'help/:action', :controller => 'help'
   map.connect 'rainbow/example/:action', :controller => 'example'
   map.connect 'rainbow/:action', :controller => 'rainbow'
-  map.connect 'presets/:action', :controller => 'presets'
+  map.connect 'presets/:action/:id', :controller => 'presets'
   map.connect ':action', :controller => 'root'
   map.root :controller => 'root'
   map.connect 'notfound', :controller => 'root', :action => 'handle_unknown_request'
