@@ -1,0 +1,2 @@
+module RainbowHelper
+end

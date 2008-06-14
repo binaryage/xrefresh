@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Rainbow for Firebug - example page</title>
+    <%= javascript_include_tag "example" %>
+    <script>
+        // CSS Browser Selector   v0.2.5
+        // Documentation:         http://rafael.adm.br/css_browser_selector
+        // License:               http://creativecommons.org/licenses/by/2.5/
+        // Author:                Rafael Lima (http://rafael.adm.br)
+        // Contributors:          http://rafael.adm.br/css_browser_selector#contributors
+        var css_browser_selector = function() {
+            var ua=navigator.userAgent.toLowerCase(),
+            is=function(t){ return ua.indexOf(t) != -1; },
+            h=document.getElementsByTagName('html')[0],
+            b=(!(/opera|webtv/i.test(ua))&&/msie (\d)/.test(ua))?('ie ie'+RegExp.$1):is('gecko/')? 'gecko':is('opera/9')?'opera opera9':/opera (\d)/.test(ua)?'opera opera'+RegExp.$1:is('konqueror')?'konqueror':is('applewebkit/')?'webkit safari':is('mozilla/')?'gecko':'',
+            os=(is('x11')||is('linux'))?' linux':is('mac')?' mac':is('win')?' win':'';
+            var c=b+os+' js';
+            h.className += h.className?' '+c:c;
+        }();
+    </script>
+  </head>
+
+  <body>
+    <div id="doc3" class="yui-t7">
+      <div id="bd">
+        <div id="mid">
+          <div class="box">
+            <div class="yui-gc">
+              <div id="mid-content" class="yui-u first">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

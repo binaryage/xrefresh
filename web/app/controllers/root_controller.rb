@@ -1,22 +1,22 @@
 class RootController < ApplicationController
   caches_page :index, :about
-	layout 'main', :except => ['digg']
-	
-	def index
-		@page = 'home';
-		@top_partial = 'download'
-		@side_partial = 'side'
-	end
+  layout 'main', :except => ['digg']
 
-	def about
-		@page = 'about';
-		@side_partial = 'side_about'
+  def index
+    @page = 'home';
+    @top_partial = 'download'
+    @side_partial = 'side'
+  end
+
+  def about
+    @page = 'about';
+    @side_partial = 'side_about'
   end
 
   def digg
   end
-	
-	def handle_unknown_request
-		redirect_to(:action => 'index')
-	end
+
+  def handle_unknown_request
+    redirect_to(:action => 'index')
+  end
 end

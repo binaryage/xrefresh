@@ -1,0 +1,194 @@
+html { height: 100%; margin-bottom: 1px; }
+
+.yui-u {
+    margin-left: 0px !important;
+}
+
+iframe {
+    border: none;
+}
+
+a{
+    color: blue;
+    text-decoration: none;
+}
+
+b{
+    font-weight: bold;
+}
+
+p{
+    padding: 4px;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+#hd
+{
+    height: 120px;
+}
+
+#hd h1, #hd h2
+{
+    display: none;
+}
+
+#hd #logo
+{
+    float: left;
+    position: relative;
+    top: 10px;
+    left: -50px;
+}
+
+#ft
+{
+    margin-top: 5px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    border-top: solid 1px #BBB9BA;
+    font-size: 80%;
+    color: #888;
+}
+
+#ft a, #ft p
+{
+    color: #888;
+    text-decoration: none;
+}
+
+#ft a:hover {
+    text-decoration: underline;
+}
+
+#ohloh
+{
+    padding-top: 2px;
+    float: right;
+}
+
+#extras {
+    margin-top: 60px;
+    border-bottom: solid 1px #BBB9BA;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#extras span {
+    padding: 2px 10px;
+    color: white;
+    background-color: grey;
+}
+
+#show-box {
+    margin-top: 10px;
+}
+
+#show-box > div {
+    float: left;
+}
+
+#satisfaction-box {
+    width: 300px;
+}
+
+#presets-box {
+    width: 250px;
+}
+
+#code-box {
+    width: 200px;
+}
+
+#show-box > div > a:hover{
+    text-decoration: underline;
+}
+
+#show-box > div > a > img {
+    float: left;
+}
+
+#show-box > div > a > p {
+    color: blue;
+    float: left;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 20px;
+}
+
+#update {
+    position: absolute;
+    text-align: right;
+    width: 300px;
+}
+
+#update div {
+    left: 150px;
+}
+
+#update div {
+    position: relative;
+    top: -50px;
+}
+
+#update div p {
+    padding-top: 0px;
+    color: red;
+    font-weight: bold;
+}
+
+#update div a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#download {
+    position: absolute;
+    text-align: right;
+    width: 300px;
+}
+
+#download div {
+    left: 400px;
+}
+
+#download div {
+    position: relative;
+    top: -50px;
+}
+
+#download div a {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#download div p {
+    padding-top: 0px;
+    color: black;
+    font-weight: bold;
+}
+
+#shock {
+    position: absolute;
+}
+
+#shock p {
+    background-image: url(/images/arrow.png);
+    color: white;
+    position: relative;
+    top: -56px;
+    left: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+}

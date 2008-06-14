@@ -31,6 +31,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # Install the default routes as the lowest priority.
   map.connect 'help/:action', :controller => 'help'
+  map.connect 'rainbow/example/:action', :controller => 'example'
+  map.connect 'rainbow/:action', :controller => 'rainbow'
+  map.connect 'presets/:action', :controller => 'presets'
   map.connect ':action', :controller => 'root'
   map.root :controller => 'root'
   map.connect 'notfound', :controller => 'root', :action => 'handle_unknown_request'
