@@ -238,6 +238,7 @@ a:hover
 #source-preview {
     border: solid 2px #888;
     float:right;
+    font-size: 11px;
 }
 
 #submit-preset {
