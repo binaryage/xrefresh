@@ -12,6 +12,6 @@ pref("extensions.xrefresh.host", "localhost");
 // Internal
 pref("extensions.xrefresh.recorderKeepAlive", 30000); // 30 seconds by default
 
-pref("extensions.xrefreshenableLocalFiles", false);
+pref("extensions.xrefresh.enableLocalFiles", false);
 pref("extensions.xrefresh.enableSystemPages", false);
 pref("extensions.xrefresh.enableSites", false);
