@@ -7,25 +7,14 @@
 # Based on code by Dave Dribin
 # http://www.dribin.org/dave/blog/archives/2008/01/04/fswatch/
 
-def die(s)
-    $stderr.puts s
-    exit 1
-end
-
-require 'osx/foundation'
-OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework'
-include OSX
 require 'set'
 require 'optparse'
 require 'ostruct'
 require "yaml"
-require 'gserver'
 begin
     require 'xrefresh-server'
 rescue LoadError
-    module XRefreshServer
-        VERSION = "?"
-    end
+    require '../lib/xrefresh-server.rb'
 end
 begin
     require 'json'
@@ -33,381 +22,123 @@ rescue LoadError
     die 'You must "sudo gem install json" to get xrefresh monitor running'
 end
 
-def generate_config(path)
-    puts "Generating config in #{path}"
-    File.open(path, "w") do |file|
-        file.puts <<CONFIG\
-# here specify list of paths to monitor
-paths:
-  - #{File.expand_path('~')} # by default watch user's home directory
-# - /you/may/add/here/some/other/path
-# - /you/may/add/here/some/another/path
+module XRefreshServer
 
-# you can various filters (ruby regexp pattern)
-# every file is split to dir and file part (for example /Users/mick/proj/coolapp and some_file.rb)
-#   both include filters must be satisfied
-#   both exclude filters must not be satisfied
-# empty value means "apply no filtering"
-dir_include:
-dir_exclude: ^#{File.expand_path('~')}/Library|/\\.(svn|framework|app|pbproj|pbxproj|xcode(proj)?|bundle)/
-file_include:
-file_exclude: ^(CVS|SCCS|vssver.?.scc|\\.(cvsignore|svn|DS_Store)|_svn|Thumbs\\.db)$|~$|^(\\.(?!htaccess)[^/]*|\\.(tmproj|o|pyc)|svn-commit(\\.[2-9])?\\.tmp)$ # merged TextMate and Netbeans patterns
+    ################################################################################
+    # command-line parsing
 
-# xpert settings
-host: #{GServer::DEFAULT_HOST}
-port: 41258 # known port for clients to connect 
-max_connections: 4 # max client connections
-debug: false # run in debug mode?
-audit: false # audit server activity
-defer_time: 0.5 # aggregation time for events
-sleep_time: 0.1 # don't hung cpu in main loop
-CONFIG
-    end
-end
+    $COMMAND = File.basename($0)
+    $USAGE = "Usage: #{$COMMAND} [OPTIONS]"
+    $VERSION = XRefreshServer::VERSION
+    $AGENT = "OSX xrefresh-server"
+    CONFIG_FILE = ".xrefresh-server.yml"
 
-################################################################################
-# command-line parsing
+    options = OpenStruct.new
+    options.output = "-"
+    options.config = nil
 
-$COMMAND = File.basename($0)
-$USAGE = "Usage: #{$COMMAND} [OPTIONS]"
-$VERSION = XRefreshServer::VERSION
-$AGENT = "OSX xrefresh-server"
-CONFIG_FILE = ".xrefresh-server.yml"
+    opts = OptionParser.new do |o|
+        o.banner = $USAGE
+        o.separator ""
+        o.separator "Specific options:"
 
-options = OpenStruct.new
-options.output = "-"
-options.config = nil
+        o.on("-c", "--config FILE", "Config file") do |fn|
+            options.config = fn
+        end
 
-opts = OptionParser.new do |o|
-    o.banner = $USAGE
-    o.separator ""
-    o.separator "Specific options:"
+        o.on("-g", "--generate [FILE]", "Generates default config file on given path") do |fn|
+            fn = "~/#{CONFIG_FILE}" if fn.nil?
+            XRefreshServer::generate_config(File.expand_path(fn))
+            exit
+        end
 
-    o.on("-c", "--config FILE", "Config file") do |fn|
-        options.config = fn
+        o.on("-o", "--output FILE", "Write output to a file") do |fn|
+            options.output = fn
+        end
+
+        o.on_tail("-h", "--help", "Show this message") do
+            puts o
+            exit
+        end
+
+        o.on_tail("-v", "--version", "Show version") do
+            puts $VERSION
+            exit
+        end
     end
 
-    o.on("-g", "--generate [FILE]", "Generates default config file on given path") do |fn|
-        fn = "~/#{CONFIG_FILE}" if fn.nil?
-        generate_config(File.expand_path(fn))
-        exit
+    begin
+        opts.parse!(ARGV)
+    rescue
+        die "Unable to parse options: #{$!}"
     end
 
-    o.on("-o", "--output FILE", "Write output to a file") do |fn|
-        options.output = fn
-    end
-
-    o.on_tail("-h", "--help", "Show this message") do
-        puts o
-        exit
-    end
-
-    o.on_tail("-v", "--version", "Show version") do
-        puts $VERSION
-        exit
-    end
-end
-
-begin
-    opts.parse!(ARGV)
-rescue
-    die "Unable to parse options: #{$!}"
-end
-
-# initialize output handle
-if options.output == "-"
-    $out = $stdout.clone
-else
-    $out = File.open(options.output, "w")
-end
-
-################################################################################
-# load config
-unless options.config
-    path = File.expand_path("~/#{CONFIG_FILE}")
-    options.config = path if File.exists?(path)
-    path = File.expand_path("./#{CONFIG_FILE}")
-    options.config = path if File.exists?(path)
-end
-unless options.config
-    puts "Config file #{CONFIG_FILE} not found in current folder or home."
-    puts "It seems you are running xrefresh-server for first time."
-    puts "Do you want to generate default config file in home directory? [Yn]"
-    s = STDIN.getc.chr
-    if s=='y' || s=='Y'
-        options.config = File.expand_path("~/#{CONFIG_FILE}")
-        generate_config(options.config)
+    # initialize output handle
+    if options.output == "-"
+        $out = $stdout.clone
     else
-        die "Please launch xrefresh-server with -c option and specify path to your config"
+        $out = File.open(options.output, "w")
     end
-end
-begin
-    CONFIG = YAML::load_file(options.config)
-rescue
-    die "Unable to load or parse config: #{options.config}"
-end
 
-# sanitize config values
-CONFIG["dir_include"] = '.*' unless CONFIG["dir_include"] 
-CONFIG["file_include"] = '.*' unless CONFIG["file_include"]
-CONFIG["dir_exclude"] = '^$' unless CONFIG["dir_exclude"] 
-CONFIG["file_exclude"] = '^$' unless CONFIG["file_exclude"] 
-CONFIG["dir_include"] = Regexp.new(CONFIG["dir_include"])
-CONFIG["file_include"] = Regexp.new(CONFIG["file_include"])
-CONFIG["dir_exclude"] = Regexp.new(CONFIG["dir_exclude"])
-CONFIG["file_exclude"] = Regexp.new(CONFIG["file_exclude"])
-CONFIG["max_connections"] = 4 unless CONFIG["max_connections"]
-CONFIG["host"] = GServer::DEFAULT_HOST unless CONFIG["host"]
-CONFIG["debug"] = !!CONFIG["debug"]
-CONFIG["audit"] = !!CONFIG["audit"]
-CONFIG["defer_time"] = 0.5 unless CONFIG["defer_time"]
-CONFIG["sleep_time"] = 0.1 unless CONFIG["sleep_time"]
-CONFIG.freeze
-
-################################################################################
-# client/server stuff
-
-# client
-class XRefreshClient
-    attr :id, :dead
-
-    def initialize(id, socket)
-        @id = id
-        @socket = socket
-        @dead = false
+    ################################################################################
+    # load config
+    unless options.config
+        path = File.expand_path("~/#{CONFIG_FILE}")
+        options.config = path if File.exists?(path)
+        path = File.expand_path("./#{CONFIG_FILE}")
+        options.config = path if File.exists?(path)
     end
-    
-    def send(data)
-        return if @dead
-        begin
-            @socket << data
-        rescue
-            $out.puts "Client ##{@id} is dead"
-            @dead = true
+    unless options.config
+        puts "Config file #{CONFIG_FILE} not found in current folder or home."
+        puts "It seems you are running xrefresh-server for first time."
+        puts "Do you want to generate default config file in home directory? [Yn]"
+        s = STDIN.getc.chr
+        if s=='y' || s=='Y'
+            options.config = File.expand_path("~/#{CONFIG_FILE}")
+            generate_config(options.config)
+        else
+            die "Please launch xrefresh-server with -c option and specify path to your config"
         end
     end
-
-    def send_about(version, agent)
-        send({"command" => "AboutMe", "version" => version, "agent" => agent}.to_json)
+    begin
+        CONFIG = YAML::load_file(options.config)
+    rescue
+        die "Unable to load or parse config: #{options.config}"
     end
 
-    def send_do_refresh(root, name, type, date, time, files)
-        send({"command" => "DoRefresh", "root" => root, "name" => name, "date" => date, "time" => time, "type" => type, "files" => files}.to_json)
-    end
+    # sanitize config values
+    CONFIG["dir_include"] = '.*' unless CONFIG["dir_include"] 
+    CONFIG["file_include"] = '.*' unless CONFIG["file_include"]
+    CONFIG["dir_exclude"] = '^$' unless CONFIG["dir_exclude"] 
+    CONFIG["file_exclude"] = '^$' unless CONFIG["file_exclude"] 
+    CONFIG["dir_include"] = Regexp.new(CONFIG["dir_include"])
+    CONFIG["file_include"] = Regexp.new(CONFIG["file_include"])
+    CONFIG["dir_exclude"] = Regexp.new(CONFIG["dir_exclude"])
+    CONFIG["file_exclude"] = Regexp.new(CONFIG["file_exclude"])
+    CONFIG["max_connections"] = 4 unless CONFIG["max_connections"]
+    CONFIG["host"] = GServer::DEFAULT_HOST unless CONFIG["host"]
+    CONFIG["debug"] = !!CONFIG["debug"]
+    CONFIG["audit"] = !!CONFIG["audit"]
+    CONFIG["defer_time"] = 0.5 unless CONFIG["defer_time"]
+    CONFIG["sleep_time"] = 0.1 unless CONFIG["sleep_time"]
+    CONFIG.freeze
+
+    ################################################################################
+    # run server
+    $out.puts "Starting server on #{CONFIG["host"]}:#{CONFIG["port"]} (max #{CONFIG["max_connections"]} clients)"
+    server = Server.new(CONFIG["port"], CONFIG["host"], CONFIG["max_connections"], $stderr, CONFIG["audit"], CONFIG["debug"])
+    server.start
+
+    ################################################################################
+    # run filesystem monitoring loop
+    start_id = FSEventsGetCurrentEventId()
+    start_time = Time.now.to_i # used to compare with mtime, which only has second accuracy
+    monitor = Monitor.new(server, CONFIG)
+    monitor.schedule(start_id)
+    monitor.run_loop(start_time) # blocking call
+
+    ################################################################################
+    # leave in peace
+    $out.flush
+    exit(0)
 end
-
-# server
-class XRefreshServer < GServer
-    attr :clients
-
-    def initialize(*args)
-        super(*args)
-        @clients = Set.new
-        @last_client_id = 0
-    end
-
-    def serve(socket)
-        socket.binmode
-        @last_client_id += 1
-        client = XRefreshClient.new(@last_client_id, socket)
-        @clients.add(client)
-        buffer = ""
-        loop do
-            # accumulate incomming input in @buffer !NON BLOCKING!
-            begin
-                data, = socket.recv(65536)
-                buffer += data
-            rescue
-                break
-            end
-
-            begin
-                # try to parse buffer
-                msg = JSON.parse buffer
-            rescue
-                # buffer may be incomplete due to packet fragmentation ...
-            else
-                # got whole message => process it
-                buffer = ""
-                process(client, msg)
-            end
-        end
-    end
-
-    def process(client, msg)
-        # see windows implementation in src/winmonitor/Server.cs#ProcessMessage
-        case msg["command"]
-        when "Hello"
-            type = msg["type"] || '?'
-            agent = msg["agent"] || '?'
-            $out.puts "* Client ##{client.id} connected:  #{type} (#{agent})"
-            client.send_about($VERSION, $AGENT)
-        when "Bye"
-            @clients.delete(client)
-            $out.puts "* Client ##{client.id} disconnected"
-        when "SetPage"
-            url = msg["url"] || '?'
-            $out.puts "* Client ##{client.id} changed page to #{url}"
-        end
-    end
-end
-
-# run server
-$out.puts "Starting server on #{CONFIG["host"]}:#{CONFIG["port"]} (max #{CONFIG["max_connections"]} clients)"
-server = XRefreshServer.new(CONFIG["port"], CONFIG["host"], CONFIG["max_connections"], $stderr, CONFIG["audit"], CONFIG["debug"])
-server.start
-
-################################################################################
-# filesystem monitoring loop
-
-result = 0
-start_id = FSEventsGetCurrentEventId()
-start_time = Time.now.to_i # used to compare with mtime, which only has second accuracy
-
-modified_dirs = Set.new
-paths_info = Hash.new
-streams = []
-
-fsevents_cb = proc do |stream, ctx, numEvents, paths, marks, eventIDs|
-    # ctx doesn't work through rubycocoa?
-    root = FSEventStreamCopyPathsBeingWatched(stream).first
-    paths.regard_as('*')
-    numEvents.times do |n|
-        $out.puts "Event: #{paths[n]}" if CONFIG["debug"]
-        modified_dirs.add({:root=>root, :dir=>paths[n]})
-    end
-end
-
-CONFIG["paths"].each do |path|
-    $out.puts "  monitoring #{path}"
-    # need to create new stream for every supplied path
-    # because we want to report registered sources of the changes
-    stream = FSEventStreamCreate(
-        KCFAllocatorDefault,
-        fsevents_cb,
-        nil,
-        [path],
-        start_id,
-        CONFIG["defer_time"],
-        KFSEventStreamCreateFlagNone) #KFSEventStreamCreateFlagNoDefer
-    die "Failed to create the FSEventStream" unless stream
-
-    FSEventStreamScheduleWithRunLoop(
-        stream,
-        CFRunLoopGetCurrent(),
-        KCFRunLoopDefaultMode)
-
-    ok = FSEventStreamStart(stream)
-    die "Failed to start the FSEventStream" unless ok
-
-    streams << stream
-end
-
-# main loop
-$out.puts "Waiting for file system events ..."
-not_first_time = false
-loop do
-    if server.stopped?
-        $out.puts "Server stopped"
-        break
-    end
-    streams.each do |stream|
-        FSEventStreamFlushSync(stream)
-    end
-    buckets = Hash.new()
-    if not_first_time # all root folders are reported during first stream flush
-        modified_dirs.each do |dir_info|
-            begin
-                dir = dir_info[:dir]
-                root = dir_info[:root]
-                unless dir=~CONFIG["dir_include"]
-                    $out.puts "debug: #{dir} rejected because dir_include" if CONFIG["debug"]
-                    next
-                end
-                if dir=~CONFIG["dir_exclude"]
-                    $out.puts "debug: #{dir} rejected because dir_exclude" if CONFIG["debug"]
-                    next
-                end
-                    
-                if File.exists?(dir)
-                    Dir.foreach(dir) do |file|
-                        unless file=~CONFIG["file_include"]
-                            $out.puts "debug: #{file} rejected because file_include" if CONFIG["debug"]
-                            next
-                        end
-                        if file=~CONFIG["file_exclude"]
-                            $out.puts "debug: #{file} rejected because file_exclude" if CONFIG["debug"]
-                            next
-                        end
-
-                        full_path = File.join(dir, file)
-                        next if File.directory?(full_path)
-                        begin
-                            stat = File.stat(full_path)
-                        rescue
-                            # file may not exist
-                            next # keep silence
-                        end
-                        current_time = stat.mtime.to_i
-                        original_time = paths_info[full_path] || start_time
-
-                        if (current_time > original_time)
-                            relative_path = full_path[root.size+1..-1]
-                            buckets[root]||=[]
-                            buckets[root]<< {
-                                "action" => "changed",
-                                "path1" => relative_path,
-                                "path2" => nil
-                            }
-                        end
-                        paths_info[full_path] = current_time
-                    end
-                else
-                    relative_path = dir[root.size+1..-1]
-                    buckets[root]||=[]
-                    buckets[root]<< {
-                        "action" => "deleted",
-                        "path1" => relative_path,
-                        "path2" => nil
-                    }
-                end
-            ensure
-                # dir may not exist
-                next #keep silence
-            end
-        end
-    else
-        not_first_time = true
-    end
-
-    if buckets.size
-        buckets.each do |root,files|
-            $out.puts "  activity in #{root}:"
-            files.each do |file|
-                $out.puts "    #{file["activity"]} #{file["path1"]}"
-            end
-            date = nil
-            time = nil
-            name = root
-            type = 'type?'
-
-            server.clients.each do |client|
-                client.send_do_refresh(root, name, type, date, time, files)
-            end
-        end
-        buckets.clear
-    end
-
-    modified_dirs.clear
-    sleep CONFIG["sleep_time"]
-end
-
-streams.each do |stream|
-    FSEventStreamStop(stream)
-    FSEventStreamInvalidate(stream)
-    FSEventStreamRelease(stream)
-end
-
-$out.flush
-
-exit(result)

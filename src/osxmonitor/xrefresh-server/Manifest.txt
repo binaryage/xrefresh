@@ -7,6 +7,9 @@ Rakefile
 bin/xrefresh-server
 config/hoe.rb
 config/requirements.rb
+lib/client.rb
+lib/monitor.rb
+lib/server.rb
 lib/xrefresh-server.rb
 script/console
 script/destroy
