@@ -1,77 +1,61 @@
-h1. xrefresh monitor
+h1. XRefresh Monitor
 
 h1. &#x2192; 'xrefresh-server'
 
-
 h2. What
 
+XRefresh is browser auto-refresh tool for web developers.
+
+More: "http://xrefresh.com":http://xrefresh.com 
+
+This gem is filesystem monitor for OSX which can talk to XRefresh clients (e.g. "Firefox browser plugin":http://addons.mozilla.org/TODO).
 
 h2. Installing
 
 <pre syntax="ruby">sudo gem install xrefresh-server</pre>
 
-h2. The basics
+h2. Run monitoring server
 
+After installation xrefresh-server executable should get onto your system path. To start server simply run:
+<pre syntax="ruby">xrefresh-server</pre>
 
-h2. Demonstration of usage
+h2. The config file
 
+This is default config file:
+<pre syntax="ruby">
+# here specify list of paths to monitor
+paths:
+  - /Users/<your-user-name> # by default watch user's home directory
+# - /you/may/add/here/some/other/path
+# - /you/may/add/here/some/another/path
 
+# you can various filters (ruby regexp pattern)
+# every file is split to dir and file part (for example /Users/mick/proj/coolapp and some_file.rb)
+#   both include filters must be satisfied
+#   both exclude filters must not be satisfied
+# empty value means "apply no filtering"
+dir_include:
+dir_exclude: ^/Users/<your-user-name>/Library|/\.(svn|framework|app|pbproj|pbxproj|xcode(proj)?|bundle)/
+file_include:
+file_exclude: ^(CVS|SCCS|vssver.?.scc|\.(cvsignore|svn|DS_Store)|_svn|Thumbs\.db)$|~$|^(\.(?!htaccess)[^/]*|\.(tmproj|o|pyc)|svn-commit(\.[2-9])?\.tmp)$ # merged TextMate and Netbeans patterns
 
-h2. Forum
+# xpert settings
+host: 127.0.0.1
+port: 41258 # known port for clients to connect 
+max_connections: 4 # max client connections
+debug: false # run in debug mode?
+audit: false # audit server activity
+defer_time: 0.5 # aggregation time for events
+sleep_time: 0.1 # don't hung cpu in main loop
+</pre>
 
-"http://groups.google.com/group/xrefresh-server":http://groups.google.com/group/xrefresh-server
+As you can see, by default monitor watches your home directory excluding all under ~/Library.
+You are encouraged to modify paths section to map to your working project directories.
 
-TODO - create Google Group - xrefresh-server
+By default config file is searched first in current directory and then in your home directory.
+You may also specify path to config file via --config parameter.
 
-h2. How to submit patches
-
-Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/ and for section "8b: Submit patch to Google Groups":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups, use the Google Group above.
-
-TODO - pick SVN or Git instructions
-
-The trunk repository is <code>svn://rubyforge.org/var/svn/xrefresh-server/trunk</code> for anonymous access.
-
-OOOORRRR
-
-You can fetch the source from either:
-
-<% if rubyforge_project_id %>
-
-* rubyforge: "http://rubyforge.org/scm/?group_id=<%= rubyforge_project_id %>":http://rubyforge.org/scm/?group_id=<%= rubyforge_project_id %>
-
-<pre>git clone git://rubyforge.org/xrefresh-server.git</pre>
-
-<% else %>
-
-* rubyforge: MISSING IN ACTION
-
-TODO - You can not created a RubyForge project, OR have not run <code>rubyforge config</code>
-yet to refresh your local rubyforge data with this projects' id information.
-
-When you do this, this message will magically disappear!
-
-Or you can hack website/index.txt and make it all go away!!
-
-<% end %>
-
-* github: "http://github.com/GITHUB_USERNAME/xrefresh-server/tree/master":http://github.com/GITHUB_USERNAME/xrefresh-server/tree/master
-
-<pre>git clone git://github.com/GITHUB_USERNAME/xrefresh-server.git</pre>
-
-
-TODO - add "github_username: username" to ~/.rubyforge/user-config.yml and newgem will reuse it for future projects.
-
-
-* gitorious: "git://gitorious.org/xrefresh-server/mainline.git":git://gitorious.org/xrefresh-server/mainline.git
-
-<pre>git clone git://gitorious.org/xrefresh-server/mainline.git</pre>
-
-h3. Build and test instructions
-
-<pre>cd xrefresh-server
-rake test
-rake install_gem</pre>
-
+When you first run xrefresh-server and there is no config file found, xrefresh-server will ask to create one for you in your home directory.
 
 h2. License
 
@@ -79,5 +63,4 @@ This code is free to use under the terms of the MIT license.
 
 h2. Contact
 
-Comments are welcome. Send an email to "FIXME full name":mailto:FIXME email via the "forum":http://groups.google.com/group/xrefresh-server
-
+Comments are welcome. Send an email to "Antonin Hildebrand":mailto:antonin@hildebradn.cz

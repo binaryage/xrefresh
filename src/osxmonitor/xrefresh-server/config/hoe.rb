@@ -17,7 +17,7 @@ VERS = XRefreshServer::VERSION + (REV ? ".#{REV}" : "")
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
-RUBYFORGE_USERNAME = "unknown"
+RUBYFORGE_USERNAME = "woid"
 def rubyforge_username
   unless @config
     begin
