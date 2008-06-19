@@ -1,279 +1,278 @@
-html { height: 100%; margin-bottom: 1px; }
+html {
+height: 100%;
+margin-bottom: 1px;
+}
 
 .yui-u {
-    margin-left: 0px !important;
+margin-left: 0px !important;
 }
 
 iframe {
-    border: none;
+border: none;
 }
 
-a{
-    color: blue;
-    text-decoration: none;
+a {
+color: blue;
+text-decoration: none;
 }
 
-b{
-    font-weight: bold;
+b {
+font-weight: bold;
 }
 
-p{
-    padding: 4px;
+p {
+padding: 4px;
 }
 
-a:hover
-{
-    text-decoration: underline;
+a:hover {
+text-decoration: underline;
 }
 
-#hd
-{
-    height: 70px;
+#hd {
+height: 70px;
 }
 
-#space-bar
-{
-    height: 50px;
+#space-bar {
+height: 50px;
 }
 
-#hd h1, #hd h2
-{
-    display: none;
+#hd h1, #hd h2 {
+display: none;
 }
 
-#hd #logo
-{
-    float: left;
-    position: relative;
-    top: 10px;
-    left: -50px;
+#hd #logo {
+float: left;
+position: relative;
+top: 10px;
+left: -50px;
 }
 
-#ft
-{
-    margin-top: 5px;
-    padding-top: 0px;
-    padding-bottom: 10px;
-    border-top: solid 1px #BBB9BA;
-    font-size: 80%;
-    color: #888;
+#ft {
+margin-top: 5px;
+padding-top: 0px;
+padding-bottom: 10px;
+border-top: solid 1px #BBB9BA;
+font-size: 80%;
+color: #888;
 }
 
-#ft a, #ft p
-{
-    color: #888;
-    text-decoration: none;
+#ft a, #ft p {
+color: #888;
+text-decoration: none;
 }
 
 #ft a:hover {
-    text-decoration: underline;
+text-decoration: underline;
 }
 
-#ohloh
-{
-    padding-top: 2px;
-    float: right;
+#ohloh {
+padding-top: 2px;
+float: right;
 }
 
 #extras {
-    margin-top: 60px;
-    border-bottom: solid 1px #BBB9BA;
-    font-size: 20px;
-    font-weight: bold;
+margin-top: 60px;
+border-bottom: solid 1px #BBB9BA;
+font-size: 20px;
+font-weight: bold;
 }
 
 #extras span {
-    padding: 2px 10px;
-    color: white;
-    background-color: grey;
+padding: 2px 10px;
+color: white;
+background-color: gray;
 }
 
 #show-box {
-    margin-top: 10px;
+margin-top: 10px;
 }
 
 #show-box > div {
-    float: left;
+float: left;
 }
 
 #satisfaction-box {
-    width: 300px;
+width: 300px;
 }
 
 #presets-box {
-    width: 250px;
+width: 250px;
 }
 
 #code-box {
-    width: 200px;
+width: 200px;
 }
 
-#show-box > div > a:hover{
-    text-decoration: underline;
+#show-box > div > a:hover {
+text-decoration: underline;
 }
 
 #show-box > div > a > img {
-    float: left;
+float: left;
 }
 
 #show-box > div > a > p {
-    color: blue;
-    float: left;
-    margin-left: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    height: 50px;
-    line-height: 20px;
+color: blue;
+float: left;
+margin-left: 10px;
+font-size: 16px;
+font-weight: bold;
+height: 50px;
+line-height: 20px;
 }
 
 #update {
-    position: absolute;
-    text-align: right;
-    width: 300px;
+position: absolute;
+text-align: right;
+width: 300px;
 }
 
 #update div {
-    left: 150px;
+left: 150px;
 }
 
 #update div {
-    position: relative;
-    top: -50px;
+position: relative;
+top: -50px;
 }
 
 #update div p {
-    padding-top: 0px;
-    color: red;
-    font-weight: bold;
+padding-top: 0px;
+color: red;
+font-weight: bold;
 }
 
 #update div a {
-    font-size: 20px;
-    font-weight: bold;
+font-size: 20px;
+font-weight: bold;
 }
 
 #download {
-    position: absolute;
-    text-align: right;
-    width: 300px;
+position: absolute;
+text-align: right;
+width: 300px;
 }
 
 #download div {
-    left: 400px;
+left: 400px;
 }
 
 #download div {
-    position: relative;
-    top: -50px;
+position: relative;
+top: -50px;
 }
 
 #download div a {
-    font-size: 20px;
-    font-weight: bold;
+font-size: 20px;
+font-weight: bold;
 }
 
 #download div p {
-    padding-top: 0px;
-    color: black;
-    font-weight: bold;
+padding-top: 0px;
+color: black;
+font-weight: bold;
 }
 
 #shock {
-    position: absolute;
+position: absolute;
 }
 
 #shock p {
-    background-image: url(/images/arrow.png);
-    color: white;
-    position: relative;
-    top: -56px;
-    left: 0px;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 8px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    width: 160px;
-    height: 40px;
-    line-height: 40px;
+background-image: url(/images/arrow.png);
+color: white;
+position: relative;
+top: -56px;
+left: 0px;
+font-size: 20px;
+font-weight: bold;
+padding: 8px;
+padding-top: 2px;
+padding-bottom: 2px;
+width: 160px;
+height: 40px;
+line-height: 40px;
 }
 
 .panelNode {
-    width: 500px;
-    height: 400px;
-    overflow: scroll !important;
+width: 500px;
+height: 400px;
+overflow: scroll !important;
 }
 
 #snippet-selector {
-    float: left;
-    width: 246px;
+float: left;
+width: 246px;
 }
 
 #snippet-selector li {
-    list-style-type: decimal;
-    list-style-position: inside;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 2px 6px;
-    cursor: pointer;
-    color:blue;
+list-style-type: decimal;
+list-style-position: inside;
+font-weight: bold;
+font-size: 14px;
+padding: 2px 6px;
+cursor: pointer;
+color: blue;
 }
 
 #top-line {
-    border-top: solid 1px #BBB9BA;
-    margin-bottom: 20px;
+border-top: solid 1px #BBB9BA;
+margin-bottom: 20px;
 }
 
 #top-line h2 {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
+margin-top: 10px;
+font-weight: bold;
+font-size: 16px;
 }
 
 .selected {
-    background-color: #888;
-    color: white !important;
+background-color: #888;
+color: white !important;
 }
 
 #source-preview {
-    border: solid 2px #888;
-    float:right;
-    font-size: 11px;
+border: solid 2px #888;
+float: right;
+font-size: 11px;
 }
 
 #submit-preset {
-    position: absolute;
-    text-align: right;
-    width: 300px;
+position: absolute;
+text-align: right;
+width: 300px;
 }
 
 #submit-preset div {
-    left: 440px;
+left: 440px;
 }
 
 #submit-preset div {
-    position: relative;
-    top: -30px;
+position: relative;
+top: -30px;
 }
 
 #submit-preset div a {
-    font-size: 16px;
-    font-weight: bold;
+font-size: 16px;
+font-weight: bold;
 }
 
 #copy-box {
-    border: solid 2px #888;
-    border-top: none;
-    float:right;
-    width: 500px;
-    height: 100px;
+border: solid 2px #888;
+border-top: none;
+float: right;
+width: 500px;
+height: 100px;
 }
 
 #copy-box textarea {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
 }
 
 #help-preset {
-    float: right;
+float: right;
+}
+
+html {
+background-color: gray;
 }

@@ -1,6 +1,10 @@
 <?xml version="1.0"?> 
 <?xml-stylesheet href="chrome://xrefresh/skin/panel.css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+   <stringbundleset id="stringbundleset">
+      <stringbundle id="strings_xrefresh" src="chrome://xrefresh/locale/xrefresh.properties"/>
+   </stringbundleset>
+
   <script type="application/x-javascript" src="chrome://xrefresh/content/lib/utf8.js"/>
 
   <!-- casper library -->
@@ -23,23 +27,7 @@
   </commandset>
   <toolbar id="fbToolbar" align="center">
     <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
-      <hbox id="fbXRefreshExtensionButtons" insertafter="fbNetButtons">
-        <toolbarspacer width="40"/>
-        <toolbarbutton id="fbXRefreshMenu" type="menu" tooltiptext="XRefresh menu">
-          <menupopup onpopupshowing="return Firebug.XRefreshExtension.onOptionsShowing(this);">
-            <menuitem label="Disable XRefresh" tooltiptext="Disables whole XRefresh functionality" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="disabledAlways"/>
-            <menuitem label="Disable automatic macro recording" tooltiptext="Disables automatic macro recorder. For case you don't like it." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="disabledRecorder"/>
-            <menuitem label="Accept only local connections" tooltiptext="Accepts only connections from this computer (security feature)." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localConnectionsOnly"/>
-            <menuitem label="Perform fast CSS replace" tooltiptext="Bypass server stack when detecting CSS-only changes. Works only for CSS files on localhost!" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="fastCSS"/>
-            <!--<menuitem label="Trigger refresh only for local pages" tooltiptext="Performs refresh only for pages sitting on 127.0.0.1 (localhost)" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localPagesOnly"/>-->
-            <!--<menuitem label="Advanced Settings..." type="checkbox" oncommand="Firebug.XRefreshExtension.advancedSettings(this)"/>-->
-            <menuseparator/>
-            <menuitem label="Website..." command="cmd_XRefreshSite"/>
-            <!--<menuitem label="Documentation..." command="cmd_XRefreshDocs"/>-->
-            <!--<menuseparator/>-->
-            <!--<menuitem label="Contribute..." command="cmd_XRefreshContribute"/>-->
-          </menupopup>
-        </toolbarbutton>
+<hbox id="fbXRefreshExtensionControls" insertafter="fbNetButtons" collapsed="true">
         <toolbarbutton id="fbXRefreshExtensionRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
         <toolbarseparator/>
         <toolbaritem id="fbXRefreshExtensionConnectionStatus" width="200" tooltiptext="Connection status">
@@ -58,6 +46,37 @@
         <toolbarbutton id="fbXRefreshExtensionRecorderPause" label="Pause" class="toolbar-text-button" tooltiptext="Pauses macro recorder" command="cmd_XRefreshPauseRecorder"/>
         <toolbarbutton id="fbXRefreshExtensionRecorderReplay" label="Replay" class="toolbar-text-button" tooltiptext="Replays recorded macro" command="cmd_XRefreshReplayRecorder"/>
       </hbox>
+
+	      <hbox id="fbXRefreshExtensionButtons" insertafter="fbNetButtons" collapsed="true">
+	        <toolbarbutton id="fbXRefreshMenu" type="menu" tooltiptext="XRefresh menu">
+	          <menupopup onpopupshowing="return Firebug.XRefreshExtension.onOptionsShowing(this);">
+	            <menuitem label="Disable automatic macro recording" tooltiptext="Disables automatic macro recorder. For case you don't like it." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="disabledRecorder"/>
+	            <menuitem label="Accept only local connections" tooltiptext="Accepts only connections from this computer (security feature)." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="localConnectionsOnly"/>
+	            <menuitem label="Perform fast CSS replace" tooltiptext="Bypass server stack when detecting CSS-only changes. Works only for CSS files on localhost!" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="fastCSS"/>
+	            <menuseparator/>
+	            <menuitem label="XRefresh Website..." command="cmd_XRefreshSite"/>
+	          </menupopup>
+	        </toolbarbutton>
+	          <toolbarseparator/>
+	          <tooltip id="fbXRefreshExtensionStateMenuTooltip"
+	              onpopupshowing="return Firebug.XRefreshExtension.onMenuTooltipShowing(this, FirebugContext)"/>
+	          <toolbarbutton id="fbXRefreshExtensionStateMenu" type="menu" tooltip="fbXRefreshExtensionPermTooltip">
+	              <menupopup
+	                  oncommand="return Firebug.XRefreshExtension.onStateMenuCommand(event, FirebugContext)"
+	                  onpopupshowing="return Firebug.XRefreshExtension.onStateMenuPopupShowing(this, FirebugContext)"
+	                  onpopuphiding="return Firebug.XRefreshExtension.onStateMenuPopupHiding(this, FirebugContext)">
+	                  <menuitem type="radio" name="fbXRefreshExtensionStateMenu" value="enable"/>
+	                  <menuitem type="radio" name="fbXRefreshExtensionStateMenu" value="disable"/>
+	                  <menuitem type="radio" name="fbXRefreshExtensionStateMenu" value="enable-site"/>
+	                  <menuitem type="radio" name="fbXRefreshExtensionStateMenu" value="disable-site"/>
+	                  <menuseparator />
+	                  <menuitem name="fbXRefreshExtensionMonitorPermisions" label="Sites ..."
+	                          oncommand="Firebug.XRefreshExtension.openPermissions(event, FirebugContext)"/>
+	              </menupopup>
+	          </toolbarbutton>
+	</hbox>
+
+
     </hbox>
   </toolbar>
   <statusbar id="status-bar">
