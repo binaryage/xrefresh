@@ -1,10 +1,10 @@
-require "lib/xrefresh-monitor.rb"
+require "lib/xrefresh-server.rb"
 
 AUTHOR = 'Antonin Hildebrand'  # can also be an array of Authors
 EMAIL = "antonin@hildebrand.cz"
 DESCRIPTION = "XRefresh filesystem monitor - browser refresh automation tool for web developers"
-GEM_NAME = 'xrefresh-monitor' # what ppl will type to install your gem
-RUBYFORGE_PROJECT = 'xrefresh-monitor' # The unix name for your project
+GEM_NAME = 'xrefresh-server' # what ppl will type to install your gem
+RUBYFORGE_PROJECT = 'xrefresh-server' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 EXTRA_DEPENDENCIES = [
@@ -13,7 +13,7 @@ EXTRA_DEPENDENCIES = [
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = XRefreshMonitor::VERSION + (REV ? ".#{REV}" : "")
+VERS = XRefreshServer::VERSION + (REV ? ".#{REV}" : "")
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
@@ -35,7 +35,7 @@ Run 'rubyforge setup' to prepare your env for access to Rubyforge
 end
 
 
-RDOC_OPTS = ['--quiet', '--title', 'xrefresh-monitor documentation',
+RDOC_OPTS = ['--quiet', '--title', 'xrefresh-server documentation',
     "--opname", "index.html",
     "--line-numbers",
     "--main", "README",

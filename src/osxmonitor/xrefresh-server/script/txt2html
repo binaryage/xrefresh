@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-GEM_NAME = 'xrefresh-monitor' # what ppl will type to install your gem
-RUBYFORGE_PROJECT = 'xrefresh-monitor'
+GEM_NAME = 'xrefresh-server' # what ppl will type to install your gem
+RUBYFORGE_PROJECT = 'xrefresh-server'
 
 require 'rubygems'
 begin
@@ -15,9 +15,9 @@ end
 require 'redcloth'
 require 'syntax/convertors/html'
 require 'erb'
-require File.dirname(__FILE__) + "/../lib/xrefresh-monitor.rb"
+require File.dirname(__FILE__) + "/../lib/xrefresh-server.rb"
 
-version  = XRefreshMonitor::VERSION
+version  = XRefreshServer::VERSION
 download = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 
 def rubyforge_project_id

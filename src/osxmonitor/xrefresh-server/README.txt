@@ -1,4 +1,4 @@
-= xrefresh-monitor
+= xrefresh-server
 
 http://xrefresh.com
 

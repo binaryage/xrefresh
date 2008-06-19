@@ -1,6 +1,6 @@
 ---
 To run monitoring server launch:
-xrefresh-monitor
+xrefresh-server
 (when first launched, you will be asked to setup config file)
-For more information see http://xrefresh-monitor.rubyforge.org
+For more information see http://xrefresh-server.rubyforge.org
 ---

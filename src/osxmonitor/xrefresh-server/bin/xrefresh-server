@@ -21,9 +21,9 @@ require 'ostruct'
 require "yaml"
 require 'gserver'
 begin
-    require 'xrefresh-monitor'
+    require 'xrefresh-server'
 rescue LoadError
-    module XRefreshMonitor
+    module XRefreshServer
         VERSION = "?"
     end
 end
@@ -70,9 +70,9 @@ end
 
 $COMMAND = File.basename($0)
 $USAGE = "Usage: #{$COMMAND} [OPTIONS]"
-$VERSION = XRefreshMonitor::VERSION
-$AGENT = "OSX xrefresh-monitor"
-CONFIG_FILE = ".xrefresh-monitor.yml"
+$VERSION = XRefreshServer::VERSION
+$AGENT = "OSX xrefresh-server"
+CONFIG_FILE = ".xrefresh-server.yml"
 
 options = OpenStruct.new
 options.output = "-"
@@ -131,14 +131,14 @@ unless options.config
 end
 unless options.config
     puts "Config file #{CONFIG_FILE} not found in current folder or home."
-    puts "It seems you are running xrefresh-monitor for first time."
+    puts "It seems you are running xrefresh-server for first time."
     puts "Do you want to generate default config file in home directory? [Yn]"
     s = STDIN.getc.chr
     if s=='y' || s=='Y'
         options.config = File.expand_path("~/#{CONFIG_FILE}")
         generate_config(options.config)
     else
-        die "Please launch xrefresh-monitor with -c option and specify path to your config"
+        die "Please launch xrefresh-server with -c option and specify path to your config"
     end
 end
 begin

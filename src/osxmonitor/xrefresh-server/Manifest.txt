@@ -4,10 +4,10 @@ Manifest.txt
 PostInstall.txt
 README.txt
 Rakefile
-bin/xrefresh-monitor
+bin/xrefresh-server
 config/hoe.rb
 config/requirements.rb
-lib/xrefresh-monitor.rb
+lib/xrefresh-server.rb
 script/console
 script/destroy
 script/generate
