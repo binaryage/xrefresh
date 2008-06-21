@@ -328,6 +328,7 @@ FBL.ns(function() {
             destroyContext: function(context, persistedState)
             {
                 Firebug.ActivableModule.destroyContext.apply(this, arguments);
+                if (!this.isEnabled(context)) return;
                 var panel = FirebugContext.getPanel("XRefreshExtension");
                 debugLog("destroy context>" + context.window.document.URL);
 
@@ -370,6 +371,8 @@ FBL.ns(function() {
             loadedContext: function(context)
             {
                 Firebug.ActivableModule.loadedContext.apply(this, arguments);
+                if (!this.isEnabled(context)) return;
+
                 var recorder = this.getRecorder(context);
                 var nextDestroyMarker = 0;
                 if (recorder) nextDestroyMarker = recorder.destroyMarker + 1;
@@ -757,11 +760,12 @@ FBL.ns(function() {
             updateRecorderPanel: function()
             {
                 if (!FirebugContext) return;
+                var enabled = this.isEnabled(FirebugContext);
 				var enabledRecorder = this.getPref("enableRecorder");
                 // safety net
                 var panel = FirebugContext.getPanel("XRefreshExtension");
                 if (!panel) return;
-                panel.showToolbarButtons("fbXRefreshExtensionRecorder", enabledRecorder);
+                panel.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
                 var browser = panel.context.browser;
                 if (!browser) return;
                 var status = browser.chrome.$("fbXRefreshExtensionRecorderStatus");
@@ -1392,8 +1396,10 @@ FBL.ns(function() {
             show: function(state)
             {
                 var enabled = Firebug.XRefreshExtension.isEnabled(this.context);
+				var enabledRecorder = Firebug.XRefreshExtension.getPref("enableRecorder");
                 this.showToolbarButtons("fbXRefreshExtensionButtons", true);
                 this.showToolbarButtons("fbXRefreshExtensionControls", enabled);
+                this.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
 
                 // the default page with description and enable button is
                 // visible only if debugger is disabled.
