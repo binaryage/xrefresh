@@ -85,8 +85,6 @@ FBL.ns(function() {
             initialize: function()
             {
  				        this.panelName = 'XRefreshExtension';
-				        this.menuTooltip = $("fbXRefreshExtensionStateMenuTooltip");
-				        this.menuButton = $("fbXRefreshExtensionStateMenu");
 				        this.description = "External browser refresh";
 
 				        Firebug.ActivableModule.initialize.apply(this, arguments);
@@ -132,7 +130,7 @@ FBL.ns(function() {
 								if (!this.alreadyActivated) return;
 								this.alreadyActivated = undefined;
 								
-				    		// Just after onPanelDeactivate, no remaining activecontext
+				    		// just after onPanelDeactivate, no remaining activecontext
 	              this.disconnectDrum();
 	              this.stopListener();
 				    },
@@ -307,8 +305,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             documentStateWatcher: function(context) {
-
-                },
+            },
             /////////////////////////////////////////////////////////////////////////////////////////
             initContext: function(context)
             {
@@ -515,9 +512,7 @@ FBL.ns(function() {
                 var dataListener = {
                     parent: this,
                     data: "",
-                    onStartRequest: bind(function(request, context)
-                    {
-                        },
+                    onStartRequest: bind(function(request, context) {},
                     this),
                     onStopRequest: function(request, context, status) {
                         this.parent.onServerDied();
@@ -528,8 +523,7 @@ FBL.ns(function() {
                     }
                 };
 
-                drumPump = Components.classes["@mozilla.org/network/input-stream-pump;1"]
-                .createInstance(Components.interfaces.nsIInputStreamPump);
+                drumPump = Components.classes["@mozilla.org/network/input-stream-pump;1"].createInstance(Components.interfaces.nsIInputStreamPump);
                 drumPump.init(stream, -1, -1, 0, 0, false);
                 drumPump.asyncRead(dataListener, null);
 
@@ -934,18 +928,7 @@ FBL.ns(function() {
                 if (!data) return;
                 context.window.scrollTo(data[0], data[1]);
             },
-				    // Menu in toolbar.
-				    onStateMenuTooltipShowing: function(tooltip, context)
-				    {
-				        if (!this.menuTooltip)
-				            return false;
-
-				        if (this.menuTooltip.fbEnabled)
-				            this.menuTooltip.label = $XREFRESH_STR(this.panelName + "." + "PermMenuTooltip");
-
-				        return this.menuTooltip.fbEnabled;
-				    },
-				
+            /////////////////////////////////////////////////////////////////////////////////////////
 				   	openPermissions: function(event, context)
 				    {
 				        cancelEvent(event);
@@ -963,10 +946,9 @@ FBL.ns(function() {
 				            prefilledHost: host,
 				        };
 
-				        openWindow("Browser:Permissions", "chrome://browser/content/preferences/permissions.xul",
-				            "", params);
+				        openWindow("Browser:Permissions", "chrome://browser/content/preferences/permissions.xul", "", params);
 				    },
-
+            /////////////////////////////////////////////////////////////////////////////////////////
 				    getMenuLabel: function(option, location, shortened)
 				    {
 				        var label = "";
@@ -983,7 +965,7 @@ FBL.ns(function() {
 				                label = "HostDisable";
 
 				            if (shortened)
-				                return $STR("panel.Disabled");
+				                return $XREFRESH_STR("panel.Disabled");
 				            break;
 
 				        case "enable-site":
@@ -995,14 +977,14 @@ FBL.ns(function() {
 				                label = "HostEnable";
 
 				            if (shortened)
-				                return $STR("panel.Enabled");
+				                return $XREFRESH_STR("panel.Enabled");
 				            break;
 
 				        case "enable":
-				            return $STR("panel.Enabled");
+				            return $XREFRESH_STR("panel.Enabled");
 
 				        case "disable":
-				            return $STR("panel.Disabled");
+				            return $XREFRESH_STR("panel.Disabled");
 				        }
 
 				        if (!label)
@@ -1407,15 +1389,12 @@ FBL.ns(function() {
             show: function(state)
             {
 				        var enabled = Firebug.XRefreshExtension.isEnabled(this.context);
-				        Firebug.XRefreshExtension.menuUpdate(this.context);
-
-				        // The "enable/disable" button is always visible.
 				        this.showToolbarButtons("fbXRefreshExtensionButtons", true);
 
-				        // These buttons are visible only if debugger is enabled.
+				        // these buttons are visible only if debugger is enabled.
 				        this.showToolbarButtons("fbXRefreshExtensionControls", enabled);
 
-				        // The default page with description and enable button is
+				        // the default page with description and enable button is
 				        // visible only if debugger is disabled.
 				        if (enabled)
 				            Firebug.ModuleManagerPage.hide(this);
