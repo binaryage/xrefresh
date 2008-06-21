@@ -34,8 +34,8 @@
 				<toolbarbutton id="fbXRefreshExtensionRecorderReplay" label="Replay" class="toolbar-text-button" tooltiptext="Replays recorded macro" command="cmd_XRefreshReplayRecorder"/>
 			</hbox>
 			<hbox id="fbXRefreshExtensionControls" insertafter="fbNetButtons" collapsed="true">
-				<toolbarbutton id="fbXRefreshExtensionRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
 				<toolbarseparator/>
+				<toolbarbutton id="fbXRefreshExtensionRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
 				<toolbarbutton id="fbXRefreshExtensionButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
 			</hbox>
 			<hbox id="fbXRefreshExtensionButtons" insertafter="fbNetButtons" collapsed="true">
