@@ -81,32 +81,23 @@ background: url(status-green.png) no-repeat;
 background: url(status-blue.png) no-repeat;
 }
 
-#fbXRefreshExtensionConnectionStatusLabel {
-padding-left: 20px;
-}
-
 .toolbar-status-connected {
-background: url(connect.png) no-repeat;
+list-style-image: url(connect.png);
+padding-left: 6px;
 }
 
 .toolbar-status-disconnected {
-background: url(disconnect.png) no-repeat;
+list-style-image: url(disconnect.png);
+padding-left: 6px;
 }
 
 .toolbar-connection-status {
 margin-top: 6px;
 }
 
-#fbXRefreshExtensionButtonConnect {
-list-style-image: url(connect_btn.png);
-}
-
-#fbXRefreshExtensionButtonDisconnect {
-list-style-image: url(disconnect_btn.png);
-}
-
 #fbXRefreshExtensionRefresh {
 list-style-image: url(refresh.png);
+padding-left: 6px;
 }
 
 .logRow-blink > .blinkHead > .blinkTitle {
