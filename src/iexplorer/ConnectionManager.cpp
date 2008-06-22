@@ -55,7 +55,8 @@ CConnection::OnDataReceived(const LPBYTE lpBuffer, DWORD dwCount)
 	{
 		// detect next line
 		LPCBYTE p = lpBuffer+pos;
-		while (*p!='\n' && p-lpBuffer!=dwCount) p++;
+		while (*p!='\n' && p-lpBuffer<dwCount-1) p++;
+		p++;
 		DWORD cnt = p-lpBuffer-pos;
 		
 		// copy line into working buffer
@@ -392,7 +393,7 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 		}
 		else
 		{
-			log.Format(_T("Refresh request from %s (not allowed for this site)"), name);
+			log.Format(_T("Refresh request from %s (not allowed for this site - modify 'Allowed Sites' using XRefresh toolbar icon)"), name);
 			m_Parent->Log(log, ICON_CANCEL);
 		}
 	}

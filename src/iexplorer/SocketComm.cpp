@@ -965,33 +965,39 @@ void CSocketComm::Run()
 	else
 		GetPeerName( stMsgProxy.address );
 
-	while( IsOpen() )
+	try {
+		while( IsOpen() )
+		{
+			// Blocking mode: Wait for event
+			dwBytes = ReadComm(lpData, dwSize, dwTimeout);
+
+			// Error? - need to signal error
+			if (dwBytes == (DWORD)-1L)
+			{
+				// Do not send event if we are closing
+	//			if (IsOpen())
+					//OnEvent( EVT_CONDROP ); // lost connection
+
+				// special case for UDP, alert about the event but do not stop
+				if (IsBroadcast())
+					continue;
+				else
+					break;
+			}
+
+			// Chars received?
+			if (IsSmartAddressing() && dwBytes == sizeof(SOCKADDR_IN))
+				OnEvent( EVT_ZEROLENGTH );
+			else if (dwBytes > 0L)
+			{
+				OnDataReceived( lpData, dwBytes);
+			}
+			Sleep(0);
+		}
+	}
+	catch (...)
 	{
-		// Blocking mode: Wait for event
-		dwBytes = ReadComm(lpData, dwSize, dwTimeout);
 
-		// Error? - need to signal error
-		if (dwBytes == (DWORD)-1L)
-		{
-			// Do not send event if we are closing
-//			if (IsOpen())
-				//OnEvent( EVT_CONDROP ); // lost connection
-
-			// special case for UDP, alert about the event but do not stop
-			if (IsBroadcast())
-				continue;
-			else
-				break;
-		}
-
-		// Chars received?
-		if (IsSmartAddressing() && dwBytes == sizeof(SOCKADDR_IN))
-			OnEvent( EVT_ZEROLENGTH );
-		else if (dwBytes > 0L)
-		{
-			OnDataReceived( lpData, dwBytes);
-		}
-		Sleep(0);
 	}
 
 	OnEvent( EVT_CONDROP ); // lost connection
