@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshMonitor", "winmonitor\XRefreshMonitor.csproj", "{25C4E083-5741-477B-A153-D0C24F80C245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshExt", "XRefreshExt.csproj", "{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshExtension", "XRefreshExtension.csproj", "{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XRefreshAddon", "iexplorer\XRefreshAddon.vcproj", "{05688726-A202-41B3-861D-8C593DFBE1AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshSetup", "XRefreshSetup.csproj", "{14E61496-BF33-4C72-9662-0584EBCF8CD3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firebug", "..\..\Firebug\Firebug.csproj", "{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,26 +53,6 @@ Global
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Release|Win32.Build.0 = Release|Win32
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Release|x64.ActiveCfg = Release|x64
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Release|x64.Build.0 = Release|x64
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Release|Win32.ActiveCfg = Release|Any CPU
-		{14E61496-BF33-4C72-9662-0584EBCF8CD3}.Release|x64.ActiveCfg = Release|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Release|Win32.ActiveCfg = Release|Any CPU
-		{43DBBA1D-38FB-4DA6-A863-A7DA0601325C}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
