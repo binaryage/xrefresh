@@ -126,14 +126,18 @@ FBL.ns(function() {
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
 				
+                setTimeout(bind(this.startupCheck, this), 1000);
+                setTimeout(bind(this.connectDrum, this), 1000);
+                setTimeout(bind(this.startListener, this), 2000);
+                this.checkTimeout = setTimeout(bind(this.connectionCheck, this), 5000);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            startupCheck: function()
+            {
 				if (!this.checkFirebugVersion())
 				{
 	                this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
 				}
-
-                setTimeout(bind(this.connectDrum, this), 1000);
-                setTimeout(bind(this.startListener, this), 2000);
-                this.checkTimeout = setTimeout(bind(this.connectionCheck, this), 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onLastPanelDeactivate: function(context, init)
