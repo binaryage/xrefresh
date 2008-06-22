@@ -45,28 +45,43 @@ CConnection::~CConnection()
 {
 }
 
-void 
+void  
 CConnection::OnDataReceived(const LPBYTE lpBuffer, DWORD dwCount)
 {
-	if (m_BufferPos+dwCount+1>=CONNECTION_BUFFER_SIZE)
+	// break incomming message into lines
+	// try to parse them as JSON line by line (with buffer accumulation)
+	DWORD pos = 0; 
+	while (pos<dwCount)
 	{
-		m_Parent->Log(_T("Connection buffer is too small. Message data has been dropped."), ICON_ERROR);
-		m_BufferPos = 0;
-		return;
-	}
-	memcpy(m_Buffer + m_BufferPos, lpBuffer, dwCount);
-	m_BufferPos += dwCount;
+		// detect next line
+		LPCBYTE p = lpBuffer+pos;
+		while (*p!='\n' && p-lpBuffer!=dwCount) p++;
+		DWORD cnt = p-lpBuffer-pos;
+		
+		// copy line into working buffer
+		if (m_BufferPos+cnt+1>=CONNECTION_BUFFER_SIZE)
+		{
+			m_Parent->Log(_T("Connection buffer is too small. Message data has been dropped."), ICON_ERROR);
+			m_BufferPos = 0;
+			continue;
+		}
+		memcpy(m_Buffer + m_BufferPos, lpBuffer+pos, cnt);
+		m_BufferPos += cnt;
+		pos += cnt;
 
-	Json::Value msg;
-	Json::Reader reader;
-	bool res = reader.parse(m_Buffer, m_Buffer+m_BufferPos, msg, false);
-	if (!res)
-	{
-		// we have only partial message ? store data and wait for next chunk ...
-		return;
+		// try to parse JSON
+		Json::Value msg;
+		Json::Reader reader;
+		bool res = reader.parse(m_Buffer, m_Buffer+m_BufferPos, msg, false);
+		if (!res)
+		{
+			// we have only partial message ? store data and wait for next chunk ...
+			continue;
+		}
+		// valid JSON means we have whole message
+		m_Parent->ProcessMessage(msg);
+		m_BufferPos = 0;
 	}
-	m_BufferPos = 0;
-	m_Parent->ProcessMessage(msg);
 }
 
 void 
@@ -247,7 +262,7 @@ CConnectionManager::Send(Json::Value& msg)
 	if (!m_Connection.IsOpen()) return;
 
 	Json::FastWriter writer;
-	string data = writer.write(msg);
+	string data = writer.write(msg)+"\n";
 	if (!m_Connection.WriteComm((LPBYTE)data.c_str(), data.size(), 1000))
 	{
 		TRACE_E(_T("unable to send message"));

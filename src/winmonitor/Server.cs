@@ -191,6 +191,7 @@ namespace XRefresh
 			Socket socket;
 			Server parent;
 			byte[] dataBuffer = new byte[64*1024];
+            String buffer;
 
 			public int id;
 			public string type;
@@ -234,17 +235,24 @@ namespace XRefresh
 						return;
 					}
 
-					char[] chars = new char[iRx + 1];
+					char[] chars = new char[iRx];
 					System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
 					int charLen = d.GetChars(dataBuffer, 0, iRx, chars, 0);
 					System.String data = new System.String(chars);
+                    string[] lines = data.Split('\n');
 
-					ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(data, typeof(ClientMessage));
-					if (ProcessMessage(message))
-					{
-						// continue the waiting for data on the Socket
-						WaitForData();
-					}
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        buffer += lines[i]+"\n";
+                        ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(buffer, typeof(ClientMessage));
+                        if (message != null)
+                        {
+                            ProcessMessage(message);
+                            buffer = "";
+                        }
+                    }
+                    // continue the waiting for data on the Socket
+                    WaitForData();
 				}
 				catch (ObjectDisposedException e)
 				{
@@ -305,8 +313,9 @@ namespace XRefresh
 				// encode string into UTF-8
 				System.Text.Encoder encoder = System.Text.Encoding.UTF8.GetEncoder();
 				int bufferSize = encoder.GetByteCount(data, 0, data.Length, true);
-				byte[] buffer = new byte[bufferSize];
+				byte[] buffer = new byte[bufferSize+1];
 				int charLen = encoder.GetBytes(data, 0, data.Length, buffer, 0, true);
+                buffer[bufferSize] = (byte)'\n';
 
 				// send as UTF-8 string
 				socket.Send(buffer);
