@@ -244,11 +244,18 @@ namespace XRefresh
                     for (int i = 0; i < lines.Length; i++)
                     {
                         buffer += lines[i]+"\n";
-                        ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(buffer, typeof(ClientMessage));
-                        if (message != null)
+                        try
                         {
-                            ProcessMessage(message);
-                            buffer = "";
+                            ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(buffer, typeof(ClientMessage));
+                            if (message != null)
+                            {
+                                ProcessMessage(message);
+                                buffer = "";
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            // still, not having full message
                         }
                     }
                     // continue the waiting for data on the Socket

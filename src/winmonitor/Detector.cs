@@ -36,8 +36,9 @@ namespace XRefresh
 		public virtual string SuggestName(string path)
 		{
 			string dir = Utils.NormalizePath(path);
-			if (dir.Length == 0) return "";
-			int last = dir.LastIndexOf('/');
+            dir = dir.TrimEnd(Path.DirectorySeparatorChar);
+            if (dir.Length == 0) return "";
+            int last = dir.LastIndexOf(Path.DirectorySeparatorChar);
 			if (last == -1) last = 0; else last++;
 			string candidate = dir.Substring(last);
 			char[] separatorChars = new char[] { ' ', '\t', '\n', '_', '.', ',', ';', ':', '-' };
@@ -126,7 +127,7 @@ namespace XRefresh
 		private void BuildExtCacheWorker(String folder, Dictionary<string, int> dict, int rootLen)
 		{
 			if (folder.Length > rootLen + 1)
-				Detector.Current.ReportProgress(folder.Substring(rootLen + 1));
+				Detector.Current.ReportProgress(folder.Substring(rootLen));
 			if (Detector.Current.WasCancelled()) throw new CancelException();
 			if (!Directory.Exists(folder)) return;
 			String[] files = Directory.GetFiles(folder);
@@ -151,7 +152,7 @@ namespace XRefresh
 			{
 				if (Detector.Current.WasCancelled()) throw new CancelException();
 				if (dir.Length > rootLen + 1)
-					Detector.Current.ReportProgress(dir.Substring(rootLen + 1));
+					Detector.Current.ReportProgress(dir.Substring(rootLen));
 
 				// optimization, directory must pass global exclude filters
 				// this is here mainly to not traverse .svn subdirectories
@@ -181,22 +182,6 @@ namespace XRefresh
 		public override bool Scan(string path)
 		{
 			return false;
-		}
-		public override string SuggestName(string path)
-		{
-			path.TrimEnd(Path.DirectorySeparatorChar);
-			path += Path.DirectorySeparatorChar;
-			string dir = Path.GetDirectoryName(path);
-            if (dir == null) return "";
-			if (dir.Length == 0) return "";
-			int last = dir.LastIndexOf(Path.DirectorySeparatorChar);
-			if (last == -1) last = 0; else last++;
-			string candidate = dir.Substring(last);
-			char[] whiteSpaceChars = new char[] { ' ', '\t', '\n', '_' };
-			candidate.TrimStart(whiteSpaceChars);
-			int first = candidate.IndexOfAny(whiteSpaceChars);
-			if (first == -1) first = candidate.Length;
-			return candidate.Substring(0, first);
 		}
 	}
 
