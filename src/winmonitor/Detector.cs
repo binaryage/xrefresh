@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Forms;
 
 namespace XRefresh
 {
@@ -110,7 +111,7 @@ namespace XRefresh
 			}
 			catch (Exception)
 			{
-				return false;
+                return false;
 			}
 		}
 
@@ -186,6 +187,7 @@ namespace XRefresh
 			path.TrimEnd(Path.DirectorySeparatorChar);
 			path += Path.DirectorySeparatorChar;
 			string dir = Path.GetDirectoryName(path);
+            if (dir == null) return "";
 			if (dir.Length == 0) return "";
 			int last = dir.LastIndexOf(Path.DirectorySeparatorChar);
 			if (last == -1) last = 0; else last++;

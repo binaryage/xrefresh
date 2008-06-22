@@ -310,7 +310,7 @@ namespace XRefresh
 
 		static public string NormalizePath(string path)
 		{
-			return path.TrimEnd(Path.DirectorySeparatorChar).Replace('\\', '/');
+            return path.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
 		}
 
 		static public void LogException(string msg, Exception e)

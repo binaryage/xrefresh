@@ -127,7 +127,7 @@ namespace XRefresh
 
 			public WorkerData(string path, Model.FoldersRow folder, BackgroundWorker worker)
             {
-                this.path = path.TrimEnd(Path.DirectorySeparatorChar);
+                this.path = path;
                 this.folder = folder;
                 this.len = this.path.Length;
                 this.model = folder.Table.DataSet as Model;
