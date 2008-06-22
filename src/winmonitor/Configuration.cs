@@ -88,8 +88,7 @@ namespace XRefresh
 						break;
 					}
 				}
-
-				if (isOk) return name;
+                if (isOk) return name;
 			}
 
 			char[] numbers = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -539,12 +538,19 @@ namespace XRefresh
 
 			string name = scannerData.scanner.SuggestName(scannerData.folder);
 			string type = scannerData.scanner.GetName();
-			Model.FoldersRow folder = model.AddFolder(MakeUniqueName(name), scannerData.folder, type);
-			VisualizeFolder(folder);
-			int row = table.TableModel.Rows.Count - 1;
-			table.TableModel.Selections.SelectCells(row, 0, row, 2);
-			table.EnsureVisible(row, 0);
-
+            string uname = MakeUniqueName(name);
+            try
+            {
+                Model.FoldersRow folder = model.AddFolder(uname, scannerData.folder, type);
+                VisualizeFolder(folder);
+                int row = table.TableModel.Rows.Count - 1;
+                table.TableModel.Selections.SelectCells(row, 0, row, 2);
+                table.EnsureVisible(row, 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Unable to add new folder: Folder:'{0}'\nType:'{1}'\nUniqueName:'{2}'\nError: {3}", name, type, uname, ex.Message), "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 			scannerData = null;
 			scannerWorker = null;
 		}

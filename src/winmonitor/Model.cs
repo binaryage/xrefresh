@@ -414,8 +414,7 @@ namespace XRefresh
 			}
 			catch (Exception ex)
 			{
-				DialogResult res = MessageBox.Show(String.Format("Unable to save config file: {0}\nError: {1}", path, ex.Message), "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				if (res != DialogResult.OK) return;
+				MessageBox.Show(String.Format("Unable to save config file: {0}\nError: {1}", path, ex.Message), "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 		}
 
