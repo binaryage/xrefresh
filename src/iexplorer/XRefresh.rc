@@ -100,8 +100,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,6,0,0
- PRODUCTVERSION 0,6,0,0
+ FILEVERSION 0,8,0,0
+ PRODUCTVERSION 0,8,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -118,12 +118,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Antonin Hildebrand"
             VALUE "FileDescription", "XRefresh IE addon"
-            VALUE "FileVersion", "0, 7, 0, 0"
+            VALUE "FileVersion", "0, 8, 0, 0"
             VALUE "InternalName", "XRefreshAddon.dll"
             VALUE "LegalCopyright", "© 2007-2008 Antonin Hildebrand"
             VALUE "OriginalFilename", "XRefreshAddon.dll"
             VALUE "ProductName", "XRefresh"
-            VALUE "ProductVersion", "0, 7, 0, 0"
+            VALUE "ProductVersion", "0, 8, 0, 0"
         END
     END
     BLOCK "VarFileInfo"

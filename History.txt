@@ -1,7 +1,15 @@
 History of XRefresh
 ===================
 
-  Version 0.7                                                        2008-??-??
+  Version 0.8                                                        2008-06-22
+  -----------------------------------------------------------------------------
+    + OSX support (http://xrefresh-server.rubyforge.org)
+    + more robust client/server communication
+    + firefox extension upgraded for Firebug 1.2 and Firefox 3
+    + cleanup in firefox extension
+    + better path handling and name suggestion in Windows Monitor
+    
+  Version 0.7                                                        2008-02-25
   -----------------------------------------------------------------------------
     + CSS files are replaced directly when detected matching file name 
       this is much faster approach, this feature has some limitations, but 
