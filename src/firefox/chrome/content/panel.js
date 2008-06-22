@@ -79,6 +79,16 @@ FBL.ns(function() {
         {
             reminder: '',
             /////////////////////////////////////////////////////////////////////////////////////////
+            checkFirebugVersion: function()
+            {
+                var version = Firebug.getVersion();
+                if (!version) return false;
+                var a = version.split('.');
+                if (a.length<2) return false;
+                // we want Firebug version 1.2+ (including alphas/betas and other weird stuff)
+                return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=2;
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             getPrefDomain: function()
             {
                 return xrefreshPrefDomain;
@@ -108,13 +118,19 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             onFirstPanelActivate: function(context, init)
             {
+                // Just before onPanelActivate, no previous activecontext
+                // Note: connection at this point was buggy.
+                // I didn't find out the reason. It seems delayed connection works well.
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
                 this.scheduledDisconnection = undefined;
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
-                // Just before onPanelActivate, no previous activecontext
-                // Note: connection at this point was buggy.
-                // I didn't find out the reason. It seems delayed connection works well.
+				
+				if (!this.checkFirebugVersion())
+				{
+	                this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
+				}
+
                 setTimeout(bind(this.connectDrum, this), 1000);
                 setTimeout(bind(this.startListener, this), 2000);
                 this.checkTimeout = setTimeout(bind(this.connectionCheck, this), 5000);
