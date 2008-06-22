@@ -268,16 +268,26 @@ CSitesModel::Test(LPCTSTR v)
 			{
 				if (r.GetAction()==E_BLOCK)
 				{
-					bool q = r.Test(s);
-					if (q) return false; // blocked by this record
+					try {
+						bool q = r.Test(s);
+						if (q) return false; // blocked by this record
+					}
+					catch (...) {
+						return false;
+					}
 				}
 			}
 			else
 			{
 				if (r.GetAction()==E_ALLOW)
 				{
-					bool q = r.Test(s);
-					if (q) accept = true; // accepted by this record
+					try {
+						bool q = r.Test(s);
+						if (q) accept = true; // accepted by this record
+					}
+					catch (...) {
+						return false;
+					}
 				}
 			}
 		}
@@ -289,6 +299,7 @@ CSitesModel::Test(LPCTSTR v)
 CString
 CSitesModel::TestWithReason(LPCTSTR v)
 {
+	USES_CONVERSION;
 	CString reason = _T("NOT ALLOWED: no rule has mathed this url");
 	tstring s(v);
 	T_SitesContainer::iterator i = m_Sites.begin();
@@ -303,10 +314,16 @@ CSitesModel::TestWithReason(LPCTSTR v)
 			{
 				if (r.GetAction()==E_BLOCK)
 				{
-					bool q = r.Test(s);
-					if (q) 
-					{
-						return FS(_T("NOT ALLOWED: block rule #%d has mathed this url"), index);
+					try {
+						bool q = r.Test(s);
+						if (q) 
+						{
+							return FS(_T("NOT ALLOWED: block rule #%d has mathed this url"), index);
+						}
+					}
+					catch (regex::bad_regexpr e) {
+						CA2T msg(e.what());
+						return FS(_T("ERROR in rule #%d: %s"), index, msg);
 					}
 				}
 			}
@@ -314,11 +331,17 @@ CSitesModel::TestWithReason(LPCTSTR v)
 			{
 				if (r.GetAction()==E_ALLOW)
 				{
-					bool q = r.Test(s);
-					if (q)
-					{
-						accept = true;
-						reason = FS(_T("ALLOWED: allow rule #%d has mathed this url"), index);
+					try {
+						bool q = r.Test(s);
+						if (q)
+						{
+							accept = true;
+							reason = FS(_T("ALLOWED: allow rule #%d has mathed this url"), index);
+						}
+					}
+					catch (regex::bad_regexpr e) {
+						CA2T msg(e.what());
+						return FS(_T("ERROR in rule #%d: %s"), index, msg);
 					}
 				}
 			}
