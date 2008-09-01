@@ -661,7 +661,7 @@ FBL.ns(function() {
                 // try to parse incomming message
                 // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
                 // TODO: make this more robust to server formating failures
-                debugLog(data);
+                debugLog(data||"empty message");
                 var data = listener.data;
                 var parts = listener.data.split('\n');
                 var buffer = this.reminder;
