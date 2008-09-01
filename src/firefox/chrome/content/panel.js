@@ -164,7 +164,7 @@ FBL.ns(function() {
                 this.log("Unable to connect to XRefresh Monitor", "warn");
                 this.log("Please check if you have running XRefresh Monitor.", "bulb");
                 this.log("    On Windows, it is program running in system tray. Look for Programs -> XRefresh -> XRefresh.exe", "bulb");
-                this.log("    On Mac, it is running command-line program xrefresh-monitor. It should be available on system path after 'sudo gem install xrefresh'", "bulb");
+                this.log("    On Mac, it is running command-line program xrefresh-server. It should be available on system path after 'sudo gem install xrefresh-server'", "bulb");
                 this.log("You may also want to check your firewall settings. XRefresh Firefox extension expects Monitor to talk from " + this.getPref('host') + " on port " + this.getPref('port'), "bulb");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
