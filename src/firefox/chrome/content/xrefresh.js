@@ -341,6 +341,7 @@ FBL.ns(function() {
             showContext: function(browser, context) {
                 Firebug.ActivableModule.showContext.apply(this, arguments);
                 dbg("show context>" + context.window.document.URL);
+                this.currentContext = context;
                 this.updatePanel();
                 this.printRecordersStats();
             },
@@ -621,6 +622,11 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             processMessage: function(message) {
                 dbg("Received message:" + message.command);
+                if (!this.currentContext || !this.isEnabled(this.currentContext)) {
+                    dbg("Skipped message because the panel is not enabled");
+                    return;
+                }
+                
                 if (message.command == "DoRefresh") {
                     var panel = FirebugContext.getPanel("XRefreshExtension");
                     if (this.getPref("fastCSS")) {

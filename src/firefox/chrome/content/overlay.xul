@@ -10,7 +10,7 @@
 	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/json.js"/>
 	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/xpath.js"/>
 	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/events.js"/>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/panel.js"/>
+	<script type="application/x-javascript" src="chrome://xrefresh/content/xrefresh.js"/>
 	<commandset id="mainCommandSet">
 		<command id="cmd_XRefreshRefresh" oncommand="Firebug.XRefreshExtension.buttonRefresh()"/>
 		<command id="cmd_XRefreshStopRecorder" oncommand="Firebug.XRefreshExtension.buttonStopRecorder()"/>
