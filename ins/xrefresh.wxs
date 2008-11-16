@@ -140,7 +140,7 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 			<Directory Id="chrome" Name="chrome">
 			  <Directory Id="content" Name="content">
 				<Component Id="content" Guid="f16acccc-a125-4a11-9fe0-dabe741d2235">
-				  <File Id="overlay.xul" Name="overlay.xul" Source="..\src\firefox\chrome\content\overlay.xul" />
+				  <File Id="xrefresh.xul" Name="xrefresh.xul" Source="..\src\firefox\chrome\content\xrefresh.xul" />
 				  <File Id="panel.js" Name="panel.js" Source="..\src\firefox\chrome\content\panel.js" />
 				</Component>
 				<Directory Id="casper" Name="casper">

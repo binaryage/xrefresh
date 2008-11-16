@@ -1,6 +1,5 @@
-content xrefresh chrome/content/ xpcnativewrappers=no
+content xrefresh chrome/content/
 skin xrefresh classic/1.0 chrome/skin/
 locale xrefresh en-US chrome/locale/en-US/
 
-overlay chrome://firebug/content/firebugOverlay.xul chrome://xrefresh/content/overlay.xul
-#overlay chrome://firebug/locale/firebug.properties chrome://xrefresh/locale/firebug.properties
+overlay chrome://firebug/content/firebugOverlay.xul chrome://xrefresh/content/xrefresh.xul

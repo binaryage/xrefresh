@@ -40,7 +40,7 @@
   -->
   <ItemGroup>
     <None Include="firefox\chrome.manifest" />
-    <None Include="firefox\chrome\content\overlay.xul" />
+    <None Include="firefox\chrome\content\xrefresh.xul" />
     <None Include="firefox\chrome\content\XRefreshOverlay.xul">
       <Link>XRefreshOverlay.xul</Link>
     </None>
