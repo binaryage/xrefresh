@@ -1236,7 +1236,7 @@ FBL.ns(function() {
         });
 
         function XRefreshExtensionPanel() {}
-        XRefreshExtensionPanel.prototype = extend(Firebug.Panel,
+        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel,
         {
             name: "XRefreshExtension",
             title: "XRefresh",
@@ -1292,6 +1292,7 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             updateStyleSheet: function(document, element, path)
             {
+                // TODO: try this: http://markmail.org/message/5mfzam3vgxtmvq3z#query:mozilla.org%2Fnetwork%2Fcache-service+page:1+mid:d6ooz3mhlsexv2rw+state:results
                 var file = Cc["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
                 file.initWithPath(path);
                 // note: async loading doesn't work
