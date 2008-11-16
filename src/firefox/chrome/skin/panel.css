@@ -1,370 +1,370 @@
 /*****************************************************************************************/
 
 #fbXRefreshMenu {
-list-style-image: url(chrome://xrefresh/skin/xrefresh.png);
--moz-opacity: 0.8;
+    list-style-image: url(chrome://xrefresh/skin/xrefresh.png);
+    -moz-opacity: 0.8;
 }
 
 #fbXRefreshMenu:hover,
 #fbXRefreshMenu[open="true"] {
--moz-opacity: 1.0;
+    -moz-opacity: 1.0;
 }
 
 #fbXRefreshMenu > .toolbarbutton-text,
 #fbXRefreshMenu > .toolbarbutton-menu-dropmarker {
-display: none;
+    display: none;
 }
 
 .toolbar-text-button > .toolbarbutton-icon {
-display: block !important;
-background: transparent !important;
+    display: block !important;
+    background: transparent !important;
 }
 
 #fbXRefreshExtensionControls .toolbar-text-button,
 #fbXRefreshExtensionRecorder .toolbar-text-button {
-margin: 0 4px 0 1px !important;
-padding: 0 !important;
-border: none !important;
-background: transparent !important;
+    margin: 0 4px 0 1px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
 }
 
 #fbXRefreshExtensionRecorderStatusLabel {
-padding-left: 20px;
-margin: 0 4px 0 1px !important;
+    padding-left: 20px;
+    margin: 0 4px 0 1px !important;
 }
 
 #fbXRefreshExtensionRecorderStart,
 #fbXRefreshExtensionRecorderStop,
 #fbXRefreshExtensionRecorderPause,
 #fbXRefreshExtensionRecorderReplay {
--moz-image-region: rect(auto,auto,auto,auto) !important;
+    -moz-image-region: rect(auto,auto,auto,auto) !important;
 }
 
 #fbXRefreshExtensionRecorderStart {
-list-style-image: url(control_rec.png);
+    list-style-image: url(control_rec.png);
 }
 
 #fbXRefreshExtensionRecorderStop {
-list-style-image: url(control_stop.png);
+    list-style-image: url(control_stop.png);
 }
 
 #fbXRefreshExtensionRecorderPause {
-list-style-image: url(control_pause.png);
+    list-style-image: url(control_pause.png);
 }
 
 #fbXRefreshExtensionRecorderPause.paused {
-list-style-image: url(control_play.png) !important;
+    list-style-image: url(control_play.png) !important;
 }
 
 #fbXRefreshExtensionRecorderReplay {
-list-style-image: url(control_repeat.png);
+    list-style-image: url(control_repeat.png);
 }
 
 .toolbar-recorder-invalid {
-background-image: url(status-gray.png);
-background-color: transparent;
-background-repeat: no-repeat;
+    background-image: url(status-gray.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
 }
 
 .toolbar-recorder-recording {
-background-image: url(status-red.png);
-background-color: transparent;
-background-repeat: no-repeat;
+    background-image: url(status-red.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
 }
 
 .toolbar-recorder-stopped {
-background-image: url(status-gray.png);
-background-color: transparent;
-background-repeat: no-repeat;
+    background-image: url(status-gray.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
 }
 
 .toolbar-recorder-paused {
-background-image: url(status-green.png);
-background-repeat: no-repeat;
-background-color: transparent;
+    background-image: url(status-green.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
 }
 
 .toolbar-recorder-replaying {
-background-image: url(status-blue.png);
-background-repeat: no-repeat;
-background-color: transparent;
+    background-image: url(status-blue.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
 }
 
 .toolbar-status-connected {
-list-style-image: url(connect.png);
-list-style-color: transparent;
-padding-left: 6px;
+    list-style-image: url(connect.png);
+    list-style-color: transparent;
+    padding-left: 6px;
 }
 
 .toolbar-status-disconnected {
-list-style-image: url(disconnect.png);
-padding-left: 6px;
+    list-style-image: url(disconnect.png);
+    padding-left: 6px;
 }
 
 #fbXRefreshExtensionRefresh {
-list-style-image: url(refresh.png);
-padding-left: 6px;
+    list-style-image: url(refresh.png);
+    padding-left: 6px;
 }
 
 .logRow-blink > .blinkHead > .blinkTitle {
-background-position: 2px 2px;
+    background-position: 2px 2px;
 }
 
 .logRow-blink > .blinkHead.closed > .blinkTitle {
-background-image: url(twistyClosed.png);
-background-repeat: no-repeat;
+    background-image: url(twistyClosed.png);
+    background-repeat: no-repeat;
 }
 
 .logRow-blink > .blinkHead.opened > .blinkTitle {
-background-image: url(twistyOpen.png);
-background-repeat: no-repeat;
+    background-image: url(twistyOpen.png);
+    background-repeat: no-repeat;
 }
 
 .logRow-blink > .blinkHead > .blinkTitle {
-padding-left: 18px;
-background-position: 3px 3px;
+    padding-left: 18px;
+    background-position: 3px 3px;
 }
 
 .logRow-blink {
-cursor: default;
+    cursor: default;
 }
 
 .refresh > .blinkTitle {
-cursor: pointer;
+    cursor: pointer;
 }
 
 .logRow-blink {
-padding: 2px 0 1px 0;
+    padding: 2px 0 1px 0;
 }
 
 .logRow-blink,
 .logRow-blink .objectLink-sourceLink {
-background-image: url(group.gif) repeat-x #FFFFFF;
-background-repeat: no-repeat;
+    background-image: url(group.gif) repeat-x #FFFFFF;
+    background-repeat: no-repeat;
 }
 
 .logRow-blink.opened {
-padding-bottom: 4px;
-border-bottom: none;
+    padding-bottom: 4px;
+    border-bottom: none;
 }
 
 .blinkTitle {
-padding-top: 1px;
-color: #000000;
+    padding-top: 1px;
+    color: #000000;
 }
 
 .refresh > .blinkTitle {
-font-weight: bold;
+    font-weight: bold;
 }
 
 .refresh > .blinkTitle:hover {
-color: blue;
-text-decoration: none !important;
+    color: blue;
+    text-decoration: none !important;
 }
 
 .refresh > .blinkTitle:hover > .blinkURI {
-text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 .blinkDate {
-font-family: Tahoma;
-font-size: 8pt;
-color: gray;
-font-weight: normal;
-margin-right: 6px;
+    font-family: Tahoma;
+    font-size: 8pt;
+    color: gray;
+    font-weight: normal;
+    margin-right: 6px;
 }
 
 .blinkInfo {
-padding-left: 6px;
-font-family: Tahoma;
-font-size: 8pt;
-color: black;
-font-weight: normal;
+    padding-left: 6px;
+    font-family: Tahoma;
+    font-size: 8pt;
+    color: black;
+    font-weight: normal;
 }
 
 .blinkIcon {
-margin-right: 2px;
-width: 16px;
-height: 16px;
-vertical-align: middle;
-background: transparent 0 0;
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    background: transparent 0 0;
 }
 
 .blinkProgress {
-margin-right: 6px;
-width: 16px;
-height: 16px;
-vertical-align: middle;
-background: transparent 0 0;
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    background: transparent 0 0;
 }
 
 .logRow-blink > .blinkHead.refresh > .blinkTitle > .blinkIcon {
-background-image: url(refresh.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(refresh.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.fastcss > .blinkTitle > .blinkIcon {
-background-image: url(fastcss.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(fastcss.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.info > .blinkTitle > .blinkIcon {
-background-image: url(info.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(info.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.error > .blinkTitle > .blinkIcon {
-background-image: url(error.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(error.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect > .blinkTitle > .blinkIcon {
-background-image: url(connect.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(connect.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.disconnect > .blinkTitle > .blinkIcon {
-background-image: url(disconnect.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(disconnect.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect_btn > .blinkTitle > .blinkIcon {
-background-image: url(connect_btn.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(connect_btn.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.disconnect_btn > .blinkTitle > .blinkIcon {
-background-image: url(disconnect_btn.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(disconnect_btn.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.connect > .blinkTitle > .blinkIcon {
-background-image: url(connect.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(connect.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.rreq > .blinkTitle > .blinkIcon {
-background-image: url(refresh.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(refresh.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.rstop > .blinkTitle > .blinkIcon {
-background-image: url(control_stop.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(control_stop.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.rstart > .blinkTitle > .blinkIcon {
-background-image: url(control_rec.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(control_rec.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.rpause > .blinkTitle > .blinkIcon {
-background-image: url(control_pause.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(control_pause.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.rreplay > .blinkTitle > .blinkIcon {
-background-image: url(control_repeat.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(control_repeat.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.warn > .blinkTitle > .blinkIcon {
-background-image: url(warn.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(warn.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead.bulb > .blinkTitle > .blinkIcon {
-background-image: url(lightbulb.png);
-background-repeat: no-repeat;
-background-position: right;
+    background-image: url(lightbulb.png);
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .logRow-blink > .blinkHead > .details {
-display: none;
+    display: none;
 }
 
 .logRow-blink > .blinkHead.opened > .details {
-margin-top: 10px;
-display: block;
+    margin-top: 10px;
+    display: block;
 }
 
 .ftable {
-margin: -10px 0 0 40px;
-padding: 0px 0px 3px 0px;
+    margin: -10px 0 0 40px;
+    padding: 0px 0px 3px 0px;
 }
 
 .ftable td {
-font-family: tahoma;
-font-size: 8pt;
-font-weight: bold;
+    font-family: tahoma;
+    font-size: 8pt;
+    font-weight: bold;
 }
 
 .froot {
-color: black;
-padding-bottom: 3px;
-padding-left: 20px;
-font-weight: bold;
-color: #008800;
-background-image: url(folder_activity.png);
-background-repeat: no-repeat;
-background-position: left;
+    color: black;
+    padding-bottom: 3px;
+    padding-left: 20px;
+    font-weight: bold;
+    color: #008800;
+    background-image: url(folder_activity.png);
+    background-repeat: no-repeat;
+    background-position: left;
 }
 
 .froot b {
-color: black;
+    color: black;
 }
 
 .ffa1, .ffb1 {
-font-weight: bold;
-color: #888;
+    font-weight: bold;
+    color: #888;
 }
 
 .ffa2, .ffb2 {
-font-weight: bold;
-color: #444;
+    font-weight: bold;
+    color: #444;
 }
 
 .faction {
-width: 36px;
-background-repeat: no-repeat;
-background-position: right;
+    width: 36px;
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .faction.changed {
-background-image: url(mini_changed.png);
-background-repeat: no-repeat;
+    background-image: url(mini_changed.png);
+    background-repeat: no-repeat;
 }
 
 .faction.created {
-background-image: url(mini_created.png);
-background-repeat: no-repeat;
+    background-image: url(mini_created.png);
+    background-repeat: no-repeat;
 }
 
 .faction.deleted {
-background-image: url(mini_deleted.png);
-background-repeat: no-repeat;
+    background-image: url(mini_deleted.png);
+    background-repeat: no-repeat;
 }
 
 .faction.renamed {
-background-image: url(mini_renamed.png);
-background-repeat: no-repeat;
+    background-image: url(mini_renamed.png);
+    background-repeat: no-repeat;
 }
 
 .twisty {
-background-position: 2px 0;
+    background-position: 2px 0;
 }

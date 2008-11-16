@@ -1,56 +1,56 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://xrefresh/skin/panel.css"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="strings_xrefresh" src="chrome://xrefresh/locale/xrefresh.properties"/>
-	</stringbundleset>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/lib/utf8.js"/>
-	<!-- casper library -->
-	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/logger.js"/>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/json.js"/>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/xpath.js"/>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/casper/events.js"/>
-	<script type="application/x-javascript" src="chrome://xrefresh/content/xrefresh.js"/>
-	<commandset id="mainCommandSet">
-		<command id="cmd_XRefreshRefresh" oncommand="Firebug.XRefreshExtension.buttonRefresh()"/>
-		<command id="cmd_XRefreshStopRecorder" oncommand="Firebug.XRefreshExtension.buttonStopRecorder()"/>
-		<command id="cmd_XRefreshStartRecorder" oncommand="Firebug.XRefreshExtension.buttonStartRecorder()"/>
-		<command id="cmd_XRefreshPauseRecorder" oncommand="Firebug.XRefreshExtension.buttonPauseRecorder()"/>
-		<command id="cmd_XRefreshReplayRecorder" oncommand="Firebug.XRefreshExtension.buttonReplayRecorder()"/>
-		<command id="cmd_XRefreshSite" oncommand="Firebug.XRefreshExtension.visitWebsite('main')"/>
-		<command id="cmd_XRefreshStatus" oncommand="Firebug.XRefreshExtension.buttonStatus()"/>
-	</commandset>
-	<toolbar id="fbToolbar" align="center">
-		<hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
-			<hbox id="fbXRefreshExtensionRecorder" insertafter="fbNetButtons" collapsed="true">
-				<toolbarseparator/>
-				<toolbaritem id="fbXRefreshExtensionRecorderStatus" width="160" tooltiptext="Macro Recorder status">
-					<label id="fbXRefreshExtensionRecorderStatusLabel" value="Status" class="toolbar-recorder-status" tooltiptext="Macro Recorder status"/>
-				</toolbaritem>
-				<toolbarseparator/>
-				<toolbarbutton id="fbXRefreshExtensionRecorderStart" label="Start" class="toolbar-text-button" tooltiptext="Starts macro recorder" command="cmd_XRefreshStartRecorder"/>
-				<toolbarbutton id="fbXRefreshExtensionRecorderStop" label="Stop" class="toolbar-text-button" tooltiptext="Stops macro recorder" command="cmd_XRefreshStopRecorder"/>
-				<toolbarbutton id="fbXRefreshExtensionRecorderPause" label="Pause" class="toolbar-text-button" tooltiptext="Pauses macro recorder" command="cmd_XRefreshPauseRecorder"/>
-				<toolbarbutton id="fbXRefreshExtensionRecorderReplay" label="Replay" class="toolbar-text-button" tooltiptext="Replays recorded macro" command="cmd_XRefreshReplayRecorder"/>
-			</hbox>
-			<hbox id="fbXRefreshExtensionControls" insertafter="fbNetButtons" collapsed="true">
-				<toolbarseparator/>
-				<toolbarbutton id="fbXRefreshExtensionRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
-				<toolbarbutton id="fbXRefreshExtensionButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
-			</hbox>
-			<hbox id="fbXRefreshExtensionButtons" insertafter="fbNetButtons" collapsed="true">
-				<toolbarbutton id="fbXRefreshMenu" type="menu" tooltiptext="XRefresh menu">
-					<menupopup onpopupshowing="return Firebug.XRefreshExtension.onOptionsShowing(this);">
-						<menuitem label="Enable macro recording" tooltiptext="Enables macro recorder. For case you need it." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="enableRecorder"/>
-						<menuitem label="Perform fast CSS replace" tooltiptext="Bypass server stack when detecting CSS-only changes. Works only for CSS files on localhost!" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="fastCSS"/>
-						<menuseparator/>
-						<menuitem label="XRefresh Website..." command="cmd_XRefreshSite"/>
-					</menupopup>
-				</toolbarbutton>
-			</hbox>
-		</hbox>
-	</toolbar>
-	<statusbar id="status-bar">
-		<statusbarpanel id="fbXRefreshExtensionStatusBarPanel" insertbefore="statusbar-display"/>
-	</statusbar>
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="strings_xrefresh" src="chrome://xrefresh/locale/xrefresh.properties"/>
+    </stringbundleset>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/lib/utf8.js"/>
+    <!-- casper library -->
+    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/logger.js"/>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/json.js"/>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/xpath.js"/>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/events.js"/>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/xrefresh.js"/>
+    <commandset id="mainCommandSet">
+        <command id="cmd_XRefreshRefresh" oncommand="Firebug.XRefreshExtension.buttonRefresh()"/>
+        <command id="cmd_XRefreshStopRecorder" oncommand="Firebug.XRefreshExtension.buttonStopRecorder()"/>
+        <command id="cmd_XRefreshStartRecorder" oncommand="Firebug.XRefreshExtension.buttonStartRecorder()"/>
+        <command id="cmd_XRefreshPauseRecorder" oncommand="Firebug.XRefreshExtension.buttonPauseRecorder()"/>
+        <command id="cmd_XRefreshReplayRecorder" oncommand="Firebug.XRefreshExtension.buttonReplayRecorder()"/>
+        <command id="cmd_XRefreshSite" oncommand="Firebug.XRefreshExtension.visitWebsite('main')"/>
+        <command id="cmd_XRefreshStatus" oncommand="Firebug.XRefreshExtension.buttonStatus()"/>
+    </commandset>
+    <toolbar id="fbToolbar" align="center">
+        <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
+            <hbox id="fbXRefreshExtensionRecorder" insertafter="fbNetButtons" collapsed="true">
+                <toolbarseparator/>
+                <toolbaritem id="fbXRefreshExtensionRecorderStatus" width="160" tooltiptext="Macro Recorder status">
+                    <label id="fbXRefreshExtensionRecorderStatusLabel" value="Status" class="toolbar-recorder-status" tooltiptext="Macro Recorder status"/>
+                </toolbaritem>
+                <toolbarseparator/>
+                <toolbarbutton id="fbXRefreshExtensionRecorderStart" label="Start" class="toolbar-text-button" tooltiptext="Starts macro recorder" command="cmd_XRefreshStartRecorder"/>
+                <toolbarbutton id="fbXRefreshExtensionRecorderStop" label="Stop" class="toolbar-text-button" tooltiptext="Stops macro recorder" command="cmd_XRefreshStopRecorder"/>
+                <toolbarbutton id="fbXRefreshExtensionRecorderPause" label="Pause" class="toolbar-text-button" tooltiptext="Pauses macro recorder" command="cmd_XRefreshPauseRecorder"/>
+                <toolbarbutton id="fbXRefreshExtensionRecorderReplay" label="Replay" class="toolbar-text-button" tooltiptext="Replays recorded macro" command="cmd_XRefreshReplayRecorder"/>
+            </hbox>
+            <hbox id="fbXRefreshExtensionControls" insertafter="fbNetButtons" collapsed="true">
+                <toolbarseparator/>
+                <toolbarbutton id="fbXRefreshExtensionRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
+                <toolbarbutton id="fbXRefreshExtensionButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
+            </hbox>
+            <hbox id="fbXRefreshExtensionButtons" insertafter="fbNetButtons" collapsed="true">
+                <toolbarbutton id="fbXRefreshMenu" type="menu" tooltiptext="XRefresh menu">
+                    <menupopup onpopupshowing="return Firebug.XRefreshExtension.onOptionsShowing(this);">
+                        <menuitem label="Enable macro recording" tooltiptext="Enables macro recorder. For case you need it." type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="enableRecorder"/>
+                        <menuitem label="Perform fast CSS replace" tooltiptext="Bypass server stack when detecting CSS-only changes. Works only for CSS files on localhost!" type="checkbox" oncommand="Firebug.XRefreshExtension.onToggleOption(this)" option="fastCSS"/>
+                        <menuseparator/>
+                        <menuitem label="XRefresh Website..." command="cmd_XRefreshSite"/>
+                    </menupopup>
+                </toolbarbutton>
+            </hbox>
+        </hbox>
+    </toolbar>
+    <statusbar id="status-bar">
+        <statusbarpanel id="fbXRefreshExtensionStatusBarPanel" insertbefore="statusbar-display"/>
+    </statusbar>
 </overlay>
