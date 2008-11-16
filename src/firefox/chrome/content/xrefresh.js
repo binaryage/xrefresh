@@ -269,13 +269,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             printRecordersStats: function() {
-                if (!(FBTrace && FBTrace.DBG_XREFRESH)) return;
-                this.log("Recorders:");
-                for (var r in recorders) {
-                    if (recorders.hasOwnProperty(r)) {
-                        this.log("  " + r + " >> " + recorders[r].getStats() + " " + recorders[r].state + " C=" + recorders[r].destroyMarker);
-                    }
-                }
+                dbg("Recorders:", recorders);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getRecorder: function(context) {
@@ -587,14 +581,14 @@ FBL.ns(function() {
                 var buffer = this.reminder;
                 for (var i = 0; i < parts.length; i++) {
                     buffer += UTF8.decode(parts[i]);
-                    if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.dumpProperties("  buffer:", buffer);
+                    dbg("  buffer:", buffer);
 
                     var message = Casper.JSON.parse(buffer);
                     if (!message) continue;
                     // we have only partial buffer? go for next chunk
                     buffer = '';
                     // message completed, clear buffer for incomming data
-                    if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.dumpProperties("    message:", message);
+                    dbg("    message:", message);
                     try {
                         this.processMessage(message);
                     } catch(e) {
