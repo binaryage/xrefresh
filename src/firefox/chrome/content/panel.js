@@ -9,6 +9,8 @@
 // open custom scope
 FBL.ns(function() {
     with(FBL) {
+        const Cc = Components.classes;
+        const Ci = Components.interfaces;
 
         const nsIPrefBranch = Ci.nsIPrefBranch;
         const nsIPrefBranch2 = Ci.nsIPrefBranch2;
@@ -63,24 +65,20 @@ FBL.ns(function() {
             if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.sysout.apply(this, arguments);
         }
 
-        FBL.$XREFRESH_STR = function(name)
-        {
+        FBL.$XREFRESH_STR = function(name) {
             return document.getElementById("strings_xrefresh").getString(name);
         };
-        FBL.$XREFRESH_STRF = function(name, args)
-        {
+        FBL.$XREFRESH_STRF = function(name, args) {
             return document.getElementById("strings_xrefresh").getFormattedString(name, args);
         };
 
         ////////////////////////////////////////////////////////////////////////
         // Firebug.XRefreshExtension, here we go!
         //
-        Firebug.XRefreshExtension = extend(Firebug.ActivableModule,
-        {
+        Firebug.XRefreshExtension = extend(Firebug.ActivableModule, {
             reminder: '',
             /////////////////////////////////////////////////////////////////////////////////////////
-            checkFirebugVersion: function()
-            {
+            checkFirebugVersion: function() {
                 var version = Firebug.getVersion();
                 if (!version) return false;
                 var a = version.split('.');
@@ -89,35 +87,29 @@ FBL.ns(function() {
                 return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=2;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getPrefDomain: function()
-            {
+            getPrefDomain: function() {
                 return xrefreshPrefDomain;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            initialize: function()
-            {
+            initialize: function() {
                 this.panelName = 'XRefreshExtension';
                 this.description = "External browser refresh";
 
                 Firebug.ActivableModule.initialize.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            shutdown: function()
-            {
+            shutdown: function() {
                 if (Firebug.getPref('defaultPanelName') == 'XRefreshExtension') {
                     Firebug.setPref('defaultPanelName', 'console');
                 }
                 Firebug.ActivableModule.shutdown.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onPanelActivate: function(context, init)
-            {
-                if (!init)
-                context.window.location.reload();
+            onPanelActivate: function(context, init) {
+                if (!init) context.window.location.reload();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onFirstPanelActivate: function(context, init)
-            {
+            onFirstPanelActivate: function(context, init) {
                 // Just before onPanelActivate, no previous activecontext
                 // Note: connection at this point was buggy.
                 // I didn't find out the reason. It seems delayed connection works well.
@@ -125,29 +117,25 @@ FBL.ns(function() {
                 this.scheduledDisconnection = undefined;
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
-				
+                
                 setTimeout(bind(this.startupCheck, this), 1000);
                 setTimeout(bind(this.connectDrum, this), 1000);
                 setTimeout(bind(this.startListener, this), 2000);
                 this.checkTimeout = setTimeout(bind(this.connectionCheck, this), 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            startupCheck: function()
-            {
-				if (!this.checkFirebugVersion())
-				{
-	                this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
-				}
+            startupCheck: function() {
+                if (!this.checkFirebugVersion()) {
+                    this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onLastPanelDeactivate: function(context, init)
-            {
+            onLastPanelDeactivate: function(context, init) {
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
                 this.scheduledDisconnection = setTimeout(bind(this.disconnect, this), 10000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            disconnect: function()
-            {
+            disconnect: function() {
                 this.scheduledDisconnection = undefined;
                 if (!this.alreadyActivated) return;
                 this.alreadyActivated = undefined;
@@ -157,9 +145,8 @@ FBL.ns(function() {
                 this.stopListener();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            connectionCheck: function()
-            {
-				this.checkTimeout = undefined;
+            connectionCheck: function() {
+                this.checkTimeout = undefined;
                 if (drumReady) return;
                 this.log("Unable to connect to XRefresh Monitor", "warn");
                 this.log("Please check if you have running XRefresh Monitor.", "bulb");
@@ -168,38 +155,30 @@ FBL.ns(function() {
                 this.log("You may also want to check your firewall settings. XRefresh Firefox extension expects Monitor to talk from " + this.getPref('host') + " on port " + this.getPref('port'), "bulb");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            shortConnectionCheck: function()
-            {
-				this.shortCheckTimeout = undefined;
+            shortConnectionCheck: function() {
+                this.shortCheckTimeout = undefined;
                 if (drumReady) return;
                 this.log("Unable to connect to XRefresh Monitor. Please check if you have running XRefresh Monitor and tweak your firewall settings if needed.", "warn");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            destroyAllRecorders: function()
-            {
-                for (var r in recorders)
-                {
+            destroyAllRecorders: function() {
+                for (var r in recorders) {
                     if (recorders.hasOwnProperty(r)) recorders[r].stop();
                 }
                 recorders = {};
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            showPanel: function(browser, panel)
-            {
+            showPanel: function(browser, panel) {
                 Firebug.ActivableModule.showPanel.apply(this, arguments);
                 var isXRefreshExtension = panel && panel.name == "XRefreshExtension";
                 if (isXRefreshExtension) this.updatePanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onOptionsShowing: function(popup)
-            {
-                for (var child = popup.firstChild; child; child = child.nextSibling)
-                {
-                    if (child.localName == "menuitem")
-                    {
+            onOptionsShowing: function(popup) {
+                for (var child = popup.firstChild; child; child = child.nextSibling) {
+                    if (child.localName == "menuitem") {
                         var option = child.getAttribute("option");
-                        if (option)
-                        {
+                        if (option) {
                             var checked = false;
                             checked = this.getPref(option);
                             child.setAttribute("checked", checked);
@@ -208,13 +187,11 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            visitWebsite: function(which)
-            {
+            visitWebsite: function(which) {
                 openNewTab(xrefreshURLs[which]);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getPref: function(name)
-            {
+            getPref: function(name) {
                 var prefName = xrefreshPrefDomain + "." + name;
 
                 var type = xrefreshPrefs.getPrefType(prefName);
@@ -226,8 +203,7 @@ FBL.ns(function() {
                 return xrefreshPrefs.getBoolPref(prefName);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            setPref: function(name, value)
-            {
+            setPref: function(name, value) {
                 var prefName = xrefreshPrefDomain + "." + name;
 
                 var type = xrefreshPrefs.getPrefType(prefName);
@@ -239,17 +215,15 @@ FBL.ns(function() {
                 xrefreshPrefs.setBoolPref(prefName, value);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onToggleOption: function(menuitem)
-            {
+            onToggleOption: function(menuitem) {
                 var option = menuitem.getAttribute("option");
                 var checked = menuitem.getAttribute("checked") == "true";
 
                 this.setPref(option, checked);
-				this.updatePanel();
+                this.updatePanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            installGate: function(context)
-            {
+            installGate: function(context) {
                 debugLog("installed gate for>" + context.window.document.URL);
 
                 // the gate is here to stop propagation of some events
@@ -262,15 +236,13 @@ FBL.ns(function() {
                 var keys = doc.getElementsByTagName("keyset");
                 this.savedKeys = [];
                 this.savedParents = [];
-                for (i = 0; i < keys.length; i++)
-                {
+                for (i = 0; i < keys.length; i++) {
                     debugLog("keyset: " + keys[i].id);
                     this.savedKeys[i] = keys[i];
                     this.savedParents[i] = keys[i].parentNode;
                 }
 
-                for (j = 0; j < this.savedKeys.length; j++)
-                {
+                for (j = 0; j < this.savedKeys.length; j++) {
                     debugLog("key: " + this.savedKeys[j].id + " ?");
                     this.savedParents[j].removeChild(this.savedKeys[j]);
                 }
@@ -278,15 +250,13 @@ FBL.ns(function() {
                 // TODO: would be nice to insert placeholders for keysets
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            uninstallGate: function(context)
-            {
+            uninstallGate: function(context) {
                 debugLog("uninstalling gate for>" + context.window.document.URL);
 
                 this.restorePageOffset(context);
 
                 // restore keyset elements
-                for (i = 0; i < this.savedKeys.length; i++)
-                {
+                for (i = 0; i < this.savedKeys.length; i++) {
                     this.savedParents[i].appendChild(this.savedKeys[i]);
                     debugLog("restored key: " + this.savedKeys[i].id + "! into: " + this.savedParents[i].id);
                 }
@@ -299,29 +269,23 @@ FBL.ns(function() {
                 this.updateRecorderPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            printRecordersStats: function()
-            {
-				if (!(FBTrace && FBTrace.DBG_XREFRESH)) return;
+            printRecordersStats: function() {
+                if (!(FBTrace && FBTrace.DBG_XREFRESH)) return;
                 this.log("Recorders:");
-                for (var r in recorders)
-                {
-                    if (recorders.hasOwnProperty(r))
-                    {
+                for (var r in recorders) {
+                    if (recorders.hasOwnProperty(r)) {
                         this.log("  " + r + " >> " + recorders[r].getStats() + " " + recorders[r].state + " C=" + recorders[r].destroyMarker);
                     }
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getRecorder: function(context)
-            {
+            getRecorder: function(context) {
                 return recorders[context.window.document.URL];
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            destroyRecorder: function(url, counter)
-            {
+            destroyRecorder: function(url, counter) {
                 var recorder = recorders[url];
-                if (recorder && recorder.destroyMarker == counter)
-                {
+                if (recorder && recorder.destroyMarker == counter) {
                     debugLog("destroying recorder due to timeout [" + (counter + "") + "] >" + url);
                     delete recorders[url];
                     this.printRecordersStats();
@@ -329,24 +293,21 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             documentStateWatcher: function(context) {
-                },
+            },
             /////////////////////////////////////////////////////////////////////////////////////////
-            initContext: function(context)
-            {
+            initContext: function(context) {
                 Firebug.ActivableModule.initContext.apply(this, arguments);
                 debugLog("init context>" + context.window.document.URL);
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            reattachContext: function(context)
-            {
+            reattachContext: function(context) {
                 Firebug.ActivableModule.reattachContext.apply(this, arguments);
                 debugLog("reattach context>" + context.window.document.URL);
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            destroyContext: function(context, persistedState)
-            {
+            destroyContext: function(context, persistedState) {
                 Firebug.ActivableModule.destroyContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
                 var panel = FirebugContext.getPanel("XRefreshExtension");
@@ -366,12 +327,10 @@ FBL.ns(function() {
                 // loadContext http://someotherpage (-> do nothing)
                 // * here we destroy http://somepage because it was NOT revisited
                 var recorder = recorders[context.window.document.URL];
-                if (recorder)
-                {
+                if (recorder) {
                     var counter = recorder.destroyMarker;
                     setTimeout(bindFixed(this.destroyRecorder, this, context.window.document.URL + "", counter), this.getPref('recorderKeepAlive'));
-                    if (recorder.state == "replaying")
-                    {
+                    if (recorder.state == "replaying") {
                         recorder.stopReplay();
                         recorder.restoreState(context.window);
                     }
@@ -380,16 +339,14 @@ FBL.ns(function() {
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            showContext: function(browser, context)
-            {
+            showContext: function(browser, context) {
                 Firebug.ActivableModule.showContext.apply(this, arguments);
                 debugLog("show context>" + context.window.document.URL);
                 this.updatePanel();
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            loadedContext: function(context)
-            {
+            loadedContext: function(context) {
                 Firebug.ActivableModule.loadedContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
 
@@ -400,18 +357,14 @@ FBL.ns(function() {
                 debugLog("loaded context>" + context.window.document.URL);
                 this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
 
-                if (drumInitiatedRefresh)
-                {
+                if (drumInitiatedRefresh) {
                     debugLog("drum initiated refresh>" + context.window.document.URL);
                     drumInitiatedRefresh = false;
-                    if (recorder && recorder.state != "stopped")
-                    {
+                    if (recorder && recorder.state != "stopped") {
                         this.log("Replaying recorded macros ...", "rreplay");
                         this.replayRecorder(context);
                     }
-                }
-                else
-                {
+                } else {
                     debugLog("not drum initiated refresh>" + context.window.document.URL);
                     var wasPaused = recorder ? recorder.state == "paused": false;
                     var wasRecording = recorder ? recorder.state == "recording": this.getPref("enableRecorder");
@@ -419,8 +372,7 @@ FBL.ns(function() {
                     // create new recorder
                     recorder = new Casper.Events.recorder(bind(this.updateRecorderPanel, this));
                     debugLog("created recorder>" + recorder);
-                    for (var eventName in Casper.Events.handler)
-                    {
+                    for (var eventName in Casper.Events.handler) {
                         recorder.listener.addListener(eventName);
                     }
 
@@ -437,33 +389,27 @@ FBL.ns(function() {
                 this.updateRecorderPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonRefresh: function()
-            {
+            buttonRefresh: function() {
                 FirebugContext.getPanel("XRefreshExtension").refresh(FirebugContext);
                 this.log("Manual refresh performed by user", "rreq");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonStatus: function()
-            {
-				if (this.checkTimeout) clearTimeout(this.checkTimeout);
-				this.checkTimeout = undefined;
-				if (this.shortCheckTimeout) clearTimeout(this.shortCheckTimeout);
-				this.shortCheckTimeout = undefined;
-                if (drumReady)
-                {
+            buttonStatus: function() {
+                if (this.checkTimeout) clearTimeout(this.checkTimeout);
+                this.checkTimeout = undefined;
+                if (this.shortCheckTimeout) clearTimeout(this.shortCheckTimeout);
+                this.shortCheckTimeout = undefined;
+                if (drumReady) {
                     this.log("Disconnection requested by user", "disconnect_btn");
                     this.disconnectDrum();
-                }
-                else
-                {
+                } else {
                     this.log("Connection requested by user", "connect_btn");
                     this.shortCheckTimeout = setTimeout(bind(this.shortConnectionCheck, this), 3000);
                     this.connectDrum();
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonStopRecorder: function()
-            {
+            buttonStopRecorder: function() {
                 var currentRecorder = this.getRecorder(FirebugContext);
                 if (!currentRecorder) return;
                 currentRecorder.stop(FirebugContext.window);
@@ -471,8 +417,7 @@ FBL.ns(function() {
                 this.log("Macro Recorder has been stopped by user", "rstop");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonStartRecorder: function()
-            {
+            buttonStartRecorder: function() {
                 var currentRecorder = this.getRecorder(FirebugContext);
                 if (!currentRecorder) return;
                 currentRecorder.start(FirebugContext.window);
@@ -480,14 +425,12 @@ FBL.ns(function() {
                 this.log("Macro Recorder has been started by user", "rstart");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            replayRecorder: function(context)
-            {
+            replayRecorder: function(context) {
                 var recorder = this.getRecorder(context);
                 if (!recorder) return;
                 if (!recorder.currentTest) return;
                 if (recorder.state == "stopped") return;
-                if (recorder.state == "replaying")
-                {
+                if (recorder.state == "replaying") {
                     this.error("Cannot replay macro, recorder is in replay state.");
                     return;
                 }
@@ -501,14 +444,12 @@ FBL.ns(function() {
                 this.updateRecorderPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonReplayRecorder: function()
-            {
+            buttonReplayRecorder: function() {
                 this.replayRecorder(FirebugContext);
                 this.log("Macro Recorder has been replayed by user", "rreplay");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            buttonPauseRecorder: function()
-            {
+            buttonPauseRecorder: function() {
                 var currentRecorder = this.getRecorder(FirebugContext);
                 if (!currentRecorder) return;
 
@@ -517,12 +458,9 @@ FBL.ns(function() {
                 var browser = panel.context.browser;
                 if (!browser) return;
                 var buttonPause = browser.chrome.$("fbXRefreshExtensionRecorderPause");
-                if (!hasClass(buttonPause, "paused"))
-                {
+                if (!hasClass(buttonPause, "paused")) {
                     currentRecorder.pause(FirebugContext.window);
-                }
-                else
-                {
+                } else {
                     currentRecorder.unpause(FirebugContext.window);
                 }
 
@@ -530,8 +468,7 @@ FBL.ns(function() {
                 this.log("Macro Recorder has been paused by user", "rpause");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            connectDrum: function()
-            {
+            connectDrum: function() {
                 var transportService = Cc["@mozilla.org/network/socket-transport-service;1"].getService(Components.interfaces.nsISocketTransportService);
                 drumTransport = transportService.createTransport(null, 0, this.getPref("host"), this.getPref("port"), null);
                 drumOutStream = drumTransport.openOutputStream(0, 0, 0);
@@ -543,8 +480,7 @@ FBL.ns(function() {
                 var dataListener = {
                     parent: this,
                     data: "",
-                    onStartRequest: bind(function(request, context) {},
-                    this),
+                    onStartRequest: bind(function(request, context) {}, this),
                     onStopRequest: function(request, context, status) {
                         this.parent.onServerDied();
                     },
@@ -561,18 +497,15 @@ FBL.ns(function() {
                 this.sendHello();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            disconnectDrum: function()
-            {
+            disconnectDrum: function() {
                 if (drumReady) this.log("Disconnected from XRefresh Monitor", "disconnect");
                 // it is nice to say good bye ...
                 this.sendBye();
-                if (drumInStream)
-                {
+                if (drumInStream) {
                     drumInStream.close();
                     drumInStream = null;
                 }
-                if (drumOutStream)
-                {
+                if (drumOutStream) {
                     drumOutStream.close();
                     drumOutStream = null;
                 }
@@ -580,26 +513,20 @@ FBL.ns(function() {
                 this.updateConnectionPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            reconnectDrum: function()
-            {
+            reconnectDrum: function() {
                 this.disconnectDrum();
                 this.connectDrum();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            startListener: function()
-            {
+            startListener: function() {
                 var server = Components.classes["@mozilla.org/network/server-socket;1"].
                 createInstance(Components.interfaces.nsIServerSocket);
 
-                var listener =
-                {
-                    onSocketAccepted: bind(function(socket, transport)
-                    {
+                var listener = {
+                    onSocketAccepted: bind(function(socket, transport) {
                         this.log("Reconnection request received");
                         Firebug.XRefreshExtension.reconnectDrum();
-                    },
-                    this),
-
+                    }, this),
                     onStopListening: function(serverSocket, status) {}
                 }
 
@@ -607,8 +534,7 @@ FBL.ns(function() {
                 var range = this.getPref("portRange");
                 var port = this.getPref("port");
                 var loopbackonly = this.getPref("localConnectionsOnly");
-                for (i = 1; i <= range; i++)
-                {
+                for (i = 1; i <= range; i++) {
                     // find some free port below drumPort
                     try {
                         server.init(port - i, loopbackonly, -1);
@@ -622,15 +548,13 @@ FBL.ns(function() {
                 this.error("No unused port available in given range: " + (port - range) + "-" + (port - 1));
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            stopListener: function()
-            {
+            stopListener: function() {
                 if (!listenerServer) return;
                 listenerServer.close();
                 listenerServer = null;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            sendMessageToServer: function(message)
-            {
+            sendMessageToServer: function(message) {
                 if (!drumOutStream) return false;
                 var data = Casper.JSON.stringify(message) + '\n';
                 // every message is delimited with new line
@@ -638,17 +562,14 @@ FBL.ns(function() {
                 drumOutStream.write(utf8data, utf8data.length);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onServerDied: function()
-            {
+            onServerDied: function() {
                 if (drumReady) this.error("Monitor has closed connection");
 
-                if (drumInStream)
-                {
+                if (drumInStream) {
                     drumInStream.close();
                     drumInStream = null;
                 }
-                if (drumOutStream)
-                {
+                if (drumOutStream) {
                     drumOutStream.close();
                     drumOutStream = null;
                 }
@@ -656,8 +577,7 @@ FBL.ns(function() {
                 this.updateConnectionPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onDataAvailable: function(listener)
-            {
+            onDataAvailable: function(listener) {
                 // try to parse incomming message
                 // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
                 // TODO: make this more robust to server formating failures
@@ -685,17 +605,13 @@ FBL.ns(function() {
                 listener.data = "";
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getMessageCSSFiles: function(message)
-            {
+            getMessageCSSFiles: function(message) {
                 var files = [];
                 var re = /\.css$/;
-                for (var i = 0; i < message.files.length; i++)
-                {
+                for (var i = 0; i < message.files.length; i++) {
                     var file = message.files[i];
-                    if (file.action == 'changed')
-                    {
-                        if (file.path1.match(re))
-                        {
+                    if (file.action == 'changed') {
+                        if (file.path1.match(re)) {
                             files.push(message.root + '\\' + file.path1);
                             // TODO: this should be platform specific
                         }
@@ -704,18 +620,13 @@ FBL.ns(function() {
                 return files;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            processMessage: function(message)
-            {
+            processMessage: function(message) {
                 debugLog("Received message:" + message.command);
-                if (message.command == "DoRefresh")
-                {
+                if (message.command == "DoRefresh") {
                     var panel = FirebugContext.getPanel("XRefreshExtension");
-                    if (this.getPref("fastCSS"))
-                    {
+                    if (this.getPref("fastCSS")) {
                         var cssFiles = this.getMessageCSSFiles(message);
-                        if (cssFiles.length == message.files.length)
-                        // contains only CSS files
-                        {
+                        if (cssFiles.length == message.files.length) { // contains only CSS files?
                             this.showEvent(message, 'fastcss');
                             return panel.updateCSS(FirebugContext, cssFiles);
                         }
@@ -723,8 +634,7 @@ FBL.ns(function() {
                     this.showEvent(message, 'refresh');
                     panel.refresh(FirebugContext);
                 }
-                if (message.command == "AboutMe")
-                {
+                if (message.command == "AboutMe") {
                     drumReady = true;
                     drumName = message.agent;
                     drumVersion = message.version;
@@ -734,15 +644,13 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updatePanel: function()
-            {
+            updatePanel: function() {
                 this.updateRefreshPanel();
                 this.updateRecorderPanel();
                 this.updateConnectionPanel();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateConnectionPanel: function()
-            {
+            updateConnectionPanel: function() {
                 if (!FirebugContext) return;
                 // safety net
                 var panel = FirebugContext.getPanel("XRefreshExtension");
@@ -753,20 +661,16 @@ FBL.ns(function() {
                 if (!buttonStatus) return;
                 buttonStatus.className = "toolbar-text-button toolbar-connection-status";
 
-                if (drumReady)
-                {
+                if (drumReady) {
                     buttonStatus.label = "Connected to " + drumName + " " + drumVersion;
                     setClass(buttonStatus, "toolbar-text-button toolbar-status-connected");
-                }
-                else
-                {
+                } else {
                     buttonStatus.label = "Disconnected";
                     setClass(buttonStatus, "toolbar-text-button toolbar-status-disconnected");
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateRefreshPanel: function()
-            {
+            updateRefreshPanel: function() {
                 if (!FirebugContext) return;
                 // safety net
                 var panel = FirebugContext.getPanel("XRefreshExtension");
@@ -777,11 +681,10 @@ FBL.ns(function() {
                 if (!buttonRefresh) return;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateRecorderPanel: function()
-            {
+            updateRecorderPanel: function() {
                 if (!FirebugContext) return;
                 var enabled = this.isEnabled(FirebugContext);
-				var enabledRecorder = this.getPref("enableRecorder");
+                var enabledRecorder = this.getPref("enableRecorder");
                 // safety net
                 var panel = FirebugContext.getPanel("XRefreshExtension");
                 if (!panel) return;
@@ -792,15 +695,14 @@ FBL.ns(function() {
                 if (!status) return;
                 var statusLabel = browser.chrome.$("fbXRefreshExtensionRecorderStatusLabel");
                 if (!statusLabel) return;
-				var buttonStop = browser.chrome.$("fbXRefreshExtensionRecorderStop");
+                var buttonStop = browser.chrome.$("fbXRefreshExtensionRecorderStop");
                 var buttonStart = browser.chrome.$("fbXRefreshExtensionRecorderStart");
                 var buttonReplay = browser.chrome.$("fbXRefreshExtensionRecorderReplay");
                 var buttonPause = browser.chrome.$("fbXRefreshExtensionRecorderPause");
                 statusLabel.className = "toolbar-recorder-status";
 
                 var currentRecorder = this.getRecorder(FirebugContext);
-                if (!currentRecorder)
-                {
+                if (!currentRecorder) {
                     statusLabel.value = "Waiting for document ...";
                     setClass(statusLabel, "toolbar-recorder-invalid");
 
@@ -813,8 +715,7 @@ FBL.ns(function() {
                 var stats = currentRecorder.getStats();
 
                 removeClass(buttonPause, "paused");
-                switch (currentRecorder.state)
-                {
+                switch (currentRecorder.state) {
                 case "recording":
                     statusLabel.value = stats + " Recording ... ";
                     setClass(statusLabel, "toolbar-recorder-recording");
@@ -858,15 +759,13 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            showEvent: function(message, icon)
-            {
+            showEvent: function(message, icon) {
                 message.time = this.getCurrentTime();
                 var event = new BlinkEvent(0, message, icon);
                 return this.publishEvent(event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            showLog: function(text, icon)
-            {
+            showLog: function(text, icon) {
                 var event = new BlinkEvent(1, {
                     text: text,
                     time: this.getCurrentTime()
@@ -875,8 +774,7 @@ FBL.ns(function() {
                 return this.publishEvent(event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getCurrentTime: function()
-            {
+            getCurrentTime: function() {
                 var d = new Date();
                 var h = d.getHours() + "";
                 var m = d.getMinutes() + "";
@@ -887,29 +785,24 @@ FBL.ns(function() {
                 return h + ":" + m + ":" + s;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            log: function(text, icon)
-            {
+            log: function(text, icon) {
                 if (!icon) icon = "info";
                 return this.showLog(text, icon);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            error: function(text, icon)
-            {
+            error: function(text, icon) {
                 if (!icon) icon = "error";
                 return this.showLog(text, icon);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            publishEvent: function(event)
-            {
+            publishEvent: function(event) {
                 if (!FirebugContext) return;
                 var panel = FirebugContext.getPanel("XRefreshExtension");
                 if (panel) panel.publish(event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            sendHello: function()
-            {
-                var message =
-                {
+            sendHello: function() {
+                var message = {
                     command: "Hello",
                     type: "Firefox",
                     agent: navigator.userAgent.toLowerCase()
@@ -917,19 +810,15 @@ FBL.ns(function() {
                 this.sendMessageToServer(message);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            sendBye: function()
-            {
-                var message =
-                {
+            sendBye: function() {
+                var message = {
                     command: "Bye"
                 };
                 this.sendMessageToServer(message);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            sendSetPage: function(contentTitle, contentURL)
-            {
-                var message =
-                {
+            sendSetPage: function(contentTitle, contentURL) {
+                var message = {
                     command: "SetPage",
                     page: contentTitle,
                     url: contentURL
@@ -937,16 +826,14 @@ FBL.ns(function() {
                 this.sendMessageToServer(message);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            storePageOffset: function(context)
-            {
+            storePageOffset: function(context) {
                 debugLog("Storing offsets for " + context.window.document.URL);
                 var recorder = recorders[context.window.document.URL];
                 if (!recorder) return;
                 recorder.offsets = [context.window.pageXOffset, context.window.pageYOffset];
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            restorePageOffset: function(context)
-            {
+            restorePageOffset: function(context) {
                 debugLog("Restoring offsets for " + context.window.document.URL);
                 var recorder = recorders[context.window.document.URL];
                 if (!recorder) return;
@@ -955,8 +842,7 @@ FBL.ns(function() {
                 context.window.scrollTo(data[0], data[1]);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            openPermissions: function(event, context)
-            {
+            openPermissions: function(event, context) {
                 cancelEvent(event);
 
                 var browserURI = FirebugChrome.getBrowserURI(context);
@@ -975,13 +861,11 @@ FBL.ns(function() {
                 openWindow("Browser:Permissions", "chrome://browser/content/preferences/permissions.xul", "", params);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getMenuLabel: function(option, location, shortened)
-            {
+            getMenuLabel: function(option, location, shortened) {
                 var label = "";
                 var host = "";
 
-                switch (option)
-                {
+                switch (option) {
                 case "disable-site":
                     if (isSystemURL(location.spec))
                     label = "SystemPagesDisable";
@@ -1019,22 +903,19 @@ FBL.ns(function() {
                 label = this.panelName + "." + label;
                 return $XREFRESH_STRF(label, [getURIHost(location)]);
             }
-
         });
 
         ////////////////////////////////////////////////////////////////////////
         //
         //
-        top.BlinkEvent = function(type, message, icon)
-        {
+        top.BlinkEvent = function(type, message, icon) {
             this.type = type;
             this.message = message;
             this.opened = false;
             this.icon = icon;
         };
 
-        Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep,
-        {
+        Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep, {
             tagRefresh:
             DIV({
                 class: "blinkHead closed $object|getIcon",
@@ -1090,32 +971,27 @@ FBL.ns(function() {
             ),
 
             /////////////////////////////////////////////////////////////////////////////////////////
-            getCaption: function(event)
-            {
+            getCaption: function(event) {
                 if (event.type == 0) return 'Project \'' + event.message.name + '\': ';
                 if (event.type == 1) return event.message.text;
                 return "???";
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getIcon: function(event)
-            {
+            getIcon: function(event) {
                 return event.icon;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getDate: function(event)
-            {
+            getDate: function(event) {
                 return ' [' + event.message.time + ']';
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            filesSentence: function(i, s)
-            {
+            filesSentence: function(i, s) {
                 if (i == 0) return null;
                 if (i == 1) return 'one item ' + s;
                 return i + ' items ' + s;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            glue: function(a)
-            {
+            glue: function(a) {
                 if (!a.length) return "";
                 var last = a.length - 1;
                 var s = a[0];
@@ -1128,8 +1004,7 @@ FBL.ns(function() {
                 return s;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getInfo: function(event)
-            {
+            getInfo: function(event) {
                 var m = event.message;
                 var changed = 0;
                 var created = 0;
@@ -1156,13 +1031,11 @@ FBL.ns(function() {
                 return this.glue(a);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onToggleBody: function(e)
-            {
+            onToggleBody: function(e) {
                 if (isLeftClick(e)) this.toggle(e.currentTarget);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            toggle: function(target)
-            {
+            toggle: function(target) {
                 var logRow = getAncestorByClass(target, "logRow-blink");
                 var row = getChildByClass(logRow, "blinkHead")
                 var event = row.repObject;
@@ -1181,8 +1054,7 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            showEventDetails: function(event, details)
-            {
+            showEventDetails: function(event, details) {
                 var s = '';
                 var m = event.message;
                 s += '<table class="ftable" cellpadding="0" cellspacing="0">';
@@ -1219,25 +1091,21 @@ FBL.ns(function() {
                 details.innerHTML = s;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            supportsObject: function(object)
-            {
+            supportsObject: function(object) {
                 return object instanceof BlinkEvent;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getRealObject: function(event, context)
-            {
+            getRealObject: function(event, context) {
                 return event.message;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getContextMenuItems: function(event)
-            {
+            getContextMenuItems: function(event) {
                 return null;
             }
         });
 
         function XRefreshExtensionPanel() {}
-        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel,
-        {
+        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel, {
             name: "XRefreshExtension",
             title: "XRefresh",
             searchable: false,
@@ -1246,38 +1114,28 @@ FBL.ns(function() {
             wasScrolledToBottom: true,
 
             /////////////////////////////////////////////////////////////////////////////////////////
-            initialize: function()
-            {
+            initialize: function() {
                 Firebug.Panel.initialize.apply(this, arguments);
 
                 this.applyCSS();
                 this.restoreState();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            applyCSS: function()
-            {
+            applyCSS: function() {
                 this.applyPanelCSS("chrome://xrefresh/skin/panel.css");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            safeGetURI: function(browser)
-            {
-                try
-                {
+            safeGetURI: function(browser) {
+                try {
                     return this.context.browser.currentURI;
-                }
-                catch(exc)
-                {
-                    return null;
-                }
+                } catch(e) {}
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            refresh: function(context)
-            {
+            refresh: function(context) {
                 var localOnly = Firebug.XRefreshExtension.getPref('localPagesOnly');
                 var uri = this.safeGetURI();
 
-                if (localOnly)
-                {
+                if (localOnly) {
                     // TODO: refresh localhost only
                     var localhost = true;
                     if (! (uri.scheme == "file" || localhost)) return;
@@ -1290,8 +1148,7 @@ FBL.ns(function() {
                 );
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateStyleSheet: function(document, element, path)
-            {
+            updateStyleSheet: function(document, element, path) {
                 // TODO: try this: http://markmail.org/message/5mfzam3vgxtmvq3z#query:mozilla.org%2Fnetwork%2Fcache-service+page:1+mid:d6ooz3mhlsexv2rw+state:results
                 var file = Cc["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
                 file.initWithPath(path);
@@ -1301,14 +1158,12 @@ FBL.ns(function() {
                 //              var channel = ios.newChannelFromURI(fileURI, document.characterSet, null);
                 //              channel.loadFlags |= Ci.nsIRequest.LOAD_BYPASS_CACHE;
                 var observer = {
-                    onStreamComplete: function(aLoader, aContext, aStatus, aLength, aResult)
-                    {
+                    onStreamComplete: function(aLoader, aContext, aStatus, aLength, aResult) {
                         var styleElement = document.createElement("style");
                         styleElement.setAttribute("type", "text/css");
                         styleElement.appendChild(document.createTextNode(aResult));
                         var attrs = ["media", "title", "disabled"];
-                        for (var i = 0; i < attrs.length; i++)
-                        {
+                        for (var i = 0; i < attrs.length; i++) {
                             var attr = attrs[i];
                             if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
                         }
@@ -1330,8 +1185,7 @@ FBL.ns(function() {
                 observer.onStreamComplete(null, null, null, null, content);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            collectDocuments: function(frame)
-            {
+            collectDocuments: function(frame) {
                 var documents = [];
                 if (!frame) return documents;
                 if (frame.document) documents.push(frame.document);
@@ -1340,8 +1194,7 @@ FBL.ns(function() {
                 return documents;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            doesCSSNameMatch: function(cssLink, cssFile)
-            {
+            doesCSSNameMatch: function(cssLink, cssFile) {
                 var firstQ = cssLink.indexOf('?');
                 if (firstQ != -1) cssLink = cssLink.substring(0, firstQ);
                 var lastLinkSlash = cssLink.lastIndexOf('/');
@@ -1353,12 +1206,10 @@ FBL.ns(function() {
                 return res;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            replaceMatchingStyleSheetsInDocument: function(document, cssFile)
-            {
+            replaceMatchingStyleSheetsInDocument: function(document, cssFile) {
                 debugLog('Replacing CSS in document', document);
                 var styleSheetList = document.styleSheets;
-                for (var i = 0; i < styleSheetList.length; i++)
-                {
+                for (var i = 0; i < styleSheetList.length; i++) {
                     var styleSheetNode = styleSheetList[i].ownerNode;
                     // this may be <style> or <link> node
                     if (!styleSheetNode) continue;
@@ -1368,14 +1219,12 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            replaceMatchingStyleSheets: function(context, cssFile)
-            {
+            replaceMatchingStyleSheets: function(context, cssFile) {
                 var documents = this.collectDocuments(context.window);
                 for (var i = 0; i < documents.length; i++) this.replaceMatchingStyleSheetsInDocument(documents[i], cssFile);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateCSS: function(context, cssFiles)
-            {
+            updateCSS: function(context, cssFiles) {
                 debugLog('Replacing css files', cssFiles);
                 for (var i = 0; i < cssFiles.length; i++)
                 {
@@ -1385,8 +1234,7 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            publish: function(event)
-            {
+            publish: function(event) {
                 var recorder = recorders[FirebugContext.window.document.URL];
                 if (!recorder) return;
                 if (!recorder.published) recorder.published = [];
@@ -1394,8 +1242,7 @@ FBL.ns(function() {
                 event.root = this.append(event, "blink", null, null);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            restoreState: function()
-            {
+            restoreState: function() {
                 var recorder = recorders[FirebugContext.window.document.URL];
                 if (!recorder) return;
                 var data = recorder.published;
@@ -1409,15 +1256,13 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            clear: function()
-            {
+            clear: function() {
                 if (this.panelNode) clearNode(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            show: function(state)
-            {
+            show: function(state) {
                 var enabled = Firebug.XRefreshExtension.isEnabled(this.context);
-				var enabledRecorder = Firebug.XRefreshExtension.getPref("enableRecorder");
+                var enabledRecorder = Firebug.XRefreshExtension.getPref("enableRecorder");
                 this.showToolbarButtons("fbXRefreshExtensionButtons", true);
                 this.showToolbarButtons("fbXRefreshExtensionControls", enabled);
                 this.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
@@ -1425,41 +1270,36 @@ FBL.ns(function() {
                 // the default page with description and enable button is
                 // visible only if debugger is disabled.
                 if (enabled)
-                	Firebug.ModuleManagerPage.hide(this);
+                    Firebug.ModuleManagerPage.hide(this);
                 else
-                	Firebug.ModuleManagerPage.show(this, Firebug.XRefreshExtension);
+                    Firebug.ModuleManagerPage.show(this, Firebug.XRefreshExtension);
 
                 if (this.wasScrolledToBottom)
                 scrollToBottom(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            hide: function()
-            {
+            hide: function() {
                 this.showToolbarButtons("fbXRefreshExtensionButtons", false);
                 this.showToolbarButtons("fbXRefreshExtensionControls", false);
                 this.showToolbarButtons("fbXRefreshExtensionRecorder", false);
                 this.wasScrolledToBottom = isScrolledToBottom(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getOptionsMenuItems: function()
-            {
+            getOptionsMenuItems: function() {
                 return null;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getTopContainer: function()
-            {
+            getTopContainer: function() {
                 return this.panelNode;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            createRow: function(rowName, className)
-            {
+            createRow: function(rowName, className) {
                 var elt = this.document.createElement("div");
                 elt.className = rowName + (className ? " " + rowName + "-" + className: "");
                 return elt;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            append: function(objects, className, rep)
-            {
+            append: function(objects, className, rep) {
                 var container = this.getTopContainer();
                 var scrolledToBottom = isScrolledToBottom(this.panelNode);
                 var row = this.createRow("logRow", className);
@@ -1474,34 +1314,24 @@ FBL.ns(function() {
                 return row;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            appendObject: function(object, row, rep)
-            {
+            appendObject: function(object, row, rep) {
                 var rep = rep ? rep: Firebug.getRep(object);
                 var res = "";
-                switch (object.type)
-                {
+                switch (object.type) {
                 case 0:
-                    res = rep.tagRefresh.append({
-                        object: object
-                    },
-                    row);
+                    res = rep.tagRefresh.append({ object: object }, row);
                     break;
                 case 1:
-                    res = rep.tagLog.append({
-                        object: object
-                    },
-                    row);
+                    res = rep.tagLog.append({ object: object }, row);
                     break;
                 }
-                if (object.opened)
-                {
+                if (object.opened) {
                     rep.toggle(row.childNodes[0].childNodes[0]);
                 }
                 return res;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            applyPanelCSS: function(url)
-            {
+            applyPanelCSS: function(url) {
                 var styleElement = this.document.createElement("link");
                 styleElement.setAttribute("type", "text/css");
                 styleElement.setAttribute("href", url);
@@ -1511,8 +1341,7 @@ FBL.ns(function() {
                 if (head) head.appendChild(styleElement);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getHeadElement: function(doc)
-            {
+            getHeadElement: function(doc) {
                 var heads = doc.getElementsByTagName("head");
                 if (heads.length == 0) return doc.documentElement;
                 return heads[0];
@@ -1523,5 +1352,4 @@ FBL.ns(function() {
         Firebug.registerRep(Firebug.XRefreshExtension.XHR);
         Firebug.registerPanel(XRefreshExtensionPanel);
     }
-});
-// close custom scope
+}); // close custom scope
