@@ -18,8 +18,7 @@ FBL.ns(function() {
         const xrefreshPrefService = Cc["@mozilla.org/preferences-service;1"];
 
         const xrefreshPrefs = xrefreshPrefService.getService(nsIPrefBranch2);
-        const xrefreshURLs =
-        {
+        const xrefreshURLs = {
             main: "http://www.xrefresh.com",
             docs: "http://www.xrefresh.com/docs",
             contribute: "http://www.xrefresh.com/contribute"
@@ -61,7 +60,7 @@ FBL.ns(function() {
             } catch(e) {}
         }
 
-        function debugLog() {
+        function dbg() {
             if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.sysout.apply(this, arguments);
         }
 
@@ -224,7 +223,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             installGate: function(context) {
-                debugLog("installed gate for>" + context.window.document.URL);
+                dbg("installed gate for>" + context.window.document.URL);
 
                 // the gate is here to stop propagation of some events
                 // beyond HTML document borders.
@@ -237,13 +236,13 @@ FBL.ns(function() {
                 this.savedKeys = [];
                 this.savedParents = [];
                 for (i = 0; i < keys.length; i++) {
-                    debugLog("keyset: " + keys[i].id);
+                    dbg("keyset: " + keys[i].id);
                     this.savedKeys[i] = keys[i];
                     this.savedParents[i] = keys[i].parentNode;
                 }
 
                 for (j = 0; j < this.savedKeys.length; j++) {
-                    debugLog("key: " + this.savedKeys[j].id + " ?");
+                    dbg("key: " + this.savedKeys[j].id + " ?");
                     this.savedParents[j].removeChild(this.savedKeys[j]);
                 }
 
@@ -251,14 +250,14 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             uninstallGate: function(context) {
-                debugLog("uninstalling gate for>" + context.window.document.URL);
+                dbg("uninstalling gate for>" + context.window.document.URL);
 
                 this.restorePageOffset(context);
 
                 // restore keyset elements
                 for (i = 0; i < this.savedKeys.length; i++) {
                     this.savedParents[i].appendChild(this.savedKeys[i]);
-                    debugLog("restored key: " + this.savedKeys[i].id + "! into: " + this.savedParents[i].id);
+                    dbg("restored key: " + this.savedKeys[i].id + "! into: " + this.savedParents[i].id);
                 }
 
                 // start recording new session
@@ -286,7 +285,7 @@ FBL.ns(function() {
             destroyRecorder: function(url, counter) {
                 var recorder = recorders[url];
                 if (recorder && recorder.destroyMarker == counter) {
-                    debugLog("destroying recorder due to timeout [" + (counter + "") + "] >" + url);
+                    dbg("destroying recorder due to timeout [" + (counter + "") + "] >" + url);
                     delete recorders[url];
                     this.printRecordersStats();
                 }
@@ -297,13 +296,13 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             initContext: function(context) {
                 Firebug.ActivableModule.initContext.apply(this, arguments);
-                debugLog("init context>" + context.window.document.URL);
+                dbg("init context>" + context.window.document.URL);
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             reattachContext: function(context) {
                 Firebug.ActivableModule.reattachContext.apply(this, arguments);
-                debugLog("reattach context>" + context.window.document.URL);
+                dbg("reattach context>" + context.window.document.URL);
                 this.printRecordersStats();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -311,7 +310,7 @@ FBL.ns(function() {
                 Firebug.ActivableModule.destroyContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
                 var panel = FirebugContext.getPanel("XRefreshExtension");
-                debugLog("destroy context>" + context.window.document.URL);
+                dbg("destroy context>" + context.window.document.URL);
 
                 // we need to destroy recorders to prevent leaks
                 // we will defer recorder destroy for recorderKeepAlive time
@@ -341,7 +340,7 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             showContext: function(browser, context) {
                 Firebug.ActivableModule.showContext.apply(this, arguments);
-                debugLog("show context>" + context.window.document.URL);
+                dbg("show context>" + context.window.document.URL);
                 this.updatePanel();
                 this.printRecordersStats();
             },
@@ -354,32 +353,32 @@ FBL.ns(function() {
                 var nextDestroyMarker = 0;
                 if (recorder) nextDestroyMarker = recorder.destroyMarker + 1;
                 // visiting old page prevent destroying recorder if found
-                debugLog("loaded context>" + context.window.document.URL);
+                dbg("loaded context>" + context.window.document.URL);
                 this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
 
                 if (drumInitiatedRefresh) {
-                    debugLog("drum initiated refresh>" + context.window.document.URL);
+                    dbg("drum initiated refresh>" + context.window.document.URL);
                     drumInitiatedRefresh = false;
                     if (recorder && recorder.state != "stopped") {
                         this.log("Replaying recorded macros ...", "rreplay");
                         this.replayRecorder(context);
                     }
                 } else {
-                    debugLog("not drum initiated refresh>" + context.window.document.URL);
+                    dbg("not drum initiated refresh>" + context.window.document.URL);
                     var wasPaused = recorder ? recorder.state == "paused": false;
                     var wasRecording = recorder ? recorder.state == "recording": this.getPref("enableRecorder");
 
                     // create new recorder
                     recorder = new Casper.Events.recorder(bind(this.updateRecorderPanel, this));
-                    debugLog("created recorder>" + recorder);
+                    dbg("created recorder>" + recorder);
                     for (var eventName in Casper.Events.handler) {
                         recorder.listener.addListener(eventName);
                     }
 
                     // register recorder
-                    debugLog("starting recorder>" + recorder);
+                    dbg("starting recorder>" + recorder);
                     if (wasRecording) recorder.start(context.window, wasPaused);
-                    debugLog("registering recorder as>" + context.window.document.URL);
+                    dbg("registering recorder as>" + context.window.document.URL);
                 }
 
                 recorder.destroyMarker = nextDestroyMarker;
@@ -581,7 +580,7 @@ FBL.ns(function() {
                 // try to parse incomming message
                 // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
                 // TODO: make this more robust to server formating failures
-                debugLog(data||"empty message");
+                dbg(data||"empty message");
                 var data = listener.data;
                 var parts = listener.data.split('\n');
                 var buffer = this.reminder;
@@ -621,7 +620,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             processMessage: function(message) {
-                debugLog("Received message:" + message.command);
+                dbg("Received message:" + message.command);
                 if (message.command == "DoRefresh") {
                     var panel = FirebugContext.getPanel("XRefreshExtension");
                     if (this.getPref("fastCSS")) {
@@ -827,14 +826,14 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             storePageOffset: function(context) {
-                debugLog("Storing offsets for " + context.window.document.URL);
+                dbg("Storing offsets for " + context.window.document.URL);
                 var recorder = recorders[context.window.document.URL];
                 if (!recorder) return;
                 recorder.offsets = [context.window.pageXOffset, context.window.pageYOffset];
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             restorePageOffset: function(context) {
-                debugLog("Restoring offsets for " + context.window.document.URL);
+                dbg("Restoring offsets for " + context.window.document.URL);
                 var recorder = recorders[context.window.document.URL];
                 if (!recorder) return;
                 var data = recorder.offsets;
@@ -917,58 +916,24 @@ FBL.ns(function() {
 
         Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep, {
             tagRefresh:
-            DIV({
-                class: "blinkHead closed $object|getIcon",
-                _repObject: "$object"
-            },
-            A({
-                class: "blinkTitle",
-                onclick: "$onToggleBody"
-            },
-            IMG({
-                class: "blinkIcon",
-                src: "blank.gif"
-            }),
-            SPAN({
-                class: "blinkDate"
-            },
-            "$object|getDate"),
-            SPAN({
-                class: "blinkURI"
-            },
-            "$object|getCaption"),
-            SPAN({
-                class: "blinkInfo"
-            },
-            "$object|getInfo")
-            ),
-            DIV({
-                class: "details"
-            })
-            ),
+                DIV({class: "blinkHead closed $object|getIcon", _repObject: "$object"},
+                    A({class: "blinkTitle", onclick: "$onToggleBody"},
+                        IMG({class: "blinkIcon", src: "blank.gif"}),
+                        SPAN({class: "blinkDate"}, "$object|getDate"),
+                        SPAN({class: "blinkURI" }, "$object|getCaption"),
+                        SPAN({class: "blinkInfo"}, "$object|getInfo")
+                    ),
+                    DIV({class: "details"})
+                ),
 
             tagLog:
-            DIV({
-                class: "blinkHead $object|getIcon",
-                _repObject: "$object"
-            },
-            A({
-                class: "blinkTitle"
-            },
-            IMG({
-                class: "blinkIcon",
-                src: "blank.gif"
-            }),
-            SPAN({
-                class: "blinkDate"
-            },
-            "$object|getDate"),
-            SPAN({
-                class: "blinkURI"
-            },
-            "$object|getCaption")
-            )
-            ),
+                DIV({class: "blinkHead $object|getIcon", _repObject: "$object"},
+                    A({class: "blinkTitle"},
+                        IMG({class: "blinkIcon", src:"blank.gif"}),
+                        SPAN({class: "blinkDate"}, "$object|getDate"),
+                        SPAN({class: "blinkURI"}, "$object|getCaption")
+                    )
+                ),
 
             /////////////////////////////////////////////////////////////////////////////////////////
             getCaption: function(event) {
@@ -1202,12 +1167,12 @@ FBL.ns(function() {
                 var lastFileSlash = cssFile.lastIndexOf('/');
                 if (lastFileSlash != -1) cssFile = cssFile.substring(lastFileSlash + 1);
                 var res = (cssFile.toLowerCase() == cssLink.toLowerCase());
-                debugLog('Match ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
+                dbg('Match ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
                 return res;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             replaceMatchingStyleSheetsInDocument: function(document, cssFile) {
-                debugLog('Replacing CSS in document', document);
+                dbg('Replacing CSS in document', document);
                 var styleSheetList = document.styleSheets;
                 for (var i = 0; i < styleSheetList.length; i++) {
                     var styleSheetNode = styleSheetList[i].ownerNode;
@@ -1225,7 +1190,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateCSS: function(context, cssFiles) {
-                debugLog('Replacing css files', cssFiles);
+                dbg('Replacing css files', cssFiles);
                 for (var i = 0; i < cssFiles.length; i++)
                 {
                     var cssFile = cssFiles[i].replace('\\', '/');
