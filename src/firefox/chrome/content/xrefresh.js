@@ -76,6 +76,8 @@ FBL.ns(function() {
         //
         Firebug.XRefreshExtension = extend(Firebug.ActivableModule, {
             reminder: '',
+            currentPanel: null,
+            
             /////////////////////////////////////////////////////////////////////////////////////////
             checkFirebugVersion: function() {
                 var version = Firebug.getVersion();
@@ -84,6 +86,12 @@ FBL.ns(function() {
                 if (a.length<2) return false;
                 // we want Firebug version 1.2+ (including alphas/betas and other weird stuff)
                 return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=2;
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            startupCheck: function() {
+                if (!this.checkFirebugVersion()) {
+                    this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getPrefDomain: function() {
@@ -98,13 +106,14 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             shutdown: function() {
-                if (Firebug.getPref('defaultPanelName') == 'XRefreshExtension') {
+                if (Firebug.getPref('defaultPanelName') == this.panelName) {
                     Firebug.setPref('defaultPanelName', 'console');
                 }
                 Firebug.ActivableModule.shutdown.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onPanelActivate: function(context, init) {
+            onPanelActivate: function(context, init, panelName) {
+                if (panelName!=this.panelName) return;
                 if (!init) context.window.location.reload();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -121,12 +130,6 @@ FBL.ns(function() {
                 setTimeout(bind(this.connectDrum, this), 1000);
                 setTimeout(bind(this.startListener, this), 2000);
                 this.checkTimeout = setTimeout(bind(this.connectionCheck, this), 5000);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            startupCheck: function() {
-                if (!this.checkFirebugVersion()) {
-                    this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
-                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onLastPanelDeactivate: function(context, init) {
@@ -169,8 +172,11 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             showPanel: function(browser, panel) {
                 Firebug.ActivableModule.showPanel.apply(this, arguments);
-                var isXRefreshExtension = panel && panel.name == "XRefreshExtension";
-                if (isXRefreshExtension) this.updatePanel();
+                var isXRefreshExtension = panel && panel.name == this.panelName;
+                if (isXRefreshExtension) {
+                    this.currentPanel = panel;
+                    this.updatePanel();
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onOptionsShowing: function(popup) {
@@ -303,7 +309,7 @@ FBL.ns(function() {
             destroyContext: function(context, persistedState) {
                 Firebug.ActivableModule.destroyContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 dbg("destroy context>" + context.window.document.URL);
 
                 // we need to destroy recorders to prevent leaks
@@ -384,7 +390,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             buttonRefresh: function() {
-                FirebugContext.getPanel("XRefreshExtension").refresh(FirebugContext);
+                FirebugContext.getPanel(this.panelName).refresh(FirebugContext);
                 this.log("Manual refresh performed by user", "rreq");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -447,7 +453,7 @@ FBL.ns(function() {
                 var currentRecorder = this.getRecorder(FirebugContext);
                 if (!currentRecorder) return;
 
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
@@ -622,7 +628,7 @@ FBL.ns(function() {
                 }
                 
                 if (message.command == "DoRefresh") {
-                    var panel = FirebugContext.getPanel("XRefreshExtension");
+                    var panel = FirebugContext.getPanel(this.panelName);
                     if (this.getPref("fastCSS")) {
                         var cssFiles = this.getMessageCSSFiles(message);
                         if (cssFiles.length == message.files.length) { // contains only CSS files?
@@ -652,7 +658,7 @@ FBL.ns(function() {
             updateConnectionPanel: function() {
                 if (!FirebugContext) return;
                 // safety net
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
@@ -672,7 +678,7 @@ FBL.ns(function() {
             updateRefreshPanel: function() {
                 if (!FirebugContext) return;
                 // safety net
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
@@ -685,7 +691,7 @@ FBL.ns(function() {
                 var enabled = this.isEnabled(FirebugContext);
                 var enabledRecorder = this.getPref("enableRecorder");
                 // safety net
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 if (!panel) return;
                 panel.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
                 var browser = panel.context.browser;
@@ -796,7 +802,7 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             publishEvent: function(event) {
                 if (!FirebugContext) return;
-                var panel = FirebugContext.getPanel("XRefreshExtension");
+                var panel = FirebugContext.getPanel(this.panelName);
                 if (panel) panel.publish(event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -1070,7 +1076,7 @@ FBL.ns(function() {
         });
 
         function XRefreshExtensionPanel() {}
-        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel, {
+        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel||Firebug.Panel, { // AblePanel was introduced in 1.3
             name: "XRefreshExtension",
             title: "XRefresh",
             searchable: false,
@@ -1297,6 +1303,11 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             applyPanelCSS: function(url) {
+                var links = FBL.getElementsBySelector(this.document, "link");
+                for (var i=0; i < links.length; i++) {
+                    var link = links[i];
+                    if (link.getAttribute('href')==url) return; // already applied
+                }
                 var styleElement = this.document.createElement("link");
                 styleElement.setAttribute("type", "text/css");
                 styleElement.setAttribute("href", url);
