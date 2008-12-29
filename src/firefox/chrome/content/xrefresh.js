@@ -528,7 +528,7 @@ FBL.ns(function() {
                         Firebug.XRefreshExtension.reconnectDrum();
                     }, this),
                     onStopListening: function(serverSocket, status) {}
-                }
+                };
 
                 var i;
                 var range = this.getPref("portRange");
@@ -860,7 +860,7 @@ FBL.ns(function() {
                     blockVisible: true,
                     sessionVisible: false,
                     allowVisible: true,
-                    prefilledHost: host,
+                    prefilledHost: host
                 };
 
                 openWindow("Browser:Permissions", "chrome://browser/content/preferences/permissions.xul", "", params);
@@ -1114,9 +1114,9 @@ FBL.ns(function() {
 
                 Firebug.XRefreshExtension.storePageOffset(context);
                 drumInitiatedRefresh = true;
-                this.context.browser.reloadWithFlags(
-                /*this.context.browser.webNavigation.LOAD_FLAGS_BYPASS_CACHE*/
-                );
+                var browser = context.browser;
+                var url = context.window.document.location;
+                browser.loadURIWithFlags(url, browser.webNavigation.LOAD_FLAGS_FROM_EXTERNAL);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateStyleSheet: function(document, element, path) {
