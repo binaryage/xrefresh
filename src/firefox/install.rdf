@@ -16,7 +16,7 @@
         <em:name>XRefresh</em:name>
         <em:description>Browser refresh automation for web developers</em:description>
         <em:creator>Antonin Hildebrand</em:creator>
-        <em:homepageURL>http://xrefresh.com</em:homepageURL>
+        <em:homepageURL>http://xrefresh.binaryage.com</em:homepageURL>
         <em:iconURL>chrome://xrefresh/skin/icon.png</em:iconURL>
     </Description>
 </RDF>
