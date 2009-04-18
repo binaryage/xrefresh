@@ -143,6 +143,7 @@ You may also specify path to config file via --config parameter.
 ## History
 
 * **v0.9** (to be released)
+  * [[darwin][darwin]] OSX monitor ignores events from .git directories
   * [[darwin][darwin]] XRefresh respects cached resources
   * [[darwin][darwin]] Changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
 
