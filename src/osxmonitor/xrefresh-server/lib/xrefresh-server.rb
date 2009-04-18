@@ -27,7 +27,7 @@ paths:
 dir_include:
 dir_exclude: ^#{File.expand_path('~')}/Library|/\\.(svn|framework|app|pbproj|pbxproj|xcode(proj)?|bundle)/
 file_include:
-file_exclude: ^(CVS|SCCS|vssver.?.scc|\\.(cvsignore|svn|DS_Store)|_svn|Thumbs\\.db)$|~$|^(\\.(?!htaccess)[^/]*|\\.(tmproj|o|pyc)|svn-commit(\\.[2-9])?\\.tmp)$ # merged TextMate and Netbeans patterns
+file_exclude: ^(CVS|SCCS|vssver.?.scc|\\.(cvsignore|git|svn|DS_Store)|_svn|Thumbs\\.db)$|~$|^(\\.(?!htaccess)[^/]*|\\.(tmproj|o|pyc)|svn-commit(\\.[2-9])?\\.tmp)$ # merged TextMate and Netbeans patterns
 
 # xpert settings
 host: #{GServer::DEFAULT_HOST}
