@@ -5,47 +5,19 @@
         <stringbundle id="strings_xrefresh" src="chrome://xrefresh/locale/xrefresh.properties"/>
     </stringbundleset>
     <script type="application/x-javascript" src="chrome://xrefresh/content/lib/utf8.js"/>
-    <!-- casper library -->
-    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/logger.js"/>
-    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/json.js"/>
-    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/xpath.js"/>
-    <script type="application/x-javascript" src="chrome://xrefresh/content/casper/events.js"/>
+    <script type="application/x-javascript" src="chrome://xrefresh/content/lib/json2.js"/>
     <script type="application/x-javascript" src="chrome://xrefresh/content/xrefresh.js"/>
     <commandset id="mainCommandSet">
-        <command id="cmd_XRefreshRefresh" oncommand="Firebug.XRefresh.buttonRefresh()"/>
-        <command id="cmd_XRefreshStopRecorder" oncommand="Firebug.XRefresh.buttonStopRecorder()"/>
-        <command id="cmd_XRefreshStartRecorder" oncommand="Firebug.XRefresh.buttonStartRecorder()"/>
-        <command id="cmd_XRefreshPauseRecorder" oncommand="Firebug.XRefresh.buttonPauseRecorder()"/>
-        <command id="cmd_XRefreshReplayRecorder" oncommand="Firebug.XRefresh.buttonReplayRecorder()"/>
-        <command id="cmd_XRefreshSite" oncommand="Firebug.XRefresh.visitWebsite('main')"/>
-        <command id="cmd_XRefreshStatus" oncommand="Firebug.XRefresh.buttonStatus()"/>
+        <command id="cmd_XRefreshRefresh" oncommand="Firebug.XRefresh.buttonRefresh(FirebugContext)"/>
+        <command id="cmd_XRefreshStatus" oncommand="Firebug.XRefresh.buttonStatus(FirebugContext)"/>
     </commandset>
     <toolbar id="fbToolbar" align="center">
         <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
-            <hbox id="fbXRefreshRecorder" insertafter="fbNetButtons">
-                <toolbarseparator/>
-                <toolbaritem id="fbXRefreshRecorderStatus" width="160" tooltiptext="Macro Recorder status">
-                    <label id="fbXRefreshRecorderStatusLabel" value="Status" class="toolbar-recorder-status" tooltiptext="Macro Recorder status"/>
-                </toolbaritem>
-                <toolbarseparator/>
-                <toolbarbutton id="fbXRefreshRecorderStart" label="Start" class="toolbar-text-button" tooltiptext="Starts macro recorder" command="cmd_XRefreshStartRecorder"/>
-                <toolbarbutton id="fbXRefreshRecorderStop" label="Stop" class="toolbar-text-button" tooltiptext="Stops macro recorder" command="cmd_XRefreshStopRecorder"/>
-                <toolbarbutton id="fbXRefreshRecorderPause" label="Pause" class="toolbar-text-button" tooltiptext="Pauses macro recorder" command="cmd_XRefreshPauseRecorder"/>
-                <toolbarbutton id="fbXRefreshRecorderReplay" label="Replay" class="toolbar-text-button" tooltiptext="Replays recorded macro" command="cmd_XRefreshReplayRecorder"/>
-            </hbox>
             <hbox id="fbXRefreshControls" insertafter="fbNetButtons">
                 <toolbarseparator/>
                 <toolbarbutton id="fbXRefreshRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
                 <toolbarbutton id="fbXRefreshButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
             </hbox>
-            <toolbarbutton id="fbXRefreshMenu" type="menu" tooltiptext="XRefresh menu" insertafter="fbNetButtons">
-                <menupopup onpopupshowing="return Firebug.XRefresh.onOptionsShowing(this);">
-                    <menuitem label="Enable macro recording" tooltiptext="Enables macro recorder. For case you need it." type="checkbox" oncommand="Firebug.XRefresh.onToggleOption(this)" option="enableRecorder"/>
-                    <menuitem label="Perform fast CSS replace" tooltiptext="Bypass server stack when detecting CSS-only changes. Works only for CSS files on localhost!" type="checkbox" oncommand="Firebug.XRefresh.onToggleOption(this)" option="fastCSS"/>
-                    <menuseparator/>
-                    <menuitem label="XRefresh Website..." command="cmd_XRefreshSite"/>
-                </menupopup>
-            </toolbarbutton>
         </hbox>
     </toolbar>
     <statusbar id="status-bar">

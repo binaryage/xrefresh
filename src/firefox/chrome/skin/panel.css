@@ -18,6 +18,7 @@
 .toolbar-text-button > .toolbarbutton-icon {
     display: block !important;
     background: transparent !important;
+    margin-right: 4px;
 }
 
 #fbXRefreshControls .toolbar-text-button,
