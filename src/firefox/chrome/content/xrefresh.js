@@ -24,8 +24,6 @@ FBL.ns(function() {
             contribute: "http://www.xrefresh.com/contribute"
         };
 
-        const xrefreshPrefDomain = "extensions.xrefresh";
-
         // see http://www.xulplanet.com/tutorials/mozsdk/sockets.php
         var drumTransport = null;
         var drumOutStream = null;
@@ -46,8 +44,7 @@ FBL.ns(function() {
         var readyStateTimer = null;
         var xrefreshOptionUpdateMap = {};
 
-        if (Firebug.TraceModule)
-        {
+        if (Firebug.TraceModule) {
             Firebug.TraceModule.DBG_XREFRESH = false;
             var type = xrefreshPrefs.getPrefType('extensions.firebug.DBG_XREFRESH');
             if (type != nsIPrefBranch.PREF_BOOL) try {
@@ -64,60 +61,64 @@ FBL.ns(function() {
             if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.sysout.apply(this, arguments);
         }
 
-        FBL.$XREFRESH_STR = function(name) {
-            return document.getElementById("strings_xrefresh").getString(name);
-        };
-        FBL.$XREFRESH_STRF = function(name, args) {
-            return document.getElementById("strings_xrefresh").getFormattedString(name, args);
-        };
-
         ////////////////////////////////////////////////////////////////////////
-        // Firebug.XRefreshExtension, here we go!
+        // Firebug.XRefresh, here we go!
         //
-        Firebug.XRefreshExtension = extend(Firebug.ActivableModule, {
+        Firebug.XRefresh = extend(Firebug.ActivableModule, {
             reminder: '',
-            currentPanel: null,
-            
             /////////////////////////////////////////////////////////////////////////////////////////
             checkFirebugVersion: function() {
                 var version = Firebug.getVersion();
                 if (!version) return false;
                 var a = version.split('.');
                 if (a.length<2) return false;
-                // we want Firebug version 1.2+ (including alphas/betas and other weird stuff)
-                return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=2;
+                // we want Firebug version 1.4+ (including alphas/betas and other weird stuff)
+                return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=4;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             startupCheck: function() {
                 if (!this.checkFirebugVersion()) {
-                    this.log("XRefresh Firefox extension works best with Firebug 1.2 or higher. Please upgrade Firebug to latest version.", "warn");
+                    this.log("XRefresh Firefox extension works only with Firebug 1.4 or higher. Please upgrade Firebug to latest version.", "warn");
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            getPrefDomain: function() {
-                return xrefreshPrefDomain;
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
             initialize: function() {
-                this.panelName = 'XRefreshExtension';
-                this.description = "External browser refresh";
-
+                dbg(">> xrefresh.initialize", arguments);
+                this.panelName = 'XRefresh';
+                this.description = "Browser refresh automation for web developers";
                 Firebug.ActivableModule.initialize.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             shutdown: function() {
-                if (Firebug.getPref('defaultPanelName') == this.panelName) {
-                    Firebug.setPref('defaultPanelName', 'console');
-                }
+                dbg(">> xrefresh.shutdown", arguments);
                 Firebug.ActivableModule.shutdown.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onPanelActivate: function(context, init, panelName) {
-                if (panelName!=this.panelName) return;
-                if (!init) context.window.location.reload();
+            onPanelEnable: function(context, panelName) {
+                if (panelName != this.panelName) return;
+                dbg(">> xrefresh.onPanelEnable", arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            onPanelDisable: function(context, panelName) {
+                if (panelName != this.panelName) return;
+                dbg(">> xrefresh.onPanelDisable", arguments);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            onSuspendFirebug: function(context) {
+                dbg(">> xrefresh.onSuspendFirebug", arguments);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            onResumeFirebug: function(context) {
+                dbg(">> xrefresh.onResumeFirebug", arguments);
+            },
+            // /////////////////////////////////////////////////////////////////////////////////////////
+            // onPanelActivate: function(context, init, panelName) {
+            //     if (panelName!=this.panelName) return;
+            //     if (!init) context.window.location.reload();
+            // },
+            /////////////////////////////////////////////////////////////////////////////////////////
             onFirstPanelActivate: function(context, init) {
+                dbg(">> xrefresh.onFirstPanelActivate", arguments);
                 // Just before onPanelActivate, no previous activecontext
                 // Note: connection at this point was buggy.
                 // I didn't find out the reason. It seems delayed connection works well.
@@ -133,6 +134,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onLastPanelDeactivate: function(context, init) {
+                dbg(">> xrefresh.onLastPanelDeactivate", arguments);
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
                 this.scheduledDisconnection = setTimeout(bind(this.disconnect, this), 10000);
             },
@@ -172,9 +174,8 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             showPanel: function(browser, panel) {
                 Firebug.ActivableModule.showPanel.apply(this, arguments);
-                var isXRefreshExtension = panel && panel.name == this.panelName;
-                if (isXRefreshExtension) {
-                    this.currentPanel = panel;
+                var isXRefresh = panel && panel.name == this.panelName;
+                if (isXRefresh) {
                     this.updatePanel();
                 }
             },
@@ -197,7 +198,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getPref: function(name) {
-                var prefName = xrefreshPrefDomain + "." + name;
+                var prefName = this.getPrefDomain() + "." + name;
 
                 var type = xrefreshPrefs.getPrefType(prefName);
                 if (type == nsIPrefBranch.PREF_STRING)
@@ -209,7 +210,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             setPref: function(name, value) {
-                var prefName = xrefreshPrefDomain + "." + name;
+                var prefName = this.getPrefDomain() + "." + name;
 
                 var type = xrefreshPrefs.getPrefType(prefName);
                 if (type == nsIPrefBranch.PREF_STRING)
@@ -457,7 +458,7 @@ FBL.ns(function() {
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
-                var buttonPause = browser.chrome.$("fbXRefreshExtensionRecorderPause");
+                var buttonPause = browser.chrome.$("fbXRefreshRecorderPause");
                 if (!hasClass(buttonPause, "paused")) {
                     currentRecorder.pause(FirebugContext.window);
                 } else {
@@ -525,7 +526,7 @@ FBL.ns(function() {
                 var listener = {
                     onSocketAccepted: bind(function(socket, transport) {
                         this.log("Reconnection request received");
-                        Firebug.XRefreshExtension.reconnectDrum();
+                        Firebug.XRefresh.reconnectDrum();
                     }, this),
                     onStopListening: function(serverSocket, status) {}
                 };
@@ -662,7 +663,7 @@ FBL.ns(function() {
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
-                var buttonStatus = browser.chrome.$("fbXRefreshExtensionButtonStatus");
+                var buttonStatus = browser.chrome.$("fbXRefreshButtonStatus");
                 if (!buttonStatus) return;
                 buttonStatus.className = "toolbar-text-button toolbar-connection-status";
 
@@ -682,7 +683,7 @@ FBL.ns(function() {
                 if (!panel) return;
                 var browser = panel.context.browser;
                 if (!browser) return;
-                var buttonRefresh = browser.chrome.$("fbXRefreshExtensionRefresh");
+                var buttonRefresh = browser.chrome.$("fbXRefreshRefresh");
                 if (!buttonRefresh) return;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -693,17 +694,17 @@ FBL.ns(function() {
                 // safety net
                 var panel = FirebugContext.getPanel(this.panelName);
                 if (!panel) return;
-                panel.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
+                //panel.showToolbarButtons("fbXRefreshRecorder", enabled && enabledRecorder);
                 var browser = panel.context.browser;
                 if (!browser) return;
-                var status = browser.chrome.$("fbXRefreshExtensionRecorderStatus");
+                var status = browser.chrome.$("fbXRefreshRecorderStatus");
                 if (!status) return;
-                var statusLabel = browser.chrome.$("fbXRefreshExtensionRecorderStatusLabel");
+                var statusLabel = browser.chrome.$("fbXRefreshRecorderStatusLabel");
                 if (!statusLabel) return;
-                var buttonStop = browser.chrome.$("fbXRefreshExtensionRecorderStop");
-                var buttonStart = browser.chrome.$("fbXRefreshExtensionRecorderStart");
-                var buttonReplay = browser.chrome.$("fbXRefreshExtensionRecorderReplay");
-                var buttonPause = browser.chrome.$("fbXRefreshExtensionRecorderPause");
+                var buttonStop = browser.chrome.$("fbXRefreshRecorderStop");
+                var buttonStart = browser.chrome.$("fbXRefreshRecorderStart");
+                var buttonReplay = browser.chrome.$("fbXRefreshRecorderReplay");
+                var buttonPause = browser.chrome.$("fbXRefreshRecorderPause");
                 statusLabel.className = "toolbar-recorder-status";
 
                 var currentRecorder = this.getRecorder(FirebugContext);
@@ -845,68 +846,6 @@ FBL.ns(function() {
                 var data = recorder.offsets;
                 if (!data) return;
                 context.window.scrollTo(data[0], data[1]);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            openPermissions: function(event, context) {
-                cancelEvent(event);
-
-                var browserURI = FirebugChrome.getBrowserURI(context);
-                var host = this.getHostForURI(browserURI);
-
-                var params = {
-                    permissionType: this.getPrefDomain(),
-                    windowTitle: $XREFRESH_STR(this.panelName + ".Permissions"),
-                    introText: $XREFRESH_STR(this.panelName + ".PermissionsIntro"),
-                    blockVisible: true,
-                    sessionVisible: false,
-                    allowVisible: true,
-                    prefilledHost: host
-                };
-
-                openWindow("Browser:Permissions", "chrome://browser/content/preferences/permissions.xul", "", params);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            getMenuLabel: function(option, location, shortened) {
-                var label = "";
-                var host = "";
-
-                switch (option) {
-                case "disable-site":
-                    if (isSystemURL(location.spec))
-                    label = "SystemPagesDisable";
-                    else if (!getURIHost(location))
-                    label = "LocalFilesDisable";
-                    else
-                    label = "HostDisable";
-
-                    if (shortened)
-                    return $XREFRESH_STR("panel.Disabled");
-                    break;
-
-                case "enable-site":
-                    if (isSystemURL(location.spec))
-                    label = "SystemPagesEnable";
-                    else if (!getURIHost(location))
-                    label = "LocalFilesEnable";
-                    else
-                    label = "HostEnable";
-
-                    if (shortened)
-                    return $XREFRESH_STR("panel.Enabled");
-                    break;
-
-                case "enable":
-                    return $XREFRESH_STR("panel.Enabled");
-
-                case "disable":
-                    return $XREFRESH_STR("panel.Disabled");
-                }
-
-                if (!label)
-                return null;
-
-                label = this.panelName + "." + label;
-                return $XREFRESH_STRF(label, [getURIHost(location)]);
             }
         });
 
@@ -920,7 +859,7 @@ FBL.ns(function() {
             this.icon = icon;
         };
 
-        Firebug.XRefreshExtension.XHR = domplate(Firebug.Rep, {
+        Firebug.XRefresh.XHR = domplate(Firebug.Rep, {
             tagRefresh:
                 DIV({class: "blinkHead closed $object|getIcon", _repObject: "$object"},
                     A({class: "blinkTitle", onclick: "$onToggleBody"},
@@ -1075,19 +1014,31 @@ FBL.ns(function() {
             }
         });
 
-        function XRefreshExtensionPanel() {}
-        XRefreshExtensionPanel.prototype = extend(Firebug.AblePanel||Firebug.Panel, { // AblePanel was introduced in 1.3
-            name: "XRefreshExtension",
+        function XRefreshPanel() {}
+        XRefreshPanel.prototype = extend(Firebug.ActivablePanel, {
+            name: "XRefresh",
             title: "XRefresh",
             searchable: false,
             editable: false,
-
             wasScrolledToBottom: true,
-
+            /////////////////////////////////////////////////////////////////////////////////////////
+            enablePanel: function(module) {
+                dbg(">> XRefreshPanel.enablePanel; " + this.context.getName());
+                Firebug.ActivablePanel.enablePanel.apply(this, arguments);
+                // this.showCommandLine(true);
+                // if (this.wasScrolledToBottom)
+                //     scrollToBottom(this.panelNode);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            disablePanel: function(module) {
+                dbg(">> XRefreshPanel.disablePanel; " + this.context.getName());
+                Firebug.ActivablePanel.disablePanel.apply(this, arguments);
+                // this.showCommandLine(false);
+            },
             /////////////////////////////////////////////////////////////////////////////////////////
             initialize: function() {
-                Firebug.Panel.initialize.apply(this, arguments);
-
+                dbg(">> XRefreshPanel.initialize", arguments);
+                Firebug.ActivablePanel.initialize.apply(this, arguments);
                 this.applyCSS();
                 this.restoreState();
             },
@@ -1103,7 +1054,8 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             refresh: function(context) {
-                var localOnly = Firebug.XRefreshExtension.getPref('localPagesOnly');
+                dbg(">> XRefreshPanel.refresh", arguments);
+                var localOnly = Firebug.XRefresh.getPref('localPagesOnly');
                 var uri = this.safeGetURI();
 
                 if (localOnly) {
@@ -1112,7 +1064,7 @@ FBL.ns(function() {
                     if (! (uri.scheme == "file" || localhost)) return;
                 }
 
-                Firebug.XRefreshExtension.storePageOffset(context);
+                Firebug.XRefresh.storePageOffset(context);
                 drumInitiatedRefresh = true;
                 var browser = context.browser;
                 var url = context.window.document.location;
@@ -1232,32 +1184,30 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             show: function(state) {
-                var enabled = Firebug.XRefreshExtension.isEnabled(this.context);
-                var enabledRecorder = Firebug.XRefreshExtension.getPref("enableRecorder");
-                this.showToolbarButtons("fbXRefreshExtensionButtons", true);
-                this.showToolbarButtons("fbXRefreshExtensionControls", enabled);
-                this.showToolbarButtons("fbXRefreshExtensionRecorder", enabled && enabledRecorder);
-
-                // the default page with description and enable button is
-                // visible only if debugger is disabled.
-                if (enabled)
-                    Firebug.ModuleManagerPage.hide(this);
-                else
-                    Firebug.ModuleManagerPage.show(this, Firebug.XRefreshExtension);
-
-                if (this.wasScrolledToBottom)
-                scrollToBottom(this.panelNode);
+                dbg(">> XRefreshPanel.show", arguments);
+                var enabled = Firebug.XRefresh.isAlwaysEnabled();
+                if (enabled) {
+                     Firebug.XRefresh.disabledPanelPage.hide(this);
+                     var enabled = true; // Firebug.XRefresh.isEnabled(this.context);
+                     this.showToolbarButtons("fbXRefreshMenu", true);
+                     this.showToolbarButtons("fbXRefreshControls", enabled);
+                     if (this.wasScrolledToBottom)
+                     scrollToBottom(this.panelNode);
+                } else {
+                    this.hide();
+                    Firebug.XRefresh.disabledPanelPage.show(this);
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             hide: function() {
-                this.showToolbarButtons("fbXRefreshExtensionButtons", false);
-                this.showToolbarButtons("fbXRefreshExtensionControls", false);
-                this.showToolbarButtons("fbXRefreshExtensionRecorder", false);
+                dbg(">> XRefreshPanel.hide", arguments);
+                this.showToolbarButtons("fbXRefreshMenu", false);
+                this.showToolbarButtons("fbXRefreshControls", false);
                 this.wasScrolledToBottom = isScrolledToBottom(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getOptionsMenuItems: function() {
-                return null;
+                return [];
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getTopContainer: function() {
@@ -1324,8 +1274,8 @@ FBL.ns(function() {
             }
         });
 
-        Firebug.registerActivableModule(Firebug.XRefreshExtension);
-        Firebug.registerRep(Firebug.XRefreshExtension.XHR);
-        Firebug.registerPanel(XRefreshExtensionPanel);
+        Firebug.registerActivableModule(Firebug.XRefresh);
+        Firebug.registerRep(Firebug.XRefresh.XHR);
+        Firebug.registerPanel(XRefreshPanel);
     }
 }); // close custom scope

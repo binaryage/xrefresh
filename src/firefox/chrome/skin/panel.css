@@ -20,43 +20,43 @@
     background: transparent !important;
 }
 
-#fbXRefreshExtensionControls .toolbar-text-button,
-#fbXRefreshExtensionRecorder .toolbar-text-button {
+#fbXRefreshControls .toolbar-text-button,
+#fbXRefreshRecorder .toolbar-text-button {
     margin: 0 4px 0 1px !important;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
 }
 
-#fbXRefreshExtensionRecorderStatusLabel {
+#fbXRefreshRecorderStatusLabel {
     padding-left: 20px;
     margin: 0 4px 0 1px !important;
 }
 
-#fbXRefreshExtensionRecorderStart,
-#fbXRefreshExtensionRecorderStop,
-#fbXRefreshExtensionRecorderPause,
-#fbXRefreshExtensionRecorderReplay {
+#fbXRefreshRecorderStart,
+#fbXRefreshRecorderStop,
+#fbXRefreshRecorderPause,
+#fbXRefreshRecorderReplay {
     -moz-image-region: rect(auto,auto,auto,auto) !important;
 }
 
-#fbXRefreshExtensionRecorderStart {
+#fbXRefreshRecorderStart {
     list-style-image: url(control_rec.png);
 }
 
-#fbXRefreshExtensionRecorderStop {
+#fbXRefreshRecorderStop {
     list-style-image: url(control_stop.png);
 }
 
-#fbXRefreshExtensionRecorderPause {
+#fbXRefreshRecorderPause {
     list-style-image: url(control_pause.png);
 }
 
-#fbXRefreshExtensionRecorderPause.paused {
+#fbXRefreshRecorderPause.paused {
     list-style-image: url(control_play.png) !important;
 }
 
-#fbXRefreshExtensionRecorderReplay {
+#fbXRefreshRecorderReplay {
     list-style-image: url(control_repeat.png);
 }
 
@@ -101,7 +101,7 @@
     padding-left: 6px;
 }
 
-#fbXRefreshExtensionRefresh {
+#fbXRefreshRefresh {
     list-style-image: url(refresh.png);
     padding-left: 6px;
 }
