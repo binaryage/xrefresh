@@ -1,7 +1,6 @@
-// For communication protocol between extension and server
-// we use UTF-8 encoded JSON to exchange messages
+// we use UTF-8 encoded JSON to exchange messages between extension and server
 //
-// This source contains copy&pasted various bits from Firebug sources.
+// this source contains copy&pasted various bits from Firebug sources.
 
 // open custom scope
 FBL.ns(function() {
@@ -9,34 +8,20 @@ FBL.ns(function() {
         const Cc = Components.classes;
         const Ci = Components.interfaces;
 
-        const nsIPrefBranch = Ci.nsIPrefBranch;
+        const xrefreshPrefService =    Cc["@mozilla.org/preferences-service;1"];
+        const socketServer =           Cc["@mozilla.org/network/server-socket;1"];
+        const socketTransportService = Cc["@mozilla.org/network/socket-transport-service;1"];
+        const inputStream =            Cc["@mozilla.org/scriptableinputstream;1"];
+        const inputStreamPump =        Cc["@mozilla.org/network/input-stream-pump;1"];
+        const localFile =              Cc["@mozilla.org/file/local;1"];
+        const fileInputStream =        Cc["@mozilla.org/network/file-input-stream;1"];
+
+        const nsIPrefBranch  = Ci.nsIPrefBranch;
         const nsIPrefBranch2 = Ci.nsIPrefBranch2;
 
-        const xrefreshPrefService = Cc["@mozilla.org/preferences-service;1"];
-        const socketServer = Cc["@mozilla.org/network/server-socket;1"];
-
         const xrefreshPrefs = xrefreshPrefService.getService(nsIPrefBranch2);
+
         const xrefreshHomepage = "http://xrefresh.binaryage.com";
-
-        // see http://www.xulplanet.com/tutorials/mozsdk/sockets.php
-        var drumTransport = null;
-        var drumOutStream = null;
-        var drumInStream = null;
-        var drumPump = null;
-
-        var drumReady = false;
-
-        var drumName = "";
-        var drumVersion = "";
-        var drumInitiatedRefresh = false;
-
-        // see http://www.xulplanet.com/tutorials/mozsdk/serverpush.php
-        var listenerServer = null;
-
-        var recorders = {};
-
-        var readyStateTimer = null;
-        var xrefreshOptionUpdateMap = {};
 
         if (Firebug.TraceModule) {
             Firebug.TraceModule.DBG_XREFRESH = false;
@@ -63,11 +48,211 @@ FBL.ns(function() {
             };
         };
         
+        // shortcuts (available in this closure):
+        var module;   // <-- here will be stored Firebug.XRefresh singleton (extension module)
+        var server;   // <-- here will be stored Firebug.XRefreshServer singleton
+        var listener; // <-- here will be stored Firebug.XRefreshListener singleton
+        
         ////////////////////////////////////////////////////////////////////////
-        // Firebug.XRefresh, here we go!
+        // Firebug.XRefreshServer is singleton, it keeps system-wide connection to xrefresh server
         //
-        Firebug.XRefresh = extend(Firebug.ActivableModule, {
+        server = Firebug.XRefreshServer = {
+            // see http://www.xulplanet.com/tutorials/mozsdk/sockets.php
+            transport: null,
+            outStream: null,
+            inStream: null,
+            pump: null,
+            ready: false,
+            name: '',
+            version: '',
+            data: '',
             reminder: '',
+            /////////////////////////////////////////////////////////////////////////////////////////
+            connect: function() {
+                dbg(">> XRefreshServer.connect", arguments);
+
+                this.releaseStreams();
+                this.data = '';
+                this.reminder = '';
+                
+                var transportService = socketTransportService.getService(Ci.nsISocketTransportService);
+                this.transport = transportService.createTransport(null, 0, module.getPref("host"), module.getPref("port"), null);
+                this.outStream = this.transport.openOutputStream(0, 0, 0);
+
+                var stream = this.transport.openInputStream(0, 0, 0);
+                this.inStream = inputStream.createInstance(Ci.nsIScriptableInputStream);
+                this.inStream.init(stream);
+
+                var that = this;
+                var listener = {
+                    onStartRequest: function(request, context) {
+                    },
+                    onStopRequest: function(request, context, status) {
+                        that.onServerDied();
+                    },
+                    onDataAvailable: function(request, context, inputStream, offset, count) {
+                        that.data += that.inStream.read(count);
+                        that.onDataAvailable();
+                    }
+                };
+
+                this.pump = inputStreamPump.createInstance(Ci.nsIInputStreamPump);
+                this.pump.init(stream, -1, -1, 0, 0, false);
+                this.pump.asyncRead(listener, null);
+
+                this.sendHello();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            disconnect: function() {
+                dbg(">> XRefreshServer.disconnect", arguments);
+                if (this.ready) module.log("Disconnected from XRefresh Server", "disconnect");
+                // it is nice to say good bye ...
+                this.sendBye();
+                this.releaseStreams();
+                this.ready = false;
+                module.updatePanels();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            reconnect: function() {
+                dbg(">> XRefreshServer.reconnect", arguments);
+                this.disconnect();
+                this.connect();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            releaseStreams: function() {
+                if (this.inStream) {
+                    this.inStream.close();
+                    this.inStream = null;
+                }
+                if (this.outStream) {
+                    this.outStream.close();
+                    this.outStream = null;
+                }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            onServerDied: function() {
+                dbg(">> XRefreshServer.onServerDied", arguments);
+                if (this.ready) module.error("XRefresh Server has closed connection");
+                this.releaseStreams();
+                this.ready = false;
+                module.updatePanels();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            onDataAvailable: function() {
+                dbg(">> XRefresh.onDataAvailable", arguments);
+                // try to parse incomming message
+                // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
+                // TODO: make this more robust to server formating failures
+                var data = this.data;
+                dbg(data||"empty message");
+                var parts = this.data.split('\n');
+                var buffer = this.reminder;
+                for (var i = 0; i < parts.length; i++) {
+                    buffer += UTF8.decode(parts[i]);
+                    dbg("  buffer:", buffer);
+
+                    var message = JSON.parse(buffer);
+                    if (!message) continue;
+                    // we have only partial buffer? go for next chunk
+                    buffer = '';
+                    // message completed, clear buffer for incomming data
+                    dbg("    message:", message);
+                    //try {
+                        module.processMessage(message);
+                    // } catch(e) {
+                    //     module.error(listener.context, "Error in processing message from XRefresh Server");
+                    // }
+                }
+                this.reminder = buffer;
+                this.data = "";
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            send: function(message) {
+                dbg(">> XRefresh.sendMessageToServer", arguments);
+                if (!this.outStream) {
+                    dbg("  !! outStream is null", arguments);
+                    return false;
+                }
+                var data = JSON.stringify(message) + '\n'; // every message is delimited with new line
+                var utf8data = UTF8.encode(data);
+                this.outStream.write(utf8data, utf8data.length);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            // message helpers
+            sendHello: function() {
+                var message = {
+                    command: "Hello",
+                    type: "Firefox",
+                    agent: navigator.userAgent.toLowerCase()
+                };
+                this.send(message);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            sendBye: function() {
+                var message = {
+                    command: "Bye"
+                };
+                this.send(message);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            sendSetPage: function(contentTitle, contentURL) {
+                var message = {
+                    command: "SetPage",
+                    page: contentTitle,
+                    url: contentURL
+                };
+                this.send(message);
+            }
+        };
+        
+        ////////////////////////////////////////////////////////////////////////
+        // listener is singleton, it keeps system-wide listener to xrefresh server boot
+        // when server boots, it pings this listener and extension than can attempt to connect using server
+        //
+        listener = Firebug.XRefreshListener = {
+            server: null, // see http://www.xulplanet.com/tutorials/mozsdk/serverpush.php
+            /////////////////////////////////////////////////////////////////////////////////////////
+            start: function() {
+                dbg(">> XRefreshListener.start", arguments);
+                var server = socketServer.createInstance(Ci.nsIServerSocket);
+                var range = module.getPref("portRange");
+                var port = module.getPref("port");
+                var loopbackonly = module.getPref("localOnly");
+                var listener = {
+                    onSocketAccepted: function(socket, transport) {
+                        module.log("Reconnection request received");
+                        server.reconnect();
+                    },
+                    onStopListening: function(serverSocket, status) {
+                    }
+                };
+                for (var i = 1; i <= range; i++) {
+                    // find some free port below the starting port
+                    try {
+                        server.init(port - i, loopbackonly, -1);
+                        server.asyncListen(listener);
+                        this.server = server;
+                        return;
+                    }
+                    catch(e) {}
+                }
+                // it seems, no port is available
+                module.error("No unused port available in given range: " + (port - range) + "-" + (port - 1));
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            stop: function() {
+                dbg(">> XRefreshListener.stop", arguments);
+                if (!this.server) return;
+                this.server.close();
+                this.server = null;
+            }
+        };
+        
+        ////////////////////////////////////////////////////////////////////////
+        // Firebug.XRefresh extension module, here we go!
+        //
+        module = Firebug.XRefresh = extend(Firebug.ActivableModule, {
+            events: [],
             /////////////////////////////////////////////////////////////////////////////////////////
             checkFirebugVersion: function() {
                 var version = Firebug.getVersion();
@@ -78,9 +263,9 @@ FBL.ns(function() {
                 return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=4;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            startupCheck: function(context) {
+            startupCheck: function() {
                 if (!this.checkFirebugVersion()) {
-                    this.log(context, "XRefresh Firefox extension works only with Firebug 1.4 or higher. Please upgrade Firebug to latest version.", "warn");
+                    this.log("XRefresh Firefox extension works only with Firebug 1.4. Please upgrade Firebug to latest version.", "warn");
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -109,59 +294,58 @@ FBL.ns(function() {
             onSuspendFirebug: function(context) {
                 dbg(">> XRefresh.onSuspendFirebug", arguments);
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
-                var that = this;
                 this.scheduledDisconnection = setTimeout(function() {
-                    that.disconnect(context);
-                }, 10000);
+                    server.disconnect();
+                }, 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onResumeFirebug: function(context) {
                 dbg(">> XRefresh.onResumeFirebug", arguments);
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
-                this.scheduledDisconnection = undefined;
+                delete this.scheduledDisconnection;
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
                 var that = this;
                 setTimeout(function() {
-                    that.startupCheck(context);
+                    that.startupCheck();
                 }, 1000);
                 setTimeout(function() {
-                    that.connectDrum(context);
+                    server.connect();
                 }, 1000);
                 setTimeout(function() {
-                    that.startListener(context);
+                    listener.start();
                 }, 2000);
                 this.checkTimeout = setTimeout(function() {
-                    that.connectionCheck(context);
+                    that.connectionCheck();
                 }, 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             disconnect: function(context) {
                 dbg(">> XRefresh.disconnect", arguments);
-                this.scheduledDisconnection = undefined;
+                delete this.scheduledDisconnection;
                 if (!this.alreadyActivated) return;
-                this.alreadyActivated = undefined;
+                this.alreadyActivated = false;
                 // just after onPanelDeactivate, no remaining activecontext
-                this.disconnectDrum(context);
-                this.stopListener(context);
+                server.disconnect();
+                listener.stop();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             connectionCheck: function(context) {
                 dbg(">> XRefresh.connectionCheck", arguments);
                 delete this.checkTimeout;
-                if (drumReady) return;
-                this.log(context, "Unable to connect to XRefresh Server", "warn");
-                this.log(context, "Please check if you have running XRefresh Server.", "bulb");
-                this.log(context, "    On Windows, it is program running in system tray. Look for Programs -> XRefresh -> XRefresh.exe", "bulb");
-                this.log(context, "    On Mac, it is running command-line program xrefresh-server. It should be available on system path after 'sudo gem install xrefresh-server'", "bulb");
-                this.log(context, "You may also want to check your firewall settings. XRefresh Firefox extension expects Server to talk from " + this.getPref('host') + " on port " + this.getPref('port'), "bulb");
+                if (server.ready) return;
+                this.log("Unable to connect to XRefresh Server", "warn");
+                this.log("Please check if you have running XRefresh Server.", "bulb");
+                this.log("    On Windows, it is program running in system tray. Look for Programs -> XRefresh -> XRefresh.exe", "bulb");
+                this.log("    On Mac, it is running command-line program xrefresh-server. It should be available on system path after 'sudo gem install xrefresh-server'", "bulb");
+                this.log("You may also want to check your firewall settings. XRefresh Firefox extension expects Server to talk from " + this.getPref('host') + " on port " + this.getPref('port'), "bulb");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             shortConnectionCheck: function(context) {
                 dbg(">> XRefresh.shortConnectionCheck", arguments);
                 delete this.shortCheckTimeout;
-                if (drumReady) return;
-                this.log(context, "Unable to connect to XRefresh Server. Please check if you have running XRefresh Server and tweak your firewall settings if needed.", "warn");
+                if (server.ready) return;
+                this.log("Unable to connect to XRefresh Server. Please check if you have running XRefresh Server and tweak your firewall settings if needed.", "warn");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             showPanel: function(browser, panel) {
@@ -216,6 +400,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             showContext: function(browser, context) {
+                if (!context) return; // BUG in FB1.4?
                 dbg(">> XRefresh.showContext: " + context.window.document.URL);
                 Firebug.ActivableModule.showContext.apply(this, arguments);
                 this.updatePanel(context);
@@ -231,7 +416,7 @@ FBL.ns(function() {
             buttonRefresh: function(context) {
                 dbg(">> XRefresh.buttonRefresh: " + context.window.document.URL);
                 context.getPanel(this.panelName).refresh(context);
-                this.log(context, "Manual refresh performed by user", "rreq");
+                this.log("Manual refresh performed by user", "rreq");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             buttonStatus: function(context) {
@@ -240,166 +425,16 @@ FBL.ns(function() {
                 delete this.checkTimeout;
                 if (this.shortCheckTimeout) clearTimeout(this.shortCheckTimeout);
                 delete this.shortCheckTimeout;
-                if (drumReady) {
-                    this.log(context, "Disconnection requested by user", "disconnect_btn");
-                    this.disconnectDrum(context);
+                if (server.ready) {
+                    this.log("Disconnection requested by user", "disconnect_btn");
+                    server.disconnect();
                 } else {
-                    this.log(context, "Connection requested by user", "connect_btn");
+                    this.log("Connection requested by user", "connect_btn");
+                    server.connect();
                     this.shortCheckTimeout = setTimeout(function() {
-                        this.shortConnectionCheck(context);
+                        module.shortConnectionCheck();
                     }, 3000);
-                    this.connectDrum(context);
                 }
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            connectDrum: function(context) {
-                dbg(">> XRefresh.connectDrum", arguments);
-                
-                var transportService = Cc["@mozilla.org/network/socket-transport-service;1"].getService(Components.interfaces.nsISocketTransportService);
-                drumTransport = transportService.createTransport(null, 0, this.getPref("host"), this.getPref("port"), null);
-                drumOutStream = drumTransport.openOutputStream(0, 0, 0);
-
-                var stream = drumTransport.openInputStream(0, 0, 0);
-                drumInStream = Cc["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
-                drumInStream.init(stream);
-
-                var dataListener = {
-                    context: context,
-                    parent: this,
-                    data: "",
-                    onStartRequest: function(request, context2) {
-                    },
-                    onStopRequest: function(request, context2, status) {
-                        this.parent.onServerDied(context);
-                    },
-                    onDataAvailable: function(request, context2, inputStream, offset, count) {
-                        this.data += drumInStream.read(count);
-                        this.parent.onDataAvailable(this);
-                    }
-                };
-
-                drumPump = Components.classes["@mozilla.org/network/input-stream-pump;1"].createInstance(Components.interfaces.nsIInputStreamPump);
-                drumPump.init(stream, -1, -1, 0, 0, false);
-                drumPump.asyncRead(dataListener, null);
-
-                this.sendHello();
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            disconnectDrum: function(context) {
-                dbg(">> XRefresh.disconnectDrum", arguments);
-                if (drumReady) this.log(context, "Disconnected from XRefresh Server", "disconnect");
-                // it is nice to say good bye ...
-                this.sendBye();
-                if (drumInStream) {
-                    drumInStream.close();
-                    drumInStream = null;
-                }
-                if (drumOutStream) {
-                    drumOutStream.close();
-                    drumOutStream = null;
-                }
-                drumReady = false;
-                this.updatePanel(context);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            reconnectDrum: function(context) {
-                dbg(">> XRefresh.reconnectDrum", arguments);
-                this.disconnectDrum(context);
-                this.connectDrum(context);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            startListener: function(context) {
-                dbg(">> XRefresh.startListener", arguments);
-                var server = socketServer.createInstance(Components.interfaces.nsIServerSocket);
-
-                var listener = {
-                    onSocketAccepted: function(socket, transport) {
-                        Firebug.XRefresh.log(context, "Reconnection request received");
-                        Firebug.XRefresh.reconnectDrum(context);
-                    },
-                    onStopListening: function(serverSocket, status) {
-                    }
-                };
-
-                var i;
-                var range = this.getPref("portRange");
-                var port = this.getPref("port");
-                var loopbackonly = this.getPref("localOnly");
-                for (i = 1; i <= range; i++) {
-                    // find some free port below drumPort
-                    try {
-                        server.init(port - i, loopbackonly, -1);
-                        server.asyncListen(listener);
-                        listenerServer = server;
-                        return;
-                    }
-                    catch(e) {}
-                }
-                // it seems, no port is available
-                this.error(context, "No unused port available in given range: " + (port - range) + "-" + (port - 1));
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            stopListener: function() {
-                dbg(">> XRefresh.stopListener", arguments);
-                if (!listenerServer) return;
-                listenerServer.close();
-                listenerServer = null;
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            sendMessageToServer: function(message) {
-                dbg(">> XRefresh.sendMessageToServer", arguments);
-                if (!drumOutStream) {
-                    dbg("  !! drumOutStream is null", arguments);
-                    return false;
-                }
-                var data = JSON.stringify(message) + '\n'; // every message is delimited with new line
-                var utf8data = UTF8.encode(data);
-                drumOutStream.write(utf8data, utf8data.length);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            onServerDied: function(context) {
-                dbg(">> XRefresh.onServerDied", arguments);
-                if (drumReady) this.error(context, "XRefresh Server has closed connection");
-
-                if (drumInStream) {
-                    drumInStream.close();
-                    drumInStream = null;
-                }
-                if (drumOutStream) {
-                    drumOutStream.close();
-                    drumOutStream = null;
-                }
-                drumReady = false;
-                this.updatePanel(context);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            onDataAvailable: function(listener) {
-                dbg(">> XRefresh.onDataAvailable", arguments);
-                // try to parse incomming message
-                // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
-                // TODO: make this more robust to server formating failures
-                dbg(data||"empty message");
-                var data = listener.data;
-                var parts = listener.data.split('\n');
-                var buffer = this.reminder;
-                for (var i = 0; i < parts.length; i++) {
-                    buffer += UTF8.decode(parts[i]);
-                    dbg("  buffer:", buffer);
-
-                    var message = JSON.parse(buffer);
-                    if (!message) continue;
-                    // we have only partial buffer? go for next chunk
-                    buffer = '';
-                    // message completed, clear buffer for incomming data
-                    dbg("    message:", message);
-                    //try {
-                        this.processMessage(listener.context, message);
-                    // } catch(e) {
-                    //     this.error(listener.context, "Error in processing message from XRefresh Server");
-                    // }
-                }
-                this.reminder = buffer;
-                listener.data = "";
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getMessageCSSFiles: function(message) {
@@ -417,34 +452,53 @@ FBL.ns(function() {
                 return files;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            processMessage: function(context, message) {
-                dbg("Received message: " + message.command);
+            processMessage: function(message) {
+                dbg(">> XRefresh.processMessage:"+ message.command);
                 if (!this.isEnabled(this.currentContext)) {
                     dbg("Skipped message because the panel is not enabled");
                     return;
                 }
                 if (message.command == "DoRefresh") {
-                    var panel = context.getPanel(this.panelName);
                     if (this.getPref("softRefresh")) {
                         var cssFiles = this.getMessageCSSFiles(message);
                         if (cssFiles.length == message.files.length) { // message contains only CSS files?
-                            this.showEvent(context, message, 'fastcss');
-                            return panel.updateCSS(context, cssFiles); // perform soft refresh
+
+                            TabWatcher.iterateContexts(function(context) {
+                                module.showEvent(context, message, 'fastcss');
+                                var panel = context.getPanel(module.panelName);
+                                panel.updateCSS(context, cssFiles); // perform soft refresh
+                            });
+                            
+                            return;
                         }
                     }
-                    this.showEvent(context, message, 'refresh');
-                    panel.refresh(context);
+                    
+                    TabWatcher.iterateContexts(function(context) {
+                        module.showEvent(context, message, 'refresh');
+                        var panel = context.getPanel(module.panelName);
+                        panel.refresh(context);
+                    });
+                    
                     return;
                 }
                 if (message.command == "AboutMe") {
-                    drumReady = true;
-                    drumName = message.agent;
-                    drumVersion = message.version;
-                    this.log(context, "Connected to " + drumName + " " + drumVersion, "connect");
-                    this.updatePanel(context);
-                    this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
+                    server.ready = true;
+                    server.name = message.agent;
+                    server.version = message.version;
+                    this.log("Connected to " + server.name + " " + server.version, "connect");
+                    this.updatePanels();
+                    TabWatcher.iterateContexts(function(context) {
+                        server.sendSetPage(context.browser.contentTitle, context.window.document.URL);
+                    });
                     return;
                 }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            updatePanels: function() {
+                var that = this;
+                TabWatcher.iterateContexts(function(context) {
+                    that.updatePanel(context);
+                });
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updatePanel: function(context) {
@@ -456,8 +510,8 @@ FBL.ns(function() {
                 var buttonStatus = browser.chrome.$("fbXRefreshButtonStatus");
                 if (!buttonStatus) return;
                 buttonStatus.className = "toolbar-text-button toolbar-connection-status";
-                if (drumReady) {
-                    buttonStatus.label = "Connected to " + drumName + " " + drumVersion;
+                if (server.ready) {
+                    buttonStatus.label = "Connected to " + server.name + " " + server.version;
                     setClass(buttonStatus, "toolbar-text-button toolbar-status-connected");
                 } else {
                     buttonStatus.label = "Disconnected";
@@ -478,23 +532,27 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             showEvent: function(context, message, icon) {
                 message.time = this.getCurrentTime();
-                var event = new BlinkEvent(0, message, icon);
+                var event = new XRefreshLogRecord(0, message, icon);
                 return this.publishEvent(context, event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             showLog: function(context, text, icon) {
-                var event = new BlinkEvent(1, { text: text, time: this.getCurrentTime() }, icon);
+                var event = new XRefreshLogRecord(1, { text: text, time: this.getCurrentTime() }, icon);
                 return this.publishEvent(context, event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            log: function(context, text, icon) {
+            log: function(text, icon) {
                 if (!icon) icon = "info";
-                return this.showLog(context, text, icon);
+                TabWatcher.iterateContexts(function(context) {
+                    module.showLog(context, text, icon);
+                });
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            error: function(context, text, icon) {
+            error: function(text, icon) {
                 if (!icon) icon = "error";
-                return this.showLog(context, text, icon);
+                TabWatcher.iterateContexts(function(context) {
+                    module.showLog(context, text, icon);
+                });
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             publishEvent: function(context, event) {
@@ -504,32 +562,15 @@ FBL.ns(function() {
                     dbg("  !! unable to lookup panel:"+this.panelName);
                     return;
                 }
+                this.events.push(event);
                 panel.publish(event);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            sendHello: function() {
-                var message = {
-                    command: "Hello",
-                    type: "Firefox",
-                    agent: navigator.userAgent.toLowerCase()
-                };
-                this.sendMessageToServer(message);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            sendBye: function() {
-                var message = {
-                    command: "Bye"
-                };
-                this.sendMessageToServer(message);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            sendSetPage: function(contentTitle, contentURL) {
-                var message = {
-                    command: "SetPage",
-                    page: contentTitle,
-                    url: contentURL
-                };
-                this.sendMessageToServer(message);
+            republishAllEvents: function(panel) {
+                dbg(">> XRefresh.republishAllEvents", arguments);
+                for (var i=0; i < this.events.length; i++) {
+                    panel.publish(this.events[i]);
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             storePageOffset: function(context) {
@@ -546,14 +587,14 @@ FBL.ns(function() {
         ////////////////////////////////////////////////////////////////////////
         //
         //
-        top.BlinkEvent = function(type, message, icon) {
+        top.XRefreshLogRecord = function(type, message, icon) {
             this.type = type;
             this.message = message;
             this.opened = false;
             this.icon = icon;
         };
 
-        Firebug.XRefresh.XHR = domplate(Firebug.Rep, {
+        Firebug.XRefresh.Record = domplate(Firebug.Rep, {
             tagRefresh:
                 DIV({class: "blinkHead closed $object|getIcon", _repObject: "$object"},
                     A({class: "blinkTitle", onclick: "$onToggleBody"},
@@ -664,23 +705,17 @@ FBL.ns(function() {
                 s += '<table class="ftable" cellpadding="0" cellspacing="0">';
                 s += '<tr><td class="froot" colspan="2">' + m.root + '</td></tr>';
 
-                var i;
-                for (i = 0; i < m.files.length; i++)
-                {
+                for (var i = 0; i < m.files.length; i++) {
                     var file = m.files[i];
                     fa = file.path1.split('\\');
-                    if (fa.length > 0)
-                    {
+                    if (fa.length > 0) {
                         fa2 = fa.pop();
                         fa1 = fa.join('\\');
                         if (fa1) fa1 += '\\';
 
-                        if (!file.path2)
-                        {
+                        if (!file.path2) {
                             s += '<tr><td class="faction ' + file.action + '"></td><td class="ffile"><span class="ffa1">' + fa1 + '</span><span class="ffa2">' + fa2 + '</span></td></tr>';
-                        }
-                        else
-                        {
+                        } else {
                             fb = file.path2.split('\\');
                             fb2 = fb.pop();
                             fb1 = fb.join('\\');
@@ -689,14 +724,12 @@ FBL.ns(function() {
                         }
                     }
                 }
-
                 s += '</table>';
-
                 details.innerHTML = s;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             supportsObject: function(object) {
-                return object instanceof BlinkEvent;
+                return object instanceof XRefreshLogRecord;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getRealObject: function(event, context) {
@@ -719,21 +752,22 @@ FBL.ns(function() {
             enablePanel: function(module) {
                 dbg(">> XRefreshPanel.enablePanel; " + this.context.getName());
                 Firebug.ActivablePanel.enablePanel.apply(this, arguments);
-                // this.showCommandLine(true);
-                // if (this.wasScrolledToBottom)
-                //     scrollToBottom(this.panelNode);
+                this.clear();
+                Firebug.XRefresh.republishAllEvents(this);
+                if (this.wasScrolledToBottom)
+                    scrollToBottom(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             disablePanel: function(module) {
                 dbg(">> XRefreshPanel.disablePanel; " + this.context.getName());
                 Firebug.ActivablePanel.disablePanel.apply(this, arguments);
-                // this.showCommandLine(false);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             initialize: function() {
                 dbg(">> XRefreshPanel.initialize", arguments);
                 Firebug.ActivablePanel.initialize.apply(this, arguments);
                 this.applyCSS();
+                Firebug.XRefresh.republishAllEvents(this);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             applyCSS: function() {
@@ -750,21 +784,14 @@ FBL.ns(function() {
                 dbg(">> XRefreshPanel.refresh", arguments);
                 var uri = this.safeGetURI();
                 Firebug.XRefresh.storePageOffset(context);
-                drumInitiatedRefresh = true;
                 var browser = context.browser;
                 var url = context.window.document.location;
                 browser.loadURIWithFlags(url, browser.webNavigation.LOAD_FLAGS_FROM_EXTERNAL);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateStyleSheet: function(document, element, path) {
-                // TODO: try this: http://markmail.org/message/5mfzam3vgxtmvq3z#query:mozilla.org%2Fnetwork%2Fcache-service+page:1+mid:d6ooz3mhlsexv2rw+state:results
-                var file = Cc["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+                var file = localFile.createInstance(Ci.nsILocalFile);
                 file.initWithPath(path);
-                // note: async loading doesn't work
-                //              var ios = Cc["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-                //              var fileURI = ios.newFileURI(file);
-                //              var channel = ios.newChannelFromURI(fileURI, document.characterSet, null);
-                //              channel.loadFlags |= Ci.nsIRequest.LOAD_BYPASS_CACHE;
                 var observer = {
                     onStreamComplete: function(aLoader, aContext, aStatus, aLength, aResult) {
                         var styleElement = document.createElement("style");
@@ -779,10 +806,8 @@ FBL.ns(function() {
                         styleElement.originalHref = element.originalHref ? element.originalHref: element.href;
                     }
                 };
-                //              var sl = Cc["@mozilla.org/network/stream-loader;1"].createInstance(Components.interfaces.nsIStreamLoader);
-                //              sl.init(channel, observer, null); // <- this doesn't work on FF3b3
-                var inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
-                var scriptableStream = Cc["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
+                var inputStream = fileInputStream.createInstance(Components.interfaces.nsIFileInputStream);
+                var scriptableStream = inputStream.createInstance(Components.interfaces.nsIScriptableInputStream);
 
                 inputStream.init(file, -1, 0, 0);
                 scriptableStream.init(inputStream);
@@ -836,8 +861,7 @@ FBL.ns(function() {
                 dbg('Replacing css files', cssFiles);
                 for (var i = 0; i < cssFiles.length; i++)
                 {
-                    var cssFile = cssFiles[i].replace('\\', '/');
-                    // convert windows backslashes to forward slashes
+                    var cssFile = cssFiles[i].replace('\\', '/'); // convert windows backslashes to forward slashes
                     this.replaceMatchingStyleSheets(context, cssFile);
                 }
             },
@@ -848,7 +872,9 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             clear: function() {
-                if (this.panelNode) clearNode(this.panelNode);
+                dbg(">> XRefreshPanel.clear", arguments);
+                if (!this.panelNode) return;
+                clearNode(this.panelNode);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             show: function(state) {
@@ -856,9 +882,7 @@ FBL.ns(function() {
                 var enabled = Firebug.XRefresh.isAlwaysEnabled();
                 if (enabled) {
                      Firebug.XRefresh.disabledPanelPage.hide(this);
-                     var enabled = true; // Firebug.XRefresh.isEnabled(this.context);
-                     this.showToolbarButtons("fbXRefreshMenu", true);
-                     this.showToolbarButtons("fbXRefreshControls", enabled);
+                     this.showToolbarButtons("fbXRefreshControls", true);
                      if (this.wasScrolledToBottom)
                      scrollToBottom(this.panelNode);
                 } else {
@@ -869,7 +893,6 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             hide: function() {
                 dbg(">> XRefreshPanel.hide", arguments);
-                this.showToolbarButtons("fbXRefreshMenu", false);
                 this.showToolbarButtons("fbXRefreshControls", false);
                 this.wasScrolledToBottom = isScrolledToBottom(this.panelNode);
             },
@@ -918,12 +941,8 @@ FBL.ns(function() {
                 var rep = rep ? rep: Firebug.getRep(object);
                 var res = "";
                 switch (object.type) {
-                    case 0:
-                        res = rep.tagRefresh.append({ object: object }, row);
-                        break;
-                    case 1:
-                        res = rep.tagLog.append({ object: object }, row);
-                        break;
+                    case 0: res = rep.tagRefresh.append({ object: object }, row); break;
+                    case 1: res = rep.tagLog.append({ object: object }, row); break;
                 }
                 if (object.opened) {
                     rep.toggle(row.childNodes[0].childNodes[0]);
@@ -954,7 +973,7 @@ FBL.ns(function() {
         });
 
         Firebug.registerActivableModule(Firebug.XRefresh);
-        Firebug.registerRep(Firebug.XRefresh.XHR);
+        Firebug.registerRep(Firebug.XRefresh.Record);
         Firebug.registerPanel(XRefreshPanel);
     }
 }); // close custom scope

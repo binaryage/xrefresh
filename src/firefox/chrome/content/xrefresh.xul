@@ -13,7 +13,7 @@
     </commandset>
     <toolbar id="fbToolbar" align="center">
         <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
-            <hbox id="fbXRefreshControls" insertafter="fbNetButtons">
+            <hbox id="fbXRefreshControls" insertafter="fbNetButtons" collapsed="true">
                 <toolbarseparator/>
                 <toolbarbutton id="fbXRefreshRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
                 <toolbarbutton id="fbXRefreshButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
