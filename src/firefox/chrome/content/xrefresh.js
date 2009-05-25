@@ -105,11 +105,13 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             disconnect: function() {
                 dbg(">> XRefreshServer.disconnect", arguments);
-                if (this.ready) module.log("Disconnected from XRefresh Server", "disconnect");
-                // it is nice to say good bye ...
-                this.sendBye();
+                if (this.ready) {
+                    module.log("Disconnected from XRefresh Server", "disconnect");
+                    // it is nice to say good bye ...
+                    this.sendBye();
+                    this.ready = false;
+                }
                 this.releaseStreams();
-                this.ready = false;
                 module.updatePanels();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -132,9 +134,11 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             onServerDied: function() {
                 dbg(">> XRefreshServer.onServerDied", arguments);
-                if (this.ready) module.error("XRefresh Server has closed connection");
+                if (this.ready) {
+                    module.error("XRefresh Server has closed connection");
+                    this.ready = false;
+                }
                 this.releaseStreams();
-                this.ready = false;
                 module.updatePanels();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +172,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             send: function(message) {
-                dbg(">> XRefresh.sendMessageToServer", arguments);
+                dbg(">> XRefresh.send: "+message.command, arguments);
                 if (!this.outStream) {
                     dbg("  !! outStream is null", arguments);
                     return false;
