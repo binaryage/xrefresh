@@ -113,10 +113,10 @@ namespace XRefresh
             this.linkLabelSite.LinkColor = System.Drawing.Color.RoyalBlue;
             this.linkLabelSite.Location = new System.Drawing.Point(84, 157);
             this.linkLabelSite.Name = "linkLabelSite";
-            this.linkLabelSite.Size = new System.Drawing.Size(134, 13);
+            this.linkLabelSite.Size = new System.Drawing.Size(147, 13);
             this.linkLabelSite.TabIndex = 8;
             this.linkLabelSite.TabStop = true;
-            this.linkLabelSite.Text = "http://www.binaryage.com";
+            this.linkLabelSite.Text = "http://xrefresh.binaryage.com";
             this.linkLabelSite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSite_LinkClicked);
             // 
             // label4
