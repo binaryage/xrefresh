@@ -5,7 +5,7 @@ http://creativecommons.org/licenses/by-nc-nd/3.0
 
 ---
 
-Copyright (c) 2007-2008, Antonin Hildebrand
+Copyright (c) 2007-2009, Antonin Hildebrand
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
