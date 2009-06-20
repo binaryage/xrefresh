@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("XRefresh")]
 [assembly: AssemblyDescription("Browser refresh automation for web developers")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("xrefresh.com")]
+[assembly: AssemblyCompany("www.binaryage.com")]
 [assembly: AssemblyProduct("XRefresh")]
-[assembly: AssemblyCopyright("Copyright © 2007-2008 Antonin Hildebrand")]
+[assembly: AssemblyCopyright("Copyright © 2007-2009s Antonin Hildebrand")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,7 +29,7 @@ using System.Resources;
 //      Minor Version 
 //      Build Number
 //      Revision
-//
-[assembly: AssemblyVersion("0.8.0.0")]
-[assembly: AssemblyFileVersion("0.8.0.0")]
+//s
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

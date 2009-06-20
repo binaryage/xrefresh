@@ -56,14 +56,8 @@ namespace XRefresh
 
 		private void linkLabelSite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			string message = "http://xrefresh.com";
+			string message = "http://www.binaryage.com";
 			Process.Start(message);
 		 }
-
-		private void linkLabelAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			string message = "http://xrefresh.com/about";
-			Process.Start(message);
-		}
 	}
 }

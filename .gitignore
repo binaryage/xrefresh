@@ -1,3 +1,10 @@
 _site
 bin
-XRefresh.ncb
+src/XRefresh.ncb
+src/XRefresh.suo
+src/iexplorer/XRefresh.h
+src/iexplorer/XRefreshAddon.vcproj.WAP.woid.user
+src/iexplorer/XRefresh_i.c
+src/iexplorer/XRefresh_p.c
+src/winmonitor/obj/
+tmp/

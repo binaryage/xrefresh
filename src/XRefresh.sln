@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshMonitor", "winmonitor\XRefreshMonitor.csproj", "{25C4E083-5741-477B-A153-D0C24F80C245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRefreshExtension", "XRefreshExtension.csproj", "{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XRefreshAddon", "iexplorer\XRefreshAddon.vcproj", "{05688726-A202-41B3-861D-8C593DFBE1AF}"
 EndProject
 Global
@@ -31,14 +29,6 @@ Global
 		{25C4E083-5741-477B-A153-D0C24F80C245}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{25C4E083-5741-477B-A153-D0C24F80C245}.Release|Win32.ActiveCfg = Release|Any CPU
 		{25C4E083-5741-477B-A153-D0C24F80C245}.Release|x64.ActiveCfg = Release|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Release|Win32.ActiveCfg = Release|Any CPU
-		{EF4D5915-7A42-48AA-8EE5-F632DA7BF583}.Release|x64.ActiveCfg = Release|Any CPU
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{05688726-A202-41B3-861D-8C593DFBE1AF}.Debug|Mixed Platforms.Build.0 = Debug|Win32
