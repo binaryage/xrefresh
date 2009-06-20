@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace XRefresh
 {
@@ -12,6 +13,8 @@ namespace XRefresh
 	// http://www.codeguru.com/Csharp/Csharp/cs_network/sockets/article.php/c7695/
 	public class Server
 	{
+        public static string SEPARATOR = "---XREFRESH-MESSAGE---";
+
 		public class ClientMessage
 		{
 			public string command;
@@ -83,6 +86,7 @@ namespace XRefresh
 			public string name;
 			public string type;
 			public File[] files;
+            public Dictionary<string, string> contents = new Dictionary<string,string>();
 
 			public ServerMessageRefresh(Model.FoldersRow folder, bool positive)
 				: base("DoRefresh")
@@ -154,6 +158,12 @@ namespace XRefresh
 						if (activity.passed)
 						{
 							files[i] = new File(root, activity);
+                            if (activity.path1.EndsWith(".css")) {
+                                TextReader tr = new StreamReader(root + "\\" + files[i].path1);
+                                string content = tr.ReadToEnd();
+                                tr.Close();
+                                contents[files[i].path1] = content;
+                            }
 							i++;
 						}
 					}
@@ -192,6 +202,7 @@ namespace XRefresh
 			Server parent;
 			byte[] dataBuffer = new byte[64*1024];
             String buffer;
+            string reminder;
 
 			public int id;
 			public string type;
@@ -209,6 +220,7 @@ namespace XRefresh
 				this.page = "";
 				this.agent = "";
 				this.type = "";
+                this.reminder = "";
 			}
 
 			public string GetClientFriendlyName()
@@ -229,35 +241,26 @@ namespace XRefresh
 					iRx = socket.EndReceive(asyn);
 					if (iRx == 0)
 					{
-						// it seems client died unexpectedly
-						Utils.LogException(GetClientFriendlyName() + ": broken connection.", new Exception("Received zero bytes."));
-						parent.RemoveClient(id); // TODO: ?
+						// it seems client died
+						parent.RemoveClient(id);
 						return;
 					}
 
 					char[] chars = new char[iRx];
 					System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
-					int charLen = d.GetChars(dataBuffer, 0, iRx, chars, 0);
+					d.GetChars(dataBuffer, 0, iRx, chars, 0);
 					System.String data = new System.String(chars);
-                    string[] lines = data.Split('\n');
+                    string[] separators = new string[] {XRefresh.Server.SEPARATOR};
+                    string[] messages = data.Split(separators, StringSplitOptions.None);
+                    messages[0] = this.reminder + messages[0]; // TODO: this is wrong, reminder should be extracted before decoding (bug case: packet fragmentation in the middle of UTF8 multichar code sequence)
 
-                    for (int i = 0; i < lines.Length; i++)
+                    for (int i = 0; i < messages.Length - 1; i++)
                     {
-                        buffer += lines[i]+"\n";
-                        try
-                        {
-                            ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(buffer, typeof(ClientMessage));
-                            if (message != null)
-                            {
-                                ProcessMessage(message);
-                                buffer = "";
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            // still, not having full message
-                        }
+                        string messageJson = messages[i];
+                        ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(messageJson, typeof(ClientMessage));
+                        ProcessMessage(message);
                     }
+                    this.reminder = messages[messages.Length-1];
                     // continue the waiting for data on the Socket
                     WaitForData();
 				}
@@ -320,10 +323,14 @@ namespace XRefresh
 				// encode string into UTF-8
 				System.Text.Encoder encoder = System.Text.Encoding.UTF8.GetEncoder();
 				int bufferSize = encoder.GetByteCount(data, 0, data.Length, true);
-				byte[] buffer = new byte[bufferSize+1];
-				int charLen = encoder.GetBytes(data, 0, data.Length, buffer, 0, true);
-                buffer[bufferSize] = (byte)'\n';
-
+                char[] separator = XRefresh.Server.SEPARATOR.ToCharArray();
+                byte[] buffer = new byte[bufferSize + separator.Length];
+				encoder.GetBytes(data, 0, data.Length, buffer, 0, true);
+                for (int i = 0; i < separator.Length; i++)
+                {
+                    buffer[data.Length + i] = (byte)separator[i];
+                }
+            
 				// send as UTF-8 string
 				socket.Send(buffer);
 			}
