@@ -1,112 +1,5 @@
 /*****************************************************************************************/
 
-#fbXRefreshMenu {
-    list-style-image: url(chrome://xrefresh/skin/xrefresh.png);
-    -moz-opacity: 0.8;
-}
-
-#fbXRefreshMenu:hover,
-#fbXRefreshMenu[open="true"] {
-    -moz-opacity: 1.0;
-}
-
-#fbXRefreshMenu > .toolbarbutton-text,
-#fbXRefreshMenu > .toolbarbutton-menu-dropmarker {
-    display: none;
-}
-
-.toolbar-text-button > .toolbarbutton-icon {
-    display: block !important;
-    background: transparent !important;
-    margin-right: 4px;
-}
-
-#fbXRefreshControls .toolbar-text-button,
-#fbXRefreshRecorder .toolbar-text-button {
-    margin: 0 4px 0 1px !important;
-    padding: 0 !important;
-    border: none !important;
-    background: transparent !important;
-}
-
-#fbXRefreshRecorderStatusLabel {
-    padding-left: 20px;
-    margin: 0 4px 0 1px !important;
-}
-
-#fbXRefreshRecorderStart,
-#fbXRefreshRecorderStop,
-#fbXRefreshRecorderPause,
-#fbXRefreshRecorderReplay {
-    -moz-image-region: rect(auto,auto,auto,auto) !important;
-}
-
-#fbXRefreshRecorderStart {
-    list-style-image: url(control_rec.png);
-}
-
-#fbXRefreshRecorderStop {
-    list-style-image: url(control_stop.png);
-}
-
-#fbXRefreshRecorderPause {
-    list-style-image: url(control_pause.png);
-}
-
-#fbXRefreshRecorderPause.paused {
-    list-style-image: url(control_play.png) !important;
-}
-
-#fbXRefreshRecorderReplay {
-    list-style-image: url(control_repeat.png);
-}
-
-.toolbar-recorder-invalid {
-    background-image: url(status-gray.png);
-    background-color: transparent;
-    background-repeat: no-repeat;
-}
-
-.toolbar-recorder-recording {
-    background-image: url(status-red.png);
-    background-color: transparent;
-    background-repeat: no-repeat;
-}
-
-.toolbar-recorder-stopped {
-    background-image: url(status-gray.png);
-    background-color: transparent;
-    background-repeat: no-repeat;
-}
-
-.toolbar-recorder-paused {
-    background-image: url(status-green.png);
-    background-repeat: no-repeat;
-    background-color: transparent;
-}
-
-.toolbar-recorder-replaying {
-    background-image: url(status-blue.png);
-    background-repeat: no-repeat;
-    background-color: transparent;
-}
-
-.toolbar-status-connected {
-    list-style-image: url(connect.png);
-    list-style-color: transparent;
-    padding-left: 6px;
-}
-
-.toolbar-status-disconnected {
-    list-style-image: url(disconnect.png);
-    padding-left: 6px;
-}
-
-#fbXRefreshRefresh {
-    list-style-image: url(refresh.png);
-    padding-left: 6px;
-}
-
 .logRow-blink > .blinkHead > .blinkTitle {
     background-position: 2px 2px;
 }
@@ -205,8 +98,8 @@
     background-position: right;
 }
 
-.logRow-blink > .blinkHead.fastcss > .blinkTitle > .blinkIcon {
-    background-image: url(fastcss.png);
+.logRow-blink > .blinkHead.softRefresh > .blinkTitle > .blinkIcon {
+    background-image: url(soft_refresh.png);
     background-repeat: no-repeat;
     background-position: right;
 }

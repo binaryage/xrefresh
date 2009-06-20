@@ -275,7 +275,7 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             initialize: function() {
                 dbg(">> XRefresh.initialize", arguments);
-                this.panelName = 'XRefresh';
+                this.panelName = 'xrefresh';
                 this.description = "Browser refresh automation for web developers";
                 Firebug.ActivableModule.initialize.apply(this, arguments);
             },
@@ -327,7 +327,6 @@ FBL.ns(function() {
             disconnect: function(context) {
                 dbg(">> XRefresh.disconnect", arguments);
                 delete this.scheduledDisconnection;
-                if (!this.alreadyActivated) return;
                 this.alreadyActivated = false;
                 // just after onPanelDeactivate, no remaining activecontext
                 server.disconnect();
@@ -423,6 +422,11 @@ FBL.ns(function() {
                 this.log("Manual refresh performed by user", "rreq");
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            buttonClear: function(context) {
+                dbg(">> XRefresh.buttonClear: " + context.window.document.URL);
+                context.getPanel(this.panelName).clear(context);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             buttonStatus: function(context) {
                 dbg(">> XRefresh.buttonStatus: " + context.window.document.URL);
                 if (this.checkTimeout) clearTimeout(this.checkTimeout);
@@ -456,45 +460,56 @@ FBL.ns(function() {
                 return files;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            checkServerCompatibility: function() {
+                var version = server.version.split('.');
+                if (server.name=='xrefresh-server' && version[0]>=0 && version[1]>=2) return true;
+                return false;
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             processMessage: function(message) {
                 dbg(">> XRefresh.processMessage:"+ message.command);
                 if (!this.isEnabled(this.currentContext)) {
                     dbg("Skipped message because the panel is not enabled");
                     return;
                 }
-                if (message.command == "DoRefresh") {
-                    if (this.getPref("softRefresh")) {
-                        var cssFiles = this.getMessageCSSFiles(message);
-                        if (cssFiles.length == message.files.length) { // message contains only CSS files?
+                switch (message.command) {
+                    case 'DoRefresh':
+                        if (this.getPref("softRefresh")) {
+                            var cssFiles = this.getMessageCSSFiles(message);
+                            if (cssFiles.length == message.files.length) {
+                                // message contains only CSS files
+                                TabWatcher.iterateContexts(function(context) {
+                                    module.showEvent(context, message, 'softRefresh');
+                                    var panel = context.getPanel(module.panelName);
+                                    panel.updateCSS(context, cssFiles); // perform soft refresh
+                                });
 
-                            TabWatcher.iterateContexts(function(context) {
-                                module.showEvent(context, message, 'fastcss');
-                                var panel = context.getPanel(module.panelName);
-                                panel.updateCSS(context, cssFiles); // perform soft refresh
-                            });
-                            
-                            return;
+                                return;
+                            }
                         }
-                    }
-                    
-                    TabWatcher.iterateContexts(function(context) {
-                        module.showEvent(context, message, 'refresh');
-                        var panel = context.getPanel(module.panelName);
-                        panel.refresh(context);
-                    });
-                    
-                    return;
-                }
-                if (message.command == "AboutMe") {
-                    server.ready = true;
-                    server.name = message.agent;
-                    server.version = message.version;
-                    this.log("Connected to " + server.name + " " + server.version, "connect");
-                    this.updatePanels();
-                    TabWatcher.iterateContexts(function(context) {
-                        server.sendSetPage(context.browser.contentTitle, context.window.document.URL);
-                    });
-                    return;
+                        TabWatcher.iterateContexts(function(context) {
+                            module.showEvent(context, message, 'refresh');
+                            var panel = context.getPanel(module.panelName);
+                            panel.refresh(context);
+                        });
+                        break;
+                    case 'AboutMe':
+                        server.ready = true;
+                        server.name = message.agent;
+                        server.version = message.version;
+                        module.log("Connected to " + server.name + " " + server.version, "connect");
+                        if (module.checkServerCompatibility()) {
+                            TabWatcher.iterateContexts(function(context) {
+                                server.sendSetPage(context.browser.contentTitle, context.window.document.URL);
+                            });
+                        } else {
+                            module.error("This server is not compatible with XRefresh Firefox extension, please update it to the latest version.");
+                            module.disconnect();
+                        }
+                        module.updatePanels();
+                        break;
+                    default: 
+                        module.error("Received unexpected command from server: "+message.command);
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -513,13 +528,10 @@ FBL.ns(function() {
                 if (!browser) return;
                 var buttonStatus = browser.chrome.$("fbXRefreshButtonStatus");
                 if (!buttonStatus) return;
-                buttonStatus.className = "toolbar-text-button toolbar-connection-status";
                 if (server.ready) {
                     buttonStatus.label = "Connected to " + server.name + " " + server.version;
-                    setClass(buttonStatus, "toolbar-text-button toolbar-status-connected");
                 } else {
                     buttonStatus.label = "Disconnected";
-                    setClass(buttonStatus, "toolbar-text-button toolbar-status-disconnected");
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -747,7 +759,7 @@ FBL.ns(function() {
 
         function XRefreshPanel() {}
         XRefreshPanel.prototype = extend(Firebug.ActivablePanel, {
-            name: "XRefresh",
+            name: "xrefresh",
             title: "XRefresh",
             searchable: false,
             editable: false,
@@ -903,7 +915,6 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             updateOption: function(name, value) {
                 dbg(">> XRefreshPanel.updateOption", arguments);
-                
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getOptionsMenuItems: function() {

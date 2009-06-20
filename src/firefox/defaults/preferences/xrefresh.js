@@ -1,8 +1,11 @@
 // Global
-pref("extensions.firebug.XRefresh.localOnly", true);
-pref("extensions.firebug.XRefresh.softRefresh", false);
+pref("extensions.firebug.xrefresh.localOnly", true);
+pref("extensions.firebug.xrefresh.softRefresh", false);
 
 // Connection
-pref("extensions.firebug.XRefresh.port", 41258);
-pref("extensions.firebug.XRefresh.portRange", 4);
-pref("extensions.firebug.XRefresh.host", "localhost");
+pref("extensions.firebug.xrefresh.port", 41258);
+pref("extensions.firebug.xrefresh.portRange", 4);
+pref("extensions.firebug.xrefresh.host", "localhost");
+
+// Enable/disable 
+pref("extensions.firebug.xrefresh.enableSites", false);
