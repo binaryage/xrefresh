@@ -8,3 +8,5 @@ src/iexplorer/XRefresh_i.c
 src/iexplorer/XRefresh_p.c
 src/winmonitor/obj/
 tmp/
+rel/
+src/iexplorer/XRefresh.aps
