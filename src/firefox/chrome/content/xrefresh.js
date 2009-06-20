@@ -22,6 +22,8 @@ FBL.ns(function() {
         const xrefreshPrefs = xrefreshPrefService.getService(nsIPrefBranch2);
 
         const xrefreshHomepage = "http://xrefresh.binaryage.com";
+        
+        const messageSeparator = "---XREFRESH-MESSAGE---";
 
         if (Firebug.TraceModule) {
             Firebug.TraceModule.DBG_XREFRESH = false;
@@ -66,14 +68,12 @@ FBL.ns(function() {
             name: '',
             version: '',
             data: '',
-            reminder: '',
             /////////////////////////////////////////////////////////////////////////////////////////
             connect: function() {
                 dbg(">> XRefreshServer.connect", arguments);
 
                 this.releaseStreams();
                 this.data = '';
-                this.reminder = '';
                 
                 var transportService = socketTransportService.getService(Ci.nsISocketTransportService);
                 this.transport = transportService.createTransport(null, 0, module.getPref("host"), module.getPref("port"), null);
@@ -145,30 +145,21 @@ FBL.ns(function() {
             onDataAvailable: function() {
                 dbg(">> XRefresh.onDataAvailable", arguments);
                 // try to parse incomming message
-                // here we expect server to send always valid stream of {json1}\n{json2}\n{json3}\n...
-                // TODO: make this more robust to server formating failures
+                // here we expect server to send always valid stream of {json1}---XREFRESH-MESSAGE---{json2}---XREFRESH-MESSAGE---{json3}---XREFRESH-MESSAGE---...
                 var data = this.data;
                 dbg(data||"empty message");
-                var parts = this.data.split('\n');
-                var buffer = this.reminder;
-                for (var i = 0; i < parts.length; i++) {
-                    buffer += UTF8.decode(parts[i]);
-                    dbg("  buffer:", buffer);
-
+                var parts = data.split(messageSeparator);
+                for (var i = 0; i < parts.length-1; i++) {
+                    var buffer = UTF8.decode(parts[i]);
                     var message = JSON.parse(buffer);
-                    if (!message) continue;
-                    // we have only partial buffer? go for next chunk
-                    buffer = '';
-                    // message completed, clear buffer for incomming data
+                    if (!message) {
+                        module.error("Enable to parse server JSON message: "+message);
+                        continue;
+                    }
                     dbg("    message:", message);
-                    //try {
-                        module.processMessage(message);
-                    // } catch(e) {
-                    //     module.error(listener.context, "Error in processing message from XRefresh Server");
-                    // }
+                    module.processMessage(message);
                 }
-                this.reminder = buffer;
-                this.data = "";
+                this.data = parts[parts.length-1];
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             send: function(message) {
@@ -177,8 +168,8 @@ FBL.ns(function() {
                     dbg("  !! outStream is null", arguments);
                     return false;
                 }
-                var data = JSON.stringify(message) + '\n'; // every message is delimited with new line
-                var utf8data = UTF8.encode(data);
+                var data = JSON.stringify(message);
+                var utf8data = UTF8.encode(data) + messageSeparator;
                 this.outStream.write(utf8data, utf8data.length);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -295,36 +286,61 @@ FBL.ns(function() {
                 dbg(">> XRefresh.onPanelDisable", arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            onEnabled: function(context) {
+                dbg(">> XRefresh.onEnabled", arguments);
+                module.start();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            onDisabled: function(context) {
+                dbg(">> XRefresh.onDisabled", arguments);
+                module.stop();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             onSuspendFirebug: function(context) {
                 dbg(">> XRefresh.onSuspendFirebug", arguments);
-                if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
-                this.scheduledDisconnection = setTimeout(function() {
-                    server.disconnect();
-                }, 5000);
+                // TODO: onResumeFirebug && onSuspendFirebug is not usable at all, it is called during browser refresh operations WTF?!!
+                // if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
+                // this.scheduledDisconnection = setTimeout(function() {
+                //     module.stop();
+                // }, 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onResumeFirebug: function(context) {
                 dbg(">> XRefresh.onResumeFirebug", arguments);
+                // module.start();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            start: function() {
+                dbg(">> XRefresh.start", arguments);
                 if (this.scheduledDisconnection) clearTimeout(this.scheduledDisconnection);
                 delete this.scheduledDisconnection;
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
-                var that = this;
                 setTimeout(function() {
-                    that.startupCheck();
+                    module.startupCheck();
                 }, 1000);
                 setTimeout(function() {
-                    server.connect();
-                }, 1000);
+                    module.connect();
+                }, 1500);
                 setTimeout(function() {
                     listener.start();
                 }, 2000);
                 this.checkTimeout = setTimeout(function() {
-                    that.connectionCheck();
+                    module.connectionCheck();
                 }, 5000);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            disconnect: function(context) {
+            stop: function() {
+                dbg(">> XRefresh.stop", arguments);
+                module.disconnect();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            connect: function() {
+                dbg(">> XRefresh.connect", arguments);
+                server.connect();
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            disconnect: function() {
                 dbg(">> XRefresh.disconnect", arguments);
                 delete this.scheduledDisconnection;
                 this.alreadyActivated = false;
@@ -336,6 +352,10 @@ FBL.ns(function() {
             connectionCheck: function(context) {
                 dbg(">> XRefresh.connectionCheck", arguments);
                 delete this.checkTimeout;
+                if (module.suppressNextConnectionCheck) {
+                    delete module.suppressNextCheck;
+                    return;
+                }
                 if (server.ready) return;
                 this.log("Unable to connect to XRefresh Server", "warn");
                 this.log("Please check if you have running XRefresh Server.", "bulb");
@@ -347,6 +367,10 @@ FBL.ns(function() {
             shortConnectionCheck: function(context) {
                 dbg(">> XRefresh.shortConnectionCheck", arguments);
                 delete this.shortCheckTimeout;
+                if (module.suppressNextConnectionCheck) {
+                    delete module.suppressNextCheck;
+                    return;
+                }
                 if (server.ready) return;
                 this.log("Unable to connect to XRefresh Server. Please check if you have running XRefresh Server and tweak your firewall settings if needed.", "warn");
             },
@@ -424,6 +448,7 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             buttonClear: function(context) {
                 dbg(">> XRefresh.buttonClear: " + context.window.document.URL);
+                this.events = [];
                 context.getPanel(this.panelName).clear(context);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -435,10 +460,10 @@ FBL.ns(function() {
                 delete this.shortCheckTimeout;
                 if (server.ready) {
                     this.log("Disconnection requested by user", "disconnect_btn");
-                    server.disconnect();
+                    module.disconnect();
                 } else {
                     this.log("Connection requested by user", "connect_btn");
-                    server.connect();
+                    module.connect();
                     this.shortCheckTimeout = setTimeout(function() {
                         module.shortConnectionCheck();
                     }, 3000);
@@ -452,8 +477,7 @@ FBL.ns(function() {
                     var file = message.files[i];
                     if (file.action == 'changed') {
                         if (file.path1.match(re)) {
-                            files.push(message.root + '\\' + file.path1);
-                            // TODO: this should be platform specific
+                            files.push(file.path1);
                         }
                     }
                 }
@@ -462,7 +486,10 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             checkServerCompatibility: function() {
                 var version = server.version.split('.');
-                if (server.name=='xrefresh-server' && version[0]>=0 && version[1]>=2) return true;
+                for (var i=0; i < version.length; i++) {
+                    version[i] = parseInt(version[i], 10);
+                }
+                if (server.name=='OSX xrefresh-server' && version[0]>=0 && version[1]>=2) return true;
                 return false;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -481,7 +508,7 @@ FBL.ns(function() {
                                 TabWatcher.iterateContexts(function(context) {
                                     module.showEvent(context, message, 'softRefresh');
                                     var panel = context.getPanel(module.panelName);
-                                    panel.updateCSS(context, cssFiles); // perform soft refresh
+                                    panel.updateCSS(context, cssFiles, message.contents); // perform soft refresh
                                 });
 
                                 return;
@@ -503,6 +530,7 @@ FBL.ns(function() {
                                 server.sendSetPage(context.browser.contentTitle, context.window.document.URL);
                             });
                         } else {
+                            module.suppressNextConnectionCheck = true;
                             module.error("This server is not compatible with XRefresh Firefox extension, please update it to the latest version.");
                             module.disconnect();
                         }
@@ -529,9 +557,11 @@ FBL.ns(function() {
                 var buttonStatus = browser.chrome.$("fbXRefreshButtonStatus");
                 if (!buttonStatus) return;
                 if (server.ready) {
-                    buttonStatus.label = "Connected to " + server.name + " " + server.version;
+                    buttonStatus.label = "Connected";
+                    buttonStatus.setAttribute('tooltiptext', "Connected to " + server.name + " " + server.version);
                 } else {
                     buttonStatus.label = "Disconnected";
+                    buttonStatus.setAttribute('tooltiptext', "Disconnected - click to attempt connection");
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -805,33 +835,18 @@ FBL.ns(function() {
                 browser.loadURIWithFlags(url, browser.webNavigation.LOAD_FLAGS_FROM_EXTERNAL);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateStyleSheet: function(document, element, path) {
-                var file = localFile.createInstance(Ci.nsILocalFile);
-                file.initWithPath(path);
-                var observer = {
-                    onStreamComplete: function(aLoader, aContext, aStatus, aLength, aResult) {
-                        var styleElement = document.createElement("style");
-                        styleElement.setAttribute("type", "text/css");
-                        styleElement.appendChild(document.createTextNode(aResult));
-                        var attrs = ["media", "title", "disabled"];
-                        for (var i = 0; i < attrs.length; i++) {
-                            var attr = attrs[i];
-                            if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
-                        }
-                        element.parentNode.replaceChild(styleElement, element);
-                        styleElement.originalHref = element.originalHref ? element.originalHref: element.href;
-                    }
-                };
-                var inputStream = fileInputStream.createInstance(Components.interfaces.nsIFileInputStream);
-                var scriptableStream = inputStream.createInstance(Components.interfaces.nsIScriptableInputStream);
-
-                inputStream.init(file, -1, 0, 0);
-                scriptableStream.init(inputStream);
-                var content = scriptableStream.read(scriptableStream.available());
-                scriptableStream.close();
-                inputStream.close();
-
-                observer.onStreamComplete(null, null, null, null, content);
+            updateStyleSheet: function(document, element, content) {
+                dbg('>> XRefreshPanel.updateStyleSheet', [element, content]);
+                var styleElement = document.createElement("style");
+                styleElement.setAttribute("type", "text/css");
+                styleElement.appendChild(document.createTextNode(content));
+                var attrs = ["media", "title", "disabled"];
+                for (var i = 0; i < attrs.length; i++) {
+                    var attr = attrs[i];
+                    if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
+                }
+                element.parentNode.replaceChild(styleElement, element);
+                styleElement.originalHref = element.originalHref ? element.originalHref: element.href;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             collectDocuments: function(frame) {
@@ -851,12 +866,12 @@ FBL.ns(function() {
                 var lastFileSlash = cssFile.lastIndexOf('/');
                 if (lastFileSlash != -1) cssFile = cssFile.substring(lastFileSlash + 1);
                 var res = (cssFile.toLowerCase() == cssLink.toLowerCase());
-                dbg('Match ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
+                dbg('>> XRefreshPanel.Match ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
                 return res;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            replaceMatchingStyleSheetsInDocument: function(document, cssFile) {
-                dbg('Replacing CSS in document', document);
+            replaceMatchingStyleSheetsInDocument: function(document, cssFile, contents) {
+                dbg('>> XRefreshPanel.replaceMatchingStyleSheetsInDocument', arguments);
                 var styleSheetList = document.styleSheets;
                 for (var i = 0; i < styleSheetList.length; i++) {
                     var styleSheetNode = styleSheetList[i].ownerNode;
@@ -864,21 +879,29 @@ FBL.ns(function() {
                     if (!styleSheetNode) continue;
                     var href = styleSheetNode.href || styleSheetNode.originalHref;
                     if (!href) continue;
-                    if (this.doesCSSNameMatch(href, cssFile)) this.updateStyleSheet(document, styleSheetNode, cssFile);
+                    if (this.doesCSSNameMatch(href, cssFile)) {
+                        var content = contents[cssFile];
+                        if (!contents) {
+                            module.error("Unable to lookup CSS file content for file: "+cssFile);
+                            continue;
+                        }
+                        this.updateStyleSheet(document, styleSheetNode, content);
+                    }
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            replaceMatchingStyleSheets: function(context, cssFile) {
+            replaceMatchingStyleSheets: function(context, cssFile, contents) {
                 var documents = this.collectDocuments(context.window);
-                for (var i = 0; i < documents.length; i++) this.replaceMatchingStyleSheetsInDocument(documents[i], cssFile);
+                for (var i = 0; i < documents.length; i++){ 
+                    this.replaceMatchingStyleSheetsInDocument(documents[i], cssFile, contents);
+                }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            updateCSS: function(context, cssFiles) {
-                dbg('Replacing css files', cssFiles);
-                for (var i = 0; i < cssFiles.length; i++)
-                {
-                    var cssFile = cssFiles[i].replace('\\', '/'); // convert windows backslashes to forward slashes
-                    this.replaceMatchingStyleSheets(context, cssFile);
+            updateCSS: function(context, cssFiles, contents) {
+                dbg('>> XRefreshPanel.updateCSS', cssFiles, contents);
+                for (var i = 0; i < cssFiles.length; i++) {
+                    var cssFile = cssFiles[i];
+                    this.replaceMatchingStyleSheets(context, cssFile, contents);
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////

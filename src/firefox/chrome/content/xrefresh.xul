@@ -15,8 +15,8 @@
     <toolbar id="fbToolbar" align="center">
         <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
             <hbox id="fbXRefreshControls" insertafter="fbNetButtons" collapsed="true">
-                <toolbarseparator/>
                 <toolbarbutton id="fbXRefreshRefresh" label="Refresh" class="toolbar-text-button" tooltiptext="Performs manual page refresh" command="cmd_XRefreshRefresh"/>
+                <toolbarseparator/>
                 <toolbarbutton id="fbXRefreshClear" label="Clear" class="toolbar-text-button" tooltiptext="Clears XRefresh console" command="cmd_XRefreshClear"/>
                 <toolbarbutton id="fbXRefreshButtonStatus" label="Status" class="toolbar-text-button" tooltiptext="XRefresh Status" command="cmd_XRefreshStatus"/>
             </hbox>
