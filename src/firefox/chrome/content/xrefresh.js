@@ -115,12 +115,6 @@ FBL.ns(function() {
                 module.updatePanels();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            reconnect: function() {
-                dbg(">> XRefreshServer.reconnect", arguments);
-                this.disconnect();
-                this.connect();
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
             releaseStreams: function() {
                 if (this.inStream) {
                     this.inStream.close();
@@ -216,7 +210,8 @@ FBL.ns(function() {
                 var listener = {
                     onSocketAccepted: function(socket, transport) {
                         module.log("Reconnection request received");
-                        server.reconnect();
+                        module.stop();
+                        module.start();
                     },
                     onStopListening: function(serverSocket, status) {
                     }
