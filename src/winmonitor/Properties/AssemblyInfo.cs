@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.binaryage.com")]
 [assembly: AssemblyProduct("XRefresh")]
-[assembly: AssemblyCopyright("Copyright © 2007-2009s Antonin Hildebrand")]
+[assembly: AssemblyCopyright("Copyright © 2007-2009 Antonin Hildebrand")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //s
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
