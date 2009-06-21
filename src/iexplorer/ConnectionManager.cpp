@@ -398,13 +398,13 @@ CConnectionManager::ProcessMessage(Json::Value& msg)
 
 		if (answer)
 		{
-			log.Format(_T("Refresh request from %s: %s"), name, story);
+			log.Format(_T("Project '%s': %s"), name, story);
 			m_Parent->Log(log, ICON_REFRESH);
 			PerformRefresh();
 		}
 		else
 		{
-			log.Format(_T("Refresh request from %s (not allowed for this site - modify 'Allowed Sites' using XRefresh toolbar icon)"), name);
+			log.Format(_T("Project '%s' (not allowed for this site - modify 'Allowed Sites' using XRefresh toolbar icon)"), name);
 			m_Parent->Log(log, ICON_CANCEL);
 		}
 	}
