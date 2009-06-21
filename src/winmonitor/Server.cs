@@ -86,7 +86,7 @@ namespace XRefresh
 			public string name;
 			public string type;
 			public File[] files;
-            public Dictionary<string, string> contents = new Dictionary<string,string>();
+            public Dictionary<string, object> contents = new Dictionary<string, object>();
 
 			public ServerMessageRefresh(Model.FoldersRow folder, bool positive)
 				: base("DoRefresh")
@@ -158,11 +158,20 @@ namespace XRefresh
 						if (activity.passed)
 						{
 							files[i] = new File(root, activity);
-                            if (activity.path1.EndsWith(".css")) {
-                                TextReader tr = new StreamReader(root + "\\" + files[i].path1);
-                                string content = tr.ReadToEnd();
-                                tr.Close();
-                                contents[files[i].path1] = content;
+                            try // file reading may throw, because someone deletes the file or something, so we should be safe here
+                            {
+                                if (activity.path1.EndsWith(".css"))
+                                {
+                                    TextReader tr = new StreamReader(root + "\\" + files[i].path1);
+                                    string content = tr.ReadToEnd();
+                                    tr.Close();
+                                    // HACK: JSON library does not escape keys in dictionary!!! 
+                                    string key = JavaScriptUtils.EscapeJavaScriptString(files[i].path1, '"', false);
+                                    contents[key] = content;
+                                }
+                            }
+                            catch (Exception)
+                            {
                             }
 							i++;
 						}

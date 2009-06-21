@@ -1,4 +1,4 @@
-// we use UTF-8 encoded JSON to exchange messages between extension and server
+﻿// we use UTF-8 encoded JSON to exchange messages between extension and server
 //
 // this source contains copy&pasted various bits from Firebug sources.
 
@@ -145,9 +145,11 @@ FBL.ns(function() {
                 var parts = data.split(messageSeparator);
                 for (var i = 0; i < parts.length-1; i++) {
                     var buffer = UTF8.decode(parts[i]);
-                    var message = JSON.parse(buffer);
+                    try {
+                        var message = JSON.parse(buffer);
+                    } catch (e) {}
                     if (!message) {
-                        module.error("Enable to parse server JSON message: "+message);
+                        module.error("Unable to parse server JSON message: "+buffer);
                         continue;
                     }
                     dbg("    message:", message);
@@ -855,6 +857,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             doesCSSNameMatch: function(cssLink, cssFile) {
+                cssFile = cssFile.replace('\\', '/'); // convert windows backslashes to forward slashes
                 var firstQ = cssLink.indexOf('?');
                 if (firstQ != -1) cssLink = cssLink.substring(0, firstQ);
                 var lastLinkSlash = cssLink.lastIndexOf('/');
