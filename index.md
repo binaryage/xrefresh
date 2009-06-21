@@ -3,8 +3,8 @@ title: XRefresh
 layout: wikistyle
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-download: http://xrefresh.googlecode.com/files/xrefresh-0.7.msi
-version: Version 0.7
+download: http://xrefresh.googlecode.com/files/xrefresh-1.0.msi
+version: Version 1.0
 ---
 
 # XRefresh can refresh browser as you modify source files
@@ -34,17 +34,17 @@ When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refr
 
 ### XRefresh extension for Firefox
 * browser plugin which listens for monitor requests and performs refresh commands
-* requires Firefox 1.5 or higher + Firebug 1.2 or higher (http://getfirebug.com)
+* requires [Firefox 3.0 or higher][firefox] + [Firebug 1.4 or higher][firebug]
 * runs on any platform supported by Firefox (tested on Windows and OSX 10.5)
 
 ### XRefresh addon for Internet Explorer
 * browser plugin which listens for monitor requests and performs refresh commands
-* requires Internet Explorer 6 or 7
+* requires [Internet Explorer 6, 7 or 8][ie]
 * runs on Windows 2000/2003/XP/Vista (32-bit)
 
 ## Installation on Windows
 
-Install [Firebug 1.3][firebug] and then install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
+Install [Firebug 1.4][firebug] and then install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
 
 Download latest [windows installer][download] and go through installation process. It will install XRefresh traybar application and IE plugin.
 
@@ -70,12 +70,12 @@ XRefresh has it's own tab panel in Firebug window. You need to enable Firebug fo
 In Interenet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
 <img src="/images/ie7toolbar.png" width="306" height="46">
 
-The icon reflects the connection status. You may click it to open XRefresh> Panel
+The icon reflects the connection status. You may click it to open XRefresh Panel
 <img src="/images/ie7console.png" width="392" height="136">
 
 ## Installation on OSX
 
-Install [Firebug 1.3][firebug] and then install [XRefresh Addon][addon].
+Install [Firebug 1.4][firebug] and then install [XRefresh Addon][addon].
 
 Execute ``sudo gem install xrefresh-server``.
 
@@ -122,16 +122,16 @@ You may also specify path to config file via --config parameter.
 ## FAQ
 
 #### Why is dual monitor setup great for web development?
-> One display is fully dedicated to your browser window showing page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your text editor.
+> One display is fully dedicated to your browser window showing page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
 
-#### What does it mean "Fast CSS replace" feature?
-> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. This is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. This is quite harder to setup and some people reported troubles. This is disabled by default, you need to enable it in XRefresh menu (under icon on Firebug's toolbar). Check [this post](http://getsatisfaction.com/xrefresh/topics/xrefresh_0_7_with_fast_css_update_for_firefox) for more info.
+#### What does it mean "Soft Refresh" feature?
+> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. This is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is minimal [example page using this technique][soft-refresh-example].
 
 #### Is there a file system monitor available for Unix?
 > Michael did some work on [porting it](http://github.com/ycros/xrefresh) over. It is probably not finished, but it should be a piece of cake for hacker like you to make it happen.
 
 #### Is there a support for Safari? Opera?
-> No plans, I'm happy with Firefox
+> No plans, I'm happy with Firefox. Support for IE will be dropped in the future. I hate brain-dead IE extension model.
 
 #### I'm editing files directly on my server via ssh, is it possible to use XRefresh over network?
 > XRefresh monitor communicates with browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable firewall and make sure they see each other. By default browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type ``about:config`` into the URL bar and filter keys by "xrefresh". Keys ``extensions.xrefresh.host`` and ``extensions.xrefresh.localConnectionsOnly`` is what you are looking for.
@@ -142,26 +142,36 @@ You may also specify path to config file via --config parameter.
 
 ## History
 
-* **v0.9** (to be released)
+* **v1.0** (21.06.2009)
+  * [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
+  * [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
+  * [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
+  * [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
+  * [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
+
+* **v0.9** (never packaged)
   * [[darwin][darwin]] OSX monitor ignores events from .git directories
   * [[darwin][darwin]] XRefresh respects cached resources
-  * [[darwin][darwin]] Changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
+  * [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
 
 * **v0.8** (19.07.2008)
-  * [[darwin][darwin]] Added OSX support
-  * [[darwin][darwin]] Fixed bug in extension networking
-  * [[darwin][darwin]] Extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
+  * [[darwin][darwin]] added OSX support
+  * [[darwin][darwin]] fixed bug in extension networking
+  * [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
 
 * **v0.7** (25.02.2008)
-  * [[darwin][darwin]] Fast CSS refresh feature
+  * [[darwin][darwin]] "Soft Refresh" feature
 
 * **v0.6** (02.01.2008)
-  * [[darwin][darwin]] Public release
+  * [[darwin][darwin]] public release
 
 * **v0.5** (12.11.2007)
-  * [[darwin][darwin]] Internal alpha
+  * [[darwin][darwin]] internal alpha
 
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
-[download]: http://xrefresh.googlecode.com/files/xrefresh-0.7.msi
-[firebug]: http://getfirebug.com
+[download]: http://xrefresh.googlecode.com/files/xrefresh-1.0.msi
+[firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
+[firefox]: http://firefox.com
+[ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
+[soft-refresh-example]: http://github.com/darwin/xrefresh/tree/master/test
