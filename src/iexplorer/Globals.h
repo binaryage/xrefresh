@@ -70,6 +70,6 @@ const int IDC_DISABLEBUTTON                       = 2;
 #define BROWSER_MESSAGE_WINDOW_CLASS_NAME         _T("CXRefreshBrowserMessageWindow")
 
 #define WAIT_GRANULARITY                          20 // in ms
-#define ALLOWED_SITES_HELP_LINK                   _T("http://xrefresh.com/help/sites")
+#define ALLOWED_SITES_HELP_LINK                   _T("http://xrefresh.binaryage.com")
 
 #define MAX_LOGGER_MESSAGES                       200

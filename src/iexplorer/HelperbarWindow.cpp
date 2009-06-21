@@ -187,7 +187,7 @@ CHelperbarWindow::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 				CComPtr<IWebBrowser2> browser = BHO->GetBrowser();
 				if (!!browser)
 				{
-					CComBSTR url = _T("http://xrefresh.com");
+					CComBSTR url = _T("http://xrefresh.binaryage.com");
 					CComVariant target = _T("_blank");
 					CComVariant flags = navOpenInNewTab;
 					browser->Navigate(url, &flags, &target, NULL, NULL);

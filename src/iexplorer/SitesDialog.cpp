@@ -285,7 +285,7 @@ CSitesDialog::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 	if (m_ImageList.Add(toolbar, mask) == -1) throw CXRefreshWindowsError(GetLastError());
 
 	m_Help.SetHyperLinkExtendedStyle(HLINK_COMMANDBUTTON);
-	m_Help.SetToolTipText(_T("Visit xrefresh.com for manual page"));
+	m_Help.SetToolTipText(_T("Visit xrefresh.binaryage.com for manual page"));
 	m_Help.SubclassWindow(GetDlgItem(IDC_HELP2));
 
 	::SetWindowText(GetDlgItem(IDC_QUERY_RESULT), _T("> enter test query and hit [Test] button..."));

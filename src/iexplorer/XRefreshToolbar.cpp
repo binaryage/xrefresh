@@ -344,7 +344,7 @@ CXRefreshToolbar::OnToolbarMenu(WORD wCode, WORD wId, HWND hWnd, BOOL& bHandled)
 			{
 				if (!!m_Browser)
 				{
-					CComBSTR url = _T("http://xrefresh.com");
+					CComBSTR url = _T("http://xrefresh.binaryage.com");
 					CComVariant target = _T("_blank");
 					CComVariant flags = navOpenInNewTab;
 					m_Browser->Navigate(url, &flags, &target, NULL, NULL);
