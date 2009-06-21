@@ -65,7 +65,7 @@ Tip: You can simply drag&drop interesting folders onto configuration dialog.
 Let **Firefox** or **Internet Explorer** connect to XRefresh.
 
 XRefresh has it's own tab panel in Firebug window. You need to enable Firebug for particular site to enable XRefresh functionality.
-<img src="/images/ffintro.png" width="417" height="179">
+<a href="/images/ffintro.png"><img src="/images/ffintro.png" width="600"></a>
 
 In Interenet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
 <img src="/images/ie7toolbar.png" width="306" height="46">
@@ -124,8 +124,8 @@ You may also specify path to config file via --config parameter.
 #### Why is dual monitor setup great for web development?
 > One display is fully dedicated to your browser window showing page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
 
-#### What does it mean "Soft Refresh" feature?
-> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. This is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is minimal [example page using this technique][soft-refresh-example].
+#### What is "Soft Refresh" feature?
+> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. I call it "soft refresh"  and it is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. With this feature you can get similar experience like Firebug on-the-fly CSS editing (without the [pain of syncing changes back to original sources](http://code.google.com/p/fbug/issues/detail?id=179)). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example].
 
 #### Is there a file system monitor available for Unix?
 > Michael did some work on [porting it](http://github.com/ycros/xrefresh) over. It is probably not finished, but it should be a piece of cake for hacker like you to make it happen.
@@ -139,6 +139,9 @@ You may also specify path to config file via --config parameter.
 ## Articles about XRefresh
 
   * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
+
+## Contributors
+  * I've used great [Silk icons by Mark James][silk]
 
 ## History
 
@@ -175,3 +178,4 @@ You may also specify path to config file via --config parameter.
 [firefox]: http://firefox.com
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
 [soft-refresh-example]: http://github.com/darwin/xrefresh/tree/master/test
+[silk]: http://www.famfamfam.com/lab/icons/silk/
