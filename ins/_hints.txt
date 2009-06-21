@@ -6,9 +6,8 @@ How to prepare new release:
    VS_VERSION_INFO in XRefereshAddon project in Resource Editor
    _build.bat
 2. alter version in build.bat
-3. update changelog
-4. run _clean.bat
-5. run _build.bat
+3. run _clean.bat
+4. run _build.bat
 
 What do you need?
 1. Visual Studio 2008 and vsvars32.bat on the path
