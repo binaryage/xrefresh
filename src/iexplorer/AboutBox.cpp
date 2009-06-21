@@ -25,8 +25,7 @@ CAboutBox::OnCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	TCHAR* hyperlink;
 	switch (LOWORD(wParam)) {
-		case IDC_HOMEPAGE: hyperlink = _T("http://xrefresh.com"); break;
-		case IDC_PEOPLE: hyperlink = _T("http://xrefresh.com/about"); break;
+		case IDC_HOMEPAGE: hyperlink = _T("http://xrefresh.binaryage.com"); break;
 		case IDC_AUTHOR: hyperlink = _T("mailto:antonin@hildebrand.cz"); break;
 		default: return S_OK;
 	}
@@ -53,15 +52,10 @@ CAboutBox::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	m_Version.SetWindowText(version);
 	m_Version.Invalidate();
 
-	m_Homepage.SetLabel(_T("http://xrefresh.com"));
+	m_Homepage.SetLabel(_T("http://xrefresh.binaryage.com"));
 	m_Homepage.SetHyperLinkExtendedStyle(HLINK_COMMANDBUTTON);
 	m_Homepage.SetToolTipText(_T("Visit XRefresh homepage"));
 	m_Homepage.SubclassWindow(GetDlgItem(IDC_HOMEPAGE));
-
-	m_About.SetLabel(_T("http://xrefresh.com/about"));
-	m_About.SetHyperLinkExtendedStyle(HLINK_COMMANDBUTTON);
-	m_About.SetToolTipText(_T("See XRefresh contributors"));
-	m_About.SubclassWindow(GetDlgItem(IDC_PEOPLE));
 
 	m_Author.SetLabel(_T("Antonin Hildebrand"));
 	m_Author.SetHyperLinkExtendedStyle(HLINK_COMMANDBUTTON);

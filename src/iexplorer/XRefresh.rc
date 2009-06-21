@@ -83,13 +83,11 @@ BEGIN
     CONTROL         208,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,283,40
     DEFPUSHBUTTON   "OK",IDOK,232,84,50,14
     CONTROL         "0.1.2003",IDC_VERSION,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,119,5,30,8
-    LTEXT           "http://xrefresh.com",IDC_HOMEPAGE,56,58,187,8
-    LTEXT           "Homepage:",IDC_HOMEPAGE_LABEL,9,58,38,8
-    LTEXT           "Contributors:",IDC_CONTRIB_LABEL,9,67,44,8
-    LTEXT           "http://xrefresh.com/about",IDC_PEOPLE,56,67,187,8
+    LTEXT           "http://xrefresh.binaryage.com",IDC_HOMEPAGE,56,62,187,8
+    LTEXT           "Homepage:",IDC_HOMEPAGE_LABEL,9,62,38,8
     LTEXT           "XRefresh can refresh Internet Explorer when you modify and save source code.",IDC_STATIC,9,45,267,8
     LTEXT           "This program is open source software.",IDC_STATIC,9,81,124,8
-    LTEXT           "Copyright © 2007-2008",IDC_STATIC,10,89,78,8
+    LTEXT           "Copyright © 2007-2009",IDC_STATIC,10,89,78,8
     LTEXT           "Antonin Hildebrand",IDC_AUTHOR,91,89,62,8
 END
 
