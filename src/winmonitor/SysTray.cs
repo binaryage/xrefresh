@@ -27,7 +27,7 @@ namespace Abhinaba.SysTray
 			m_notifyIcon.Icon = icon; // icon in the tray
 			m_DefaultIcon = icon;
 			m_notifyIcon.ContextMenu = menu; // context menu
-			m_font = new Font("Helvetica", 8);
+			m_font = new Font(FontFamily.GenericSansSerif, 8);
 
 			m_timer = new System.Timers.Timer();
 			m_timer.Interval = 100;
