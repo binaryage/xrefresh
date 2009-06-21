@@ -19,6 +19,7 @@ CToolWindow::TryToIntegrate(HWND hWnd)
 	if (!finder.m_hWnd) return false;
 	SubclassWindow(finder.m_hWnd);
 
+	if (!::IsWindow(this->m_hWnd)) return true; // HACK
 	CImageList il = GetImageList();
 	m_IconBase = il.GetImageCount();
 	il.AddIcon(LoadIcon(GetBaseModule().GetModuleInstance(), MAKEINTRESOURCE(IDI_XREFRESHA))); 

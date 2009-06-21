@@ -8,6 +8,8 @@
 #error "_UNICODE required"
 #endif
 
+#define MESSAGE_SEPARATOR "---XREFRESH-MESSAGE---"
+
 // helpers
 CString UnpackValue(Json::Value& v)
 {
@@ -51,13 +53,20 @@ CConnection::OnDataReceived(const LPBYTE lpBuffer, DWORD dwCount)
 	// break incomming message into lines
 	// try to parse them as JSON line by line (with buffer accumulation)
 	DWORD pos = 0; 
+	DWORD cnt = 0;
 	while (pos<dwCount)
 	{
 		// detect next line
 		LPCBYTE p = lpBuffer+pos;
-		while (*p!='\n' && p-lpBuffer<dwCount-1) p++;
-		p++;
-		DWORD cnt = p-lpBuffer-pos;
+		LPBYTE x = (LPBYTE)strstr((const char*)p, MESSAGE_SEPARATOR);
+		if (!x) 
+		{
+			cnt = dwCount - pos;			
+			memcpy(m_Buffer + m_BufferPos, lpBuffer + pos, cnt);
+			m_BufferPos += cnt;
+			break;
+		}
+		cnt = x-p;
 		
 		// copy line into working buffer
 		if (m_BufferPos+cnt+1>=CONNECTION_BUFFER_SIZE)
@@ -66,9 +75,9 @@ CConnection::OnDataReceived(const LPBYTE lpBuffer, DWORD dwCount)
 			m_BufferPos = 0;
 			continue;
 		}
-		memcpy(m_Buffer + m_BufferPos, lpBuffer+pos, cnt);
+		memcpy(m_Buffer + m_BufferPos, lpBuffer + pos, cnt);
 		m_BufferPos += cnt;
-		pos += cnt;
+		pos += cnt + strlen(MESSAGE_SEPARATOR);
 
 		// try to parse JSON
 		Json::Value msg;
@@ -76,9 +85,11 @@ CConnection::OnDataReceived(const LPBYTE lpBuffer, DWORD dwCount)
 		bool res = reader.parse(m_Buffer, m_Buffer+m_BufferPos, msg, false);
 		if (!res)
 		{
-			// we have only partial message ? store data and wait for next chunk ...
+			m_Parent->Log(_T("Unable to parse message"), ICON_ERROR);
+			m_BufferPos = 0;
 			continue;
 		}
+
 		// valid JSON means we have whole message
 		m_Parent->ProcessMessage(msg);
 		m_BufferPos = 0;
@@ -263,7 +274,7 @@ CConnectionManager::Send(Json::Value& msg)
 	if (!m_Connection.IsOpen()) return;
 
 	Json::FastWriter writer;
-	string data = writer.write(msg)+"\n";
+	string data = writer.write(msg)+MESSAGE_SEPARATOR;
 	if (!m_Connection.WriteComm((LPBYTE)data.c_str(), data.size(), 1000))
 	{
 		TRACE_E(_T("unable to send message"));

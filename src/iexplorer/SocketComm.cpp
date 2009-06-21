@@ -935,7 +935,7 @@ void CSocketComm::Run()
 	if (!IsSmartAddressing())
 	{
 		lpData = stMsgProxy.data;
-		dwSize = sizeof(stMsgProxy.data);
+		dwSize = sizeof(stMsgProxy.data) - 1;
 	}
 
 	// Should we run as server mode
@@ -990,6 +990,7 @@ void CSocketComm::Run()
 				OnEvent( EVT_ZEROLENGTH );
 			else if (dwBytes > 0L)
 			{
+				lpData[dwBytes] = 0; 
 				OnDataReceived( lpData, dwBytes);
 			}
 			Sleep(0);
