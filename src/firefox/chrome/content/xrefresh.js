@@ -830,7 +830,7 @@ FBL.ns(function() {
                 Firebug.XRefresh.storePageOffset(context);
                 var browser = context.browser;
                 var url = context.window.document.location;
-                browser.loadURIWithFlags(url, browser.webNavigation.LOAD_FLAGS_FROM_EXTERNAL);
+                browser.loadURIWithFlags(url, browser.webNavigation.LOAD_IS_REFRESH|browser.webNavigation.LOAD_FLAGS_BYPASS_CACHE|browser.webNavigation.LOAD_FLAGS_BYPASS_PROXY);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateStyleSheet: function(document, element, content) {
