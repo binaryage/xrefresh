@@ -245,6 +245,7 @@ FBL.ns(function() {
         //
         module = Firebug.XRefresh = extend(Firebug.ActivableModule, {
             events: [],
+            offsets: {},
             /////////////////////////////////////////////////////////////////////////////////////////
             checkFirebugVersion: function() {
                 var version = Firebug.getVersion();
@@ -434,6 +435,7 @@ FBL.ns(function() {
                 dbg(">> XRefresh.loadedContext: " + context.window.document.URL);
                 Firebug.ActivableModule.loadedContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
+                this.restorePageOffset(context);
                 this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -618,13 +620,25 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             storePageOffset: function(context) {
-                dbg("Storing offsets for " + context.window.document.URL);
-                // recorder.offsets = [context.window.pageXOffset, context.window.pageYOffset];
+                dbg(">> XRefresh.storePageOffset", arguments);
+                if (context.browser.webProgress.isLoadingDocument) {
+                    dbg("   ! document is still being loaded, skipping ...");
+                    return;
+                }
+                var key = context.window.document.URL;
+                var win = context.window;
+                this.offsets[key] = [win.pageXOffset, win.pageYOffset];
+                dbg("  -> stored: "+this.offsets[key][0]+'x'+this.offsets[key][1]);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             restorePageOffset: function(context) {
-                dbg("Restoring offsets for " + context.window.document.URL);
-                // context.window.scrollTo(data[0], data[1]);
+                dbg(">> XRefresh.restorePageOffset", arguments);
+                var key = context.window.document.URL;
+                var data = this.offsets[key];
+                if (!data) return;
+                var win = context.window;
+                win.scrollTo(data[0], data[1]);
+                dbg("  -> scroll to:" + data[0] + 'x' + data[1]);
             }
         });
 
