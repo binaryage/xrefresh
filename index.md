@@ -146,7 +146,7 @@ You may also specify path to config file via --config parameter.
 ## History
 
 * **v1.0.2** (26.06.2009)
-  * [[darwin][darwin]] Firefox: refresh correctly bypass cache
+  * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
   * [[darwin][darwin]] Firefox: document scroll position is restored after refresh
 
 * **v1.0.1** (21.06.2009)
