@@ -4,7 +4,7 @@ layout: wikistyle
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
 download: http://xrefresh.googlecode.com/files/xrefresh-1.0.1.msi
-version: Version 1.0.1
+version: Version 1.0.2
 ---
 
 # XRefresh can refresh browser as you modify source files
@@ -144,6 +144,10 @@ You may also specify path to config file via --config parameter.
   * I've used great [Silk icons by Mark James][silk]
 
 ## History
+
+* **v1.0.2** (26.06.2009)
+  * [[darwin][darwin]] Firefox: refresh correctly bypass cache
+  * [[darwin][darwin]] Firefox: document scroll position is restored after refresh
 
 * **v1.0.1** (21.06.2009)
   * [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
