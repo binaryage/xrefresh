@@ -1,6 +1,7 @@
 // Global
 pref("extensions.firebug.xrefresh.localOnly", true);
 pref("extensions.firebug.xrefresh.softRefresh", false);
+pref("extensions.firebug.xrefresh.softRefreshJS", false);
 
 // Connection
 pref("extensions.firebug.xrefresh.port", 41258);

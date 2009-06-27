@@ -47,16 +47,22 @@
     color: #000000;
 }
 
-.refresh > .blinkTitle, .softRefresh  > .blinkTitle {
+.refresh > .blinkTitle, 
+.softRefresh  > .blinkTitle, 
+.softRefreshJS > .blinkTitle {
     font-weight: bold;
 }
 
-.refresh > .blinkTitle:hover, .softRefresh > .blinkTitle:hover {
+.refresh > .blinkTitle:hover, 
+.softRefresh > .blinkTitle:hover, 
+.softRefreshJS > .blinkTitle:hover {
     color: blue;
     text-decoration: none !important;
 }
 
-.refresh > .blinkTitle:hover > .blinkURI, .softRefresh > .blinkTitle:hover > .blinkURI {
+.refresh > .blinkTitle:hover > .blinkURI, 
+.softRefresh > .blinkTitle:hover > .blinkURI,  
+.softRefreshJS > .blinkTitle:hover > .blinkURI {
     text-decoration: underline !important;
 }
 
@@ -100,6 +106,12 @@
 
 .logRow-blink > .blinkHead.softRefresh > .blinkTitle > .blinkIcon {
     background-image: url(soft_refresh.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.logRow-blink > .blinkHead.softRefreshJS > .blinkTitle > .blinkIcon {
+    background-image: url(soft_refresh_js.png);
     background-repeat: no-repeat;
     background-position: right;
 }

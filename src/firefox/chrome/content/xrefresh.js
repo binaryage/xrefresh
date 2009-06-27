@@ -527,12 +527,14 @@ FBL.ns(function() {
 
                                 return;
                             }
+                        }
                             
+                        if (this.getPref("softRefreshJS")) {
                             var jsFiles = this.getMessageJSFiles(message);
                             if (jsFiles.length == message.files.length) {
                                 // message contains only JS files
                                 TabWatcher.iterateContexts(function(context) {
-                                    module.showEvent(context, message, 'softRefresh');
+                                    module.showEvent(context, message, 'softRefreshJS');
                                     var panel = context.getPanel(module.panelName);
                                     panel.updateJS(context, jsFiles, message.contents); // perform soft refresh
                                 });
