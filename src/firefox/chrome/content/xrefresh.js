@@ -911,7 +911,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             doesCSSNameMatch: function(cssLink, cssFile) {
-                cssFile = cssFile.replace('\\', '/'); // convert windows backslashes to forward slashes
+                cssFile = cssFile.replace(/\\/g, '/'); // convert windows backslashes to forward slashes
                 var firstQ = cssLink.indexOf('?');
                 if (firstQ != -1) cssLink = cssLink.substring(0, firstQ);
                 var lastLinkSlash = cssLink.lastIndexOf('/');
