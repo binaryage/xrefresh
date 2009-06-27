@@ -528,7 +528,6 @@ FBL.ns(function() {
                                 return;
                             }
                         }
-                            
                         if (this.getPref("softRefreshJS")) {
                             var jsFiles = this.getMessageJSFiles(message);
                             if (jsFiles.length == message.files.length) {
@@ -1043,7 +1042,8 @@ FBL.ns(function() {
             getOptionsMenuItems: function() {
                 dbg(">> XRefreshPanel.getOptionsMenuItems", arguments);
                 return [
-                    optionMenu("Use Soft Refresh (if possible)", "softRefresh"),
+                    optionMenu("Use Soft Refresh for CSS", "softRefresh"),
+                    optionMenu("Use Soft Refresh for JS", "softRefreshJS"),
                     '-',
                     {
                         label: "Visit XRefresh Website...",
