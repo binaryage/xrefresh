@@ -483,6 +483,20 @@ FBL.ns(function() {
                 return files;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            getMessageJSFiles: function(message) {
+                var files = [];
+                var re = /\.js$/;
+                for (var i = 0; i < message.files.length; i++) {
+                    var file = message.files[i];
+                    if (file.action == 'changed') {
+                        if (file.path1.match(re)) {
+                            files.push(file.path1);
+                        }
+                    }
+                }
+                return files;
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             checkServerCompatibility: function() {
                 var version = server.version.split('.');
                 for (var i=0; i < version.length; i++) {
@@ -509,6 +523,18 @@ FBL.ns(function() {
                                     module.showEvent(context, message, 'softRefresh');
                                     var panel = context.getPanel(module.panelName);
                                     panel.updateCSS(context, cssFiles, message.contents); // perform soft refresh
+                                });
+
+                                return;
+                            }
+                            
+                            var jsFiles = this.getMessageJSFiles(message);
+                            if (jsFiles.length == message.files.length) {
+                                // message contains only JS files
+                                TabWatcher.iterateContexts(function(context) {
+                                    module.showEvent(context, message, 'softRefresh');
+                                    var panel = context.getPanel(module.panelName);
+                                    panel.updateJS(context, jsFiles, message.contents); // perform soft refresh
                                 });
 
                                 return;
@@ -861,6 +887,20 @@ FBL.ns(function() {
                 styleElement.originalHref = element.originalHref ? element.originalHref: element.href;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            updateJavaScript: function(document, element, content) {
+                dbg('>> XRefreshPanel.updateJavaScript', [element, content]);
+                var styleElement = document.createElement("script");
+                styleElement.setAttribute("type", "text/javascript");
+                styleElement.appendChild(document.createTextNode(content));
+                var attrs = ["media", "title", "disabled", "src"];
+                for (var i = 0; i < attrs.length; i++) {
+                    var attr = attrs[i];
+                    if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
+                }
+                element.parentNode.replaceChild(styleElement, element);
+                dbg('>> XRefreshPanel.updateJavaScript: JavaScript Reloaded! ' + element.src);
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             collectDocuments: function(frame) {
                 var documents = [];
                 if (!frame) return documents;
@@ -903,10 +943,47 @@ FBL.ns(function() {
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            replaceMatchingJavaScriptInDocument: function(document, jsFile, contents) {
+                dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument', arguments);
+                var javascriptList = document.getElementsByTagName('script');
+                dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: javascriptList.length = ' + javascriptList.length);
+        
+                for (var i = 0; i < javascriptList.length; i++) {
+                    var javascriptNode = javascriptList[i];
+                    var src = javascriptNode.src;
+                    if (!src) continue;
+                    
+                    // prep test vars
+                    // convert windows slashes to what the rest of the world uses, basename, convert to lowercase
+                    var jsFileTest = jsFile.replace(/\\/g, '/').replace(/.*\//, '').toLowerCase();
+                    // basename, convert to lowercase
+                    var srcTest = src.replace(/.*\//, '').toLowerCase();
+                    
+                    dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: compare: ' + jsFileTest + ' vs ' + srcTest);
+                    // does the script element src attrib match our filename coming in from the change
+                    if (jsFileTest.match(srcTest)) {
+                        var content = contents[jsFile];
+                        if (!contents) {
+                            module.error("Unable to lookup JS file content for file: "+jsFile);
+                            continue;
+                        }
+            dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: Found Match!');
+                        this.updateJavaScript(document, javascriptNode, content);
+                    }
+                }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             replaceMatchingStyleSheets: function(context, cssFile, contents) {
                 var documents = this.collectDocuments(context.window);
                 for (var i = 0; i < documents.length; i++){ 
                     this.replaceMatchingStyleSheetsInDocument(documents[i], cssFile, contents);
+                }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            replaceMatchingJavaScript: function(context, jsFile, contents) {
+                var documents = this.collectDocuments(context.window);
+                for (var i = 0; i < documents.length; i++){ 
+                    this.replaceMatchingJavaScriptInDocument(documents[i], jsFile, contents);
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -915,6 +992,14 @@ FBL.ns(function() {
                 for (var i = 0; i < cssFiles.length; i++) {
                     var cssFile = cssFiles[i];
                     this.replaceMatchingStyleSheets(context, cssFile, contents);
+                }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            updateJS: function(context, jsFiles, contents) {
+                dbg('>> XRefreshPanel.updateJS', jsFiles, contents);
+                for (var i = 0; i < jsFiles.length; i++) {
+                    var jsFile = jsFiles[i];
+                    this.replaceMatchingJavaScript(context, jsFile, contents);
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
