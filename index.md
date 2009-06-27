@@ -124,8 +124,11 @@ You may also specify path to config file via --config parameter.
 #### Why is dual monitor setup great for web development?
 > One display is fully dedicated to your browser window showing page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
 
-#### What is "Soft Refresh" feature?
-> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. I call it "soft refresh"  and it is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. With this feature you can get similar experience like Firebug on-the-fly CSS editing (without the [pain of syncing changes back to original sources](http://code.google.com/p/fbug/issues/detail?id=179)). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example].
+#### What is "Soft Refresh CSS" feature?
+> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. I call it "soft refresh"  and it is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. With this feature you can get similar experience like Firebug on-the-fly CSS editing (without the [pain of syncing changes back to original sources](http://code.google.com/p/fbug/issues/detail?id=179)). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example], you should be able to see soft refresh icons when modifying style.css.
+
+#### What is "Soft Refresh JS" feature?
+> XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, that updated script is just evaluated as-is in the context of main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call jQuery onReady function again. If you don't understand these consequences rather do not enable this feature and go with full refresh. This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example], you should be able to see soft refresh icons when modifying code.js.
 
 #### Is there a file system monitor available for Unix?
 > Michael did some work on [porting it](http://github.com/ycros/xrefresh) over. It is probably not finished, but it should be a piece of cake for hacker like you to make it happen.
@@ -144,6 +147,10 @@ You may also specify path to config file via --config parameter.
   * I've used great [Silk icons by Mark James][silk]
 
 ## History
+
+* **v1.1** (to be released)
+  * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
+  * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue #3](http://github.com/darwin/xrefresh/issues#issue/3))
 
 * **v1.0.2** (26.06.2009)
   * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
@@ -178,6 +185,7 @@ You may also specify path to config file via --config parameter.
 * **v0.5** (12.11.2007)
   * [[darwin][darwin]] internal alpha
 
+[blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
 [download]: http://xrefresh.googlecode.com/files/xrefresh-1.0.msi
