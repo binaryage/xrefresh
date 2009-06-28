@@ -968,7 +968,7 @@ FBL.ns(function() {
                             module.error("Unable to lookup JS file content for file: "+jsFile);
                             continue;
                         }
-            dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: Found Match!');
+                        dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: Found Match!');
                         this.updateJavaScript(document, javascriptNode, content);
                     }
                 }
