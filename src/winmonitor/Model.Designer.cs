@@ -308,7 +308,7 @@ namespace XRefresh {
         private void InitClass() {
             this.DataSetName = "Model";
             this.Prefix = "";
-            this.Namespace = "http://xrefresh.binaryage.com/model.xsd";
+            this.Namespace = "http://xrefresh.com/model.xsd";
             this.Locale = new global::System.Globalization.CultureInfo("");
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.ExcludeSchema;
