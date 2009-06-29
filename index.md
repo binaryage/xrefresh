@@ -3,8 +3,8 @@ title: XRefresh
 layout: wikistyle
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-download: http://xrefresh.googlecode.com/files/xrefresh-1.0.1.msi
-version: Version 1.0.2
+download: http://xrefresh.googlecode.com/files/xrefresh-1.1.msi # one more link is down in the list!
+version: Version 1.1
 ---
 
 # XRefresh can refresh browser as you modify source files
@@ -21,6 +21,8 @@ Typical usage scenario is for local web development on a machine with two monito
 When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refresh a web page for you.
 
 ## XRefresh components
+
+First you have a monitor running which is a classic OS application listening to filesystem events and you also need a browser extensions which performs the refresh when file changes are signaled.
 
 ### XRefresh Monitor for Windows
 * standalone windows traybar application watching for changes in selected folder(s)
@@ -148,9 +150,9 @@ You may also specify path to config file via --config parameter.
 
 ## History
 
-* **v1.1** (to be released)
+* **v1.1** (29.06.2009)
   * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
-  * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue #3](http://github.com/darwin/xrefresh/issues#issue/3))
+  * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
 
 * **v1.0.2** (26.06.2009)
   * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
@@ -188,7 +190,7 @@ You may also specify path to config file via --config parameter.
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
-[download]: http://xrefresh.googlecode.com/files/xrefresh-1.0.msi
+[download]: http://xrefresh.googlecode.com/files/xrefresh-1.1.msi
 [firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
 [firefox]: http://firefox.com
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
