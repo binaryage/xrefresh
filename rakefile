@@ -101,4 +101,5 @@ task :default do
   puts red('need zip on command line (download http://www.info-zip.org/Zip.html)') unless system("zip -r \"#{res}\" *");
   Dir.chdir(owd)
   remove_dir(TMP) if File.exist?(TMP) # recursive!
+  puts "-> #{blue(res)}"
 end
