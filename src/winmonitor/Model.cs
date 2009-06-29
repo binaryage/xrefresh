@@ -381,7 +381,8 @@ namespace XRefresh
 
 				if (Settings.Count == 0)
 				{
-					ActivityLog.Current.AddEventLog(Properties.Resources.Error, "Loaded settings table is empty (" + path + "). Revertig to default settings.");
+                    CreateDefaultSettings();
+                    ActivityLog.Current.AddEventLog(Properties.Resources.Error, "Loaded settings table is empty (" + path + "). Revertig to default settings.");
 				}
 			}
 		}
