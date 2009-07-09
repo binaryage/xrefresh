@@ -3,8 +3,8 @@ title: XRefresh
 layout: wikistyle
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-download: http://xrefresh.googlecode.com/files/xrefresh-1.1.msi # one more link is down in the list!
-version: Version 1.1
+download: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi # one more link is down in the list!
+version: Version 1.2
 ---
 
 # XRefresh can refresh browser as you modify source files
@@ -149,6 +149,10 @@ You may also specify path to config file via --config parameter.
   * I've used great [Silk icons by Mark James][silk]
 
 ## History
+
+* **v1.2** (09.07.2009)
+  * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
+  * [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
 
 * **v1.1** (29.06.2009)
   * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
