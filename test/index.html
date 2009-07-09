@@ -3,9 +3,11 @@
     <head>
         <title>XRefresh Test</title>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="code.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="some/directory/stylesheet_with_relative_urls.css?some=existing&parameters=present">
+        <script id="code" src="code.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
+        <div class="logo"></div>
         <h1>XRefresh Test</h1>
         <button onclick="doAction()">Do Action</button>
     </body>

@@ -874,22 +874,48 @@ FBL.ns(function() {
                 browser.loadURIWithFlags(url, browser.webNavigation.LOAD_IS_REFRESH|browser.webNavigation.LOAD_FLAGS_BYPASS_CACHE|browser.webNavigation.LOAD_FLAGS_BYPASS_PROXY);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
+            // returns new url with added cache busting parameter http://orig.url.com/some/path?xrefresh=1
+            // if xrefresh parameter is already present, returns url with greater number xrefresh=2, xrefresh=3, ...
+            generateNextUrl: function(url) {
+                url = url+"";
+                var re = /(\?|&)xrefresh=(\d+)/;
+                var m = url.match(re);
+                if (!m) { 
+                    if (url.indexOf('?')==-1) {
+                        return url + '?xrefresh=1';
+                    } else {
+                        return url + '&xrefresh=1';
+                    }
+                } else {
+                    return url.replace(re, function(match, separator, version) {
+                        return separator+"xrefresh="+(parseInt(version, 10)+1);
+                    });
+                }
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
             updateStyleSheet: function(document, element, content) {
                 dbg('>> XRefreshPanel.updateStyleSheet', [element, content]);
-                var styleElement = document.createElement("style");
-                styleElement.setAttribute("type", "text/css");
-                styleElement.appendChild(document.createTextNode(content));
-                var attrs = ["media", "title", "disabled"];
-                for (var i = 0; i < attrs.length; i++) {
-                    var attr = attrs[i];
-                    if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
-                }
-                element.parentNode.replaceChild(styleElement, element);
-                styleElement.originalHref = element.originalHref ? element.originalHref: element.href;
+                // note: content is no more needed, we are doing refresh by changing cache busting parameter in the url.
+                //       this is little bit slower, but it has big advantage, because it fetches new file using whole server stack.
+                //       you know sass, less and other CSS preprocessors should work.
+                element.href = this.generateNextUrl(element.href);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateJavaScript: function(document, element, content) {
                 dbg('>> XRefreshPanel.updateJavaScript', [element, content]);
+
+                // !!! cannot do this, src contains file:// style link even if original specification was relative url!
+                // element.src = this.generateNextUrl(element.src);
+
+                // !!! this technique correctly replaces src value, but Firefox does not re-evaluate script
+                // for (var i=0; i < element.attributes.length; i++) {
+                //     var attr = element.attributes[i];
+                //     if (attr.name=='src') {
+                //         attr.value = this.generateNextUrl(attr.value);
+                //     }
+                // }
+
+                // ok, let's do it oldschool way, force evaluation by creating new script node
                 var styleElement = document.createElement("script");
                 styleElement.setAttribute("type", "text/javascript");
                 styleElement.appendChild(document.createTextNode(content));
@@ -899,7 +925,6 @@ FBL.ns(function() {
                     if (element.hasAttribute(attr)) styleElement.setAttribute(attr, element.getAttribute(attr));
                 }
                 element.parentNode.replaceChild(styleElement, element);
-                dbg('>> XRefreshPanel.updateJavaScript: JavaScript Reloaded! ' + element.src);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             collectDocuments: function(frame) {
@@ -920,7 +945,20 @@ FBL.ns(function() {
                 var lastFileSlash = cssFile.lastIndexOf('/');
                 if (lastFileSlash != -1) cssFile = cssFile.substring(lastFileSlash + 1);
                 var res = (cssFile.toLowerCase() == cssLink.toLowerCase());
-                dbg('>> XRefreshPanel.Match ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
+                dbg('>> XRefreshPanel.doesCSSNameMatch ' + cssLink + ' vs. ' + cssFile + ' result:' + (res ? 'true': 'false'));
+                return res;
+            },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            doesJSNameMatch: function(jsLink, jsFile) {
+                jsFile = jsFile.replace(/\\/g, '/'); // convert windows backslashes to forward slashes
+                var firstQ = jsLink.indexOf('?');
+                if (firstQ != -1) jsLink = jsLink.substring(0, firstQ);
+                var lastLinkSlash = jsLink.lastIndexOf('/');
+                if (lastLinkSlash != -1) jsLink = jsLink.substring(lastLinkSlash + 1);
+                var lastFileSlash = jsFile.lastIndexOf('/');
+                if (lastFileSlash != -1) jsFile = jsFile.substring(lastFileSlash + 1);
+                var res = (jsFile.toLowerCase() == jsLink.toLowerCase());
+                dbg('>> XRefreshPanel.doesJSNameMatch ' + jsLink + ' vs. ' + jsFile + ' result:' + (res ? 'true': 'false'));
                 return res;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -931,7 +969,7 @@ FBL.ns(function() {
                     var styleSheetNode = styleSheetList[i].ownerNode;
                     // this may be <style> or <link> node
                     if (!styleSheetNode) continue;
-                    var href = styleSheetNode.href || styleSheetNode.originalHref;
+                    var href = styleSheetNode.href;
                     if (!href) continue;
                     if (this.doesCSSNameMatch(href, cssFile)) {
                         var content = contents[cssFile];
@@ -953,22 +991,13 @@ FBL.ns(function() {
                     var javascriptNode = javascriptList[i];
                     var src = javascriptNode.src;
                     if (!src) continue;
-                    
-                    // prep test vars
-                    // convert windows slashes to what the rest of the world uses, basename, convert to lowercase
-                    var jsFileTest = jsFile.replace(/\\/g, '/').replace(/.*\//, '').toLowerCase();
-                    // basename, convert to lowercase
-                    var srcTest = src.replace(/.*\//, '').toLowerCase();
-                    
-                    dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: compare: ' + jsFileTest + ' vs ' + srcTest);
                     // does the script element src attrib match our filename coming in from the change
-                    if (jsFileTest.match(srcTest)) {
+                    if (this.doesJSNameMatch(src, jsFile)) {
                         var content = contents[jsFile];
                         if (!contents) {
                             module.error("Unable to lookup JS file content for file: "+jsFile);
                             continue;
                         }
-                        dbg('>> XRefreshPanel.replaceMatchingJavaScriptInDocument: Found Match!');
                         this.updateJavaScript(document, javascriptNode, content);
                     }
                 }
