@@ -194,7 +194,7 @@ You may also specify path to config file via --config parameter.
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
-[download]: http://xrefresh.googlecode.com/files/xrefresh-1.1.msi
+[download]: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi
 [firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
 [firefox]: http://firefox.com
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
