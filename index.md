@@ -77,9 +77,10 @@ The icon reflects the connection status. You may click it to open XRefresh Panel
 
 ## Installation on OSX
 
-Install [Firebug 1.4][firebug] and then install [XRefresh Addon][addon].
-
-Execute ``sudo gem install xrefresh-server``.
+  * Install [Firebug 1.4][firebug] 
+  * Install [XRefresh Addon][addon]
+  * Install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
+  * Execute ``sudo gem install xrefresh-server``.
 
 <img class="shadow" src="/images/osx.png">
 
@@ -200,3 +201,4 @@ You may also specify path to config file via --config parameter.
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
 [soft-refresh-example]: http://github.com/darwin/xrefresh/tree/master/test
 [silk]: http://www.famfamfam.com/lab/icons/silk/
+[rubycocoa]: http://rubycocoa.sourceforge.net
