@@ -142,6 +142,9 @@ You may also specify path to config file via --config parameter.
 #### I'm editing files directly on my server via ssh, is it possible to use XRefresh over network?
 > XRefresh monitor communicates with browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable firewall and make sure they see each other. By default browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type ``about:config`` into the URL bar and filter keys by "xrefresh". Keys ``extensions.xrefresh.host`` and ``extensions.xrefresh.localConnectionsOnly`` is what you are looking for.
 
+#### Do you support @import linked css files in Soft Refresh of CSS?
+> No, you have to link all css files directly from root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
+
 ## Articles about XRefresh
 
   * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
