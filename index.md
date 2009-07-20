@@ -20,6 +20,11 @@ Typical usage scenario is for local web development on a machine with two monito
 
 When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refresh a web page for you.
 
+<div>
+<object width="787" height="473"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="787" height="473"></embed></object>
+<div class="video-note">screencast by Sean Schertell, visit <a href="http://zentools.net/">ZenTools homepage</a></div>
+</div>
+
 ## XRefresh components
 
 First you have a monitor running which is a classic OS application listening to filesystem events and you also need a browser extensions which performs the refresh when file changes are signaled.
