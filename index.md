@@ -1,22 +1,53 @@
 ---
 title: XRefresh
-layout: wikistyle
+subtitle: browser refresh automation for web developers
+layout: product
+icon: /shared/img/xrefresh-icon.png
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-download: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi # one more link is down in the list!
-version: Version 1.2
+downloadtitle: Download v1.2
+download: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi
+downloadboxwidth: 230px
+donate: https://addons.mozilla.org/en-US/firefox/addons/contribute/7711?source=addon-detail
+subdownload: 
+subdownloadlink:
+mainshot:
+mainshotfull:
+overlaysx: 880px
+overlaysy: 608px
+overlaycx: 25px
+overlaycy: 10px
+mainright: <object width="470" height="282"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="470" height="282"></embed></object><div class="video-note">screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
+mainrightshift: 70px
 ---
 
-# XRefresh can refresh browser as you modify source files
+<div class="advertisement">
+	<div class="plug">Recommended reading:</div>
+	<a href="http://www.amazon.com/gp/product/0596527330?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527330"><img border="0" src="/shared/img/amazon/41JdIb%2BJlvL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527330" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+	
+	<a href="http://www.amazon.com/gp/product/0596527322?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527322"><img border="0" src="/shared/img/amazon/41SbEZIgguL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527322" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
-<img src="/images/welcome.png" width="540" height="184">
+	<a href="http://www.amazon.com/gp/product/0596527403?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527403"><img border="0" src="/shared/img/amazon/41XPmfu3h8L._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527403" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+	<a href="http://www.amazon.com/gp/product/0596101996?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596101996"><img border="0" src="/shared/img/amazon/41IVmVYhRNL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596101996" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+	
+	<a href="http://www.amazon.com/gp/product/0596528388?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596528388"><img border="0" src="/shared/img/amazon/415pix92XkL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596528388" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+	
+	<div class="offer"><a href="mailto:antonin@binaryage.com">advertise here</a></div>
+</div>
+<script type="text/javascript" src="http://www.assoc-amazon.com/s/link-enhancer?tag=xrefresh-20&o=1">
+</script>
+
+## Features
 
 XRefresh is a browser plugin which will refresh current web page due to file change in selected folders.
 
+<img class="content-image" src="/images/howto.png">
+
 Typical usage scenario is for local web development on a machine with two monitors:
 
-  * Monitor1: browser with current web page being developed
-  * Monitor2: editor/IDE, graphical editor and other tools for source editing
+* Monitor1: browser with current web page being developed
+* Monitor2: editor/IDE, graphical editor and other tools for source editing
 
 When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refresh a web page for you.
 
@@ -25,71 +56,74 @@ When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refr
 <div class="video-note">screencast by Sean Schertell, visit <a href="http://zentools.net/">ZenTools homepage</a></div>
 </div>
 
-## XRefresh components
+### XRefresh components
 
 First you have a monitor running which is a classic OS application listening to filesystem events and you also need a browser extensions which performs the refresh when file changes are signaled.
 
-### XRefresh Monitor for Windows
+#### XRefresh Monitor for Windows
 * standalone windows traybar application watching for changes in selected folder(s)
 * requires .NET Framework 2.0 or higher
 * runs on Windows 2000/2003/XP/Vista (32-bit)
 
-### XRefresh Monitor for OSX
+#### XRefresh Monitor for OSX
 * command-line server application watching for changes in selected folder(s)
 * requires OSX 10.5 (Leopard) or higher
 * requires Ruby and rubygems (this is installed on Leopard by default)
 
-### XRefresh extension for Firefox
+#### XRefresh extension for Firefox
 * browser plugin which listens for monitor requests and performs refresh commands
 * requires [Firefox 3.0 or higher][firefox] + [Firebug 1.4 or higher][firebug]
 * runs on any platform supported by Firefox (tested on Windows and OSX 10.5)
 
-### XRefresh addon for Internet Explorer
+#### XRefresh addon for Internet Explorer
 * browser plugin which listens for monitor requests and performs refresh commands
 * requires [Internet Explorer 6, 7 or 8][ie]
 * runs on Windows 2000/2003/XP/Vista (32-bit)
 
-## Installation on Windows
+## Windows
 
-Install [Firebug 1.4][firebug] and then install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
+* install [Firebug 1.4][firebug] 
+* install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
+* download [windows installer][download] and go through installation process. It will install XRefresh traybar application and IE plugin.
 
-Download latest [windows installer][download] and go through installation process. It will install XRefresh traybar application and IE plugin.
-
-<img src="/images/howto.png">
-
-#### Usage
+### Usage
 
 Launch **XRefresh** and check for it in the traybar.  
 After start the icon is gray and it means that there are no browsers connected to XRefresh.
 
-<img src="/images/tray.png" width="121" height="36">
+<img class="raw-image" src="/images/tray.png" width="121" height="36">
 
 Tell **XRefresh** where are located your files. XRefresh will watch for your modifications.   
 Tip: You can simply drag&drop interesting folders onto configuration dialog.
 
-<img src="/images/config.png" width="479" height="120">
+<img class="raw-image" src="/images/config.png" width="479" height="120">
 
 Let **Firefox** or **Internet Explorer** connect to XRefresh.
 
+#### Firefox 
 XRefresh has it's own tab panel in Firebug window. You need to enable Firebug for particular site to enable XRefresh functionality.
-<a href="/images/ffintro.png"><img src="/images/ffintro.png" width="600"></a>
 
+<a href="/images/ffintro.png"><img class="raw-image" src="/images/ffintro.png" width="600"></a>
+
+#### Interenet Explorer
 In Interenet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
-<img src="/images/ie7toolbar.png" width="306" height="46">
+
+<img class="raw-image" src="/images/ie7toolbar.png" width="306" height="46">
 
 The icon reflects the connection status. You may click it to open XRefresh Panel
-<img src="/images/ie7console.png" width="392" height="136">
 
-## Installation on OSX
+<img class="raw-image" src="/images/ie7console.png" width="392" height="136">
 
-  * Install [Firebug 1.4][firebug] 
-  * Install [XRefresh Addon][addon]
-  * Install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
-  * Execute ``sudo gem install xrefresh-server``.
+## OSX
 
-<img class="shadow" src="/images/osx.png">
+* Install [Firebug 1.4][firebug] 
+* Install [XRefresh Addon][addon]
+* Install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
+* Execute ``sudo gem install xrefresh-server``.
 
-#### Usage
+<img class="shadow" src="/images/osx.png" width="920">
+
+### Usage
 
 After installation xrefresh-server executable should get onto your system path. 
 To start server simply run ``xrefresh-server`` from command-line.
@@ -121,11 +155,11 @@ After first run, default config file will be created in ``~/.xrefresh-server.yml
     defer_time: 0.5 # aggregation time for events
     sleep_time: 0.1 # don't hung cpu in main loop
  
-As you can see, by default monitor watches your home directory excluding all under ~/Library.
+As you can see, by default monitor watches your home directory excluding all under `~/Library`.
 You are encouraged to modify paths section to map to your working project directories.
  
 By default config file is searched first in current directory and then in your home directory.
-You may also specify path to config file via --config parameter.
+You may also specify path to config file via `--config` parameter.
 
 ## FAQ
 
@@ -150,55 +184,57 @@ You may also specify path to config file via --config parameter.
 #### Do you support @import linked css files in Soft Refresh of CSS?
 > No, you have to link all css files directly from root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
 
-## Articles about XRefresh
-
-  * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
-
-## Contributors
-  * I've used great [Silk icons by Mark James][silk]
-
 ## History
 
 * **v1.2** (09.07.2009)
-  * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
-  * [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
+	* [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
+	* [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
 
 * **v1.1** (29.06.2009)
-  * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
-  * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
+	* [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
+	* [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
 
 * **v1.0.2** (26.06.2009)
-  * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
-  * [[darwin][darwin]] Firefox: document scroll position is restored after refresh
+	* [[darwin][darwin]] Firefox: refresh correctly bypasses cache
+	* [[darwin][darwin]] Firefox: document scroll position is restored after refresh
 
 * **v1.0.1** (21.06.2009)
-  * [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
+	* [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
 
 * **v1.0** (21.06.2009)
-  * [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
-  * [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
-  * [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
-  * [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
-  * [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
+	* [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
+	* [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
+	* [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
+	* [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
+	* [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
 
 * **v0.9** (never packaged)
-  * [[darwin][darwin]] OSX monitor ignores events from .git directories
-  * [[darwin][darwin]] XRefresh respects cached resources
-  * [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
+	* [[darwin][darwin]] OSX monitor ignores events from .git directories
+	* [[darwin][darwin]] XRefresh respects cached resources
+	* [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
 
 * **v0.8** (19.07.2008)
-  * [[darwin][darwin]] added OSX support
-  * [[darwin][darwin]] fixed bug in extension networking
-  * [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
+	* [[darwin][darwin]] added OSX support
+	* [[darwin][darwin]] fixed bug in extension networking
+	* [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
 
 * **v0.7** (25.02.2008)
-  * [[darwin][darwin]] "Soft Refresh" feature
+	* [[darwin][darwin]] "Soft Refresh" feature
 
 * **v0.6** (02.01.2008)
-  * [[darwin][darwin]] public release
+	* [[darwin][darwin]] public release
 
 * **v0.5** (12.11.2007)
-  * [[darwin][darwin]] internal alpha
+	* [[darwin][darwin]] internal alpha
+
+## Links
+
+### Articles
+  * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
+
+### Contributors
+  * I've used great [Silk icons by Mark James][silk]
+
 
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
