@@ -128,6 +128,8 @@ The icon reflects the connection status. You may click it to open XRefresh Panel
 After installation xrefresh-server executable should get onto your system path. 
 To start server simply run ``xrefresh-server`` from command-line.
 
+Having problems running it? Maybe RubyCocoa problems some people had on Leopard. Check <a href="http://gist.github.com/158851">http://gist.github.com/158851</a>.
+
 After first run, default config file will be created in ``~/.xrefresh-server.yml``:
 
     # here specify list of paths to monitor
