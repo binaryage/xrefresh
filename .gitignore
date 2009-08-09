@@ -10,3 +10,5 @@ src/winmonitor/obj/
 tmp/
 rel/
 src/iexplorer/XRefresh.aps
+_layouts
+shared
