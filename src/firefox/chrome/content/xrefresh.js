@@ -415,7 +415,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             reattachContext: function(context) {
-                dbg(">> XRefresh.reattachContext: " + context.window.document.URL);
+                dbg(">> XRefresh.reattachContext: " + context.window);
                 Firebug.ActivableModule.reattachContext.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -436,7 +436,7 @@ FBL.ns(function() {
                 Firebug.ActivableModule.loadedContext.apply(this, arguments);
                 if (!this.isEnabled(context)) return;
                 this.restorePageOffset(context);
-                this.sendSetPage(context.browser.contentTitle, context.window.document.URL);
+                server.sendSetPage(context.browser.contentTitle, context.window.document.URL);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             buttonRefresh: function(context) {
