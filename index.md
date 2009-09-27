@@ -22,18 +22,18 @@ mainrightshift: 70px
 ---
 
 <div class="advertisement">
-	<div class="plug">Recommended reading:</div>
-	<a href="http://www.amazon.com/gp/product/0596527330?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527330"><img border="0" src="/shared/img/amazon/41JdIb%2BJlvL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527330" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-	
-	<a href="http://www.amazon.com/gp/product/0596527322?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527322"><img border="0" src="/shared/img/amazon/41SbEZIgguL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527322" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    <div class="plug">Recommended reading:</div>
+    <a href="http://www.amazon.com/gp/product/0596527330?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527330"><img border="0" src="/shared/img/amazon/41JdIb%2BJlvL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527330" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    
+    <a href="http://www.amazon.com/gp/product/0596527322?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527322"><img border="0" src="/shared/img/amazon/41SbEZIgguL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527322" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
-	<a href="http://www.amazon.com/gp/product/0596527403?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527403"><img border="0" src="/shared/img/amazon/41XPmfu3h8L._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527403" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    <a href="http://www.amazon.com/gp/product/0596527403?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527403"><img border="0" src="/shared/img/amazon/41XPmfu3h8L._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527403" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
-	<a href="http://www.amazon.com/gp/product/0596101996?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596101996"><img border="0" src="/shared/img/amazon/41IVmVYhRNL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596101996" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-	
-	<a href="http://www.amazon.com/gp/product/0596528388?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596528388"><img border="0" src="/shared/img/amazon/415pix92XkL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596528388" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-	
-	<div class="offer"><a href="mailto:antonin@binaryage.com">advertise here</a></div>
+    <a href="http://www.amazon.com/gp/product/0596101996?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596101996"><img border="0" src="/shared/img/amazon/41IVmVYhRNL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596101996" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    
+    <a href="http://www.amazon.com/gp/product/0596528388?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596528388"><img border="0" src="/shared/img/amazon/415pix92XkL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596528388" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    
+    <div class="offer"><a href="mailto:antonin@binaryage.com">advertise here</a></div>
 </div>
 <script type="text/javascript" src="http://www.assoc-amazon.com/s/link-enhancer?tag=xrefresh-20&o=1">
 </script>
@@ -189,45 +189,45 @@ You may also specify path to config file via `--config` parameter.
 ## History
 
 * **v1.2** (09.07.2009)
-	* [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
-	* [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
+    * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
+    * [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
 
 * **v1.1** (29.06.2009)
-	* [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
-	* [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
+    * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
+    * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
 
 * **v1.0.2** (26.06.2009)
-	* [[darwin][darwin]] Firefox: refresh correctly bypasses cache
-	* [[darwin][darwin]] Firefox: document scroll position is restored after refresh
+    * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
+    * [[darwin][darwin]] Firefox: document scroll position is restored after refresh
 
 * **v1.0.1** (21.06.2009)
-	* [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
+    * [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
 
 * **v1.0** (21.06.2009)
-	* [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
-	* [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
-	* [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
-	* [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
-	* [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
+    * [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
+    * [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
+    * [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
+    * [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
+    * [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
 
 * **v0.9** (never packaged)
-	* [[darwin][darwin]] OSX monitor ignores events from .git directories
-	* [[darwin][darwin]] XRefresh respects cached resources
-	* [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
+    * [[darwin][darwin]] OSX monitor ignores events from .git directories
+    * [[darwin][darwin]] XRefresh respects cached resources
+    * [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
 
 * **v0.8** (19.07.2008)
-	* [[darwin][darwin]] added OSX support
-	* [[darwin][darwin]] fixed bug in extension networking
-	* [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
+    * [[darwin][darwin]] added OSX support
+    * [[darwin][darwin]] fixed bug in extension networking
+    * [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
 
 * **v0.7** (25.02.2008)
-	* [[darwin][darwin]] "Soft Refresh" feature
+    * [[darwin][darwin]] "Soft Refresh" feature
 
 * **v0.6** (02.01.2008)
-	* [[darwin][darwin]] public release
+    * [[darwin][darwin]] public release
 
 * **v0.5** (12.11.2007)
-	* [[darwin][darwin]] internal alpha
+    * [[darwin][darwin]] internal alpha
 
 ## Links
 
