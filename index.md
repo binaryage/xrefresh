@@ -237,7 +237,6 @@ You may also specify path to config file via `--config` parameter.
 ### Contributors
   * I've used great [Silk icons by Mark James][silk]
 
-
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
