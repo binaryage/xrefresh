@@ -1,5 +1,6 @@
 ---
-title: XRefresh
+title: XRefresh = browser refresh automation for web developers
+product_title: XRefresh
 subtitle: browser refresh automation for web developers
 layout: product
 icon: /shared/img/xrefresh-icon.png
@@ -7,8 +8,6 @@ repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
 downloadtitle: Download v1.2
 download: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi
-downloadboxwidth: 230px
-donate: https://addons.mozilla.org/en-US/firefox/addons/contribute/7711?source=addon-detail
 subdownload: 
 subdownloadlink:
 mainshot:
@@ -19,24 +18,9 @@ overlaycx: 25px
 overlaycy: 10px
 mainright: <object width="470" height="282"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="470" height="282"></embed></object><div class="video-note">screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
 mainrightshift: 70px
+facebook: 1
+retweet: 1
 ---
-
-<div class="advertisement">
-    <div class="plug">Recommended reading:</div>
-    <a href="http://www.amazon.com/gp/product/0596527330?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527330"><img border="0" src="/shared/img/amazon/41JdIb%2BJlvL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527330" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-    
-    <a href="http://www.amazon.com/gp/product/0596527322?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527322"><img border="0" src="/shared/img/amazon/41SbEZIgguL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527322" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a href="http://www.amazon.com/gp/product/0596527403?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596527403"><img border="0" src="/shared/img/amazon/41XPmfu3h8L._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596527403" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-
-    <a href="http://www.amazon.com/gp/product/0596101996?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596101996"><img border="0" src="/shared/img/amazon/41IVmVYhRNL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596101996" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-    
-    <a href="http://www.amazon.com/gp/product/0596528388?ie=UTF8&tag=xrefresh-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=0596528388"><img border="0" src="/shared/img/amazon/415pix92XkL._SL110_.jpg"></a><img src="http://www.assoc-amazon.com/e/ir?t=xrefresh-20&l=as2&o=1&a=0596528388" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-    
-    <div class="offer"><a href="mailto:antonin@binaryage.com">advertise here</a></div>
-</div>
-<script type="text/javascript" src="http://www.assoc-amazon.com/s/link-enhancer?tag=xrefresh-20&o=1">
-</script>
 
 ## Features
 
