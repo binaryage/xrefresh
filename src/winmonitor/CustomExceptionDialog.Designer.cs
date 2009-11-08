@@ -30,6 +30,7 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomExceptionDialog));
             this.panelTop = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelDevider = new System.Windows.Forms.Panel();
             this.labelCaption = new System.Windows.Forms.Label();
@@ -37,8 +38,6 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.buttonNotSend = new System.Windows.Forms.Button();
             this.linkLabelData = new System.Windows.Forms.LinkLabel();
             this.checkBoxRestart = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +45,6 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             // 
             this.panelTop.BackColor = System.Drawing.SystemColors.Window;
             this.panelTop.Controls.Add(this.label2);
-            this.panelTop.Controls.Add(this.label1);
             this.panelTop.Controls.Add(this.labelTitle);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
@@ -54,13 +52,23 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.panelTop.Size = new System.Drawing.Size(402, 63);
             this.panelTop.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 31);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Ooops!";
+            // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(159, 19);
+            this.labelTitle.Location = new System.Drawing.Point(159, 30);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(231, 13);
+            this.labelTitle.Size = new System.Drawing.Size(197, 13);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "XRefresh application has crashed.";
             // 
@@ -79,9 +87,10 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.labelCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCaption.Location = new System.Drawing.Point(13, 80);
             this.labelCaption.Name = "labelCaption";
-            this.labelCaption.Size = new System.Drawing.Size(191, 13);
+            this.labelCaption.Size = new System.Drawing.Size(196, 13);
             this.labelCaption.TabIndex = 3;
-            this.labelCaption.Text = "Please tell us about this problem";
+            this.labelCaption.Text = "Please tell me about this problem";
+            this.labelCaption.Click += new System.EventHandler(this.labelCaption_Click);
             // 
             // labelDescription
             // 
@@ -108,7 +117,7 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.linkLabelData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.linkLabelData.Location = new System.Drawing.Point(13, 162);
             this.linkLabelData.Name = "linkLabelData";
-            this.linkLabelData.Size = new System.Drawing.Size(265, 13);
+            this.linkLabelData.Size = new System.Drawing.Size(271, 13);
             this.linkLabelData.TabIndex = 8;
             this.linkLabelData.TabStop = true;
             this.linkLabelData.Text = "Send me your error report and let me nail that bug down.";
@@ -125,27 +134,7 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.checkBoxRestart.Text = "&Restart XRefresh";
             this.checkBoxRestart.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(196, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "We are still in beta, didn\'t we tell you? ;-)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 31);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Ooops!";
-            // 
-            // UnhandledExDlgForm
+            // CustomExceptionDialog
             // 
             this.AcceptButton = this.buttonNotSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,7 +153,7 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "UnhandledExDlgForm";
+            this.Name = "CustomExceptionDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XRefresh Crash";
             this.TopMost = true;
@@ -187,6 +176,5 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
         internal System.Windows.Forms.CheckBox checkBoxRestart;
         internal System.Windows.Forms.LinkLabel linkLabelData;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
     }
 }

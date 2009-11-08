@@ -15,5 +15,10 @@ namespace Zayko.Dialogs.UnhandledExceptionDlg
 		{
 			buttonNotSend.Focus();
 		}
+
+        private void labelCaption_Click(object sender, EventArgs e)
+        {
+
+        }
 	}
 }
