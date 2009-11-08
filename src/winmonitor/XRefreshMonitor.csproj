@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>JSON\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -101,30 +105,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FlexControl\SeparatorMouseEventArgs.cs" />
-    <Compile Include="JSON\Converters\AspNetAjaxDateTimeConverter.cs" />
-    <Compile Include="JSON\Converters\HtmlColorConverter.cs" />
-    <Compile Include="JSON\Converters\XmlNodeConverter.cs" />
-    <Compile Include="JSON\Identifier.cs" />
-    <Compile Include="JSON\JavaScriptArray.cs" />
-    <Compile Include="JSON\JavaScriptConstructor.cs" />
-    <Compile Include="JSON\JavaScriptConvert.cs" />
-    <Compile Include="JSON\JavaScriptObject.cs" />
-    <Compile Include="JSON\JavaScriptParameters.cs" />
-    <Compile Include="JSON\JavaScriptUtils.cs" />
-    <Compile Include="JSON\JsonConverter.cs" />
-    <Compile Include="JSON\JsonConverterCollection.cs" />
-    <Compile Include="JSON\JsonIgnoreAttribute.cs" />
-    <Compile Include="JSON\JsonReader.cs" />
-    <Compile Include="JSON\JsonReaderException.cs" />
-    <Compile Include="JSON\JsonSerializationException.cs" />
-    <Compile Include="JSON\JsonSerializer.cs" />
-    <Compile Include="JSON\JsonToken.cs" />
-    <Compile Include="JSON\JsonWriter.cs" />
-    <Compile Include="JSON\JsonWriterException.cs" />
-    <Compile Include="JSON\StringBuffer.cs" />
-    <Compile Include="JSON\Utilities\CollectionUtils.cs" />
-    <Compile Include="JSON\Utilities\ReflectionUtils.cs" />
-    <Compile Include="JSON\Utilities\StringUtils.cs" />
     <Compile Include="MozBar\ImageListPanel.cs">
       <SubType>Component</SubType>
     </Compile>

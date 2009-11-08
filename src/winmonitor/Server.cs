@@ -165,8 +165,7 @@ namespace XRefresh
                                     TextReader tr = new StreamReader(root + "\\" + files[i].path1);
                                     string content = tr.ReadToEnd();
                                     tr.Close();
-                                    // HACK: JSON library does not escape keys in dictionary!!! 
-                                    string key = JavaScriptUtils.EscapeJavaScriptString(files[i].path1, '"', false);
+                                    string key = files[i].path1;
                                     contents[key] = content;
                                 }
                             }
@@ -241,49 +240,55 @@ namespace XRefresh
 			// detects any client writing of data on the stream
 			public void OnDataReceived(IAsyncResult asyn)
 			{
-				try
-				{
-					int iRx = 0;
-					// Complete the BeginReceive() asynchronous call by EndReceive() method
-					// which will return the number of characters written to the stream 
-					// by the client
-					iRx = socket.EndReceive(asyn);
-					if (iRx == 0)
-					{
-						// it seems client died
-						parent.RemoveClient(id);
-						return;
-					}
+                try
+                {
+                    int iRx = 0;
+                    // Complete the BeginReceive() asynchronous call by EndReceive() method
+                    // which will return the number of characters written to the stream 
+                    // by the client
+                    iRx = socket.EndReceive(asyn);
+                    if (iRx == 0)
+                    {
+                        // it seems client died
+                        parent.RemoveClient(id);
+                        return;
+                    }
 
-					char[] chars = new char[iRx];
-					System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
-					d.GetChars(dataBuffer, 0, iRx, chars, 0);
-					System.String data = new System.String(chars);
-                    string[] separators = new string[] {XRefresh.Server.SEPARATOR};
+                    char[] chars = new char[iRx];
+                    System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
+                    d.GetChars(dataBuffer, 0, iRx, chars, 0);
+                    System.String data = new System.String(chars);
+                    string[] separators = new string[] { XRefresh.Server.SEPARATOR };
                     string[] messages = data.Split(separators, StringSplitOptions.None);
                     messages[0] = this.reminder + messages[0]; // TODO: this is wrong, reminder should be extracted before decoding (bug case: packet fragmentation in the middle of UTF8 multichar code sequence)
 
                     for (int i = 0; i < messages.Length - 1; i++)
                     {
                         string messageJson = messages[i];
-                        ClientMessage message = (ClientMessage)JavaScriptConvert.DeserializeObject(messageJson, typeof(ClientMessage));
+                        messageJson = messageJson.Replace("\0", ""); // HACK to get rid of \0 bytes
+                        ClientMessage message = JsonConvert.DeserializeObject<ClientMessage>(messageJson);
                         ProcessMessage(message);
                     }
-                    this.reminder = messages[messages.Length-1];
+                    this.reminder = messages[messages.Length - 1];
                     // continue the waiting for data on the Socket
                     WaitForData();
-				}
-				catch (ObjectDisposedException e)
-				{
-					Utils.LogException(GetClientFriendlyName() + " closed socket without notice.", e);
-					parent.RemoveClient(id); // TODO: ?
-				}
-				catch (SocketException e)
-				{
-					// fire exception when browser crashed
-					Utils.LogException(GetClientFriendlyName() + " died without saying goodbye (crashed?)", e);
-					parent.RemoveClient(id); // TODO: ?
-				}
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Utils.LogException(GetClientFriendlyName() + " closed socket without notice.", e);
+                    parent.RemoveClient(id); // TODO: ?
+                }
+                catch (SocketException e)
+                {
+                    // fire exception when browser crashed
+                    Utils.LogException(GetClientFriendlyName() + " died without saying goodbye (crashed?)", e);
+                    parent.RemoveClient(id); // TODO: ?
+                }
+                catch (Exception e)
+                {
+                    Utils.LogException(GetClientFriendlyName() + " thrown exception", e);
+                    parent.RemoveClient(id); // TODO: ?
+                }
 			}
 
 			private bool ProcessMessage(ClientMessage message)
@@ -327,7 +332,7 @@ namespace XRefresh
 			public void SendMessage(ServerMessage message)
 			{
 				// serialize message to JSON
-				char[] data = JavaScriptConvert.SerializeObject(message).ToCharArray();
+                char[] data = JsonConvert.SerializeObject(message).ToCharArray();
 
 				// encode string into UTF-8
 				System.Text.Encoder encoder = System.Text.Encoding.UTF8.GetEncoder();
@@ -337,7 +342,7 @@ namespace XRefresh
 				encoder.GetBytes(data, 0, data.Length, buffer, 0, true);
                 for (int i = 0; i < separator.Length; i++)
                 {
-                    buffer[data.Length + i] = (byte)separator[i];
+                    buffer[bufferSize + i] = (byte)separator[i];
                 }
             
 				// send as UTF-8 string

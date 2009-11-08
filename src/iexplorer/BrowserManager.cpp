@@ -191,7 +191,6 @@ CBrowserManager::IsBrowserThread(DWORD threadId, TBrowserId browserId)
 {
 	CHECK_THREAD_OWNERSHIP;
 	CBrowserMessageWindow* pBrowserMessageWindow = FindBrowserMessageWindow(browserId);
-	ATLASSERT(pBrowserMessageWindow);
 	if (!pBrowserMessageWindow) return false;
 	return pBrowserMessageWindow->GetThreadId()==threadId;
 }

@@ -12,3 +12,5 @@ rel/
 src/iexplorer/XRefresh.aps
 _layouts
 shared
+*.TMP
+*.user
