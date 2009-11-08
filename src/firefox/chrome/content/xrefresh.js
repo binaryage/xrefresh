@@ -247,21 +247,6 @@ FBL.ns(function() {
             events: [],
             offsets: {},
             /////////////////////////////////////////////////////////////////////////////////////////
-            checkFirebugVersion: function() {
-                var version = Firebug.getVersion();
-                if (!version) return false;
-                var a = version.split('.');
-                if (a.length<2) return false;
-                // we want Firebug version 1.4+ (including alphas/betas and other weird stuff)
-                return parseInt(a[0], 10)>=1 && parseInt(a[1], 10)>=4;
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            startupCheck: function() {
-                if (!this.checkFirebugVersion()) {
-                    this.log("XRefresh Firefox extension works only with Firebug 1.4. Please upgrade Firebug to latest version.", "warn");
-                }
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
             initialize: function() {
                 dbg(">> XRefresh.initialize", arguments);
                 this.panelName = 'xrefresh';
@@ -314,9 +299,6 @@ FBL.ns(function() {
                 delete this.scheduledDisconnection;
                 if (this.alreadyActivated) return;
                 this.alreadyActivated = true;
-                setTimeout(function() {
-                    module.startupCheck();
-                }, 1000);
                 setTimeout(function() {
                     module.connect();
                 }, 1500);
