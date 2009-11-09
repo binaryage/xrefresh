@@ -1,2 +1,5 @@
 _site
 rel/
+src/
+tmp/
+bin/

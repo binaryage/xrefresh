@@ -170,6 +170,11 @@ You may also specify path to config file via `--config` parameter.
 #### Do you support @import linked css files in Soft Refresh of CSS?
 > No, you have to link all css files directly from root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
 
+#### I don't see XRefresh panel in IE. What should I try?
+> Delete these keys using RegEdit:
+`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}`
+`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}`
+
 ## History
 
 * **v1.2** (09.07.2009)
