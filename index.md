@@ -179,9 +179,9 @@ Here is a minimal [example page using this technique][soft-refresh-example], you
 ## History
 
 * **v1.3** (09.11.2009)
-    * fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
-    * tested to work under Firebug 1.5 + Firefox 3.6
-    * IE8 compatibility
+    * [[darwin][darwin]] fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
+    * [[darwin][darwin]] tested to work under Firebug 1.5 + Firefox 3.6
+    * [[darwin][darwin]] IE8 compatibility
 
 * **v1.2** (09.07.2009)
     * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
