@@ -135,6 +135,7 @@ All things are installed for Everyone into HKLM, I wasn't able to figure out how
 			  <File Id="XRefresh.exe" Name="XRefresh.exe" DiskId="1" Source="../bin/XRefresh.exe" Vital="yes">
 				  <Shortcut Id="XRefreshEXE" Directory="IDProgramGroup" Name="XRefresh" Advertise="yes" Description="XRefresh Monitor executable" />
 			  </File>
+			  <File Id="Newtonsoft.Json.Net20.dll" Name="Newtonsoft.Json.Net20.dll" DiskId="1" Source="../bin/Newtonsoft.Json.Net20.dll" Vital="yes"/>
 			</Component>
 		</Directory>
 	  </Directory>
