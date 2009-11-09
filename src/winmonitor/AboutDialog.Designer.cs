@@ -33,15 +33,21 @@ namespace XRefresh
             this.labelVersion = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelDevider = new System.Windows.Forms.Panel();
-            this.labelStat1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.linkLabelSite = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
-            this.labelThanks = new System.Windows.Forms.Label();
             this.linkLabelContact = new System.Windows.Forms.LinkLabel();
-            this.labelStat2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -62,9 +68,8 @@ namespace XRefresh
             this.labelVersion.AutoSize = true;
             this.labelVersion.Location = new System.Drawing.Point(172, 9);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(35, 13);
+            this.labelVersion.Size = new System.Drawing.Size(0, 13);
             this.labelVersion.TabIndex = 3;
-            this.labelVersion.Text = "BETA";
             // 
             // pictureBox1
             // 
@@ -84,17 +89,6 @@ namespace XRefresh
             this.panelDevider.Size = new System.Drawing.Size(425, 2);
             this.panelDevider.TabIndex = 1;
             // 
-            // labelStat1
-            // 
-            this.labelStat1.AutoSize = true;
-            this.labelStat1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStat1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.labelStat1.Location = new System.Drawing.Point(12, 82);
-            this.labelStat1.Name = "labelStat1";
-            this.labelStat1.Size = new System.Drawing.Size(342, 14);
-            this.labelStat1.TabIndex = 3;
-            this.labelStat1.Text = "XRefresh has done 1000000 refresh operations so far.";
-            // 
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -111,7 +105,7 @@ namespace XRefresh
             this.linkLabelSite.AutoSize = true;
             this.linkLabelSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.linkLabelSite.LinkColor = System.Drawing.Color.RoyalBlue;
-            this.linkLabelSite.Location = new System.Drawing.Point(84, 157);
+            this.linkLabelSite.Location = new System.Drawing.Point(182, 80);
             this.linkLabelSite.Name = "linkLabelSite";
             this.linkLabelSite.Size = new System.Drawing.Size(147, 13);
             this.linkLabelSite.TabIndex = 8;
@@ -122,21 +116,12 @@ namespace XRefresh
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 157);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.Size = new System.Drawing.Size(172, 13);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Homepage:";
-            // 
-            // labelThanks
-            // 
-            this.labelThanks.AutoSize = true;
-            this.labelThanks.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelThanks.Location = new System.Drawing.Point(254, 123);
-            this.labelThanks.Name = "labelThanks";
-            this.labelThanks.Size = new System.Drawing.Size(159, 13);
-            this.labelThanks.TabIndex = 10;
-            this.labelThanks.Text = "thank you for using this software";
+            this.label4.Text = "Brought to you by BinaryAge:";
             // 
             // linkLabelContact
             // 
@@ -150,17 +135,6 @@ namespace XRefresh
             this.linkLabelContact.TabStop = true;
             this.linkLabelContact.Text = "Antonin Hildebrand";
             this.linkLabelContact.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelContact_LinkClicked);
-            // 
-            // labelStat2
-            // 
-            this.labelStat2.AutoSize = true;
-            this.labelStat2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStat2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.labelStat2.Location = new System.Drawing.Point(12, 99);
-            this.labelStat2.Name = "labelStat2";
-            this.labelStat2.Size = new System.Drawing.Size(344, 14);
-            this.labelStat2.TabIndex = 14;
-            this.labelStat2.Text = "It had saved you approximatelly 1000000 mouse clicks";
             // 
             // label6
             // 
@@ -180,9 +154,92 @@ namespace XRefresh
             this.label7.ForeColor = System.Drawing.Color.DarkGray;
             this.label7.Location = new System.Drawing.Point(12, 201);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(193, 14);
+            this.label7.Size = new System.Drawing.Size(298, 14);
             this.label7.TabIndex = 19;
-            this.label7.Text = "This program is open source software";
+            this.label7.Text = "This program is open source software created in binary age";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 112);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(332, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Made possible using open source donated by these guys:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 129);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(161, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "FlexControl by Michael Chapman";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 142);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(165, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Json.NET by James Newton-King";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(124, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "XPTable by Mathew Hall";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 168);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(129, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "MozBar by Patrik Bohman";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(216, 155);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(127, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Silk Icons by Mark James";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(216, 129);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(197, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "UnhandledExceptionDlg by Vitaly Zayko";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(216, 142);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(113, 13);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "FirefoxDialog by Rafey";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.DarkGray;
+            this.label12.Location = new System.Drawing.Point(216, 168);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "and others ...";
             // 
             // AboutDialog
             // 
@@ -192,15 +249,21 @@ namespace XRefresh
             this.CancelButton = this.buttonOK;
             this.ClientSize = new System.Drawing.Size(425, 234);
             this.ControlBox = false;
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.labelStat2);
             this.Controls.Add(this.linkLabelContact);
-            this.Controls.Add(this.labelThanks);
             this.Controls.Add(this.linkLabelSite);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.labelStat1);
             this.Controls.Add(this.panelDevider);
             this.Controls.Add(this.panelTop);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -224,16 +287,22 @@ namespace XRefresh
 
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Panel panelDevider;
-		private System.Windows.Forms.Label labelStat1;
 		private System.Windows.Forms.Button buttonOK;
 		internal System.Windows.Forms.LinkLabel linkLabelSite;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelThanks;
         internal System.Windows.Forms.LinkLabel linkLabelContact;
-		private System.Windows.Forms.Label labelStat2;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -524,7 +524,6 @@ namespace XRefresh
 						if (!client.muted)
 						{
 							client.SendMessage(message);
-							Context.Current.IncreaseRefreshCounter();
 							somethingSent = true;
 						}
 					}

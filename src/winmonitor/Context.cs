@@ -21,16 +21,8 @@ namespace XRefresh
 		Menu menu;
 		Icon icon = Properties.Resources.XRefreshDisconnected;
 		System.Timers.Timer memTimer = new System.Timers.Timer();
-		System.Timers.Timer counterTimer = new System.Timers.Timer();
 		int mainThreadID = -1;
-		int refreshCounter;
 		SysTray sysTray;
-
-		public int RefreshCounter
-		{
-			get { return refreshCounter; }
-			set { refreshCounter = value; }
-		}
 
 		public static Model Model 
 		{ 
@@ -48,14 +40,10 @@ namespace XRefresh
 			Current = this;
 			Utils.CheckOrGenerateUniqueId();
 
-			refreshCounter = Utils.GetRefreshCounter();
 			mainThreadID = Thread.CurrentThread.GetHashCode();
 
 			memTimer.Interval = 1000; // execute after one second
 			memTimer.Elapsed += new System.Timers.ElapsedEventHandler(memTimer_Elapsed);
-
-			counterTimer.Interval = 5*60*1000; // execute every 5 minutes
-			counterTimer.Elapsed += new System.Timers.ElapsedEventHandler(counterTimer_Elapsed);
 
 			LoadSettings();
 			model.Init();
@@ -95,11 +83,6 @@ namespace XRefresh
 			}
 		}
 
-		void counterTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-		{
-			Utils.SetRefreshCounter(refreshCounter);
-		}
-
 		void memTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			memTimer.Interval = 10000; // 10 seconds
@@ -114,7 +97,6 @@ namespace XRefresh
 		void OnThreadExit(object sender, EventArgs e)
 		{
 			SaveSettings();
-			Utils.SetRefreshCounter(refreshCounter);
 
 			// we must manually tidy up and remove the icon before we exit
 			// otherwise it will be left behind until the user mouses over
@@ -287,11 +269,6 @@ namespace XRefresh
 				}
 			}
 			sysTray.StartAnimation(50, 0);
-		}
-
-		public void IncreaseRefreshCounter()
-		{
-			refreshCounter++;
 		}
 	}
 }

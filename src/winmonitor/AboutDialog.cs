@@ -11,33 +11,6 @@ namespace XRefresh
 		{
 			InitializeComponent();
 			labelVersion.Text += " " + Utils.GetVersionString();
-
-			int counter = Context.Current.RefreshCounter;
-			float hours = ((float)counter) / (60 * 60);
-
-			// i'm not able to format string properly using one format string :-(
-			if (counter == 0)
-			{
-				labelStat1.Text = String.Format("XRefresh has not performed any refresh operation so far.");
-			}
-			else if (counter < 10)
-			{
-				labelStat1.Text = String.Format("XRefresh has performed {0,0} refresh operations so far.", counter);
-			}
-			else
-			{
-				labelStat1.Text = String.Format("XRefresh has performed {0:0,0} refresh operations so far.", counter);
-			}
-			if (hours >= 0.1)
-			{
-				labelStat2.Text = String.Format("That counts for more than {0:0.0} hours of your precious time.", hours);
-				labelThanks.Text = "thank you for using this software";
-			}
-			else
-			{
-				labelStat2.Text = "";
-				labelThanks.Text = "";
-			}
 		}
 
 		private void buttonOK_Click(object sender, EventArgs e)
@@ -58,6 +31,6 @@ namespace XRefresh
 		{
 			string message = "http://xrefresh.binaryage.com";
 			Process.Start(message);
-		 }
+        }
 	}
 }

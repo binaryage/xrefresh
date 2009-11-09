@@ -172,27 +172,6 @@ namespace XRefresh
 			key.SetValue("SettingsPath", path);
 		}
 
-		static public int GetRefreshCounter()
-		{
-			try
-			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(RootKey);
-				return (int)key.GetValue("RefreshCounter");
-			}
-			catch (NullReferenceException)
-			{
-				RegistryKey key = Registry.CurrentUser.CreateSubKey(RootKey);
-				SetRefreshCounter(0);
-				return 0;
-			}
-		}
-
-		static public void SetRefreshCounter(int count)
-		{
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(RootKey);
-			key.SetValue("RefreshCounter", count);
-		}
-
 		static public string GetUniqueId()
 		{
 			try
