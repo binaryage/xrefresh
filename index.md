@@ -6,8 +6,8 @@ layout: product
 icon: /shared/img/xrefresh-icon.png
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-downloadtitle: Download v1.2
-download: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi
+downloadtitle: Download v1.3
+download: http://addons.mozilla.org/en-US/firefox/addon/7711
 subdownload: 
 subdownloadlink:
 mainshot:
@@ -66,9 +66,9 @@ First you have a monitor running which is a classic OS application listening to 
 
 ## Windows
 
-* install [Firebug 1.4][firebug] 
+* install [Firebug 1.4 or higher][firebug] 
 * install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
-* download [windows installer][download] and go through installation process. It will install XRefresh traybar application and IE plugin.
+* download [Windows Monitor][winmonitor] and go through installation process. It will install XRefresh traybar application and IE plugin.
 
 ### Usage
 
@@ -100,7 +100,7 @@ The icon reflects the connection status. You may click it to open XRefresh Panel
 
 ## OSX
 
-* Install [Firebug 1.4][firebug] 
+* Install [Firebug 1.4 or higher][firebug] 
 * Install [XRefresh Addon][addon]
 * Install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
 * Execute ``sudo gem install xrefresh-server``.
@@ -177,6 +177,11 @@ You may also specify path to config file via `--config` parameter.
 
 ## History
 
+* **v1.3** (09.11.2009)
+    * fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
+    * tested to work under Firebug 1.5 + Firefox 3.6
+    * IE8 compatibility
+
 * **v1.2** (09.07.2009)
     * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
     * [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
@@ -226,10 +231,10 @@ You may also specify path to config file via `--config` parameter.
 ### Contributors
   * I've used great [Silk icons by Mark James][silk]
 
+[winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.3.msi
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
-[download]: http://xrefresh.googlecode.com/files/xrefresh-1.2.msi
 [firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
 [firefox]: http://firefox.com
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
