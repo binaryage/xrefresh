@@ -22,47 +22,22 @@ facebook: 1
 retweet: 1
 ---
 
-## Features
-
-XRefresh is a browser plugin which will refresh current web page due to file change in selected folders.
-
-<img class="content-image" src="/images/howto.png">
-
-Typical usage scenario is for local web development on a machine with two monitors:
-
-* Monitor1: browser with current web page being developed
-* Monitor2: editor/IDE, graphical editor and other tools for source editing
-
-When you hit CTRL+S (or whatever key for save), XRefresh will detect it and refresh a web page for you.
-
-<div>
-<object width="787" height="473"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="787" height="473"></embed></object>
-<div class="video-note">screencast by Sean Schertell, visit <a href="http://zentools.net/">ZenTools homepage</a></div>
+<div class="more-box more-box-align">
+    <div class="tf-ad-1">Already happy XRefresh user?</div>
+    <div class="tf-ad-2">Maybe you can do some javascript magic?</div>
+    <div class="tf-ad-3">Check out <img src="http://firequery.binaryage.com/shared/img/firequery-icon.png" style="margin-right: 3px; top:3px;" width="16"><a href="http://firequery.binaryage.com">FireQuery</a></div>
 </div>
 
-### XRefresh components
+## Features
 
-First you have a monitor running which is a classic OS application listening to filesystem events and you also need a browser extensions which performs the refresh when file changes are signaled.
+<img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px">
 
-#### XRefresh Monitor for Windows
-* standalone windows traybar application watching for changes in selected folder(s)
-* requires .NET Framework 2.0 or higher
-* runs on Windows 2000/2003/XP/Vista (32-bit)
+XRefresh is a browser plugin which will refresh current web page due to file change in selected folders. This makes it possible to do live page editing with your favorite HTML/CSS editor.
 
-#### XRefresh Monitor for OSX
-* command-line server application watching for changes in selected folder(s)
-* requires OSX 10.5 (Leopard) or higher
-* requires Ruby and rubygems (this is installed on Leopard by default)
+Typical usage scenario is for local web development on a machine with two monitors. The first monitor is for source code editor and the second one is fully dedicated to previewing web page in Firefox. Thanks to XRefresh, page in Firefox is automatically updated with saved changes into source files (html, css, js, images). XRefresh also provides advanced feature "Soft Refresh" which enables you to modify CSS files on-the-fly without full refresh. With this feature you can get similar experience like live editing of CSS in Firebug (without the pain of syncing changes back to your sources).
 
-#### XRefresh extension for Firefox
-* browser plugin which listens for monitor requests and performs refresh commands
-* requires [Firefox 3.0 or higher][firefox] + [Firebug 1.4 or higher][firebug]
-* runs on any platform supported by Firefox (tested on Windows and OSX 10.5)
+<p style="clear:both"></p>
 
-#### XRefresh addon for Internet Explorer
-* browser plugin which listens for monitor requests and performs refresh commands
-* requires [Internet Explorer 6, 7 or 8][ie]
-* runs on Windows 2000/2003/XP/Vista (32-bit)
 
 ## Windows
 
@@ -100,48 +75,21 @@ The icon reflects the connection status. You may click it to open XRefresh Panel
 
 ## OSX
 
-* Install [Firebug 1.4 or higher][firebug] 
-* Install [XRefresh Addon][addon]
-* Install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
-* Execute ``sudo gem install xrefresh-server``.
+* install [Firebug 1.4 or higher][firebug] 
+* install [XRefresh Addon][addon]
+* install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
+* execute `sudo gem install xrefresh-server --source http://gemcutter.org`.
 
 <img class="shadow" src="/images/osx.png" width="920">
 
 ### Usage
 
 After installation xrefresh-server executable should get onto your system path. 
-To start server simply run ``xrefresh-server`` from command-line.
+To start server simply run `xrefresh-server` from command-line.
 
 Having problems running it? Maybe RubyCocoa problems some people had on Leopard. Check <a href="http://gist.github.com/158851">http://gist.github.com/158851</a>.
 
-After first run, default config file will be created in ``~/.xrefresh-server.yml``:
-
-    # here specify list of paths to monitor
-    paths:
-      - /Users/<your-user-name> # by default watch user's home directory
-    # - /you/may/add/here/some/other/path
-    # - /you/may/add/here/some/another/path
-
-    # you can various filters (ruby regexp pattern)
-    # every file is split to dir and file part (for example /Users/mick/proj/coolapp and some_file.rb)
-    #   both include filters must be satisfied
-    #   both exclude filters must not be satisfied
-    # empty value means "apply no filtering"
-    dir_include:
-    dir_exclude: ^/Users/<your-user-name>/Library|/\.(svn|framework|app|pbproj|pbxproj|xcode(proj)?|bundle)/
-    file_include:
-    file_exclude: ^(CVS|SCCS|vssver.?.scc|\.(cvsignore|svn|DS_Store)|_svn|Thumbs\.db)$|~$|^(\.(?!htaccess)[^/]*|\.(tmproj|o|pyc)|svn-commit(\.[2-9])?\.tmp)$ # merged TextMate and Netbeans patterns
-
-    # xpert settings
-    host: 127.0.0.1
-    port: 41258 # known port for clients to connect 
-    max_connections: 4 # max client connections
-    debug: false # run in debug mode?
-    audit: false # audit server activity
-    defer_time: 0.5 # aggregation time for events
-    sleep_time: 0.1 # don't hung cpu in main loop
- 
-As you can see, by default monitor watches your home directory excluding all under `~/Library`.
+After first run, default config file will be created in `~/.xrefresh-server.yml`:
 You are encouraged to modify paths section to map to your working project directories.
  
 By default config file is searched first in current directory and then in your home directory.
@@ -166,7 +114,7 @@ Here is a minimal [example page using this technique][soft-refresh-example], you
 > No plans, I'm happy with Firefox. Support for IE will be dropped in the future. I hate brain-dead IE extension model.
 
 #### I'm editing files directly on my server via ssh, is it possible to use XRefresh over network?
-> XRefresh monitor communicates with browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable firewall and make sure they see each other. By default browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type ``about:config`` into the URL bar and filter keys by "xrefresh". Keys ``extensions.xrefresh.host`` and ``extensions.xrefresh.localConnectionsOnly`` is what you are looking for.
+> XRefresh monitor communicates with browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable firewall and make sure they see each other. By default browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type `about:config` into the URL bar and filter keys by "xrefresh". Keys `extensions.xrefresh.host` and `extensions.xrefresh.localConnectionsOnly` is what you are looking for.
 
 #### Do you support @import linked css files in Soft Refresh of CSS?
 > No, you have to link all css files directly from root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
@@ -226,11 +174,23 @@ Here is a minimal [example page using this technique][soft-refresh-example], you
 
 ## Links
 
-### Articles
+### Articles and Reviews
   * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
+  * [Automated Browser Refresher For Developing Easier: XRefresh](http://www.webresourcesdepot.com/automated-browser-refresher-for-developing-easier-xrefresh/) by **Web Resources Depot**
+  * [Browser Refresh Automation (XRefresh)](http://brenelz.com/2009/06/19/browser-refresh-automation-xrefresh/) by **Brenley Dueck**
 
-### Contributors
-  * I've used great [Silk icons by Mark James][silk]
+### Software used
+
+  * Great [Silk icons][silk] by **Mark James**
+  * FlexControl by **Michael Chapman**
+  * [Json.NET](http://james.newtonking.com/projects/json-net.aspx) by **James Newton-King**
+  * [XPTable](http://www.codeproject.com/KB/list/XPTable.aspx) by **Mathew Hall**
+  * [MozBar](http://www.codeproject.com/KB/menus/MozBar.aspx) by **Patrik Bohman**
+  * [UnhandledExceptionDlg](http://www.codeproject.com/KB/exception/UnhandledExceptionClass.aspx) by **Vitaly Zayko**
+  * [FirefoxDialog](http://www.codeproject.com/KB/miscctrl/ControlFirefoxDialog.aspx?msg=1856449) by **Rafey**
+  * [RubyCocoa](http://rubycocoa.sourceforge.net) by **RubyCocoa Team**
+
+Thanks guys!
 
 [winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.3.msi
 [blackout]: http://github.com/blackout
