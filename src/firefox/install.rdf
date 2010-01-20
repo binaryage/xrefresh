@@ -18,7 +18,7 @@
           <Description>
             <em:id>firebug@software.joehewitt.com</em:id>
             <em:minVersion>1.4</em:minVersion>
-            <em:maxVersion>1.5</em:maxVersion>
+            <em:maxVersion>1.6</em:maxVersion>
           </Description>
         </em:requires>
         <em:name>XRefresh</em:name>
