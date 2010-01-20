@@ -37,19 +37,6 @@ FBL.ns(function() {
             if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.sysout.apply(this, arguments);
         }
 
-        var optionMenu = function(label, option) {
-            return {
-                label: label, 
-                nol10n: true,
-                type: "checkbox", 
-                checked: Firebug.XRefresh.getPref(option), 
-                option: option,
-                command: function() {
-                    Firebug.XRefresh.setPref(option, !Firebug.XRefresh.getPref(option)); // toggle
-                }
-            };
-        };
-        
         // shortcuts (available in this closure):
         var module;   // <-- here will be stored Firebug.XRefresh singleton (extension module)
         var server;   // <-- here will be stored Firebug.XRefreshServer singleton
@@ -71,18 +58,18 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             connect: function() {
                 dbg(">> XRefreshServer.connect", arguments);
-
+        
                 this.releaseStreams();
                 this.data = '';
                 
                 var transportService = socketTransportService.getService(Ci.nsISocketTransportService);
                 this.transport = transportService.createTransport(null, 0, module.getPref("host"), module.getPref("port"), null);
                 this.outStream = this.transport.openOutputStream(0, 0, 0);
-
+        
                 var stream = this.transport.openInputStream(0, 0, 0);
                 this.inStream = inputStream.createInstance(Ci.nsIScriptableInputStream);
                 this.inStream.init(stream);
-
+        
                 var that = this;
                 var listener = {
                     onStartRequest: function(request, context) {
@@ -95,11 +82,11 @@ FBL.ns(function() {
                         that.onDataAvailable();
                     }
                 };
-
+        
                 this.pump = inputStreamPump.createInstance(Ci.nsIInputStreamPump);
                 this.pump.init(stream, -1, -1, 0, 0, false);
                 this.pump.asyncRead(listener, null);
-
+        
                 this.sendHello();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
@@ -259,16 +246,6 @@ FBL.ns(function() {
                 Firebug.ActivableModule.shutdown.apply(this, arguments);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
-            onPanelEnable: function(context, panelName) {
-                if (panelName != this.panelName) return;
-                dbg(">> XRefresh.onPanelEnable", arguments);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
-            onPanelDisable: function(context, panelName) {
-                if (panelName != this.panelName) return;
-                dbg(">> XRefresh.onPanelDisable", arguments);
-            },
-            /////////////////////////////////////////////////////////////////////////////////////////
             onEnabled: function(context) {
                 dbg(">> XRefresh.onEnabled", arguments);
                 module.start();
@@ -370,7 +347,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getPref: function(name) {
-                var prefName = this.getPrefDomain() + "." + name;
+                var prefName = this.getPrefDomain().toLowerCase() + "." + name;
                 var type = xrefreshPrefs.getPrefType(prefName);
                 if (type == nsIPrefBranch.PREF_STRING)
                 return xrefreshPrefs.getCharPref(prefName);
@@ -381,7 +358,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             setPref: function(name, value) {
-                var prefName = this.getPrefDomain() + "." + name;
+                var prefName = this.getPrefDomain().toLowerCase() + "." + name;
                 var type = xrefreshPrefs.getPrefType(prefName);
                 if (type == nsIPrefBranch.PREF_STRING)
                 xrefreshPrefs.setCharPref(prefName, value);
@@ -885,10 +862,10 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             updateJavaScript: function(document, element, content) {
                 dbg('>> XRefreshPanel.updateJavaScript', [element, content]);
-
+        
                 // !!! cannot do this, src contains file:// style link even if original specification was relative url!
                 // element.src = this.generateNextUrl(element.src);
-
+        
                 // !!! this technique correctly replaces src value, but Firefox does not re-evaluate script
                 // for (var i=0; i < element.attributes.length; i++) {
                 //     var attr = element.attributes[i];
@@ -896,7 +873,7 @@ FBL.ns(function() {
                 //         attr.value = this.generateNextUrl(attr.value);
                 //     }
                 // }
-
+        
                 // ok, let's do it oldschool way, force evaluation by creating new script node
                 var styleElement = document.createElement("script");
                 styleElement.setAttribute("type", "text/javascript");
@@ -1051,6 +1028,19 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             getOptionsMenuItems: function() {
+                var optionMenu = function(label, option) {
+                    return {
+                        label: label, 
+                        nol10n: true,
+                        type: "checkbox", 
+                        checked: Firebug.XRefresh.getPref(option), 
+                        option: option,
+                        command: function() {
+                            Firebug.XRefresh.setPref(option, !Firebug.XRefresh.getPref(option)); // toggle
+                        }
+                    };
+                };
+
                 dbg(">> XRefreshPanel.getOptionsMenuItems", arguments);
                 return [
                     optionMenu("Use Soft Refresh for CSS", "softRefresh"),
@@ -1109,7 +1099,7 @@ FBL.ns(function() {
                 styleElement.setAttribute("type", "text/css");
                 styleElement.setAttribute("href", url);
                 styleElement.setAttribute("rel", "stylesheet");
-
+        
                 var head = this.getHeadElement(this.document);
                 if (head) head.appendChild(styleElement);
             },
