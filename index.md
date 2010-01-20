@@ -6,7 +6,7 @@ layout: product
 icon: /shared/img/xrefresh-icon.png
 repo: http://github.com/darwin/xrefresh
 support: http://github.com/darwin/xrefresh/issues
-downloadtitle: Download v1.3
+downloadtitle: Download v1.4
 download: http://addons.mozilla.org/en-US/firefox/addon/7711
 subdownload: 
 subdownloadlink:
@@ -125,6 +125,10 @@ Here is a minimal [example page using this technique][soft-refresh-example], you
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}`
 
 ## History
+
+* **v1.4** (09.11.2009)
+    * [[darwin][darwin]] tested Firebug 1.5 compatibility
+    * [[darwin][darwin]] fixed broken option checkers in panel context menus of Firebug (<a href="http://getsatisfaction.com/binaryage/topics/conflicts_with_firebug_1_5_0b9">more info</a>)
 
 * **v1.3** (09.11.2009)
     * [[darwin][darwin]] fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
