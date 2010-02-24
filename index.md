@@ -23,9 +23,8 @@ retweet: 1
 ---
 
 <div class="more-box more-box-align" style="margin-top: 60px">
-    <div class="tf-ad-1">Already a happy XRefresh user?</div>
-    <div class="tf-ad-2">Do you work on some javascript with jQuery?</div>
-    <div class="tf-ad-3">Then, check out <img src="http://firequery.binaryage.com/shared/img/firequery-icon.png" style="margin-right: 3px; top:3px;" width="16"><a href="http://firequery.binaryage.com">FireQuery</a></div>
+    <div class="tf-ad-2">Looking for XRefresh for iPhone development?</div>
+    <div class="tf-ad-3">Then, check out <a href="http://github.com/melito/mish">Mish by Melito</a>!</div>
 </div>
 
 ## Features
