@@ -857,7 +857,55 @@ FBL.ns(function() {
                 // note: content is no more needed, we are doing refresh by changing cache busting parameter in the url.
                 //       this is little bit slower, but it has big advantage, because it fetches new file using whole server stack.
                 //       you know sass, less and other CSS preprocessors should work.
-                element.href = this.generateNextUrl(element.href);
+                
+                // now prepare for magic!
+                // this was original implementation here:
+                //
+                //   element.href = this.generateNextUrl(element.href);
+                // 
+                // this worked but had unpleasant visual artifacts => my explanation:
+                // when setting new href to the link tag, Firefox forgets the old stylesheet immediatelly and waits for new stylesheet to be downloaded
+                // when page reflows during that time (and redisplays), xrefresh user sees unstyled page for a while
+                // (usualy for fraction of the second until new stylesheet loads and forces new reflow)
+                // 
+
+                // the new shiny idea:
+                // insert the new stylesheet immediatelly after the original one in the DOM, so it should override old rules
+                // then remove old stylesheet after some delay (2 seconds should be enough)
+                //
+                // this works nicely for my testing pages
+                // ---
+                // as you can see implementation is not very straightforward because of Firefox bugs?!
+                //
+                // var clone = element.cloneNode(false); // DOES NOT WORK, HATE XUL DEVELOPMENT!!!
+                // insertAfter(styleElement, element);
+                // clone.href = this.generateNextUrl(element.href);
+
+                var insertAfter = function(newElement, targetElement) {
+                    var parent = targetElement.parentNode;
+                    if (parent.lastchild == targetElement) {
+                        parent.appendChild(newElement);
+                    } else {
+                        parent.insertBefore(newElement, targetElement.nextSibling);
+                    }
+                };
+                
+                var url = this.generateNextUrl(element.href);
+                var styleElement = this.document.createElement("link");
+                styleElement.setAttribute("type", "text/css");
+                // cannot set URL here, Firefox freezes for unknown reason!!! see ***
+                // styleElement.setAttribute("href", url);
+                styleElement.setAttribute("rel", "stylesheet");
+                insertAfter(styleElement, element);
+
+                setTimeout(function() {
+                    // trick: need to set url after returning to main loop ***
+                    styleElement.setAttribute("href", url);
+                    setTimeout(function() {
+                        // decay old element so we get correct display
+                        element.parentNode.removeChild(element);
+                    }, 2000);
+                }, 0);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             updateJavaScript: function(document, element, content) {
