@@ -1,31 +1,21 @@
 ---
-title: XRefresh = browser refresh automation for web developers
-product_title: XRefresh
-subtitle: browser refresh automation for web developers
 layout: product
-icon: /shared/img/xrefresh-icon.png
+title: XRefresh provides browser refresh automation for web developers
+product_title: XRefresh
+product_subtitle: will refresh your browser during development
+download: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
-support: http://github.com/darwin/xrefresh/issues
-downloadtitle: Download v1.4
-download: http://addons.mozilla.org/en-US/firefox/addon/7711
-subdownload: 
-subdownloadlink:
-mainshot:
-mainshotfull:
-overlaysx: 880px
-overlaysy: 608px
-overlaycx: 25px
-overlaycy: 10px
-mainright: <object width="470" height="282"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="470" height="282"></embed></object><div class="video-note">screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
-mainrightshift: 70px
+downloadtitle: Install 1.4
 facebook: 1
 retweet: 1
+nothumbs: 1
+advert: Looking for XRefresh for iPhone development? Check out <a href="http://github.com/melito/mish">Mish by Melito</a>!
+shots: [{
+    title: "XRefresh",
+    thumb: "/shared/img/xrefresh-mainshot.png",
+    full: "/shared/img/xrefresh-mainshot-full.png"
+}]
 ---
-
-<div class="more-box more-box-align" style="margin-top: 60px">
-    <div class="tf-ad-2">Looking for XRefresh for iPhone development?</div>
-    <div class="tf-ad-3">Then, check out <a href="http://github.com/melito/mish">Mish by Melito</a>!</div>
-</div>
 
 ## Features
 
@@ -37,6 +27,9 @@ Typical usage scenario is for local web development on a machine with two monito
 
 <p style="clear:both"></p>
 
+### Screencast
+
+<object width="100%" height="600"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="600"></embed></object><div class="video-note">the screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
 
 ## Windows
 
@@ -123,7 +116,7 @@ Here is a minimal [example page using this technique][soft-refresh-example], you
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}`
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}`
 
-## History
+## Changelog
 
 * **v1.4** (09.11.2009)
     * [[darwin][darwin]] tested Firebug 1.5 compatibility
