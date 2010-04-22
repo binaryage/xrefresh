@@ -9,6 +9,17 @@ downloadtitle: Install 1.4
 facebook: 1
 retweet: 1
 nothumbs: 1
+buzz: 1
+fbsdk: 1
+ogmeta: {
+    site_name: "BinaryAge website",
+    description: "XRefresh provides browser refresh automation for web developers",
+    email: "antonin@binaryage.com",
+    type: "product",
+    title: "XRefresh",
+    url: "http://xrefresh.binaryage.com",
+    image: "http://www.binaryage.com/shared/img/icons/xrefresh-64.png"
+}
 advert: Looking for XRefresh for iPhone development? Check out <a href="http://github.com/melito/mish">Mish by Melito</a>!
 shots: [{
     title: "XRefresh",
