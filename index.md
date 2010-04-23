@@ -18,7 +18,7 @@ ogmeta: {
     type: "product",
     title: "XRefresh",
     url: "http://xrefresh.binaryage.com",
-    image: "http://www.binaryage.com/shared/img/icons/xrefresh-64.png"
+    image: "http://www.binaryage.com/shared/img/icons/xrefresh-128.png"
 }
 advert: Looking for XRefresh for iPhone development? Check out <a href="http://github.com/melito/mish">Mish by Melito</a>!
 shots: [{
