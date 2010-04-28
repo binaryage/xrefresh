@@ -3,6 +3,10 @@ layout: product
 title: XRefresh provides browser refresh automation for web developers
 product_title: XRefresh
 product_subtitle: will refresh your browser during development
+meta_title: XRefresh provides browser refresh automation for web developers
+meta_keywords: xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser
+meta_description: XRefresh is a browser plugin which will refresh current web page due to file change in selected folders
+meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
 downloadtitle: Install 1.4
