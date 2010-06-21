@@ -10,9 +10,10 @@ meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
 downloadtitle: Install 1.4
+leftshift: 50px
+likeshift: 28px
 facebook: 1
 retweet: 1
-nothumbs: 1
 buzz: 1
 fbsdk: 1
 ogmeta: {
