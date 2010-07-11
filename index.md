@@ -16,6 +16,7 @@ facebook: 1
 retweet: 1
 buzz: 1
 fbsdk: 1
+flattr: http://xrefresh.binaryage.com
 ogmeta: {
     site_name: "BinaryAge website",
     description: "XRefresh provides browser refresh automation for web developers",
