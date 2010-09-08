@@ -74,8 +74,8 @@ XRefresh has it's own tab panel in Firebug window. You need to enable Firebug fo
 
 <a href="/images/ffintro.png"><img class="raw-image" src="/images/ffintro.png" width="600"></a>
 
-#### Interenet Explorer
-In Interenet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
+#### Internet Explorer
+In Internet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
 
 <img class="raw-image" src="/images/ie7toolbar.png" width="306" height="46">
 
