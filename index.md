@@ -39,9 +39,9 @@ shots: [{
 
 <img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px">
 
-XRefresh is a browser plugin which will refresh current web page due to file change in selected folders. This makes it possible to do live page editing with your favorite HTML/CSS editor.
+XRefresh is a browser plugin which will refresh the current web page due to file change in selected folders. This makes it possible to do live page editing with your favorite HTML/CSS editor.
 
-Typical usage scenario is for local web development on a machine with two monitors. The first monitor is for source code editor and the second one is fully dedicated to previewing web page in Firefox. Thanks to XRefresh, page in Firefox is automatically updated with saved changes into source files (html, css, js, images). XRefresh also provides advanced feature "Soft Refresh" which enables you to modify CSS files on-the-fly without full refresh. With this feature you can get similar experience like live editing of CSS in Firebug (without the pain of syncing changes back to your sources).
+The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes into source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh" which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get similar experience to live editing of CSS in Firebug (without the pain of syncing changes back to your source).
 
 <p style="clear:both"></p>
 
@@ -53,16 +53,16 @@ Typical usage scenario is for local web development on a machine with two monito
 
 * install [Firebug 1.4 or higher][firebug] 
 * install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
-* download [Windows Monitor][winmonitor] and go through installation process. It will install XRefresh traybar application and IE plugin.
+* download [Windows Monitor][winmonitor] and go through the installation process. It will install XRefresh traybar application and IE plugin.
 
 ### Usage
 
 Launch **XRefresh** and check for it in the traybar.  
-After start the icon is gray and it means that there are no browsers connected to XRefresh.
+After starting, the icon is gray which means that there are no browsers connected to XRefresh.
 
 <img class="raw-image" src="/images/tray.png" width="121" height="36">
 
-Tell **XRefresh** where are located your files. XRefresh will watch for your modifications.   
+Tell **XRefresh** where your files are located. XRefresh will watch for your modifications.   
 Tip: You can simply drag&drop interesting folders onto configuration dialog.
 
 <img class="raw-image" src="/images/config.png" width="479" height="120">
@@ -70,16 +70,16 @@ Tip: You can simply drag&drop interesting folders onto configuration dialog.
 Let **Firefox** or **Internet Explorer** connect to XRefresh.
 
 #### Firefox 
-XRefresh has it's own tab panel in Firebug window. You need to enable Firebug for particular site to enable XRefresh functionality.
+XRefresh has its own tab panel in the Firebug window. You need to enable Firebug for a particular site to enable XRefresh functionality.
 
 <a href="/images/ffintro.png"><img class="raw-image" src="/images/ffintro.png" width="600"></a>
 
 #### Internet Explorer
-In Internet Explorer 7 you can find XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
+In Internet Explorer 7 you can find the XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).
 
 <img class="raw-image" src="/images/ie7toolbar.png" width="306" height="46">
 
-The icon reflects the connection status. You may click it to open XRefresh Panel
+The icon reflects the connection status. You can click it to open XRefresh Panel
 
 <img class="raw-image" src="/images/ie7console.png" width="392" height="136">
 
@@ -94,40 +94,40 @@ The icon reflects the connection status. You may click it to open XRefresh Panel
 
 ### Usage
 
-After installation xrefresh-server executable should get onto your system path. 
-To start server simply run `xrefresh-server` from command-line.
+After installation, the xrefresh-server executable should be added to your system path. 
+To start the server simply run `xrefresh-server` from command-line.
 
-Having problems running it? Maybe RubyCocoa problems some people had on Leopard. Check <a href="http://gist.github.com/158851">http://gist.github.com/158851</a>.
+Having problems running it? Maybe it's because of RubyCocoa problems, as some people had on Leopard. Check <a href="http://gist.github.com/158851">http://gist.github.com/158851</a>.
 
-After first run, default config file will be created in `~/.xrefresh-server.yml`:
+When it is first run, a default config file will be created in `~/.xrefresh-server.yml`:
 You are encouraged to modify paths section to map to your working project directories.
  
-By default config file is searched first in current directory and then in your home directory.
-You may also specify path to config file via `--config` parameter.
+By default the config file is searched for first in the current directory and then in your home directory.
+You may also specify the path to your config file via `--config` parameter.
 
 ## FAQ
 
 #### Why is dual monitor setup great for web development?
-> One display is fully dedicated to your browser window showing page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
+> One display is fully dedicated to your browser window showing the page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
 
 #### What is "Soft Refresh CSS" feature?
-> <img src="/images/soft-refresh-checkbox.png" style="float:left; height: 100px; padding-right: 10px"> XRefresh is able to replace externally linked CSS file with updated version without reloading whole page. I call it "soft refresh"  and it is handy in dynamic AJAX-style applications. The page stays in same state and does not blink during refresh. With this feature you can get similar experience like Firebug on-the-fly CSS editing (without the [pain of syncing changes back to original sources](http://code.google.com/p/fbug/issues/detail?id=179)). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button).
-Here is a minimal [example page using this technique][soft-refresh-example], you should be able to see soft refresh icons when modifying style.css.
+> <img src="/images/soft-refresh-checkbox.png" style="float:left; height: 100px; padding-right: 10px"> XRefresh is able to replace an externally linked CSS file with an updated version without reloading the whole page. I call it "soft refresh" and it is handy in dynamic AJAX-style applications. The page stays in the same state and does not blink during refresh. With this feature you can get a similar experience as Firebug on-the-fly CSS editing (without the [pain of syncing changes back to original source](http://code.google.com/p/fbug/issues/detail?id=179)). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button).
+Here is a minimal [example page using this technique][soft-refresh-example]. You should be able to see soft refresh icons when modifying style.css.
 
-#### What is "Soft Refresh JS" feature?
-> XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, that updated script is just evaluated as-is in the context of main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call jQuery onReady function again. If you don't understand these consequences rather do not enable this feature and go with full refresh. This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example], you should be able to see soft refresh icons when modifying code.js.
+#### What is "Soft Refresh JS"?
+> XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, the updated script is just evaluated as-is in the context of the main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call the jQuery onReady function again. If you don't understand these consequences it is better to not enable this feature and go with full refresh. Soft Refresh JS is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example]. You should be able to see soft refresh icons when modifying code.js.
 
 #### Is there a file system monitor available for Unix?
 > Michael did some work on [porting it](http://github.com/ycros/xrefresh) over. It is probably not finished, but it should be a piece of cake for hacker like you to make it happen.
 
-#### Is there a support for Safari? Opera?
-> No plans, I'm happy with Firefox. Support for IE will be dropped in the future. I hate brain-dead IE extension model.
+#### Is there support for Safari? Opera?
+> No plans, I'm happy with Firefox. Support for IE will be dropped in the future. I hate the brain-dead IE extension model.
 
-#### I'm editing files directly on my server via ssh, is it possible to use XRefresh over network?
-> XRefresh monitor communicates with browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable firewall and make sure they see each other. By default browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type `about:config` into the URL bar and filter keys by "xrefresh". Keys `extensions.xrefresh.host` and `extensions.xrefresh.localConnectionsOnly` is what you are looking for.
+#### I'm editing files directly on my server via ssh, is it possible to use XRefresh over the network?
+> XRefresh monitor communicates with the browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable your firewall and make sure they see each other. By default the browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type `about:config` into the URL bar and filter keys by "xrefresh". Keys `extensions.xrefresh.host` and `extensions.xrefresh.localConnectionsOnly` are what you are looking for.
 
 #### Do you support @import linked css files in Soft Refresh of CSS?
-> No, you have to link all css files directly from root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
+> No, you have to link all css files directly from the root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.
 
 #### I don't see XRefresh panel in IE. What should I try?
 > Delete these keys using RegEdit:
