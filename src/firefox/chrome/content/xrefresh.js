@@ -464,13 +464,7 @@ FBL.ns(function() {
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             checkServerCompatibility: function() {
-                var version = server.version.split('.');
-                for (var i=0; i < version.length; i++) {
-                    version[i] = parseInt(version[i], 10);
-                }
-                if (server.name=='OSX xrefresh-server' && version[0]>=0 && version[1]>=2) return true;
-                if (server.name=='XRefresh' && version[0]>=1 && version[1]>=0) return true;
-                return false;
+                return true;
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             processMessage: function(message) {
