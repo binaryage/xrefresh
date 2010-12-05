@@ -1,5 +1,5 @@
 REM run this from xrefresh/ins direcotory
-@SET XVERSION=1.3
+@SET XVERSION=1.5
 @SET PATH=%PATH%;wix-3
 call vsvars32.bat
 
