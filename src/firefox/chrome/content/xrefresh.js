@@ -33,7 +33,7 @@ FBL.ns(function() {
             } catch(e) {}
         }
 
-        function dbg() {
+        var dbg = function() {
             if (FBTrace && FBTrace.DBG_XREFRESH) FBTrace.sysout.apply(this, arguments);
         }
 
@@ -239,6 +239,7 @@ FBL.ns(function() {
                 this.panelName = 'xrefresh';
                 this.description = "Browser refresh automation for web developers";
                 Firebug.ActivableModule.initialize.apply(this, arguments);
+                module.start();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             shutdown: function() {
@@ -248,12 +249,14 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             onEnabled: function(context) {
                 dbg(">> XRefresh.onEnabled", arguments);
+                this.registerObservers(context);
                 module.start();
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onDisabled: function(context) {
                 dbg(">> XRefresh.onDisabled", arguments);
                 module.stop();
+                this.unregisterObservers(context);
             },
             /////////////////////////////////////////////////////////////////////////////////////////
             onSuspendFirebug: function(context) {
@@ -345,6 +348,10 @@ FBL.ns(function() {
                 dbg(">> XRefresh.visitWebsite", arguments);
                 openNewTab(xrefreshHomepage);
             },
+            /////////////////////////////////////////////////////////////////////////////////////////
+            getPrefDomain: function() {
+                return Firebug.prefDomain + "." + this.panelName;
+            },            
             /////////////////////////////////////////////////////////////////////////////////////////
             getPref: function(name) {
                 var prefName = this.getPrefDomain().toLowerCase() + "." + name;
@@ -785,13 +792,21 @@ FBL.ns(function() {
             }
         });
 
-        function XRefreshPanel() {}
+        var XRefreshPanel = function() {};
         XRefreshPanel.prototype = extend(Firebug.ActivablePanel, {
             name: "xrefresh",
             title: "XRefresh",
             searchable: false,
             editable: false,
             wasScrolledToBottom: true,
+
+            onActivationChanged: function(enable) {
+                dbg(">>>XRefreshPanel.onActivationChanged enable:"+enable);
+                if (enable)
+                    module.addObserver(this);
+                else
+                    module.removeObserver(this);
+            },            
             /////////////////////////////////////////////////////////////////////////////////////////
             enablePanel: function(module) {
                 dbg(">> XRefreshPanel.enablePanel; " + this.context.getName());
@@ -1053,15 +1068,28 @@ FBL.ns(function() {
             /////////////////////////////////////////////////////////////////////////////////////////
             show: function(state) {
                 dbg(">> XRefreshPanel.show", arguments);
-                var enabled = Firebug.XRefresh.isAlwaysEnabled();
-                if (enabled) {
-                     Firebug.XRefresh.disabledPanelPage.hide(this);
-                     this.showToolbarButtons("fbXRefreshControls", true);
-                     if (this.wasScrolledToBottom)
-                     scrollToBottom(this.panelNode);
+                
+                var that = this;
+                var work = function() {
+                    that.showToolbarButtons("fbXRefreshControls", true);
+                    if (that.wasScrolledToBottom) {
+                        scrollToBottom(that.panelNode);
+                    }
+                };
+
+                // Firebug 1.6 removes Firebug.DisabledPanelPage, simplifies the activation
+                // and the following code is not necessary any more.
+                if (module.disabledPanelPage) {
+                    var enabled = Firebug.XRefresh.isAlwaysEnabled();
+                    if (enabled) {
+                         Firebug.XRefresh.disabledPanelPage.hide(this);
+                         work();
+                    } else {
+                        this.hide();
+                        Firebug.XRefresh.disabledPanelPage.show(this);
+                    }
                 } else {
-                    this.hide();
-                    Firebug.XRefresh.disabledPanelPage.show(this);
+                    work();
                 }
             },
             /////////////////////////////////////////////////////////////////////////////////////////
