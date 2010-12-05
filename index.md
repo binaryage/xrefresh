@@ -9,7 +9,7 @@ meta_description: XRefresh is a browser plugin which will refresh current web pa
 meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
-downloadtitle: Install 1.4
+downloadtitle: Install 1.5
 leftshift: 50px
 likeshift: 28px
 facebook: 1
@@ -144,6 +144,10 @@ If this is not possible consider tweaking `browser.sessionstore.postdata` to 1 i
 You should learn [about consequences](http://forums.mozillazine.org/viewtopic.php?p=3001440) of doing so.
 
 ## Changelog
+
+* **v1.5** (05.12.2010)
+    * [[darwin][darwin]] compatibility with Firebug 1.6
+    * [[darwin][darwin]] prevent flickering and scroll jumping during soft refresh of CSS
 
 * **v1.4** (09.11.2009)
     * [[darwin][darwin]] tested Firebug 1.5 compatibility
