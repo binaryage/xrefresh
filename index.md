@@ -147,6 +147,7 @@ You should learn [about consequences](http://forums.mozillazine.org/viewtopic.ph
 
 * **v1.5** (05.12.2010)
     * [[darwin][darwin]] compatibility with Firebug 1.6
+    * [[darwin][darwin]] fixed buggy JSON encoding on Windows (updated to Json.NET 3.5 Release 8) - [more info](http://getsatisfaction.com/binaryage/topics/_unable_to_parse_server_json_message_dirty_fix)
     * [[darwin][darwin]] prevent flickering and scroll jumping during soft refresh of CSS
 
 * **v1.4** (09.11.2009)
@@ -219,7 +220,7 @@ You should learn [about consequences](http://forums.mozillazine.org/viewtopic.ph
 
 Thanks guys!
 
-[winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.3.msi
+[winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.5.msi
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
