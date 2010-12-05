@@ -35,7 +35,7 @@ shots: [{
 ---
 
 
-## Features
+## About
 
 <img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px">
 
@@ -105,6 +105,13 @@ You are encouraged to modify paths section to map to your working project direct
 By default the config file is searched for first in the current directory and then in your home directory.
 You may also specify the path to your config file via `--config` parameter.
 
+## Unix
+
+There are some ports in the wild:
+
+ * [https://github.com/YouWoTMA/xrefresh-server](https://github.com/YouWoTMA/xrefresh-server) by Carl Jhonson
+ * [https://github.com/justmoon/xrefresh-emacs](https://github.com/justmoon/xrefresh-emacs) by Stefan Thomas
+
 ## FAQ
 
 #### Why is dual monitor setup great for web development?
@@ -117,11 +124,8 @@ Here is a minimal [example page using this technique][soft-refresh-example]. You
 #### What is "Soft Refresh JS"?
 > XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, the updated script is just evaluated as-is in the context of the main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call the jQuery onReady function again. If you don't understand these consequences it is better to not enable this feature and go with full refresh. Soft Refresh JS is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal [example page using this technique][soft-refresh-example]. You should be able to see soft refresh icons when modifying code.js.
 
-#### Is there a file system monitor available for Unix?
-> Michael did some work on [porting it](http://github.com/ycros/xrefresh) over. It is probably not finished, but it should be a piece of cake for hacker like you to make it happen.
-
 #### Is there support for Safari? Opera?
-> No plans, I'm happy with Firefox. Support for IE will be dropped in the future. I hate the brain-dead IE extension model.
+> No plans, I'm happy with Firefox. Support for IE will be dropped in the future. For Safari there is a similar project to XRefresh called [LiveReload](https://github.com/mockko/livereload).
 
 #### I'm editing files directly on my server via ssh, is it possible to use XRefresh over the network?
 > XRefresh monitor communicates with the browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable your firewall and make sure they see each other. By default the browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type `about:config` into the URL bar and filter keys by "xrefresh". Keys `extensions.xrefresh.host` and `extensions.xrefresh.localConnectionsOnly` are what you are looking for.
@@ -133,6 +137,11 @@ Here is a minimal [example page using this technique][soft-refresh-example]. You
 > Delete these keys using RegEdit:
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}`
 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}`
+
+#### How do I get rid of POSTDATA confirmation dialog during refresh?
+> First, try to use soft-refresh feature to not resend data at all. Tweak only live CSS.
+If this is not possible consider tweaking `browser.sessionstore.postdata` to 1 in about:config.
+You should learn [about consequences](http://forums.mozillazine.org/viewtopic.php?p=3001440) of doing so.
 
 ## Changelog
 
