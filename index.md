@@ -39,9 +39,9 @@ shots: [{
 
 <img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px">
 
-XRefresh is a browser plugin which will refresh the current web page due to file change in selected folders. This makes it possible to do live page editing with your favorite HTML/CSS editor.
+XRefresh is a browser plugin which will refresh the current web page due to file changes in selected folders. This makes it possible to do live page editing using your favorite HTML/CSS editor.
 
-The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes into source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh" which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get similar experience to live editing of CSS in Firebug (without the pain of syncing changes back to your source).
+The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes in the source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh", which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get a similar experience to live editing of CSS in Firebug (without the pain of syncing changes back to your source).
 
 <p style="clear:both"></p>
 
@@ -141,7 +141,7 @@ Here is a minimal [example page using this technique][soft-refresh-example]. You
 #### How do I get rid of POSTDATA confirmation dialog during refresh?
 > First, try to use soft-refresh feature to not resend data at all. Tweak only live CSS.
 If this is not possible consider tweaking `browser.sessionstore.postdata` to 1 in about:config.
-You should learn [about consequences](http://forums.mozillazine.org/viewtopic.php?p=3001440) of doing so.
+You should learn [about the consequences](http://forums.mozillazine.org/viewtopic.php?p=3001440) of doing so.
 
 ## Changelog
 
