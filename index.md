@@ -18,7 +18,7 @@ flattr: http://xrefresh.binaryage.com
 ogmeta: {
     site_name: "BinaryAge website",
     description: "XRefresh provides browser refresh automation for web developers",
-    email: "antonin@binaryage.com",
+    email: "support@binaryage.com",
     type: "product",
     title: "XRefresh",
     url: "http://xrefresh.binaryage.com",
