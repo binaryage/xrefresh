@@ -105,7 +105,11 @@ You may also specify the path to your config file via `--config` parameter.
 
 ## Unix
 
-There are some ports in the wild:
+### You should check out [AutoRefresh](https://github.com/logankoester/autorefresh) by [Logan Koester](http://blog.logankoester.com/)
+
+---
+
+There are also some XRefresh ports in the wild:
 
  * [https://github.com/YouWoTMA/xrefresh-server](https://github.com/YouWoTMA/xrefresh-server) by Carl Jhonson
  * [https://github.com/justmoon/xrefresh-emacs](https://github.com/justmoon/xrefresh-emacs) by Stefan Thomas
