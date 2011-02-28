@@ -7,7 +7,8 @@ meta_title: XRefresh provides browser refresh automation for web developers
 meta_keywords: xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser
 meta_description: XRefresh is a browser plugin which will refresh current web page due to file change in selected folders
 meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
-download: https://addons.mozilla.org/en-US/firefox/addon/7711
+download: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
+download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
 downloadtitle: Install 1.5
 facebook: 1
@@ -50,7 +51,7 @@ The typical usage scenario is for local web development on a machine with two mo
 ## Windows
 
 * install [Firebug 1.4 or higher][firebug] 
-* install [XRefresh Addon][addon] (you don't need this step if you are going to use XRefresh with IE only).
+* install [XRefresh Addon][download] (you don't need this step if you are going to use XRefresh with IE only).
 * download [Windows Monitor][winmonitor] and go through the installation process. It will install XRefresh traybar application and IE plugin.
 
 ### Usage
@@ -225,6 +226,7 @@ Thanks guys!
 [winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.5.msi
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
+[download]: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
 [firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
 [firefox]: http://firefox.com
