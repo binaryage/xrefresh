@@ -14,3 +14,4 @@ _layouts
 shared
 *.TMP
 *.user
+Gemfile.lock

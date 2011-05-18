@@ -4,8 +4,9 @@ DST = File.join(ROOT, 'rel')
 TMP = File.join(ROOT, 'tmp')
 
 unless defined? OSX then
-  OSX = PLATFORM =~ /darwin/
-  WIN = PLATFORM =~ /win32/
+  platform = PLATFORM rescue RUBY_PLATFORM
+  OSX = platform =~ /darwin/
+  WIN = platform =~ /win32/
   NIX = !(OSX || WIN)
 end
 
