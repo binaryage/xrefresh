@@ -1,6 +1,7 @@
 ---
-layout: product
+layout: product2
 title: XRefresh provides browser refresh automation for web developers
+product: xrefresh
 product_title: XRefresh
 product_subtitle: will refresh your browser during development
 meta_title: XRefresh provides browser refresh automation for web developers
@@ -32,7 +33,6 @@ shots: [{
     full: "/shared/img/xrefresh-mainshot-full.png"
 }]
 ---
-
 
 ## About
 
