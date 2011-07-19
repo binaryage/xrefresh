@@ -11,7 +11,8 @@ meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
-downloadtitle: Install 1.5
+downloadtitle: Install v1.5
+downloadsubtitle: and become CSS ninja
 facebook: 1
 retweet: 1
 buzz: 1
