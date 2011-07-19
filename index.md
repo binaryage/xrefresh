@@ -12,7 +12,7 @@ download: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
 downloadtitle: Install v1.5
-downloadsubtitle: and become CSS ninja
+downloadsubtitle: and become a CSS ninja
 facebook: 1
 retweet: 1
 buzz: 1
