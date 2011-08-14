@@ -15,7 +15,7 @@ repo: http://github.com/darwin/xrefresh
 downloadtitle: Switch to LiveReload
 downloadsubtitle: LiveReload superseded XRefresh
 buttonicon: warning
-note: <a href="http://livereload.com">LiveReload</a> is simply a better version of XRefresh. But if you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.
+note: Read more in <a href="http://blog.binaryage.com/xrefresh-superseded-by-livereload">XRefresh superseded by LiveReload</a> [blog]<br><br>If you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.
 facebook: 1
 fbsdk: 1
 ogmeta: {
