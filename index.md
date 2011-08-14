@@ -8,16 +8,16 @@ meta_title: XRefresh provides browser refresh automation for web developers
 meta_keywords: xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser
 meta_description: XRefresh is a browser plugin which will refresh current web page due to file change in selected folders
 meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
-download: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
+download: http://livereload.com
+download_alt: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/darwin/xrefresh
-downloadtitle: Install v1.5
-downloadsubtitle: and become a CSS ninja
+downloadtitle: Switch to LiveReload
+downloadsubtitle: LiveReload superseded XRefresh
+buttonicon: warning
+note: <a href="http://livereload.com">LiveReload</a> is simply a better version of XRefresh. But if you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.
 facebook: 1
-retweet: 1
-buzz: 1
 fbsdk: 1
-flattr: http://xrefresh.binaryage.com
 ogmeta: {
     site_name: "BinaryAge website",
     description: "XRefresh provides browser refresh automation for web developers",
@@ -27,7 +27,6 @@ ogmeta: {
     url: "http://xrefresh.binaryage.com",
     image: "http://www.binaryage.com/shared/img/icons/xrefresh-256.png"
 }
-advert: Looking for XRefresh for iPhone development? Check out <a href="http://github.com/melito/mish">Mish by Melito</a>!
 shots: [{
     title: "XRefresh",
     thumb: "/shared/img/xrefresh-mainshot.png",
@@ -39,9 +38,9 @@ shots: [{
 
 <img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px">
 
-XRefresh is a browser plugin which will refresh the current web page due to file changes in selected folders. This makes it possible to do live page editing using your favorite HTML/CSS editor.
+XRefresh is a browser plugin which will refresh a web page due to file changes in selected folders. This makes it possible to do live page editing using your favorite HTML/CSS editor.
 
-The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes in the source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh", which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get a similar experience to live editing of CSS in Firebug (without the pain of syncing changes back to your source).
+The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes in the source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh", which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get a similar experience to live editing of CSS in Firebug.
 
 <p style="clear:both"></p>
 
@@ -83,12 +82,12 @@ The icon reflects the connection status. You can click it to open XRefresh Panel
 
 <img class="raw-image" src="/images/ie7console.png" width="392" height="136">
 
-## OSX
+## Mac OS X
 
 * install [Firebug 1.4 or higher][firebug] 
 * install [XRefresh Addon][addon]
 * install [Ruby Cocoa][rubycocoa] (filesystem monitoring depends on native Cocoa FSEvent API)
-* execute `sudo gem install xrefresh-server --source http://gemcutter.org`.
+* execute `sudo gem install xrefresh-server`.
 
 <img class="shadow" src="/images/osx.png" width="920">
 
@@ -105,18 +104,10 @@ You are encouraged to modify paths section to map to your working project direct
 By default the config file is searched for first in the current directory and then in your home directory.
 You may also specify the path to your config file via `--config` parameter.
 
-## Unix
-
-### You should check out [AutoRefresh](https://github.com/logankoester/autorefresh) by [Logan Koester](http://blog.logankoester.com/)
-
----
-
-There are also some XRefresh ports in the wild:
-
- * [https://github.com/YouWoTMA/xrefresh-server](https://github.com/YouWoTMA/xrefresh-server) by Carl Jhonson
- * [https://github.com/justmoon/xrefresh-emacs](https://github.com/justmoon/xrefresh-emacs) by Stefan Thomas
-
 ## FAQ
+
+#### Is XRefresh still in development?
+> No, XRefresh was superseded by [LiveReload](http://livereload.com). I started XRefresh back in 2007 and it worked really well for me and other folks, but it has some issues. The main issue probably is ever changing Firebug and Firefox versions and time it took me to maintain the compatibility. Recently Andrey and other guys from LiveReload put a lot of effort into making a better tool for refresh-driven development. LiveReload has more features, it is maintained and also provides support for multiple browsers.
 
 #### Why is dual monitor setup great for web development?
 > One display is fully dedicated to your browser window showing the page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.
@@ -205,6 +196,10 @@ You should learn [about the consequences](http://forums.mozillazine.org/viewtopi
     * [[darwin][darwin]] internal alpha
 
 ## Links
+
+### XRefresh was superseded by LiveReload
+
+  * [LiveReload - The Web Developer Wonderland](http://livereload.com)
 
 ### Articles and Reviews
   * [Automated browser refresh addon for Firefox and IE](http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie) by **Elio Rivero**
