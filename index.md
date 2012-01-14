@@ -130,8 +130,8 @@ Here is a minimal [example page using this technique][soft-refresh-example]. You
 
 #### I don't see XRefresh panel in IE. What should I try?
 > Delete these keys using RegEdit:
-`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}`
-`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}`
+<code style="font-size:9px">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}</code>
+<code style="font-size:9px">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}</code>
 
 #### How do I get rid of POSTDATA confirmation dialog during refresh?
 > First, try to use soft-refresh feature to not resend data at all. Tweak only live CSS.
