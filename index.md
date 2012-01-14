@@ -141,59 +141,59 @@ You should learn [about the consequences](http://forums.mozillazine.org/viewtopi
 ## Changelog
 
 * **v1.5** (05.12.2010)
-    * [[darwin][darwin]] compatibility with Firebug 1.6
-    * [[darwin][darwin]] fixed buggy JSON encoding on Windows (updated to Json.NET 3.5 Release 8) - [more info](http://getsatisfaction.com/binaryage/topics/_unable_to_parse_server_json_message_dirty_fix)
-    * [[darwin][darwin]] prevent flickering and scroll jumping during soft refresh of CSS
+    * compatibility with Firebug 1.6
+    * fixed buggy JSON encoding on Windows (updated to Json.NET 3.5 Release 8) - [more info](http://getsatisfaction.com/binaryage/topics/_unable_to_parse_server_json_message_dirty_fix)
+    * prevent flickering and scroll jumping during soft refresh of CSS
 
 * **v1.4** (09.11.2009)
-    * [[darwin][darwin]] tested Firebug 1.5 compatibility
-    * [[darwin][darwin]] fixed broken option checkers in panel context menus of Firebug (<a href="http://getsatisfaction.com/binaryage/topics/conflicts_with_firebug_1_5_0b9">more info</a>)
+    * tested Firebug 1.5 compatibility
+    * fixed broken option checkers in panel context menus of Firebug (<a href="http://getsatisfaction.com/binaryage/topics/conflicts_with_firebug_1_5_0b9">more info</a>)
 
 * **v1.3** (09.11.2009)
-    * [[darwin][darwin]] fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
-    * [[darwin][darwin]] tested to work under Firebug 1.5 + Firefox 3.6
-    * [[darwin][darwin]] IE8 compatibility
+    * fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
+    * tested to work under Firebug 1.5 + Firefox 3.6
+    * IE8 compatibility
 
 * **v1.2** (09.07.2009)
-    * [[darwin][darwin]] Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
-    * [[darwin][darwin]] Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
+    * Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
+    * Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
 
 * **v1.1** (29.06.2009)
-    * [[blackout][blackout]] Firefox: added Soft Refresh functionality for script files
-    * [[blackout][blackout]] Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3))
+    * Firefox: added Soft Refresh functionality for script files [[blackout][blackout]]
+    * Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3)) [[blackout][blackout]]
 
 * **v1.0.2** (26.06.2009)
-    * [[darwin][darwin]] Firefox: refresh correctly bypasses cache
-    * [[darwin][darwin]] Firefox: document scroll position is restored after refresh
+    * Firefox: refresh correctly bypasses cache
+    * Firefox: document scroll position is restored after refresh
 
 * **v1.0.1** (21.06.2009)
-    * [[darwin][darwin]] fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
+    * fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down
 
 * **v1.0** (21.06.2009)
-    * [[darwin][darwin]] compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
-    * [[darwin][darwin]] more robust communication protocol (should solve occasionally broken connections)
-    * [[darwin][darwin]] Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
-    * [[darwin][darwin]] fixed problem with Helvetica font on localized Spain Windows
-    * [[darwin][darwin]] changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
+    * compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)
+    * more robust communication protocol (should solve occasionally broken connections)
+    * Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)
+    * fixed problem with Helvetica font on localized Spain Windows
+    * changed extension guid back to xrefresh@xrefresh.com to continue in original project at [addons.mozilla.org][addon]
 
 * **v0.9** (never packaged)
-    * [[darwin][darwin]] OSX monitor ignores events from .git directories
-    * [[darwin][darwin]] XRefresh respects cached resources
-    * [[darwin][darwin]] changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
+    * OSX monitor ignores events from .git directories
+    * XRefresh respects cached resources
+    * changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3
 
 * **v0.8** (19.07.2008)
-    * [[darwin][darwin]] added OSX support
-    * [[darwin][darwin]] fixed bug in extension networking
-    * [[darwin][darwin]] extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
+    * added OSX support
+    * fixed bug in extension networking
+    * extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)
 
 * **v0.7** (25.02.2008)
-    * [[darwin][darwin]] "Soft Refresh" feature
+    * "Soft Refresh" feature
 
 * **v0.6** (02.01.2008)
-    * [[darwin][darwin]] public release
+    * public release
 
 * **v0.5** (12.11.2007)
-    * [[darwin][darwin]] internal alpha
+    * internal alpha
 
 ## Links
 
