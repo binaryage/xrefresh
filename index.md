@@ -1,5 +1,5 @@
 ---
-layout: product2
+layout: product
 title: XRefresh provides browser refresh automation for web developers
 product: xrefresh
 product_title: XRefresh
