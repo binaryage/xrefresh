@@ -11,7 +11,7 @@ meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: http://livereload.com
 download_alt: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
-repo: http://github.com/darwin/xrefresh
+repo: http://github.com/binaryage/xrefresh
 downloadtitle: Switch to LiveReload
 downloadsubtitle: LiveReload superseded XRefresh
 buttonicon: warning
