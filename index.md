@@ -9,7 +9,7 @@ meta_keywords: xrefresh,firefox,addon,binaryage,productivity,software,refresh,br
 meta_description: XRefresh is a browser plugin which will refresh current web page due to file change in selected folders
 meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
 download: http://livereload.com
-download_alt: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
+download_alt: https://github.com/downloads/binaryage/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
 repo: http://github.com/binaryage/xrefresh
 downloadtitle: Switch to LiveReload
@@ -150,17 +150,17 @@ You should learn [about the consequences](http://forums.mozillazine.org/viewtopi
     * fixed broken option checkers in panel context menus of Firebug (<a href="http://getsatisfaction.com/binaryage/topics/conflicts_with_firebug_1_5_0b9">more info</a>)
 
 * **v1.3** (09.11.2009)
-    * fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/darwin/xrefresh/issues#issue/7) and [Issue 8](http://github.com/darwin/xrefresh/issues#issue/7))
+    * fixed crashing of WinMonitor when dealing with unicode filenames (fixes [Issue 7](http://github.com/binaryage/xrefresh/issues#issue/7) and [Issue 8](http://github.com/binaryage/xrefresh/issues#issue/7))
     * tested to work under Firebug 1.5 + Firefox 3.6
     * IE8 compatibility
 
 * **v1.2** (09.07.2009)
-    * Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/darwin/xrefresh/issues#issue/4))
+    * Firefox: Soft Refresh works with CSS files using relative paths ([Issue 4](http://github.com/binaryage/xrefresh/issues#issue/4))
     * Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less
 
 * **v1.1** (29.06.2009)
     * Firefox: added Soft Refresh functionality for script files [[blackout][blackout]]
-    * Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/darwin/xrefresh/issues#issue/3)) [[blackout][blackout]]
+    * Firefox: fixed Soft Refresh bug on Windows ([Issue 3](http://github.com/binaryage/xrefresh/issues#issue/3)) [[blackout][blackout]]
 
 * **v1.0.2** (26.06.2009)
     * Firefox: refresh correctly bypasses cache
@@ -222,11 +222,11 @@ Thanks guys!
 [winmonitor]: http://xrefresh.googlecode.com/files/xrefresh-1.5.msi
 [blackout]: http://github.com/blackout
 [darwin]: http://github.com/darwin
-[download]: https://github.com/downloads/darwin/xrefresh/xrefresh-1.5.xpi
+[download]: https://github.com/downloads/binaryage/xrefresh/xrefresh-1.5.xpi
 [addon]: http://addons.mozilla.org/en-US/firefox/addon/7711/
 [firebug]: https://addons.mozilla.org/en-US/firefox/addons/versions/1843
 [firefox]: http://firefox.com
 [ie]: http://www.microsoft.com/windows/internet-explorer/default.aspx
-[soft-refresh-example]: http://github.com/darwin/xrefresh/tree/master/test
+[soft-refresh-example]: http://github.com/binaryage/xrefresh/tree/master/test
 [silk]: http://www.famfamfam.com/lab/icons/silk/
 [rubycocoa]: http://rubycocoa.sourceforge.net
