@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://developers.facebook.com/schema/"
+      
+>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <title>XRefresh provides browser refresh automation for web developers</title>
+        
+        <link rel="canonical" href="http://xrefresh.binaryage.com">
+        
+        
+        <meta name="title" content="XRefresh provides browser refresh automation for web developers" />
+        
+        
+        <meta name="description" content="XRefresh is a browser plugin which will refresh current web page due to file change in selected folders" />
+        
+        
+        <meta name="keywords" content="xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser" />
+        
+        
+        <link rel="image_src" href="http://www.binaryage.com/base/img/icons/xrefresh-256.png" />
+        
+        <meta name="google-site-verification" content="N_xzdr6ymSUQFhAEvQg7f-sp1JAeJCdW2JuaRg-da0w" />
+        <meta property="fb:admins" content="antonin.hildebrand" />
+        
+            
+                <meta property="og:email" content="support@binaryage.com" />
+            
+            
+                <meta property="og:description" content="XRefresh provides browser refresh automation for web developers" />
+            
+            
+                <meta property="og:site_name" content="BinaryAge website" />
+            
+            
+                <meta property="og:type" content="product" />
+            
+            
+                <meta property="og:title" content="XRefresh" />
+            
+            
+                <meta property="og:url" content="http://xrefresh.binaryage.com" />
+            
+            
+                <meta property="og:image" content="http://www.binaryage.com/base/img/icons/xrefresh-256.png" />
+            
+        
+        
+        <!-- test comment - hello world! -->
+
+        <link href="http://www.google.com/profiles/antonin.hildebrand" rel="me" type="text/html" />
+        <link href="http://feeds.feedburner.com/binaryage-blog" type="application/atom+xml" rel="alternate" title="Ideas from BinaryAge" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        
+        <script type="text/javascript" charset="utf-8">
+            // give the custom font 5s to load, otherwise enable simple font visibility
+            setTimeout(function() {
+                $('html').addClass('wf-fake-active');
+            }, 2000);
+        </script>
+        
+        <style type="text/css">
+            /* prevent visible font switching - this is also repeated in global.styl for fastspring compatibility!  */
+            .js .wf {
+                opacity: 0 !important;
+                filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0) !important;
+                -webkit-transition: opacity 0.5s ease 0s;
+                -moz-transition: opacity 0.5s ease 0s;
+                -o-transition: opacity 0.5s ease 0s;
+                transition: opacity 0.5s ease 0s;
+            }
+            .wf-active .wf,
+            .wf-fake-active .wf {
+                opacity: 1 !important;
+                filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100) !important;
+            }
+        </style>
+        
+        
+
+        <link rel="stylesheet" href="/base/css/site.css" type="text/css">
+    
+        
+        
+        
+        
+        <!-- SCRIPTS START -->
+        <script type="text/javascript" charset="utf-8">
+            /*
+            CSS Browser Selector v0.4.0 (Nov 02, 2010)
+            Rafael Lima (http://rafael.adm.br)
+            http://rafael.adm.br/css_browser_selector
+            License: http://creativecommons.org/licenses/by/2.5/
+            Contributors: http://rafael.adm.br/css_browser_selector#contributors
+            */
+            function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua.indexOf(t)>-1},g='gecko',w='webkit',s='safari',o='opera',m='mobile',h=document.documentElement,b=[(!(/opera|webtv/i.test(ua))&&/msie\s(\d)/.test(ua))?('ie ie'+RegExp.$1):is('firefox/2')?g+' ff2':is('firefox/3.5')?g+' ff3 ff3_5':is('firefox/3.6')?g+' ff3 ff3_6':is('firefox/3')?g+' ff3':is('gecko/')?g:is('opera')?o+(/version\/(\d+)/.test(ua)?' '+o+RegExp.$1:(/opera(\s|\/)(\d+)/.test(ua)?' '+o+RegExp.$2:'')):is('konqueror')?'konqueror':is('blackberry')?m+' blackberry':is('android')?m+' android':is('chrome')?w+' chrome':is('iron')?w+' iron':is('applewebkit/')?w+' '+s+(/version\/(\d+)/.test(ua)?' '+s+RegExp.$1:''):is('mozilla/')?g:'',is('j2me')?m+' j2me':is('iphone')?m+' iphone':is('ipod')?m+' ipod':is('ipad')?m+' ipad':is('mac')?'mac':is('darwin')?'mac':is('webtv')?'webtv':is('win')?'win'+(is('windows nt 6.0')?' vista':''):is('freebsd')?'freebsd':(is('x11')||is('linux'))?'linux':'','js']; c = b.join(' '); h.className += ' '+c; return c;}; css_browser_selector(navigator.userAgent);
+        </script>
+        <script type="text/javascript" charset="utf-8">
+            // define dummy replacements for firebug functionality (needed for Opera)
+            if (!window.console) {
+                window.console = {};
+                function fn() {
+                    opera.postError(arguments);
+                };
+                ['log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml', 'group', 'groupEnd', 
+                'time', 'timeEnd', 'count', 'trace', 'profile', 'profileEnd'].forEach(function(name) {
+                    window.console[name] = fn;
+                });
+            }            
+            (function() {
+                    var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml", "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"];
+                    if(!window.console){
+                        window.console = {};
+                    }
+                    for (var i in names) {
+                        window.console[names[i]] = window.console[names[i]] || function(){
+                            return;
+                        };
+                    }
+            })();
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            // https://github.com/carhartl/jquery-cookie
+            function bacookie(key, value, options) {
+                // key and at least value given, set cookie...
+                if (arguments.length > 1 && String(value) !== "[object Object]") {
+                    options = options || {};
+
+                    if (value === null || value === undefined) {
+                        options.expires = -1;
+                    }
+
+                    if (typeof options.expires === 'number') {
+                        var days = options.expires, t = options.expires = new Date();
+                        t.setDate(t.getDate() + days);
+                    }
+
+                    value = String(value);
+
+                    return (document.cookie = [
+                        encodeURIComponent(key), '=',
+                        options.raw ? value : encodeURIComponent(value),
+                        options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+                        options.path ? '; path=' + options.path : '',
+                        options.domain ? '; domain=' + options.domain : '',
+                        options.secure ? '; secure' : ''
+                    ].join(''));
+                }
+
+                // key and possibly options given, get cookie...
+                options = value || {};
+                var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
+                return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
+            };
+            // parseUri 1.2.2
+            // (c) Steven Levithan <stevenlevithan.com>
+            // MIT License
+
+            function parseUri (str) {
+                var o   = parseUri.options,
+                    m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+                    uri = {},
+                    i   = 14;
+
+                while (i--) uri[o.key[i]] = m[i] || "";
+
+                uri[o.q.name] = {};
+                uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+                    if ($1) uri[o.q.name][$1] = $2;
+                });
+
+                return uri;
+            };
+
+            parseUri.options = {
+                strictMode: false,
+                key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+                q:   {
+                    name:   "queryKey",
+                    parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+                },
+                parser: {
+                    strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+                    loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+                }
+            };            
+        </script>
+
+        <script>
+            function utmx_section(){}function utmx(){};
+        </script>
+        
+
+        <script type="text/javascript">
+            WebFontConfig = { 
+                google: { families: [ 'Play:regular,bold' ] }
+            };
+            (function() {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })();
+        </script>
+        
+        
+        <script src="/base/js/code2.js"></script>
+        
+    
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+        </script>
+        
+        <script type="text/javascript">
+            _gaq.push(['_setAccount', 'UA-8404259-1']);
+            _gaq.push(['_addIgnoredRef', '.binaryage.com']); // do not count subdomains as referrer trafic
+            _gaq.push(['_setDomainName', '.binaryage.com']); // track all subdomains with shared cookie
+            _gaq.push(['_setAllowLinker', true]); // important for cross domain user tracking (the session may be passed in URL params)
+            _gaq.push(['_setAllowHash', false]); // do not use url-hash check
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        
+    
+        
+        
+        
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        
+        
+        <!-- SCRIPTS END -->
+    </head>
+    <body id="page-xrefresh-index">
+        <div id="topbar">
+            <div class="container topbar">
+                <div class="topbar-buttons">
+                    <div class="topbar-labs wf">
+                        labs
+                    </div>
+                    <div class="topbar-testimonials wf">
+                        testimonials
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="header" class="menu-products">
+            <div class="container header">
+                <a href="http://www.binaryage.com" title="BinaryAge Software">
+                    <div class="header-logo">
+                        <div class="header-logo-hover"></div>
+                    </div>
+                </a>
+                
+                <div class="header-motto arrow"></div>
+                <div class="header-selector"></div>
+                <ul class="header-menu">
+                    <li class="menu-item-store wf"><a href="http://www.binaryage.com/store"><span>store</span></a></li>
+                    <li class="menu-item-products wf"><a href="http://www.binaryage.com"><span>products</span></a></li>
+                    <li class="menu-item-blog wf"><a href="http://blog.binaryage.com"><span>blog</span></a></li>  
+                    <li class="menu-item-hints wf"><a href="http://hints.binaryage.com"><span>hints</span></a></li>
+                    <li class="menu-item-support wf"><a href="http://support.binaryage.com"><span>support</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            
+            <div class="wf">
+            <div class="main-product" id="product-xrefresh">
+    <div class="container">
+        <div class="main-product-left span-12">
+            <div class="product-logo-box">
+                <img class="product-icon" src="/base/img/icons/xrefresh-64.png">
+                <div class="product-tagline">
+                    <h1 class="product-title">XRefresh</h1><div class="plusone-wrapper"><g:plusone size="medium"></g:plusone></div>
+                    <h2 class="product-subtitle">will refresh your browser during development</h2>
+                </div>
+            </div>
+            <div class="product-buttons-box">
+                <div class="product-buttons">
+                    
+                    <a id="o-download" href="http://livereload.com" class="button product-button-warning">
+                        <div><div>Switch to LiveReload<div class="product-specs">LiveReload superseded XRefresh</div></div></div>
+                    </a>
+                    
+                    
+                    <div class="clear"></div>
+                </div>
+                <div class="product-note-box">
+                    
+                        <div class="product-note">Read more in <a href="http://blog.binaryage.com/xrefresh-superseded-by-livereload">XRefresh superseded by LiveReload</a> [blog]<br><br>If you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.</div>
+                    
+                </div>
+            </div>
+            <div class="social-box">
+                <div class="social-box-inner">
+                    
+                    
+                    
+                    
+                    
+                </div>
+                <div class="clear"></div>
+            </div>    
+        </div>
+        <div class="main-product-right span-12 last">
+            <div class="main-screenshot">
+                
+                <div id="screenshot-box-1" class="screenshot-box no-shadow" >
+                    
+                    <a id="o-shot1" href="http://xrefresh.binaryage.com/base/img/xrefresh-mainshot-full.png" class="overlayable" title="XRefresh">
+                    
+                        <img src="http://xrefresh.binaryage.com/base/img/xrefresh-mainshot.png"/>
+                        
+                        <div class="zoom-icon"></div>
+                        
+                    
+                    </a>
+                    
+                </div>
+                
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-tabs" id="tabs-xrefresh">
+    <div class="container">
+        <div class="tab-bar">
+            <ul class="tabs"></ul> 
+        </div>
+        <div class="panes"></div>
+    </div>
+</div>
+
+<div class="main-content-here" style="display:none">
+    <h2>About</h2>
+
+<p><img class="content-image" src="/images/howto.png" width="200" style="float: left; margin-right: 20px"></p>
+
+<p>XRefresh is a browser plugin which will refresh a web page due to file changes in selected folders. This makes it possible to do live page editing using your favorite HTML/CSS editor.</p>
+
+<p>The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes in the source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh", which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get a similar experience to live editing of CSS in Firebug.</p>
+
+<p style="clear:both"></p>
+
+
+<h3>Screencast</h3>
+
+<object width="100%" height="600"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="600"></embed></object>
+
+
+<div class="video-note">the screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
+
+
+<h2>Windows</h2>
+
+<ul>
+<li>install <a href="https://addons.mozilla.org/en-US/firefox/addons/versions/1843">Firebug 1.4 or higher</a></li>
+<li>install <a href="https://github.com/downloads/binaryage/xrefresh/xrefresh-1.5.xpi">XRefresh Addon</a> (you don't need this step if you are going to use XRefresh with IE only).</li>
+<li>download <a href="http://xrefresh.googlecode.com/files/xrefresh-1.5.msi">Windows Monitor</a> and go through the installation process. It will install XRefresh traybar application and IE plugin.</li>
+</ul>
+
+
+<h3>Usage</h3>
+
+<p>Launch <strong>XRefresh</strong> and check for it in the traybar.<br/>
+After starting, the icon is gray which means that there are no browsers connected to XRefresh.</p>
+
+<p><img class="raw-image" src="/images/tray.png" width="121" height="36"></p>
+
+<p>Tell <strong>XRefresh</strong> where your files are located. XRefresh will watch for your modifications. <br/>
+Tip: You can simply drag&amp;drop interesting folders onto configuration dialog.</p>
+
+<p><img class="raw-image" src="/images/config.png" width="479" height="120"></p>
+
+<p>Let <strong>Firefox</strong> or <strong>Internet Explorer</strong> connect to XRefresh.</p>
+
+<h4>Firefox</h4>
+
+<p>XRefresh has its own tab panel in the Firebug window. You need to enable Firebug for a particular site to enable XRefresh functionality.</p>
+
+<p><a href="/images/ffintro.png"><img class="raw-image" src="/images/ffintro.png" width="600"></a></p>
+
+<h4>Internet Explorer</h4>
+
+<p>In Internet Explorer 7 you can find the XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).</p>
+
+<p><img class="raw-image" src="/images/ie7toolbar.png" width="306" height="46"></p>
+
+<p>The icon reflects the connection status. You can click it to open XRefresh Panel</p>
+
+<p><img class="raw-image" src="/images/ie7console.png" width="392" height="136"></p>
+
+<h2>Mac OS X</h2>
+
+<ul>
+<li>install <a href="https://addons.mozilla.org/en-US/firefox/addons/versions/1843">Firebug 1.4 or higher</a></li>
+<li>install <a href="http://addons.mozilla.org/en-US/firefox/addon/7711/">XRefresh Addon</a></li>
+<li>install <a href="http://rubycocoa.sourceforge.net">Ruby Cocoa</a> (filesystem monitoring depends on native Cocoa FSEvent API)</li>
+<li>execute <code>sudo gem install xrefresh-server</code>.</li>
+</ul>
+
+
+<p><img class="shadow" src="/images/osx.png" width="920"></p>
+
+<h3>Usage</h3>
+
+<p>After installation, the xrefresh-server executable should be added to your system path.
+To start the server simply run <code>xrefresh-server</code> from command-line.</p>
+
+<p>Having problems running it? Maybe it's because of RubyCocoa problems, as some people had on Leopard. Check <a href="http://gist.github.com/158851">http://gist.github.com/158851</a>.</p>
+
+<p>When it is first run, a default config file will be created in <code>~/.xrefresh-server.yml</code>:
+You are encouraged to modify paths section to map to your working project directories.</p>
+
+<p>By default the config file is searched for first in the current directory and then in your home directory.
+You may also specify the path to your config file via <code>--config</code> parameter.</p>
+
+<h2>FAQ</h2>
+
+<h4>Is XRefresh still in development?</h4>
+
+<blockquote><p>No, XRefresh was superseded by <a href="http://livereload.com">LiveReload</a>. I started XRefresh back in 2007 and it worked really well for me and other folks, but it has some issues. The main issue probably is ever changing Firebug and Firefox versions and time it took me to maintain the compatibility. Recently Andrey and other guys from LiveReload put a lot of effort into making a better tool for refresh-driven development. LiveReload has more features, it is maintained and also provides support for multiple browsers.</p></blockquote>
+
+<h4>Why is dual monitor setup great for web development?</h4>
+
+<blockquote><p>One display is fully dedicated to your browser window showing the page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.</p></blockquote>
+
+<h4>What is "Soft Refresh CSS" feature?</h4>
+
+<blockquote><p><img src="/images/soft-refresh-checkbox.png" style="float:left; height: 100px; padding-right: 10px"> XRefresh is able to replace an externally linked CSS file with an updated version without reloading the whole page. I call it "soft refresh" and it is handy in dynamic AJAX-style applications. The page stays in the same state and does not blink during refresh. With this feature you can get a similar experience as Firebug on-the-fly CSS editing (without the <a href="http://code.google.com/p/fbug/issues/detail?id=179">pain of syncing changes back to original source</a>). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button).
+Here is a minimal <a href="http://github.com/binaryage/xrefresh/tree/master/test">example page using this technique</a>. You should be able to see soft refresh icons when modifying style.css.</p></blockquote>
+
+<h4>What is "Soft Refresh JS"?</h4>
+
+<blockquote><p>XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, the updated script is just evaluated as-is in the context of the main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call the jQuery onReady function again. If you don't understand these consequences it is better to not enable this feature and go with full refresh. Soft Refresh JS is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal <a href="http://github.com/binaryage/xrefresh/tree/master/test">example page using this technique</a>. You should be able to see soft refresh icons when modifying code.js.</p></blockquote>
+
+<h4>Is there support for Safari? Opera?</h4>
+
+<blockquote><p>No plans, I'm happy with Firefox. Support for IE will be dropped in the future. For Safari there is a similar project to XRefresh called <a href="https://github.com/mockko/livereload">LiveReload</a>.</p></blockquote>
+
+<h4>I'm editing files directly on my server via ssh, is it possible to use XRefresh over the network?</h4>
+
+<blockquote><p>XRefresh monitor communicates with the browser extension using TCP/IP. So, it is possible, but it may be tricky because you need to disable your firewall and make sure they see each other. By default the browser extension tries to connect to 127.0.0.1 on port 41258. In Firefox type <code>about:config</code> into the URL bar and filter keys by "xrefresh". Keys <code>extensions.xrefresh.host</code> and <code>extensions.xrefresh.localConnectionsOnly</code> are what you are looking for.</p></blockquote>
+
+<h4>Do you support @import linked css files in Soft Refresh of CSS?</h4>
+
+<blockquote><p>No, you have to link all css files directly from the root HTML using &lt;link rel="..."&gt; tag. Other kinds of css stylesheets linkage are ignored during soft refresh.</p></blockquote>
+
+<h4>I don't see XRefresh panel in IE. What should I try?</h4>
+
+<blockquote><p>Delete these keys using RegEdit:
+<code style="font-size:9px">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories{00021493-0000-0000-C000-000000000046}</code>
+<code style="font-size:9px">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories{00021494-0000-0000-C000-000000000046}</code></p></blockquote>
+
+<h4>How do I get rid of POSTDATA confirmation dialog during refresh?</h4>
+
+<blockquote><p>First, try to use soft-refresh feature to not resend data at all. Tweak only live CSS.
+If this is not possible consider tweaking <code>browser.sessionstore.postdata</code> to 1 in about:config.
+You should learn <a href="http://forums.mozillazine.org/viewtopic.php?p=3001440">about the consequences</a> of doing so.</p></blockquote>
+
+<h2>Changelog</h2>
+
+<ul>
+<li><p><strong>v1.5</strong> (05.12.2010)</p>
+
+<ul>
+<li>compatibility with Firebug 1.6</li>
+<li>fixed buggy JSON encoding on Windows (updated to Json.NET 3.5 Release 8) - <a href="http://getsatisfaction.com/binaryage/topics/_unable_to_parse_server_json_message_dirty_fix">more info</a></li>
+<li>prevent flickering and scroll jumping during soft refresh of CSS</li>
+</ul>
+</li>
+<li><p><strong>v1.4</strong> (09.11.2009)</p>
+
+<ul>
+<li>tested Firebug 1.5 compatibility</li>
+<li>fixed broken option checkers in panel context menus of Firebug (<a href="http://getsatisfaction.com/binaryage/topics/conflicts_with_firebug_1_5_0b9">more info</a>)</li>
+</ul>
+</li>
+<li><p><strong>v1.3</strong> (09.11.2009)</p>
+
+<ul>
+<li>fixed crashing of WinMonitor when dealing with unicode filenames (fixes <a href="http://github.com/binaryage/xrefresh/issues#issue/7">Issue 7</a> and <a href="http://github.com/binaryage/xrefresh/issues#issue/7">Issue 8</a>)</li>
+<li>tested to work under Firebug 1.5 + Firefox 3.6</li>
+<li>IE8 compatibility</li>
+</ul>
+</li>
+<li><p><strong>v1.2</strong> (09.07.2009)</p>
+
+<ul>
+<li>Firefox: Soft Refresh works with CSS files using relative paths (<a href="http://github.com/binaryage/xrefresh/issues#issue/4">Issue 4</a>)</li>
+<li>Firefox: Soft Refresh reloads CSS from server, so it works with CSS preprocessors like sass or less</li>
+</ul>
+</li>
+<li><p><strong>v1.1</strong> (29.06.2009)</p>
+
+<ul>
+<li>Firefox: added Soft Refresh functionality for script files [<a href="http://github.com/blackout">blackout</a>]</li>
+<li>Firefox: fixed Soft Refresh bug on Windows (<a href="http://github.com/binaryage/xrefresh/issues#issue/3">Issue 3</a>) [<a href="http://github.com/blackout">blackout</a>]</li>
+</ul>
+</li>
+<li><p><strong>v1.0.2</strong> (26.06.2009)</p>
+
+<ul>
+<li>Firefox: refresh correctly bypasses cache</li>
+<li>Firefox: document scroll position is restored after refresh</li>
+</ul>
+</li>
+<li><p><strong>v1.0.1</strong> (21.06.2009)</p>
+
+<ul>
+<li>fixed fatal bug in 1.0 release (Windows only: communication failed when updating CSS files) - thanks Alejandro Torres for tracking this down</li>
+</ul>
+</li>
+<li><p><strong>v1.0</strong> (21.06.2009)</p>
+
+<ul>
+<li>compatibility with Firebug 1.4 (unfortunately changes are not backward compatible for older Firebug releases)</li>
+<li>more robust communication protocol (should solve occasionally broken connections)</li>
+<li>Soft Refresh can be used over network (as a side product fixed strange Firefox bugs when reading files from local filesystem)</li>
+<li>fixed problem with Helvetica font on localized Spain Windows</li>
+<li>changed extension guid back to xrefresh@xrefresh.com to continue in original project at <a href="http://addons.mozilla.org/en-US/firefox/addon/7711/">addons.mozilla.org</a></li>
+</ul>
+</li>
+<li><p><strong>v0.9</strong> (never packaged)</p>
+
+<ul>
+<li>OSX monitor ignores events from .git directories</li>
+<li>XRefresh respects cached resources</li>
+<li>changed extension guid to xrefresh@hildebrand.cz, compatibility with Firebug 1.3</li>
+</ul>
+</li>
+<li><p><strong>v0.8</strong> (19.07.2008)</p>
+
+<ul>
+<li>added OSX support</li>
+<li>fixed bug in extension networking</li>
+<li>extension can be enabled/disabled per site (uses new firebug 1.2 feature for this)</li>
+</ul>
+</li>
+<li><p><strong>v0.7</strong> (25.02.2008)</p>
+
+<ul>
+<li>"Soft Refresh" feature</li>
+</ul>
+</li>
+<li><p><strong>v0.6</strong> (02.01.2008)</p>
+
+<ul>
+<li>public release</li>
+</ul>
+</li>
+<li><p><strong>v0.5</strong> (12.11.2007)</p>
+
+<ul>
+<li>internal alpha</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Links</h2>
+
+<h3>XRefresh was superseded by LiveReload</h3>
+
+<ul>
+<li><a href="http://livereload.com">LiveReload - The Web Developer Wonderland</a></li>
+</ul>
+
+
+<h3>Articles and Reviews</h3>
+
+<ul>
+<li><a href="http://www.ilovecolors.com.ar/automated-browser-refresh-addon-for-firefox-and-ie">Automated browser refresh addon for Firefox and IE</a> by <strong>Elio Rivero</strong></li>
+<li><a href="http://www.webresourcesdepot.com/automated-browser-refresher-for-developing-easier-xrefresh/">Automated Browser Refresher For Developing Easier: XRefresh</a> by <strong>Web Resources Depot</strong></li>
+<li><a href="http://brenelz.com/2009/06/19/browser-refresh-automation-xrefresh/">Browser Refresh Automation (XRefresh)</a> by <strong>Brenley Dueck</strong></li>
+</ul>
+
+
+<h3>Software used</h3>
+
+<ul>
+<li>Great <a href="http://www.famfamfam.com/lab/icons/silk/">Silk icons</a> by <strong>Mark James</strong></li>
+<li>FlexControl by <strong>Michael Chapman</strong></li>
+<li><a href="http://james.newtonking.com/projects/json-net.aspx">Json.NET</a> by <strong>James Newton-King</strong></li>
+<li><a href="http://www.codeproject.com/KB/list/XPTable.aspx">XPTable</a> by <strong>Mathew Hall</strong></li>
+<li><a href="http://www.codeproject.com/KB/menus/MozBar.aspx">MozBar</a> by <strong>Patrik Bohman</strong></li>
+<li><a href="http://www.codeproject.com/KB/exception/UnhandledExceptionClass.aspx">UnhandledExceptionDlg</a> by <strong>Vitaly Zayko</strong></li>
+<li><a href="http://www.codeproject.com/KB/miscctrl/ControlFirefoxDialog.aspx?msg=1856449">FirefoxDialog</a> by <strong>Rafey</strong></li>
+<li><a href="http://rubycocoa.sourceforge.net">RubyCocoa</a> by <strong>RubyCocoa Team</strong></li>
+</ul>
+
+
+<p>Thanks guys!</p>
+
+</div>
+
+<script>
+$(function() { 
+    var panes = $('.panes');
+    var tabs = $('.tabs');
+    var cur;
+    var items = $('.main-content-here > *');
+    items.each(function(i) {
+        var el = $(this);
+        var tag = el.attr('tagName');
+        if (tag=='SCRIPT') return;
+        if (tag=='NOSCRIPT') return;
+        if (tag=='STYLE') return;
+        if (el.hasClass('panes') || el.hasClass('tabs')) return;
+        if (el.attr('tagName')=='H2') {
+            var name = el.html();
+            var id = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            var li = $('<li/>');
+            var a = $('<a class=\"tbx\"/>').attr('href', '#'+id).html(name);
+            li.append(a);
+            a.append('<div class="shadow"></div>');
+            tabs.append(li);
+            cur = $('<div/>').addClass('wikistyle').addClass(id);
+            panes.append(cur);
+            el.remove();
+            cur.append($("<h2/>").html(name));
+        } else {
+            if (cur) {
+                cur.append(el);
+            }
+        }
+    });
+    $("ul.tabs").tabs("div.panes > div");
+    $("ul.tabs a").history();
+});
+</script>
+
+<script>
+    $(function() {
+        $(".product-thumbs-scrollable").scrollable({
+            size: 5
+        });
+
+        $(".product-thumbs-items img").click(function() {
+            var img = $(this);
+            var visible = $('.screenshot-box:visible');
+            var box = $(img.attr('rel'));
+            if (box[0] === visible[0]) return; // optimization to not fade when clicked same image or during initial load
+            visible.fadeOut();
+            box.fadeIn();
+        }).filter(":first").click(); // when page loads simulate a "click" on the first image
+    });
+</script>
+
+<div class="simple_overlay" id="overlay-gallery" style="display:none"> 
+    <a class="overlay-prev">prev</a> 
+    <a class="overlay-next">next</a> 
+    <div class="overlay-info"></div>
+    <img class="overlay-progress" src="http://xrefresh.binaryage.com/base/img/twitter-loader.gif" /> 
+</div>
+
+<script>
+(function() {
+    $('.overlayable').overlay({
+        expose: '#f1f1f1',
+        target: '#overlay-gallery'
+    }).gallery({
+        disabledClass: 'disabled-overlay',
+        prev: '.overlay-prev',
+        next: '.overlay-next',
+        info: '.overlay-info',
+        progress: '.overlay-progress',
+        opacity: 1,
+        speed: 200, 
+        template: '[${index}/${total}] ${title}'
+    });
+})();
+</script>
+
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+        <div id="tweets-section">
+            <div class="container" style="position: relative">
+                <ol id="tweets" class="statuses"></ol>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <div class="container">
+                <div class="footer-separator"></div>
+                <div class="footerbox">
+                    
+                    <div class="facebook-like-button-wrapper">
+                        <fb:like width="650" href="http://xrefresh.binaryage.com" layout="standard" show_faces="false" font="arial"></fb:like>
+                    </div>
+                    
+                    <div class="footer-links wf">
+                        
+                        <a href="javascript:GSFNFeedbackWidget.show()">feedback</a> | 
+                        
+                        
+                        <a href="http://github.com/binaryage/xrefresh">source code</a> | 
+                        
+                        <a href="http://www.binaryage.com/about.html">contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    
+        
+
+        
+    
+        
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            window.fbAsyncInit = function() {
+                FB.init({appId: '332451499524', status: true, cookie: true, xfbml: true});
+            };
+            (function() {
+                var e = document.createElement('script'); e.async = true;
+                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+        </script>
+        
+
+        
+        
+        <script type="text/javascript" charset="utf-8">
+            $(function() {
+                var initialized;
+                $('.topbar-testimonials').bind('click', function() {
+                    if (window.SSTracker) {
+                        SSTracker.pushState('praise');
+                    }
+            
+                    if (!initialized) {
+                        $("#tweets").tweet({
+                            user: "binaryage"
+                        });
+                        initialized = true;
+                    }
+                });
+        
+                // trigger page states
+                setTimeout(function() { // give other code some time to init
+                    var hash = location.hash.substring(1);
+                    if (hash.substring(0,2)=="o-") {
+                        $('#'+hash).trigger('click');
+                    }
+                }, 500);
+            });
+    
+            // localhost debug
+            $(function() {
+                var host = document.location.host;
+                if (host.substring(host.length-3)=='org') {
+                    $('a').each(function() {
+                        var el = $(this);
+                        var href = el.attr('href');
+                        if (href) {
+                            if (href.match('binaryage.com')) {
+                                href = href.replace('binaryage.com', 'binaryage.org');
+                            }
+                            var loc = document.location+"";
+                            if (href.substring(0, 4)!="http" && href.match(/\/[^.]+$/i)) { 
+                                // this is for local jekyll server inconsistency
+                                if (host.substring(loc.length-1)=="2") { 
+                                    // next website version
+                                    href += "2";
+                                }
+                                if (loc.substring(loc.length-6)=="2.html") { 
+                                    // next website version
+                                    href += "2";
+                                }
+                                href += ".html";
+                            }
+                            el.attr('href', href);
+                        }
+                    });
+                }
+            });
+            
+            (function(){
+                // store the referrer in cookie for later reuse
+                var parts = parseUri(document.location+"");
+                var referrer = parts.queryKey["referrer"];
+                if (referrer) {
+                    bacookie("bareferrer", referrer, {path: '/', expires: 14});
+                }
+            })();
+  
+            // cross-domain tracking
+            // http://code.google.com/apis/analytics/docs/tracking/gaTrackingSite.html
+            $('a').live('click', function() {
+                var href = $(this).attr("href")+"";
+                // pass referrer if available, FastSpring will report it on final order
+                var referrer = bacookie("bareferrer");
+                if (referrer) {
+                    href += (href.indexOf("?")==-1?"?":"&")+"referrer="+encodeURIComponent(referrer);
+                }
+                var current = document.location+"";
+                // just for switching domains between binaryage.com <-> fastspring.com
+                if ((current.match(/fastspring\.com/) && href.match(/binaryage\.com/)) || 
+                    (current.match(/binaryage\.com/) && href.match(/fastspring\.com/))) {
+                    _gaq.push(['_link', href]);
+                    return false;
+                }
+            });
+        </script>
+        
+
+        
+        <div id="getsatifucktion"></div>
+        <div id="getsatifucktion2"></div>
+        <script type="text/javascript" charset="utf-8">
+            $("#getsatifucktion").html(writeCapture.sanitize('<scr'+'ipt type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></scr'+'ipt>', {
+                done: function() {
+                    if (typeof window.GSFN == "object") {
+                        window.GSFNFeedbackWidget = new GSFN.feedback_widget({
+                            container: "getsatifucktion2",
+                            display: "overlay",
+                            company: "binaryage",
+                            placement: "hidden",
+                            color: "#656565",
+                            style: "idea"
+                        });
+                    }
+                }
+            }));
+        </script>
+        
+
+        
+
+        
+        <script type="text/javascript">
+          var _gauges = _gauges || [];
+          (function() {
+            var t   = document.createElement('script');
+            t.type  = 'text/javascript';
+            t.async = true;
+            t.id    = 'gauges-tracker';
+            
+            t.setAttribute('data-site-id', '4f10d65d844d52139500000b');
+            
+            t.src = '//secure.gaug.es/track.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(t, s);
+          })();
+        </script>
+        
+
+        
+        <div class="suck-area">
+            <div class="container">
+                <div class="fixed-wrapper">
+                    <div class="suck-dialog suck-ie5" style="display:none">
+                        This page is using the latest HTML5 techniques. You are using old Internet Explorer 5. Please <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home">upgrade to Internet Explorer 9</a> for pixel-perfect experience. Thanks!
+                        <div class="suck-close" onclick="$(this).parent().addClass('suck-closed'); bacookie('suck-closed', '1', {path: '/'})"></div>
+                        <div class="suck-icon"></div>
+                    </div>
+                    <div class="suck-dialog suck-ie6" style="display:none">
+                        This page is using the latest HTML5 techniques. You are using old Internet Explorer 6. Please <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home">upgrade to Internet Explorer 9</a> for pixel-perfect experience. Thanks!
+                        <div class="suck-close" onclick="$(this).parent().addClass('suck-closed'); bacookie('suck-closed', '1', {path: '/'})"></div>
+                        <div class="suck-icon"></div>
+                    </div>
+                    <div class="suck-dialog suck-ie7" style="display:none">
+                        This page is using the latest HTML5 techniques. You are using old Internet Explorer 7. Please <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home">upgrade to Internet Explorer 9</a> for pixel-perfect experience. Thanks!
+                        <div class="suck-close" onclick="$(this).parent().addClass('suck-closed'); bacookie('suck-closed', '1', {path: '/'})"></div>
+                        <div class="suck-icon"></div>
+                    </div>
+                    <div class="suck-dialog suck-ie8" style="display:none">
+                        This page is using the latest HTML5 techniques. You are using old Internet Explorer 8. Please <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home">upgrade to Internet Explorer 9</a> for pixel-perfect experience. Thanks!
+                        <div class="suck-close" onclick="$(this).parent().addClass('suck-closed'); bacookie('suck-closed', '1', {path: '/'})"></div>
+                        <div class="suck-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+            if (bacookie('suck-closed')) {
+                $('.suck-dialog').addClass('suck-closed');
+            }
+        </script>
+        
+    </body>
+</html>
