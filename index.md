@@ -1,13 +1,14 @@
 ---
-layout: product
+layout: product-home
 title: XRefresh provides browser refresh automation for web developers
 product: xrefresh
 product_title: XRefresh
 product_subtitle: will refresh your browser during development
+product_icon: /shared/img/icons/xrefresh-256.png
 meta_title: XRefresh provides browser refresh automation for web developers
 meta_keywords: xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser
 meta_description: XRefresh is a browser plugin which will refresh current web page due to file change in selected folders
-meta_image: http://www.binaryage.com/shared/img/icons/xrefresh-256.png
+meta_image: /shared/img/icons/xrefresh-256.png
 download: http://livereload.com
 download_alt: https://github.com/downloads/binaryage/xrefresh/xrefresh-1.5.xpi
 download_old: https://addons.mozilla.org/en-US/firefox/addon/7711
@@ -18,6 +19,7 @@ buttonicon: warning
 note: Read more in <a href="http://blog.binaryage.com/xrefresh-superseded-by-livereload">XRefresh superseded by LiveReload</a> [blog]<br><br>If you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.
 facebook: 1
 fbsdk: 1
+build_tabs: 1
 ogmeta: {
     site_name: "BinaryAge website",
     description: "XRefresh provides browser refresh automation for web developers",
@@ -33,6 +35,9 @@ shots: [{
     full: "/shared/img/xrefresh-mainshot-full.png"
 }]
 ---
+
+{% contentfor product-buttons %}
+{% endcontentfor %}
 
 ## About
 
