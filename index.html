@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://developers.facebook.com/schema/">
+<html lang="en" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://developers.facebook.com/schema/" class="ba">
   <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
     <title>XRefresh provides browser refresh automation for web developers</title>
-    <link rel="canonical" href="http://xrefresh.binaryage.com"/>
+    <link rel="canonical" href="https://xrefresh.binaryage.com/"/>
+    <link rel="shortcut icon" href="https://static.binaryage.com/5604bda0_favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="https://static.binaryage.com/5604bda0_favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://static.binaryage.com/e33ac6ae_shared_css_site.css" type="text/css"/>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="title" content="XRefresh provides browser refresh automation for web developers"/>
     <meta name="description" content="XRefresh is a browser plugin which will refresh current web page due to file change in selected folders"/>
     <meta name="keywords" content="xrefresh,firefox,addon,binaryage,productivity,software,refresh,browser"/>
-    <link rel="image_src" href="http://www.binaryage.com/shared/img/icons/xrefresh-256.png"/>
+    <link rel="image_src" href="https://static.binaryage.com/7d73da09_shared_img_icons_xrefresh-256.png"/>
     <meta name="google-site-verification" content="N_xzdr6ymSUQFhAEvQg7f-sp1JAeJCdW2JuaRg-da0w"/>
     <meta property="fb:admins" content="antonin.hildebrand"/>
     <meta property="og:email" content="support@binaryage.com"/>
@@ -17,139 +21,120 @@
     <meta property="og:title" content="XRefresh"/>
     <meta property="og:url" content="http://xrefresh.binaryage.com"/>
     <meta property="og:image" content="http://www.binaryage.com/shared/img/icons/xrefresh-256.png"/>
-    <link href="http://feeds.feedburner.com/binaryage-blog" type="application/atom+xml" rel="alternate" title="Ideas from BinaryAge"/>
-    <link rel="shortcut icon" href="http://static.binaryage.com/5604bda0_favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="http://static.binaryage.com/5604bda0_favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript" charset="utf-8">
-      // give the custom font some time to load, otherwise enable simple font visibility
-      setTimeout(function(){$("html").addClass("wf-fake-active")},2e3)
-    </script>
-    <style type="text/css">
-      .js .wf{opacity:0!important;filter:alpha(opacity=0)!important;-webkit-transition:opacity .5s ease 0s;-moz-transition:opacity .5s ease 0s;-o-transition:opacity .5s ease 0s;transition:opacity .5s ease 0s;font-smoothing:antialiased;-webkit-font-smoothing:antialiased}.wf-active .wf,.wf-fake-active .wf{opacity:1!important;filter:alpha(opacity=100)!important}
-    </style>
-    <link rel="stylesheet" href="http://static.binaryage.com/a9fa179c_shared_css_site.css" type="text/css"/>
-    <script type="text/javascript" charset="utf-8">
-      /*
-      CSS Browser Selector v0.4.0 (Nov 02, 2010)
-      Rafael Lima (http://rafael.adm.br)
-      http://rafael.adm.br/css_browser_selector
-      License: http://creativecommons.org/licenses/by/2.5/
-      Contributors: http://rafael.adm.br/css_browser_selector#contributors
-      */
-      function css_browser_selector(e){var t=e.toLowerCase(),n=function(e){return t.indexOf(e)>-1},r="gecko",i="webkit",s="safari",o="opera",u="mobile",a=document.documentElement,f=[!/opera|webtv/i.test(t)&&/msie\s(\d)/.test(t)?"ie ie"+RegExp.$1:n("firefox/2")?r+" ff2":n("firefox/3.5")?r+" ff3 ff3_5":n("firefox/3.6")?r+" ff3 ff3_6":n("firefox/3")?r+" ff3":n("gecko/")?r:n("opera")?o+(/version\/(\d+)/.test(t)?" "+o+RegExp.$1:/opera(\s|\/)(\d+)/.test(t)?" "+o+RegExp.$2:""):n("konqueror")?"konqueror":n("blackberry")?u+" blackberry":n("android")?u+" android":n("chrome")?i+" chrome":n("iron")?i+" iron":n("applewebkit/")?i+" "+s+(/version\/(\d+)/.test(t)?" "+s+RegExp.$1:""):n("mozilla/")?r:"",n("j2me")?u+" j2me":n("iphone")?u+" iphone":n("ipod")?u+" ipod":n("ipad")?u+" ipad":n("mac")?"mac":n("darwin")?"mac":n("webtv")?"webtv":n("win")?"win"+(n("windows nt 6.0")?" vista":""):n("freebsd")?"freebsd":n("x11")||n("linux")?"linux":"","js"];c=f.join(" ");a.className+=" "+c;return c}css_browser_selector(navigator.userAgent)
-    </script>
-    <script type="text/javascript" charset="utf-8">
-      if(!window.console){window.console={};function fn(){opera.postError(arguments)}["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"].forEach(function(o){window.console[o]=fn})}!function(){var o=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"];if(!window.console){window.console={}}for(var n in o){window.console[o[n]]=window.console[o[n]]||function(){return}}}()
-    </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      // https://github.com/carhartl/jquery-cookie
-      function bacookie(e,t,n){if(arguments.length>1&&String(t)!=="[object Object]"){n=n||{};if(t===null||t===undefined){n.expires=-1}if(typeof n.expires==="number"){var r=n.expires,i=n.expires=new Date;i.setDate(i.getDate()+r)}t=String(t);return document.cookie=[encodeURIComponent(e),"=",n.raw?t:encodeURIComponent(t),n.expires?"; expires="+n.expires.toUTCString():"",n.path?"; path="+n.path:"",n.domain?"; domain="+n.domain:"",n.secure?"; secure":""].join("")}n=t||{};var s,o=n.raw?function(e){return e}:decodeURIComponent;return(s=(new RegExp("(?:^|; )"+encodeURIComponent(e)+"=([^;]*)")).exec(document.cookie))?o(s[1]):null}
-    </script>
-    <script type="text/javascript" charset="utf-8">
-      function parseUri(r){var e=parseUri.options,o=e.parser[e.strictMode?"strict":"loose"].exec(r),s={},t=14;while(t--)s[e.key[t]]=o[t]||"";s[e.q.name]={};s[e.key[12]].replace(e.q.parser,function(r,o,t){if(o)s[e.q.name][o]=t});return s}parseUri.options={strictMode:false,key:["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],q:{name:"queryKey",parser:/(?:^|&)([^&=]*)=?([^&]*)/g},parser:{strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/}}
-    </script>
-    <script type="text/javascript">
-      WebFontConfig={google:{families:["Play:regular,bold"]}};!function(){var t=document.createElement("script");t.src=("https:"==document.location.protocol?"https":"http")+"://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";t.type="text/javascript";t.async="true";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()
-    </script>
-    <script src="http://static.binaryage.com/c0e8173f_shared_js_code.js"></script>
-    <script type="text/javascript">
-      var _gaq=_gaq||[]
-    </script>
-    <script type="text/javascript">
-      _gaq.push(["_setAccount","UA-8404259-1"]);_gaq.push(["_addIgnoredRef",".binaryage.com"]);_gaq.push(["_setDomainName",".binaryage.com"]);_gaq.push(["_setAllowLinker",true]);_gaq.push(["_setAllowHash",false]);_gaq.push(["_trackPageview"]);(function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})()
-    </script>
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <link href="https://feeds.feedburner.com/binaryage-blog" type="application/atom+xml" rel="alternate" title="Ideas from BinaryAge"/>
+    <script type="text/javascript" charset="utf-8">function parseUri(r){var e=parseUri.options,o=e.parser[e.strictMode?"strict":"loose"].exec(r),s={},t=14;while(t--)s[e.key[t]]=o[t]||"";s[e.q.name]={};s[e.key[12]].replace(e.q.parser,function(r,o,t){if(o)s[e.q.name][o]=t});return s}parseUri.options={strictMode:false,key:["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],q:{name:"queryKey",parser:/(?:^|&)([^&=]*)=?([^&]*)/g},parser:{strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/}}</script>
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <script>WebFont.load({google:{families:["Play:400,700:latin"]}})</script>
+    <script src="https://static.binaryage.com/3e4de0bb_shared_js_code.js"></script>
+    <script type="text/javascript">window["ga"]=function(){}</script>
+    <script>window["ga"]=undefined;(function(e,n,a,t,i,o,r){e["GoogleAnalyticsObject"]=i;e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date;o=n.createElement(a),r=n.getElementsByTagName(a)[0];o.async=1;o.src=t;r.parentNode.insertBefore(o,r)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-8404259-1","auto",{allowLinker:true});ga("send","pageview");ga("require","linker");ga("linker:autoLink",["fastspring.com"],true)</script>
   </head>
   <body id="page-xrefresh-index">
-    <div id="topbar">
-      <div class="container topbar">
-        <div class="topbar-buttons">
-          <div class="topbar-labs wf">
-            labs
-          </div>
-          <div class="topbar-testimonials wf">
-            testimonials
+    <div id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="relativize">
+              <a href="http://www.binaryage.com" title="BinaryAge Software">
+                <div class="binaryage-logo">
+                  <svg class="logo">
+                    <g class="logo-badge">
+                      <rect class="logo-badge-background" x="0" y="0" rx="4" ry="4" width="60" height="54"/>
+                      <path class="logo-letter-b" d=" M6,47 L6,17 12,17 12,25 29,25 29,47 Z M12,42 L12,30 23,30 23,42 Z"/>
+                      <path class="logo-letter-a" d=" M32,47 L32,34 49,34 49,30 32,30 32,25 54,25 54,47 Z M37,42 L37,39 49,39 49,42 Z"/>
+                    </g>
+                    <g class="logo-label" transform="translate(71, 22)">
+                      <g class="logo-word-binary">
+                        <path class="logo-label-letter-b" transform="translate(0, 0)" d=" M0,25 L0,0 5,0 5,7 20,7 20,25 Z M5,21 L5,11 15,11 15,21 Z"/>
+                        <path class="logo-label-letter-i" transform="translate(22, 0)" d=" M0,25 L0,7 5,7 5,25 Z M0,3 L5,3 5,0 0,0 Z"/>
+                        <path class="logo-label-letter-n" transform="translate(29, 0)" d=" M0,25 L0,7 20,7 20,25 15,25 15,11 5,11 5,25 Z"/>
+                        <path class="logo-label-letter-a" transform="translate(51, 0)" d=" M0,25 L0,14 15,14 15,11 0,11 0,7 20,7 20,25 Z M5,21 L5,18 15,18 15,21 Z"/>
+                        <path class="logo-label-letter-r" transform="translate(73, 0)" d=" M0,25 L0,7 20,7 20,11 5,11 5,25 Z"/>
+                        <path class="logo-label-letter-y" transform="translate(95, 0)" d=" M0,25 L0,7 5,7 5,21 15,21 15,7 20,7 20,32 0,32 0,28 15,28 15,25 Z"/>
+                      </g>
+                      <g class="logo-word-age" transform="translate(118, 0)">
+                        <path class="logo-label-letter-a" transform="translate(0, 0)" d=" M0,25 L0,14 15,14 15,11 0,11 0,7 20,7 20,25 Z M5,21 L5,18 15,18 15,21 Z"/>
+                        <path class="logo-label-letter-g" transform="translate(22, 0)" d=" M0,25 L0,7 20,7 20,32 0,32 0,28 15,28 15,25 Z M5,21 L5,11 15,11 15,21 Z"/>
+                        <path class="logo-label-letter-e" transform="translate(44, 0)" d=" M0,25 L0,7 20,7 20,18 5,18 5,21 20,21 20,25 Z M5,14 L5,11 15,11 15,14 Z"/>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div class="relativize">
+              <ul class="header-menu menu-selected-">
+                <li class="menu-item-store"><a href="http://www.binaryage.com/store"><i class="fa fa-shopping-cart"></i><span>store</span></a></li>
+                <li class="menu-item-products"><a href="http://www.binaryage.com"><i class="fa fa-star"></i><span>products</span></a></li>
+                <li class="menu-item-blog"><a href="http://blog.binaryage.com"><i class="fa fa-bullhorn"></i><span>blog</span></a></li>
+                <li class="menu-item-support"><a href="http://discuss.binaryage.com"><i class="fa fa-comments"></i><span>support</span></a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="header" class="menu-products">
-      <div class="container header">
-        <a href="http://www.binaryage.com" title="BinaryAge Software">
-          <div class="header-logo">
-            <div class="header-logo-hover"></div>
-          </div>
-        </a>
-        <div class="header-motto arrow"></div>
-        <div class="header-selector"></div>
-        <ul class="header-menu">
-          <li class="menu-item-store wf"><a href="http://www.binaryage.com/store"><span>store</span></a></li>
-          <li class="menu-item-products wf"><a href="http://www.binaryage.com"><span>products</span></a></li>
-          <li class="menu-item-blog wf"><a href="http://blog.binaryage.com"><span>blog</span></a></li>
-          <li class="menu-item-hints wf"><a href="http://hints.binaryage.com"><span>hints</span></a></li>
-          <li class="menu-item-support wf"><a href="http://discuss.binaryage.com"><span>support</span></a></li>
-        </ul>
-      </div>
-    </div>
-    <div id="main">
-      <div class="wf">
-        <div class="main-product" id="product-xrefresh">
-          <div class="container">
-            <div class="main-product-left span-12">
-              <div class="product-logo-box">
-                <img class="product-icon" src="http://static.binaryage.com/317ba4d5_shared_img_icons_xrefresh-64.png"/>
+    <div id="main" class="cf">
+      <div id="xrefresh-header" class="product-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="product-box">
+                <img class="product-icon" src="https://static.binaryage.com/7d73da09_shared_img_icons_xrefresh-256.png"/>
                 <div class="product-tagline">
-                  <h1 class="product-title">XRefresh</h1><div class="plusone-wrapper"><g:plusone size="medium"></g:plusone></div>
+                  <h1 class="product-title">XRefresh</h1>
                   <h2 class="product-subtitle">will refresh your browser during development</h2>
+                  <div class="product-social">
+                    <div class="social-box">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="product-buttons-box">
-                <div class="product-buttons">
-                  <a id="o-download" href="http://livereload.com" class="button product-button-warning">
-                    <div><div>Switch to LiveReload<div class="product-specs">LiveReload superseded XRefresh</div></div></div>
-                  </a>
-                  <div class="clear"></div>
-                </div>
-                <div class="product-note-box">
-                  <div class="product-note">Read more in <a href="http://blog.binaryage.com/xrefresh-superseded-by-livereload">XRefresh superseded by LiveReload</a> [blog]<br/><br/>If you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.</div>
-                </div>
-              </div>
-              <div class="social-box">
-                <div class="social-box-inner">
-                </div>
-                <div class="clear"></div>
               </div>
             </div>
-            <div class="main-product-right span-12 last">
-              <div class="main-screenshot">
-                <div id="screenshot-box-1" class="screenshot-box no-shadow">
-                  <a id="o-shot1" href="http://static.binaryage.com/0361061b_shared_img_xrefresh-mainshot-full.png" class="overlayable" title="XRefresh">
-                    <img src="http://static.binaryage.com/d3bb4a0b_shared_img_xrefresh-mainshot.png"/>
-                    <div class="zoom-icon"></div>
-                  </a>
+            <div class="col-md-6">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="xrefresh-showcase" class="product-showcase">
+        <div class="container">
+          <div class="row">
+            <div class="generic-separator"></div>
+            <div class="col-md-7 col-md-push-5">
+              <div class="showcase">
+                <div class="main-screenshot">
+                  <div id="screenshot-box-1" class="screenshot-box ">
+                    <a id="o-shot1" href="https://static.binaryage.com/0361061b_shared_img_xrefresh-mainshot-full.png" data-fancybox-group="gallery" class="screenshot" title="XRefresh">
+                      <img src="https://static.binaryage.com/d3bb4a0b_shared_img_xrefresh-mainshot.png"/>
+                      <div class="zoom-icon"></div>
+                    </a>
+                  </div>
                 </div>
-                <div class="clear"></div>
+              </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1 col-md-pull-7">
+              <div class="highlights">
               </div>
             </div>
           </div>
         </div>
-        <div class="main-tabs" id="tabs-xrefresh">
-          <div class="container">
-            <div class="tab-bar">
-              <ul class="tabs"></ul>
-            </div>
-            <div class="panes"></div>
+      </div>
+      <div class="product-tabs-wrapper" id="tabs-xrefresh">
+        <div class="container">
+          <div class="product-tabs doc-page" style="display:none">
+            <ul></ul>
           </div>
         </div>
-        <div class="main-content-here" style="display:none">
+      </div>
+      <div id="xrefresh-content" class="product-content" style="display:none">
+        <div class="container">
           <h2>About</h2>
-          <p><img class="content-image" src="http://static.binaryage.com/f174db52_images_howto.png" width="200" style="float: left; margin-right: 20px"/></p>
+          <p><img class="content-image" src="https://static.binaryage.com/f174db52_images_howto.png" width="200" style="float: left; margin-right: 20px"/></p>
           <p>XRefresh is a browser plugin which will refresh a web page due to file changes in selected folders. This makes it possible to do live page editing using your favorite HTML/CSS editor.</p>
           <p>The typical usage scenario is for local web development on a machine with two monitors. The first monitor is for the source code editor and the second one is fully dedicated to previewing the web page in Firefox. Thanks to XRefresh, the page in Firefox is automatically updated with saved changes in the source files (html, css, js, images). XRefresh also provides the advanced feature "Soft Refresh", which enables you to modify CSS files on-the-fly without a full refresh. With this feature you can get a similar experience to live editing of CSS in Firebug.</p>
           <p style="clear:both"></p>
           <h3>Screencast</h3>
-  <object width="100%" height="600"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"/></param><param name="allowFullScreen" value="true"/></param><param name="allowscriptaccess" value="always"/></param><embed src="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="600"/></embed></object>
+  <object width="100%" height="600"><param name="movie" value="http://www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=1"/></param><param name="allowFullScreen" value="true"/></param><param name="allowscriptaccess" value="always"/></param><embed src="//www.youtube.com/v/6pL6YTWlbI4&hl=cs&fs=1&color1=0x3a3a3a&color2=0x999999&border=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="600"/></embed></object>
   <div class="video-note">the screencast by <b>Sean Schertell</b>, visit <a href="http://zentools.net/"><b>ZenTools homepage</b></a></div>
   <h2>Windows</h2>
   <ul>
@@ -160,19 +145,19 @@
   <h3>Usage</h3>
   <p>Launch <strong>XRefresh</strong> and check for it in the traybar.<br/>
   After starting, the icon is gray which means that there are no browsers connected to XRefresh.</p>
-  <p><img class="raw-image" src="http://static.binaryage.com/465d9632_images_tray.png" width="121" height="36"/></p>
+  <p><img class="raw-image" src="https://static.binaryage.com/465d9632_images_tray.png" width="121" height="36"/></p>
   <p>Tell <strong>XRefresh</strong> where your files are located. XRefresh will watch for your modifications. <br/>
   Tip: You can simply drag&amp;drop interesting folders onto configuration dialog.</p>
-  <p><img class="raw-image" src="http://static.binaryage.com/7a401fef_images_config.png" width="479" height="120"/></p>
+  <p><img class="raw-image" src="https://static.binaryage.com/7a401fef_images_config.png" width="479" height="120"/></p>
   <p>Let <strong>Firefox</strong> or <strong>Internet Explorer</strong> connect to XRefresh.</p>
   <h4>Firefox</h4>
   <p>XRefresh has its own tab panel in the Firebug window. You need to enable Firebug for a particular site to enable XRefresh functionality.</p>
-  <p><a href="http://static.binaryage.com/2d4bba04_images_ffintro.png"><img class="raw-image" src="http://static.binaryage.com/2d4bba04_images_ffintro.png" width="600"/></a></p>
+  <p><a href="https://static.binaryage.com/2d4bba04_images_ffintro.png"><img class="raw-image" src="https://static.binaryage.com/2d4bba04_images_ffintro.png" width="600"/></a></p>
   <h4>Internet Explorer</h4>
   <p>In Internet Explorer 7 you can find the XRefresh icon in the tools in the top right corner (the icon may be hidden in the chevron section).</p>
-  <p><img class="raw-image" src="http://static.binaryage.com/b4d814b9_images_ie7toolbar.png" width="306" height="46"/></p>
+  <p><img class="raw-image" src="https://static.binaryage.com/b4d814b9_images_ie7toolbar.png" width="306" height="46"/></p>
   <p>The icon reflects the connection status. You can click it to open XRefresh Panel</p>
-  <p><img class="raw-image" src="http://static.binaryage.com/965de2d0_images_ie7console.png" width="392" height="136"/></p>
+  <p><img class="raw-image" src="https://static.binaryage.com/965de2d0_images_ie7console.png" width="392" height="136"/></p>
   <h2>Mac OS X</h2>
   <ul>
     <li>install <a href="https://addons.mozilla.org/en-US/firefox/addons/versions/1843">Firebug 1.4 or higher</a></li>
@@ -180,7 +165,7 @@
     <li>install <a href="http://rubycocoa.sourceforge.net">Ruby Cocoa</a> (filesystem monitoring depends on native Cocoa FSEvent API)</li>
     <li>execute <code>sudo gem install xrefresh-server</code>.</li>
   </ul>
-  <p><img class="shadow" src="http://static.binaryage.com/21394ef6_images_osx.png" width="920"/></p>
+  <p><img class="shadow" src="https://static.binaryage.com/21394ef6_images_osx.png" width="920"/></p>
   <h3>Usage</h3>
   <p>After installation, the xrefresh-server executable should be added to your system path.
   To start the server simply run <code>xrefresh-server</code> from command-line.</p>
@@ -195,7 +180,7 @@
   <h4>Why is dual monitor setup great for web development?</h4>
   <blockquote><p>One display is fully dedicated to your browser window showing the page you are currently editing. With XRefresh you don't need to switch between windows. Stay in your favorite text editor.</p></blockquote>
   <h4>What is "Soft Refresh CSS" feature?</h4>
-  <blockquote><p><img src="http://static.binaryage.com/8aaa6500_images_soft-refresh-checkbox.png" style="float:left; height: 100px; padding-right: 10px"/> XRefresh is able to replace an externally linked CSS file with an updated version without reloading the whole page. I call it "soft refresh" and it is handy in dynamic AJAX-style applications. The page stays in the same state and does not blink during refresh. With this feature you can get a similar experience as Firebug on-the-fly CSS editing (without the <a href="http://code.google.com/p/fbug/issues/detail?id=179">pain of syncing changes back to original source</a>). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button).
+  <blockquote><p><img src="https://static.binaryage.com/8aaa6500_images_soft-refresh-checkbox.png" style="float:left; height: 100px; padding-right: 10px"/> XRefresh is able to replace an externally linked CSS file with an updated version without reloading the whole page. I call it "soft refresh" and it is handy in dynamic AJAX-style applications. The page stays in the same state and does not blink during refresh. With this feature you can get a similar experience as Firebug on-the-fly CSS editing (without the <a href="http://code.google.com/p/fbug/issues/detail?id=179">pain of syncing changes back to original source</a>). This is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button).
   Here is a minimal <a href="http://github.com/binaryage/xrefresh/tree/master/test">example page using this technique</a>. You should be able to see soft refresh icons when modifying style.css.</p></blockquote>
   <h4>What is "Soft Refresh JS"?</h4>
   <blockquote><p>XRefresh is also able to replace externally linked JS file with updated version without reloading whole page. It works similar to Soft Refresh of CSS, but there is a catch. Remember, the updated script is just evaluated as-is in the context of the main window (because it is added as a new script tag). So it is not able to remove deleted functions, it will not update anonymous functions bound to elements or for example it will not call the jQuery onReady function again. If you don't understand these consequences it is better to not enable this feature and go with full refresh. Soft Refresh JS is disabled by default, you need to enable it in XRefresh menu (under context menu on XRefresh tab button). Here is a minimal <a href="http://github.com/binaryage/xrefresh/tree/master/test">example page using this technique</a>. You should be able to see soft refresh icons when modifying code.js.</p></blockquote>
@@ -321,61 +306,29 @@
   </ul>
   <p>Thanks guys!</p>
 </div>
-<script>
-  $(function(){var a=$(".panes");var e=$(".tabs");var t;var s=$(".main-content-here > *");s.each(function(s){var r=$(this);var n=r.attr("tagName");if(n=="SCRIPT")return;if(n=="NOSCRIPT")return;if(n=="STYLE")return;if(r.hasClass("panes")||r.hasClass("tabs"))return;if(r.attr("tagName")=="H2"){var i=r.html();var d=i.toLowerCase().replace(/[^a-z0-9]/g,"-");var p=$("<li>");var v=$('<a class="tbx">').attr("href","#"+d).html(i);p.append(v);v.append('<div class="shadow"></div>');e.append(p);t=$("<div>").addClass("wikistyle").addClass(d);a.append(t);r.remove();t.append($("<h2>").html(i))}else{if(t){t.append(r)}}});$("ul.tabs").tabs("div.panes > div");$("ul.tabs a").history()})
-</script>
-<script>
-  $(function(){$(".product-thumbs-scrollable").scrollable({size:5});$(".product-thumbs-items img").click(function(){var e=$(this);var t=$(".screenshot-box:visible");var n=$(e.attr("rel"));if(n[0]===t[0])return;t.fadeOut();n.fadeIn()}).filter(":first").click()})
-</script>
-<div class="simple_overlay" id="overlay-gallery" style="display:none">
-  <a class="overlay-prev">prev</a>
-  <a class="overlay-next">next</a>
-  <div class="overlay-info"></div>
-  <img class="overlay-progress" src="http://static.binaryage.com/32e8f83d_shared_img_twitter-loader.gif"/>
 </div>
-<script>
-  !function(){$(".overlayable").overlay({expose:"#f1f1f1",target:"#overlay-gallery"}).gallery({disabledClass:"disabled-overlay",prev:".overlay-prev",next:".overlay-next",info:".overlay-info",progress:".overlay-progress",opacity:1,speed:200,template:"[${index}/${total}] ${title}"})}()
-</script>
-</div>
-<div class="clear"></div>
-</div>
-<div id="tweets-section">
-  <div class="container" style="position: relative">
-    <ol id="tweets" class="statuses"></ol>
-  </div>
 </div>
 <div id="footer">
   <div class="container">
-    <div class="footer-separator"></div>
-    <div class="footerbox">
-      <div class="facebook-like-button-wrapper">
-        <fb:like width="650" href="http://xrefresh.binaryage.com" layout="standard" show_faces="false" font="arial"></fb:like>
+    <div class="row">
+      <div class="col-md-8">
       </div>
-      <div class="footer-links wf">
-        <a href="http://github.com/binaryage/xrefresh">source code</a> |
-        <a href="http://www.binaryage.com/about.html">contact</a>
+      <div class="col-md-4">
+        <div class="footer-box-right">
+          <div class="footer-copyright">
+            <div class="footer-license">
+              <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0"><img title="the website license" alt="Creative Commons License" style="border-width:0" src="https://static.binaryage.com/69a4ba35_shared_img_byccnd.png"/></a>
+            </div>
+            <a href="http://www.binaryage.com/about">BinaryAge Limited</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div id="fb-root"></div>
-<script type="text/javascript">
-  window.fbAsyncInit=function(){FB.init({appId:"332451499524",status:true,cookie:true,xfbml:true})};(function(){var e=document.createElement("script");e.async=true;e.src=document.location.protocol+"//connect.facebook.net/en_US/all.js";document.getElementById("fb-root").appendChild(e)})()
-</script>
-<script type="text/javascript" charset="utf-8">
-  $(function(){var e;$(".topbar-testimonials").bind("click",function(){if(window.SSTracker){SSTracker.pushState("praise")}if(!e){$("#tweets").tweet({user:"binaryage"});e=true}})})
-</script>
-<script type="text/javascript" charset="utf-8">
-  $(function(){setTimeout(function(){var e=location.hash.substring(1);if(e.substring(0,2)=="o-"){$("#"+e).trigger("click")}},500)})
-</script>
-<script type="text/javascript" charset="utf-8">
-  $(function(){var t=document.location.host;if(t.substring(t.length-3)=="org"){$("a").each(function(){var a=$(this);var i=a.attr("href");if(i){if(i.match("binaryage.com")){i=i.replace("binaryage.com","binaryage.org")}var n=document.location+"";if(i.substring(0,4)!="http"&&i.match(/\/[^.]+$/i)){if(t.substring(n.length-1)=="2"){i+="2"}if(n.substring(n.length-6)=="2.html"){i+="2"}i+=".html"}a.attr("href",i)}})}})
-</script>
-<script type="text/javascript" charset="utf-8">
-  !function(){var r=parseUri(document.location+"");var e=r.queryKey["referrer"];if(e){bacookie("bareferrer",e,{path:"/",expires:14})}}();$("a").live("click",function(){var r=$(this).attr("href")+"";var e=bacookie("bareferrer");if(e){r+=(r.indexOf("?")==-1?"?":"&")+"referrer="+encodeURIComponent(e)}var a=document.location+"";if(a.match(/fastspring\.com/)&&r.match(/binaryage\.com/)||a.match(/binaryage\.com/)&&r.match(/fastspring\.com/)){_gaq.push(["_link",r]);return false}})
-</script>
-<script type="text/javascript">
-  var _gauges=_gauges||[];(function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.id="gauges-tracker";e.setAttribute("data-site-id","4f10d65d844d52139500000b");e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})()
-</script>
+<script>(function(e,t,n){var a,c=e.getElementsByTagName(t)[0];if(e.getElementById(n))return;a=e.createElement(t);a.id=n;a.src="//connect.facebook.net/en_US/all.js#xfbml=1&appId=332451499524";c.parentNode.insertBefore(a,c)})(document,"script","facebook-jssdk")</script>
+<script type="text/javascript" charset="utf-8">if(window.jQuery){$(function(){setTimeout(function(){var i=location.hash.substring(1);if(i.substring(0,2)=="o-"){$("#"+i).trigger("click")}},500)})}</script>
+<script type="text/javascript">var _gauges=_gauges||[];(function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.id="gauges-tracker";e.setAttribute("data-site-id","4f10d65d844d52139500000b");e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})()</script>
 </body>
 </html>
