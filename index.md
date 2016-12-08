@@ -29,11 +29,6 @@ ogmeta: {
     url: "http://xrefresh.binaryage.com",
     image: "http://www.binaryage.com/shared/img/icons/xrefresh-256.png"
 }
-shots: [{
-    title: "XRefresh",
-    thumb: "/shared/img/xrefresh-mainshot.png",
-    full: "/shared/img/xrefresh-mainshot-full.png"
-}]
 ---
 
 {% contentfor product-buttons %}
