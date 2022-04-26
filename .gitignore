@@ -3,3 +3,4 @@ rel/
 src/
 tmp/
 bin/
+.jekyll*
