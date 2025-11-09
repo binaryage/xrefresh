@@ -17,8 +17,6 @@ downloadtitle: Switch to LiveReload
 downloadsubtitle: LiveReload superseded XRefresh
 buttonicon: warning
 note: Read more in <a href="http://blog.binaryage.com/xrefresh-superseded-by-livereload">XRefresh superseded by LiveReload</a> [blog]<br><br>If you really need XRefresh for some reason, please check out <a href="#windows">Windows</a> or <a href="#mac-os-x">Mac OS X</a> sections for download instructions.
-facebook: 1
-fbsdk: 1
 build_tabs: 1
 ogmeta: {
     site_name: "BinaryAge website",
